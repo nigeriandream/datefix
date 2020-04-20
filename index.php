@@ -732,6 +732,10 @@
 	============================================= -->
 	<script src="js/jquery.js"></script>
 	<script src="js/plugins.js"></script>
+	<script src="js/select2.js"></script>
+	<script src="js/conditional-form.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script src="js/msform.js"></script>
 
 	<!-- Google Map JavaScripts
 	============================================= -->

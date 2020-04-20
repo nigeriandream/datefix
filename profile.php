@@ -1119,7 +1119,7 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/select2.js"></script>
-	<script src="js/lga.js"></script>
+	<script src="js/conditional-form.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 	<script src="js/msform.js"></script>
 	<!-- <script src="js/scripts.js"></script> -->
@@ -1127,28 +1127,6 @@
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="js/functions.js"></script>
-
-	<script>
-		function topFunction() {
-
-			var position =
-				document.body.scrollTop || document.documentElement.scrollTop;
-			if (position) {
-				window.scrollBy(0, -Math.max(1, Math.floor(position / 10)));
-				scrollAnimation = setTimeout("topFunction()", 30);
-			} else clearTimeout(scrollAnimation);
-			// document.body.scrollTop = 0; // For Safari
-			// document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-		}
-	</script>
-
-
-
-	<script>
-		jQuery("#tabs-profile").on("tabsactivate", function(event, ui) {
-			jQuery('.flexslider .slide').resize();
-		});
-	</script>
 
 
 </body>

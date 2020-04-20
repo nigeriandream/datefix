@@ -70,3 +70,15 @@ function fixStepIndicator(n) {
   //... and adds the "active" class on the current step:
   x[n].className += " active";
 }
+
+function topFunction() {
+
+      var position =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      if (position) {
+        window.scrollBy(0, -Math.max(1, Math.floor(position / 10)));
+        scrollAnimation = setTimeout("topFunction()", 30);
+      } else clearTimeout(scrollAnimation);
+      // document.body.scrollTop = 0; // For Safari
+      // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
