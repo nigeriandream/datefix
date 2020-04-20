@@ -665,7 +665,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label">State</label>
-																<select name="origin-state-1" id="state4" class="form-control">
+																<select name="origin-state" id="state4" class="form-control">
 																	<option value="" selected="selected" disabled></option>
 
 																	<option value='Does Not Matter'>Does Not Matter</option>
@@ -714,7 +714,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label">LGA</label>
-																<select name="origin-lga-1" id="lga4" class="form-control" required>
+																<select name="origin-lga" id="lga4" class="form-control" required>
 																</select>
 															</div>
 														</div>
@@ -1060,14 +1060,49 @@
 
 											</div>
 
+											<div class="form-category">
+												<h4>Choose Your Dealbreakers.</h3>
+													<span>These are two features that you absolutely will not compromise on. If these conditions are not exactly what you want, the potential partner will not be considered.</span>
+													<hr>
+
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">First Dealbreaker</label>
+																<select name="dealbreaker1" id="dealbreaker1" class="form-control">
+																	<option value="No Dealbreaker" selected="selected">No Dealbreaker</option>
+																	<option value="residence-state">State of Residence</option>
+																	<option value="origin-state">State of Origin</option>
+																	<option value="religion">Religion</option>
+																	<option value="denomination">Denomination</option>
+																	<option value="marital-status">Marital Status</option>
+																	<option value="children">Children</option>
+																	<option value="blood-group">Blood Group</option>
+																	<option value="genotype">Genotype</option>
+																	<option value="body-size">Body Size</option>
+																	<option value="drink">Drinks</option>
+																	<option value="smoke">Smokes</option>
+																</select>
+															</div>
+														</div>
+
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label">Second Dealbreaker</label>
+																<select name="dealbreaker2" id="dealbreaker2" class="form-control">
+																	<option value="No Dealbreaker" selected="selected">No Dealbreaker</option>
+																</select>
+															</div>
+														</div>
+													</div>
+
+											</div>
+
 
 										</div>
 										<div class="tab">
 
-											Birthday:
-											<p><input placeholder="dd" oninput="this.className = ''" name="dd"></p>
-											<p><input placeholder="mm" oninput="this.className = ''" name="nn"></p>
-											<p><input placeholder="yyyy" oninput="this.className = ''" name="yyyy"></p>
+											A bunch of lorem ipsums go here. rules and instructions and stuff, before client can submit form and make payment.
 
 
 										</div>

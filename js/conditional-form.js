@@ -55,6 +55,8 @@
   $('#extraversion2').select2();
   $('#agreeableness2').select2();
   $('#neurotism2').select2();
+  $('#dealbreaker1').select2();
+  $('#dealbreaker2').select2();
 
 
 
@@ -788,6 +790,85 @@ $(document).ready(function () {
 
     //add the option values to the select list with an id of denomination2
     document.getElementById("denomination2").innerHTML = html.join('');
+
+  });
+
+});
+
+
+
+$(document).ready(function () {
+  $("#dealbreaker1").change(function () {
+    var dealbreaker1 = $(this).val();
+
+
+
+    switch (dealbreaker1) {
+
+      case "No Dealbreaker":
+        var data = ['No Dealbreaker'];
+        break;
+
+      case "residence-state":
+        var data = ['No Dealbreaker', 'origin-state', 'religion', 'denomination', 'marital-status', 'children', 'blood-group', 'genotype', 'body-size', 'drinks', 'smokes'];
+        break;
+
+      case "origin-state":
+        var data = ['No Dealbreaker', 'residence-state', 'religion', 'denomination', 'marital-status', 'children', 'blood-group', 'genotype', 'body-size', 'drinks', 'smokes'];
+        break;
+
+      case "religion":
+        var data = ['No Dealbreaker', 'residence-state', 'origin-state', 'denomination', 'marital-status', 'children', 'blood-group', 'genotype', 'body-size', 'drinks', 'smokes'];
+        break;
+
+      case "denomination":
+        var data = ['No Dealbreaker', 'residence-state', 'origin-state', 'religion', 'marital-status', 'children', 'blood-group', 'genotype', 'body-size', 'drinks', 'smokes'];
+        break;
+
+      case "marital-status":
+        var data = ['No Dealbreaker', 'residence-state', 'origin-state', 'religion', 'denomination', 'children', 'blood-group', 'genotype', 'body-size', 'drinks', 'smokes'];
+        break;
+
+      case "children":
+        var data = ['No Dealbreaker', 'residence-state', 'origin-state', 'religion', 'denomination', 'marital-status', 'blood-group', 'genotype', 'body-size', 'drinks', 'smokes'];
+        break;
+
+      case "blood-group":
+        var data = ['No Dealbreaker', 'residence-state', 'origin-state', 'religion', 'denomination', 'marital-status', 'children', 'genotype', 'body-size', 'drinks', 'smokes'];
+        break;
+
+      case "genotype":
+        var data = ['No Dealbreaker', 'residence-state', 'origin-state', 'religion', 'denomination', 'marital-status', 'children', 'blood-group', 'body-size', 'drinks', 'smokes'];
+        break;
+
+      case "body-size":
+        var data = ['No Dealbreaker', 'residence-state', 'origin-state', 'religion', 'denomination', 'marital-status', 'children', 'blood-group', 'genotype', 'drinks', 'smokes'];
+        break;
+
+      case "drinks":
+        var data = ['No Dealbreaker', 'residence-state', 'origin-state', 'religion', 'denomination', 'marital-status', 'children', 'blood-group', 'genotype', 'body-size', 'smokes'];
+        break;
+
+      case "smokes":
+        var data = ['No Dealbreaker', 'residence-state', 'origin-state', 'religion', 'denomination', 'marital-status', 'children', 'blood-group', 'genotype', 'body-size', 'drinks'];
+
+    }
+
+
+
+
+    var i;
+    var html = [];
+    //loop through the array
+    for (var i = 0; i < data.length; i++) { //begin for loop
+
+      //add the option elements to the html array
+      html.push("<option>" + data[i] + "</option>")
+
+    } //end for loop
+
+    //add the option values to the select list with an id of dealbreaker2
+    document.getElementById("dealbreaker2").innerHTML = html.join('');
 
   });
 
