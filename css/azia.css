@@ -15894,7 +15894,7 @@ textarea.parsley-success:focus {
 .az-chat-contacts-wrapper {
 	padding: 10px 20px;
 	flex-shrink: 0;
-	border-bottom: 1px solid #ced4da;
+	/* border-bottom: 1px solid #ced4da; */
 	overflow: hidden;
 }
 @media (min-width: 992px) {

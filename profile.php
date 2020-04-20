@@ -28,7 +28,7 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>Profile | Canvas</title>
+	<title>Datefix | Setup Session</title>
 
 
 </head>

@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+  //IDs for the first form
+
   $('#lga1').select2();
   $("#state1").select2();
   $('#lga2').select2();
@@ -25,6 +27,8 @@
   $('#extraversion1').select2();
   $('#agreeableness1').select2();
   $('#neurotism1').select2();
+
+  //IDs for the second form
 
   $('#lga3').select2();
   $("#state3").select2();
@@ -56,8 +60,6 @@
 
   $("#state1").change(function () {
     var state1 = $(this).val();
-
-
 
     switch (state1) {
       case "Non-Nigerian Resident":

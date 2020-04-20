@@ -110,7 +110,7 @@
     <div class="container">
       <div class="az-content-left az-content-left-chat">
         <div class="az-chat-contacts-wrapper">
-          <h6 style="font-weight: bold;">MATCHED CONTACTS</h6>
+          <h6 style="font-weight: bold; font-size: 20px;">MATCHED CONTACTS</h6>
         </div><!-- az-chat-active-contacts -->
 
         <div id="azChatList" class="az-chat-list">
@@ -121,7 +121,7 @@
             </div>
             <div class="media-body">
               <div class="media-contact-name">
-                <span>Socrates Itumay</span>
+                <span>Jennifer Echenim</span>
                 <span>2 hours</span>
               </div>
               <p>Nam quam nunc, blandit vel aecenas et ante tincid</p>
@@ -134,7 +134,7 @@
             </div>
             <div class="media-body">
               <div class="media-contact-name">
-                <span>Dexter dela Cruz</span>
+                <span>Yvonne Ifeoma</span>
                 <span>3 hours</span>
               </div>
               <p>Maec enas tempus, tellus eget con dime ntum rhoncus, sem quam</p>
@@ -147,7 +147,7 @@
         <div class="az-chat-header">
           <div class="az-img-user"><img src="https://via.placeholder.com/500x500" alt=""></div>
           <div class="az-chat-msg-name">
-            <h6>Reynante Labares</h6>
+            <h6>Jennifer Echenim</h6>
             <small>Last seen: 2 minutes ago</small>
           </div>
           <nav class="nav">
@@ -268,6 +268,7 @@
   <script src="lib/ionicons/ionicons.js"></script>
   <script src="lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
   <script src="lib/lightslider/js/lightslider.min.js"></script>
+
 
   <script src="js/azia.js"></script>
   <script>
