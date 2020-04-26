@@ -18,8 +18,19 @@
   <link href="lib/typicons.font/typicons.css" rel="stylesheet">
   <link href="lib/lightslider/css/lightslider.min.css" rel="stylesheet">
 
-  <!-- azia CSS -->
-  <link rel="stylesheet" href="css/azia.css">
+  <!-- chat CSS -->
+  <link rel="stylesheet" href="css/chat.css">
+
+  <!-- datefix css -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/dark.css" type="text/css" />
+  <link rel="stylesheet" href="css/font-icons.css" type="text/css" />
+  <link rel="stylesheet" href="css/et-line.css" type="text/css" />
+  <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
 
 </head>
 
@@ -270,7 +281,7 @@
   <script src="lib/lightslider/js/lightslider.min.js"></script>
 
 
-  <script src="js/azia.js"></script>
+  <script src="js/chat.js"></script>
   <script>
     $(function() {
       'use strict'

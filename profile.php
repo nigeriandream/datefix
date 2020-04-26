@@ -350,7 +350,7 @@
 																<select name="genotype" id="genotype1" class="form-control" required>
 																	<option value="" selected disabled></option>
 																	<option value="1">AA</option>
-																	<option value="2">AA or AS</option>
+																	<option value="2">AS</option>
 																	<option value="3">SS</option>
 																</select>
 															</div>
@@ -1162,7 +1162,6 @@
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="js/functions.js"></script>
-
 
 </body>
 

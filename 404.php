@@ -82,7 +82,7 @@
 			<div class="container clearfix">
 				<h1>Page Not Found</h1>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#">Datefix</a></li>
+					<li class="breadcrumb-item"><a href="index.php">Datefix</a></li>
 					<li class="breadcrumb-item active" aria-current="page">404</li>
 				</ol>
 			</div>

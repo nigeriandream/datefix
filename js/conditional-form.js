@@ -384,7 +384,7 @@ $(document).ready(function () {
 
     switch (religion1) {
       case "Christian":
-        var data = ['Select item...', 'Aba North', 'Aba South', 'Arochukwu', 'Bende', 'Ikwuano', 'Isiala Ngwa North', 'Isiala Ngwa South', 'Isuikwuato', 'Obi Ngwa', 'Ohafia', 'Osisioma', 'Ugwunagbo', 'Ukwa East', 'Ukwa West', 'Umuahia North', 'muahia South', 'Umu Nneochi'];
+        var data = ['Select item...', 'Roman Catholic', 'Protestant', 'Anglican', 'Baptist', 'Lutheran', 'Eastern Orthodox', 'Oriental Orthodox', 'Methodist', 'SDA', 'Other'];
         break;
 
       case "Muslim":
@@ -759,7 +759,7 @@ $(document).ready(function () {
         break;
 
       case "Christian":
-        var data = ['Does Not Matter', 'Aba North', 'Aba South', 'Arochukwu', 'Bende', 'Ikwuano', 'Isiala Ngwa North', 'Isiala Ngwa South', 'Isuikwuato', 'Obi Ngwa', 'Ohafia', 'Osisioma', 'Ugwunagbo', 'Ukwa East', 'Ukwa West', 'Umuahia North', 'muahia South', 'Umu Nneochi'];
+        var data = ['Does Not Matter', 'Roman Catholic', 'Protestant', 'Anglican', 'Baptist', 'Lutheran', 'Eastern Orthodox', 'Oriental Orthodox', 'Methodist', 'SDA', 'Other'];
         break;
 
       case "Muslim":
