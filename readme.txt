@@ -39,7 +39,7 @@ Now youre ready for the proper setup
 =>      login in with your superuser details
 
 1,      create a chat thread 
-                
+                PS: to get the secret field, visit http://127.0.0.1:8000/chat/create/key and copy the code and paste into the secret field
 2,      create another user
 
 =>      then you can now start working on the chat.

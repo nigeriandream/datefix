@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .algorithms import reply_request
+from .algorithms import reply_request, create_private_key
 from .models import Chat_Message, Chat_Thread
 from Account.models import User
 from django.utils.datetime_safe import datetime
@@ -70,3 +70,7 @@ def delete_message(request, chat_id, id_):
         chat.second_deleted = ','.join(list_)
     return HttpResponse(id_)
     
+    
+def create_key(request):
+    key = create_private_key()
+    return HttpResponse(key)

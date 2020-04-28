@@ -20,7 +20,7 @@ class Chat_Thread(models.Model):
     show_details = models.BooleanField(default=False)
     first_deleted = models.TextField()
     second_deleted = models.TextField()
-    secret = models.BinaryField()
+    secret = models.CharField(max_length=64)
     last_message_date = models.DateTimeField(default=None, null=True)
     
     
