@@ -113,7 +113,6 @@ class Chat_Message(models.Model):
     text = models.BinaryField()
     datetime = models.DateTimeField()
     send_status = models.CharField(max_length=20, choices=(('sent', 'sent'), ('delivered', 'delivered')))
-    # expiry date = 3 minutes
     chat = models.ForeignKey(Chat_Thread, on_delete=models.CASCADE)
     
     def expired(self):

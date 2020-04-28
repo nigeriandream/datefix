@@ -14,7 +14,7 @@
 			<div class="container clearfix">
 				<h1>Setup</h1>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.php">Datefix</a></li>
+					<li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
 					<li class="breadcrumb-item"><a href="#">John Doe</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Setup</li>
 				</ol>
@@ -41,13 +41,9 @@
 								<div class="col-lg-12">
 
 									<!-- Multi step form -->
-									<form id="regForm" action="/action_page.php">
 										<!-- One "tab" for each step in the form: -->
+										<form id="user-form" action={% url 'get_data' 'user' %} method="get">
 										<div class="tab">
-
-
-
-
 											<h2 style="margin-bottom: 3px">Describe Yourself</h2>
 											<p>Tell us about yourself</p>
 											<div class="form-category">
@@ -120,7 +116,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label">State</label>
-																<select name="origin-state-1" id="state2" class="form-control">
+																<select name="origin-state" id="state2" class="form-control">
 																	<option value="" selected="selected" disabled></option>
 
 																	<option value='Non-Nigerian'>Non-Nigerian</option>
@@ -168,7 +164,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label">LGA</label>
-																<select name="origin-lga-1" id="lga2" class="form-control" required>
+																<select name="origin-lga" id="lga2" class="form-control" required>
 																</select>
 															</div>
 														</div>
@@ -515,10 +511,10 @@
 
 
 										</div>
+										</form>
+										<form></form>
+										<form id="partner-form" action={% url 'get_data' 'partner' %} method="get">
 										<div class="tab">
-
-
-
 											<h2 style="margin-bottom: 3px">Your Ideal Partner</h2>
 											<p>Tell us what you want in a partner</p>
 											<div class="form-category">
@@ -897,7 +893,6 @@
 												<h4>Your Ideal Partner's Personality</h3>
 													<hr>
 
-
 													<div class="form-group">
 														<div class="row">
 															<div class="col-md-8">
@@ -1027,6 +1022,9 @@
 
 
 										</div>
+										</form>
+										<form></form>
+
 										<div class="tab">
 
 											A bunch of lorem ipsums go here. rules and instructions and stuff, before client can submit form and make payment.
@@ -1046,8 +1044,7 @@
 											<span class="step"></span>
 											<span class="step"></span>
 										</div>
-									</form> <!-- End Multi step form -->
-
+									
 
 								</div>
 

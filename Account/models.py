@@ -86,6 +86,7 @@ class User(AbstractUser):
             return notifications.count()
         notify = json.loads(self.notification)
         return [x for x in notifications if (str(x.id) not in notify['read']) and (str(x.id) not in notify['deleted'])].__len__()  
+
 class Couple(models.Model):
     first_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match1')
     second_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match2')

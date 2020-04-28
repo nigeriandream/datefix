@@ -26,7 +26,7 @@ def signup(request):
     if request.method == 'POST':
         if request.POST['password1'] == request.POST['password2'] :
             my_data = {'sex': request.POST['sex'], 'phone': request.POST['phone']}
-            choice_data = {'partner-sex': request.POST['partner-sex']}
+            choice_data = {'sex': request.POST['partner-sex']}
             user = User.objects.create_user(
                 username= get_username(),
                 email = request.POST['email'],
@@ -55,7 +55,7 @@ def dashboard(request):
             matches = [User.objects.get(id=int(x)) for x in user.matches_()]
             accepted = [i.id for i in matches if in_my_chat(user, i) is True]
             notifications = user.notifications()
-            return render(request, 'Account/profile.html', {'user_details': user_details,
+            return render(request, 'Account/profile.html', {'user': user, 'user_details': user_details,
                                                               'choice_details': choice_details,
                                                               'matches': matches,
                                                               'notifications': notifications,
@@ -64,47 +64,25 @@ def dashboard(request):
         else:
             return redirect('login')
 
-def data_details(request):
-    try:
-        user = User.objects.get(id=request.session['user_id'])
-    except KeyError:
-        user = User.objects.get(id=request.user.id)
-    if request.method == 'GET':
-        if request.session.get('deal_breaker', False):
-            del request.session['deal_breaker']
-            data = list(json.loads(user.choice_data))
-            return render(request, 'Account/final.html', {'attributes': data})
-        elif request.session.get('change min', False):
-            return render(request, 'Account/final.html', {'adjust': True})
-        else:
-            return redirect('signup')
-    elif request.method == 'POST':
-        if request.session['change min']:
-            user.min_score = request.POST['minimum score']
-            user.save()
-            del request.session['change min']
-            return redirect('match')
-        else:
-            user.deal_breaker = ' , '.join(list(request.POST)[1:3])
-            user.profile_picture = request.FILES['profile_pic']
-            user.min_score = request.POST['minimum score']
-            user.save()
-            return redirect('payment')
-        
     
-def update_profile(request):
-    pass
-    # the post form for updating profile and new payment
-    return redirect ('dashboard')
-
 def matching(request):
-    if request.method == 'POST':
-        user = User.objects.get(id=request.user.id)
+    if request.method == 'GET':
+        user = User.objects.get(id=GET['user_id'])
         if match_user(user) is True:
-            return redirect('dashboard')
-        else:
-            request.session['change min'] = True
-            return redirect('data_details')
+            return HttpResponse(json.dumps({'matches': user.matches_()}))
+        return HttpResponse(json.dumps({'matches': []}))
+        
+        
+def adjust_min(request):
+    if request.method == 'GET':
+        try:
+            user = User.objects.get(id=GET['user_id'])
+            return HttpResponse('fail')
+        except User.DoesNotExist:
+            user.min_score = GET['min_score']
+            user.save()
+            return HttpResponse('success')
+
         
 def delete_notifications(request, id_):
     if request.method == 'GET':
@@ -142,5 +120,24 @@ def read_notifications(request):
         return HttpResponse('not done')
     
     
-
+def get_data(request, type_):
+    if request.method == 'GET':
+        user = User.objects.get(id=request.user.id)
+        if type_==  'user':
+            user_data = json.loads(user.user_data)
+            user_data.update(request.GET)
+            user.user_data = json.dumps(user_data)
+            user.save()
+            return HttpResponse('success')
+        
+        if type_ == 'partner':
+            user_data = json.loads(user.choice_data)
+            user_data.update(request.GET)
+            user.deal_breaker = json.dumps([user_data['dealbreaker1'], user_data['dealbreaker2']])
+            del(user_data['dealbreaker1'], user_data['dealbreaker2'])
+            user.choice_data = json.dumps(user_data)
+            user.save()
+            return HttpResponse('success')
+            
+        return HttpResponse('fail')    
  

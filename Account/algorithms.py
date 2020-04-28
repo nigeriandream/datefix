@@ -43,7 +43,8 @@ def _2_point(minimum, maximum, choice):
 
 def compare_users(me, you):
     mark = 0
-    absolute_match = ['lga', 'state', 'denomination', 'religion', 'marital-status', 'children',
+    absolute_match = ['residence-lga', 'residence-state', 'origin-lga',
+                      'origin-state', 'denomination', 'religion', 'marital-status', 'children',
                   'blood-group', 'genotype']
 
     _2_spectrum = ['net-worth', 'education', 'body-shape']
