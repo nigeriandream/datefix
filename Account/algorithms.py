@@ -3,6 +3,8 @@ import random
 import json
 
 
+
+
 def _3_point(yourChoice, maximum, Choice):
     if (yourChoice == 0) or abs(yourChoice - Choice) == 0:
         return 1
@@ -13,7 +15,20 @@ def _3_point(yourChoice, maximum, Choice):
     return 0    
     
     
-
+def age_range(me, you):
+   min_ =  me.choice_data_()['min-age'] 
+   max_ = me.choice_data_()['max-age']
+   age = you.user_data_()['age']
+   if int(age) in range(int(min_), int(max_)):
+       return 1
+   elif abs(int(min_)-int(age)) < 5 and abs(int(max_)-int(age)) < 5:
+       return 0.5
+   else:
+       return 0
+       
+   
+    
+   
 
 def _2_point(minimum, maximum, choice):
     if choice < minimum :
@@ -25,13 +40,18 @@ def _2_point(minimum, maximum, choice):
     score = (point/total)
     return score
 
+
 def compare_users(me, you):
     mark = 0
-    _attr = []
-    _3_spectrum = []
-    _2_spectrum = []
+    absolute_match = ['lga', 'state', 'denomination', 'religion', 'marital-status', 'children',
+                  'blood-group', 'genotype']
+
+    _2_spectrum = ['net-worth', 'education', 'body-shape']
+
+    _3_spectrum = ['complexion', 'height', 'body-type', 'drink', 'smoke', 'conscientiousness', 'openess',
+            'extraversion', 'agreeableness', 'neurotism']
     deal_breakers = me.deal_breaker.split(',')
-    total = len(_attr) + len(_3_spectrum) + len(_2_spectrum)
+    total = len(absolute_match) + len(_3_spectrum) + len(_2_spectrum) + 1
     
     for i in deal_breakers:
         if me.choice_data_()[i] == you.user_data_()[i]:
@@ -39,7 +59,7 @@ def compare_users(me, you):
         else:
             return 0
     
-    for i in _attr:
+    for i in absolute_match:
         if me.choice_data_()[i] == you.user_data_()[i]:
             mark = mark + 1
             
@@ -49,6 +69,8 @@ def compare_users(me, you):
     
     for i in _3_spectrum:
         mark = mark + _3_point(me.choice_data_()[i], 5, you.user_data_()[i])
+    
+    mark = mark + age_range(me, you)
     
     return (mark/total) * 100
 
