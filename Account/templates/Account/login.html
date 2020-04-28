@@ -59,8 +59,8 @@
 
 
 						<h3>Don't have an Account? Register Now.</h3>
-
-						<form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
+						<form></form>
+						<form id="register-form" name="register-form" class="nobottommargin" action={% url 'register' %}"#" method="post">
 
 							<div class="col_half">
 								<label for="first-name">First Name:</label>
@@ -108,12 +108,12 @@
 
 							<div class="col_half">
 								<label for="password">Choose Password:</label>
-								<input type="password" id="password" name="register-form-password" value="" class="form-control" />
+								<input type="password" id="password" name="password1" value="" class="form-control" />
 							</div>
 
 							<div class="col_half col_last">
 								<label for="repassword">Re-enter Password:</label>
-								<input type="password" id="repassword" name="repassword" value="" class="form-control" />
+								<input type="password" id="repassword" name="password2" value="" class="form-control" />
 							</div>
 
 

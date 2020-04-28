@@ -24,32 +24,26 @@ def login(request):
 
 def signup(request):
     if request.method == 'POST':
-        if not request.POST['choice'] and request.POST['password1'] == request.POST['password2'] :
-            my_data = request.POST
+        if request.POST['password1'] == request.POST['password2'] :
+            my_data = {'sex': request.POST['sex'], 'phone': request.POST['phone']}
+            choice_data = {'partner-sex': request.POST['partner-sex']}
             user = User.objects.create_user(
                 username= get_username(),
                 email = request.POST['email'],
-                password = request.POST['password1']
+                password = request.POST['password1'],
+                first_name = request.POST['first-name'],
+                last_name = request.POST['last-name']
             )
-            user.user_data = json.dumps(request.POST)
+            user.user_data = json.dumps(my_data)
+            user.choice_data = json.dumps(choice_data)
             user.save()
-            request.session['choice'] = True
-            request.session['user_id'] = user.id
-            return redirect('signup')
-        else:
-            user = User.objects.get(id=request.session['user_id'])
-            user.choice_data = json.dumps(request.POST)
-            user.save()
-            return redirect('data_details')
+            return redirect('login')
+        
     elif request.method == 'GET':
         if request.user.is_authenticated:
             return redirect('dashboard')
-        if request.session.get('choice', False):
-            del request.session['choice']
-            request.session['deal_breaker'] = True
-            return render(request, 'Account/signup.html', {'choice': True})
-        else:
-            return render(request, 'Account/signup.html')
+
+        return render(request, 'Account/signup.html')
 
 
 def dashboard(request):
@@ -149,4 +143,4 @@ def read_notifications(request):
     
     
 
-        
+ 
