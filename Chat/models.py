@@ -106,7 +106,9 @@ class Chat_Thread(models.Model):
                 if x.id not in list_[position]]
         return chat_message_items.__len__()
         
-        
+    def first_msg_today(self):
+        chat_msg = Chat_Message.objects.filter(chat=self).filter(datetime=datetime.today()).order_by('id')
+        return chat_msg[0]
     
 class Chat_Message(models.Model):
     sender = models.ForeignKey(settings.AUTH_USER_MODEL,  on_delete=models.DO_NOTHING)
@@ -119,3 +121,5 @@ class Chat_Message(models.Model):
         if (datetime.now(timezone.utc) - self.datetime) > timedelta(seconds=180):
             return True
         return False
+    
+    
