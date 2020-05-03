@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}
+   404 | Canvas
+{% endblock title %}
+
+
+{% block content %}
+    <!-- Page Title
+		============================================= -->
+		<section id="page-title">
+
+			<div class="container clearfix">
+				<h1>Page Not Found</h1>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.php">Datefix</a></li>
+					<li class="breadcrumb-item active" aria-current="page">404</li>
+				</ol>
+			</div>
+
+		</section><!-- #page-title end -->
+
+		<!-- Content
+		============================================= -->
+		<section id="content">
+
+			<div class="content-wrap">
+
+				<div class="container clearfix">
+
+					<div class="col_full nobottommargin">
+						<div class="error404 center">404</div>
+						<h4 class="center">Ooopps! The Page you were looking for, couldn't be found.</h4>
+						<span class="center" style="display:block;">Check to be sure you have the correct URL</span>
+					</div>
+
+
+
+				</div>
+
+			</div>
+
+		</section><!-- #content end -->
+        <!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+
+		<!-- Footer
+		============================================= -->
+		{% include "footer.html" %}
+		<!-- #footer end -->
+{% endblock content %}
