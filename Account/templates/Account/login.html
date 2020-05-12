@@ -7,6 +7,7 @@
 
 {% block content %}
 
+
 <!-- Header
 		============================================= -->
 		<header id="header" class="full-header">
@@ -48,12 +49,14 @@
 
 		</header><!-- #header end --><!-- #header end -->
 
-	<!-- Page Title
-		============================================= -->
-		<section id="page-title">
 
-			<div class="container clearfix">
-				<h1>My Account</h1>
+		<!-- Page Title
+		============================================= -->
+		<section id="page-title" class="page-title-parallax dark" style="background-image: url({% static "images/page/pfbgx.png" %}); padding: 120px 0; background-size:cover;" data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
+
+			<div class="container clearfix dark">
+				<h1 data-animate="fadeInUp" style="color:#eee;">My Account</h1>
+				<span data-animate="fadeInUp" style="color:#eee;" data-delay="300">Login or Signup</span>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Login</li>
@@ -64,7 +67,7 @@
 
 		<!-- Content
 		============================================= -->
-		<section id="content">
+		<section id="content" >
 
 			<div class="content-wrap">
 
