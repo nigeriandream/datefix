@@ -90,6 +90,18 @@
 
 ---------------------------------------------------------------- */
 
+.cta-join {
+	color: #222 !important;
+	background: #f9f9f9 !important;
+	border-color: #f9f9f9 !important;
+}
+
+.cta-join:hover {
+	background-color: rgba(255, 255, 255, 0.8) !important;
+	transform: scale(1.03);
+	font-weight: 700 !important;
+}
+
 *[role="form"] {
 	padding: 15px;
 	margin: 0 auto;
@@ -837,7 +849,7 @@ span.middot {
 	position: relative;
 	margin: 60px 0;
 	padding: 60px 0;
-	background-color: #f9f9f9;
+	background-color: rgba(250, 250, 250, 0.1);
 	overflow: hidden;
 }
 
@@ -8727,14 +8739,26 @@ body:not(.device-touch) .button.button-full strong {
 	display: block;
 	margin: 20px auto;
 	width: 30px;
-	border-top: 2px solid #555;
+	border-top: 2px solid #ccc;
 	-webkit-transition: width 0.3s ease;
 	-o-transition: width 0.3s ease;
 	transition: width 0.3s ease;
 }
 
+.featureline {
+	padding: 20px;
+}
+
 .featureline:hover .hoverline::after {
 	width: 50px;
+}
+
+.featureline i {
+	transition: 0.4s ease color !important;
+}
+
+.featureline:hover i {
+	color: #ee438c !important;
 }
 
 .feature-box:first-child {

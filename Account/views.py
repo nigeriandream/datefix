@@ -25,17 +25,15 @@ def login(request):
 def signup(request):
     if request.method == 'POST':
         if request.POST['password1'] == request.POST['password2'] :
-            my_data = {'sex': request.POST['sex'], 'phone': request.POST['phone']}
-            choice_data = {'sex': request.POST['partner-sex']}
             user = User.objects.create_user(
                 username= get_username(),
                 email = request.POST['email'],
                 password = request.POST['password1'],
                 first_name = request.POST['first-name'],
-                last_name = request.POST['last-name']
+                last_name = request.POST['last-name'],
+                sex= request.POST['sex'],
+                phone = request.POST['phone']    
             )
-            user.user_data = json.dumps(my_data)
-            user.choice_data = json.dumps(choice_data)
             user.save()
             return redirect('login')
         
@@ -68,8 +66,9 @@ def dashboard(request):
 def matching(request):
     if request.method == 'GET':
         user = User.objects.get(id=GET['user_id'])
-        if match_user(user) is True:
-            return HttpResponse(json.dumps({'matches': user.matches_()}))
+        if user.sex == 'female':
+            if match_user(user) is True:
+                return HttpResponse(json.dumps({'matches': user.matches_()}))
         return HttpResponse(json.dumps({'matches': []}))
         
         
