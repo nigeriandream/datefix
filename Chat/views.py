@@ -10,14 +10,14 @@ import json
 
 
 def all_chats(request):
-    user = User.objects.get(id=request.user.id)
-    if request.method == 'GET' and user.payed is True:
-        chats = Chat_Thread.objects.filter(Q(first_user_id=request.user.id)|Q(second_user_id=request.user.id)).order_by('last_message_date')    
-        unread_msg = [x.no_unread_msg(user) for x in chats]
-        data = zip(chats, unread_msg)
-        print(unread_msg[0])
-        return render(request, 'Chat/all_chat.html', {'data': data})
-    else:
+    # user = User.objects.get(id=request.user.id)
+    # if request.method == 'GET' and user.payed is True:
+    #     chats = Chat_Thread.objects.filter(Q(first_user_id=request.user.id)|Q(second_user_id=request.user.id)).order_by('last_message_date')    
+    #     unread_msg = [x.no_unread_msg(user) for x in chats]
+    #     data = zip(chats, unread_msg)
+    #     print(unread_msg[0])
+    #     return render(request, 'Chat/all_chat.html', {'data': data})
+    # else:
         return redirect('dashboard')
 
 def chat(request, thread_id):
@@ -25,7 +25,8 @@ def chat(request, thread_id):
     chat = Chat_Thread.objects.get(id=thread_id)
     chat.self_delete()
     chat.show_detail()
-    if request.method == 'GET' and user.payed is True and (chat.first_user == user or chat.second_user == user):
+    # if request.method == 'GET' and user.payed is True and (chat.first_user == user or chat.second_user == user):
+    if request.method == 'GET' and (chat.first_user == user or chat.second_user == user):
         return render(request, 'Chat/chat.html', {'messages': chat.chat_messages(chat.position(user)), 
                                                   'show': chat.show_details, 'receiver': chat.get_receiver(user),
                                                   'chat_id': chat.id})
