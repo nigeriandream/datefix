@@ -83,7 +83,7 @@ Nigeria's best dating site for professionals
 							</span>
 						</h1>
 					</div>
-					<a href="#" data-href="#howitworks" class="button button-border button-light button-circle"
+					<a href="#" data-scrollto="#howitworks" class="button button-border button-light button-circle"
 						data-easing="easeInOutExpo" data-speed="1250" data-offset="70">How Datefix Works</a>
 					<a href={% url 'login'  %} class="button button-border button-light button-circle cta-join"
 						data-easing="easeInOutExpo" data-speed="1250" data-offset="70">Join Datefix Now</a>
@@ -113,7 +113,9 @@ Nigeria's best dating site for professionals
 
 		<div id="section-about">
 
-			<div class="section nomargin parallax dark nobottommargin" style="background-image: url({% static "images/page/pfbgx.png" %}); padding: 70px 50px; background-position: center center; background-color: #000;" data-bottom-top="background-position:15px 80px;" data-top-bottom="background-position:-15px -80px;">
+			<div class="section nomargin parallax dark nobottommargin"
+				style="background-image: url({% static "images/page/pfbgx.png" %}); padding: 70px 50px; background-position: center center; background-color: #000;"
+				data-bottom-top="background-position:15px 80px;" data-top-bottom="background-position:-15px -80px;">
 				<div class="container clearfix topmargin-lg bottommargin-lg">
 
 					<div class="row grid-container" data-layout="masonry" style="overflow: visible">
@@ -168,34 +170,7 @@ Nigeria's best dating site for professionals
 
 						<div class="col-lg-4 mb-4">
 							<div class="flip-card text-center">
-								<div class="flip-card-front dark" data-height-xl="505"
-									style="background-image: url({% static "images/page/tile3.jpg" %});">
-									<div class="flip-card-inner">
-										<div class="card nobg noborder text-center">
-											<div class="card-body">
-												<i class="icon-th-large1 h3"></i>
-												<h3 class="card-title">Engagement Rink</h3>
-												<span>- COMING SOON -</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="flip-card-back" data-height-xl="505"
-									style="background-image: url({% static "images/page/back.jpg" %});">
-									<div class="flip-card-inner">
-										<p class="mb-2 text-white">Engagement Rink is the only forum for professionals
-											who want to find love the right way. Our forum allows people like you to ask
-											any type of question as it concerns relationships, and get advice from peers
-											and more experienced people as well. Sometimes, our coaches even pitch in
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 mb-4">
-							<div class="flip-card text-center">
-								<div class="flip-card-front dark" data-height-xl="200"
+								<div class="flip-card-front dark"
 									style="background-image: url({% static "images/page/tile4.jpg" %});">
 									<div class="flip-card-inner">
 										<div class="card nobg noborder text-center">
@@ -206,7 +181,7 @@ Nigeria's best dating site for professionals
 										</div>
 									</div>
 								</div>
-								<div class="flip-card-back" data-height-xl="200"
+								<div class="flip-card-back"
 									style="background-image: url({% static "images/page/back.jpg" %});">
 									<div class="flip-card-inner">
 										<p class="mb-2 text-white">Datefix is only for those who want a serious
@@ -217,33 +192,12 @@ Nigeria's best dating site for professionals
 							</div>
 						</div>
 
-						<div class="col-lg-4 mb-4">
-							<div class="flip-card text-center top-to-bottom">
-								<div class="flip-card-front dark" data-height-xl="200"
-									style="background-image: url({% static "images/page/tile5.jpg" %});">
-									<div class="flip-card-inner">
-										<div class="card nobg noborder">
-											<div class="card-body">
-												<i class="icon-edit h3"></i>
-												<h3 class="card-title mb-0">Personalised Experience</h3>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="flip-card-back" data-height-xl="200"
-									style="background-image: url({% static "images/page/back.jpg" %});">
-									<div class="flip-card-inner">
-										<p class="mb-2 text-white">Potential matches are selected with consideration for
-											the users' highlighted preference.</p>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 
 				</div>
-			
-				<div id="howitworks" class="divider divider-short divider-center topmargin-md"><i class="icon-star3"></i></div>
+
+				<div id="howitworks" class="divider divider-short divider-center topmargin-md"><i
+						class="icon-star3"></i></div>
 
 				<div class="heading-block center">
 					<h3>How Datefix Works</h3>
@@ -252,7 +206,7 @@ Nigeria's best dating site for professionals
 				<div class="row divcenter center">
 
 
-					<div class="col-lg-3 featureline" data-animate="fadeInLeft" data-delay="5">
+					<div class="col-lg-4 featureline" data-animate="fadeInLeft" data-delay="5">
 						<i class="i-plain color i-large icon-play-circle inline-block" style="margin-bottom: 15px;"></i>
 						<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
 							<h4 class="hoverline">Register</h4>
@@ -261,16 +215,7 @@ Nigeria's best dating site for professionals
 							and email address so you can get on the platform.</p>
 					</div>
 
-					<div class="col-lg-3 featureline" data-animate="fadeInUp" data-delay="300">
-						<i class="i-plain color i-large icon-user inline-block" style="margin-bottom: 15px;"></i>
-						<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-							<h4 class="hoverline">Make Payment</h4>
-						</div>
-						<p>Since we go the extra mile to get you your dream partner, we make sure only the
-							most serious of people are members of DateFix.</p>
-					</div>
-
-					<div class="col-lg-3 featureline" data-animate="fadeInUp" data-delay="600">
+					<div class="col-lg-4 featureline" data-animate="fadeInUp" data-delay="600">
 						<i class="i-plain color i-large icon-clipboard-list inline-block"
 							style="margin-bottom: 15px;"></i>
 						<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
@@ -280,7 +225,7 @@ Nigeria's best dating site for professionals
 							are unique so we'll let you even pick a deal breaker.</p>
 					</div>
 
-					<div class="col-lg-3 featureline" data-animate="fadeInRight" data-delay="900">
+					<div class="col-lg-4 featureline" data-animate="fadeInRight" data-delay="900">
 						<i class="i-plain color i-large icon-line-heart inline-block" style="margin-bottom: 15px;"></i>
 						<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
 							<h4 class="hoverline">Get a Date</h4>
@@ -293,11 +238,143 @@ Nigeria's best dating site for professionals
 
 			</div>
 
-<div class="section nomargin parallax dark nobottommargin topmargin-sm"
+			<div class="section nomargin" style="padding-bottom: 0px;">
+				<div class="container clearfix">
+					<div class="divcenter center" style="max-width: 900px;">
+
+						<h1 class="notopmargin t300 ls1">For the Working Professional</h1>
+
+					</div>
+
+					<div class="row divcenter center">
+
+						<p style="font-size: 20px;font-weight: 300;">Here at DateFix, we understand that the demands of
+							modern life leaves close to no room for socialization in the life of a Nigerian Professional
+							and so we aim to bridge this societal gap by bringing like-minded compatible singles to your
+							niche.</p>
+
+						<p style="font-size: 20px;font-weight: 300;">We do not claim to arrange a relationship for you
+							rather we bring potential life partners close to you, people who you would otherwise not
+							have the time and opportunity to meet. Ultimately, your destiny remains in your hands as you
+							take the initiative and call the shots in any given fix.</p>
+
+
+						<div class="col-lg-3 featureline" data-animate="fadeInLeft" data-delay="5">
+							<i class="i-plain color i-large icon-star inline-block" style="margin-bottom: 15px;"></i>
+							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+								<h4 class="hoverline">Exclusivity</h4>
+							</div>
+							<p>Our paid subscription ensures that our service is closed to a certain class of persons
+								and therefore not free for all</p>
+						</div>
+
+						<div class="col-lg-3 featureline" data-animate="fadeInUp" data-delay="300">
+							<i class="i-plain color i-large icon-star inline-block" style="margin-bottom: 15px;"></i>
+							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+								<h4 class="hoverline">Broad Search</h4>
+							</div>
+							<p>Datefix breaks the barrier of meeting people outside your social circle or local
+								community by casting your net wider for people with similar interest.</p>
+						</div>
+
+						<div class="col-lg-3 featureline" data-animate="fadeInUp" data-delay="600">
+							<i class="i-plain color i-large icon-star inline-block" style="margin-bottom: 15px;"></i>
+							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+								<h4 class="hoverline">Your Choice</h4>
+							</div>
+							<p>Datefix runs an automated search then lets you take your time to choose which one result
+								you have the best connection with.</p>
+						</div>
+
+						<div class="col-lg-3 featureline" data-animate="fadeInRight" data-delay="900">
+							<i class="i-plain color i-large icon-star inline-block" style="margin-bottom: 15px;"></i>
+							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+								<h4 class="hoverline">The Fixers</h4>
+							</div>
+							<p>DateFix forums are superintended by professionals in the counseling, psychology and
+								medical fields who give expert advice to Datefix members</p>
+						</div>
+
+					</div>
+				</div>
+
+				<div id="video-corner" class="divider divider-short divider-center topmargin-md"><i
+						class="icon-star3"></i></div>
+
+				<div class="heading-block center">
+					<h3>Video Perspectives</h3>
+				</div>
+
+
+				<div class="masonry-thumbs grid-3 clearfix">
+					<a href="https://www.youtube.com/watch?v=haZnBJI7A68" data-lightbox="iframe">
+						<img src="{% static 'images/page/vidp.jpg' %}" />
+						<div class="overlay center">
+							<div class="overlay-wrap">
+								<div
+									style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 0px;">
+									<h3 class="nobottommargin" style="font-size: 20px;color: #fff;">HOW SHOULD MONEY BE
+										HANDLED IN A
+										RELATIONSHIP</h3>
+									<hr style="background-color: #fff;">
+
+									<p style="font-size: 15px;color: #fff;">
+										One of the biggest areas of conflict in a relationship is money. Finances. How
+										should
+										each person spend and on what? Should there be a joint account or just joint
+										accounting? Huge difference.
+										Coach Sylvia touches on this in this video and sheds some light on the issue.
+										What do you think?</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="https://www.youtube.com/watch?v=pJ9J0yUlVww" data-lightbox="iframe">
+						<img src="{% static 'images/page/vidp.jpg' %}" />
+						<div class="overlay center">
+							<div class="overlay-wrap">
+								<div
+									style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 10px;">
+									<h3 class="nobottommargin" style="font-size: 20px;color: #fff;">“Money builds strong
+										affection in a
+										relationship” - Single lady on Datefix</h3>
+									<hr style="background-color: #fff;">
+
+									<p style="font-size: 15px;color: #fff;">
+										Here is a video about why Money is important in a relationship. What’s your take
+										on this?<br>
+										If you will like to see more opinions about
+										relationships, Subscribe to the channel and follow our IG page @datefix.me</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					<a href="https://www.youtube.com/watch?v=LnXYqWf5awI" data-lightbox="iframe">
+						<img src="{% static 'images/page/vidp.jpg' %}" />
+						<div class="overlay center">
+							<div class="overlay-wrap">
+								<div
+									style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 10px;">
+									<h3 class="nobottommargin" style="font-size: 20px;color: #fff;">NOT SO SWEET SUGAR
+										DADDY?</h3>
+									<hr style="background-color: #fff;">
+
+									<p style="font-size: 15px;color: #fff;">
+										In this video, A single lady on datefix talks about the pros and cons of having
+										a sugar daddy.<br>
+										This is a totally objective review, not indicative of her preferences :)</p>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="section nomargin parallax dark nobottommargin topmargin-sm"
 				style="background-image: url({% static "images/page/main2.jpg" %}); background-size: cover; padding: 100px 0; background-position: center center; background-color: #000;"
 				data-bottom-top="background-position:25px 80px;" data-top-bottom="background-position:-25px -80px;">
 
-<div class="divider divider-short divider-center topmargin-md"><i class="icon-star3"></i></div>
+				<div class="divider divider-short divider-center topmargin-md"><i class="icon-star3"></i></div>
 				<div class="heading-block center">
 					<h3 class="divcenter">Some Online Dating Facts</h3>
 				</div>
@@ -376,222 +453,9 @@ Nigeria's best dating site for professionals
 
 			</div>
 
-			<div class="section nomargin">
-				<div class="container clearfix">
-					<div class="divcenter center" style="max-width: 900px;">
-
-						<h1 class="notopmargin t300 ls1">How DateFix Works</h1>
-
-					</div>
-
-					<div class="row divcenter center">
 
 
-						<div class="col-lg-3 featureline" data-animate="fadeInLeft" data-delay="5">
-							<i class="i-plain color i-large icon-play-circle inline-block"
-								style="margin-bottom: 15px;"></i>
-							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-								<h4 class="hoverline">Register</h4>
-							</div>
-							<p>Just tell us a couple of things about you. Say your phone number, location, sex
-								and email address so you can get on the platform.</p>
-						</div>
 
-						<div class="col-lg-3 featureline" data-animate="fadeInUp" data-delay="300">
-							<i class="i-plain color i-large icon-user inline-block" style="margin-bottom: 15px;"></i>
-							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-								<h4 class="hoverline">Make Payment</h4>
-							</div>
-							<p>Since we go the extra mile to get you your dream partner, we make sure only the
-								most serious of people are members of DateFix.</p>
-						</div>
-
-						<div class="col-lg-3 featureline" data-animate="fadeInUp" data-delay="600">
-							<i class="i-plain color i-large icon-clipboard-list inline-block"
-								style="margin-bottom: 15px;"></i>
-							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-								<h4 class="hoverline">Be Specific</h4>
-							</div>
-							<p>Not everyone likes tall dark and handsome. Just kidding. But we know your specs
-								are unique so we'll let you even pick a deal breaker.</p>
-						</div>
-
-						<div class="col-lg-3 featureline" data-animate="fadeInRight" data-delay="900">
-							<i class="i-plain color i-large icon-line-heart inline-block"
-								style="margin-bottom: 15px;"></i>
-							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-								<h4 class="hoverline">Get a Date</h4>
-							</div>
-							<p>Once in a while, we'll send you your perfect match and then you can get intouch
-								with each other and see if it's a perfect match.</p>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
-			
-
-			<div class="row clearfix align-items-stretch">
-
-				<div class="col-lg-6 center col-padding"
-					style="background: url('images/page/main-4.jpg') center center no-repeat; background-size: cover;">
-				</div>
-
-				<div class="col-lg-6 center col-padding" style="background-color: #F5F5F5;">
-					<div class="heading-block nobottomborder">
-						<span class="before-heading color">Sample text as placeholder</span>
-						<h3>Walkthrough Video</h3>
-					</div>
-
-					<div class="center bottommargin">
-						<a id="desc-video" href="https://www.youtube.com/watch?v=7AeyhvBtNPc" data-lightbox="iframe"
-							style="position: relative;">
-							<img src="images/page/main.jpg" alt="Video">
-							<span class="i-overlay nobg"><i class="icon-youtube-play"></i></span>
-						</a>
-					</div>
-					<p class="lead nobottommargin">Place video here which explains important datefix matters</p>
-				</div>
-
-			</div>
-
-			<a href="portfolio.html" class="button button-full button-dark floral-banner center tright bottommargin-lg">
-				<div class="container clearfix">
-					Join Datefix Now <i class="icon-caret-right" style="top:4px;"></i>
-				</div>
-			</a>
-
-
-			<div class="container clearfix center" id="fixers" style="max-width: 1000px">
-
-				<h1 class="topmargin nobottommargin t300 ls1">The Fixers</h1>
-
-				<p class="lead divcenter nomargin" style="max-width: 800px;">Meet our coaches.</p>
-
-				<!-- <p class="bottommargin" style="font-size: 16px;"><a href="#" data-scrollto="#section-services" data-easing="easeInOutExpo" data-speed="1250" data-offset="70" class="more-link">Learn more <i class="icon-angle-right"></i></a></p> -->
-
-				<div class="row topmargin-sm divcenter">
-
-					<div class="col-md-4 bottommargin" data-animate="fadeInLeft" data-delay="5">
-
-						<div class="team">
-							<div class="team-image">
-								<img src={% static "images/team/1.jpg" %} alt="Dr Ani">
-								<div class="team-overlay">
-									<p>Dr. Ani is a University of Chicago trained medical doctor and
-										relationship coach. She mentors and helps guide young women to better
-										understand relationships and the roles played by each party. She is
-										married ith 3 children. </p>
-									<div class="team-social-icons">
-										<a href="#" class="social-icon si-borderless si-small si-twitter"
-											title="Twitter">
-											<i class="icon-twitter"></i>
-											<i class="icon-twitter"></i>
-										</a>
-										<a href="#" class="social-icon si-borderless si-small si-linkedin"
-											title="LinkedIn">
-											<i class="icon-linkedin"></i>
-											<i class="icon-linkedin"></i>
-										</a>
-										<a href="#" class="social-icon si-borderless si-small si-instagram"
-											title="Instagram">
-											<i class="icon-instagram"></i>
-											<i class="icon-instagram"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="team-desc team-desc-bg">
-								<div class="team-title">
-									<h4>Dr Ani</h4>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-					<div class="col-md-4 bottommargin" data-animate="fadeInUp" data-delay="300">
-
-						<div class="team">
-							<div class="team-image">
-								<img src={% static "images/team/2.jpg" %} alt="Faith History">
-								<div class="team-overlay">
-									<p>Faith History is a University of Baltimore Communications graduate who
-										has worked extensively with young people in helping them achieve
-										work-life balance. As an On-Air Personality, Faith also helps young
-										people attain their dreams and potentials via technology, using her
-										digital platforms both on radio and online. She is happily married with
-										children. </p>
-									<div class="team-social-icons">
-										<a href="#" class="social-icon si-borderless si-small si-twitter"
-											title="Twitter">
-											<i class="icon-twitter"></i>
-											<i class="icon-twitter"></i>
-										</a>
-										<a href="#" class="social-icon si-borderless si-small si-linkedin"
-											title="LinkedIn">
-											<i class="icon-linkedin"></i>
-											<i class="icon-linkedin"></i>
-										</a>
-										<a href="#" class="social-icon si-borderless si-small si-instagram"
-											title="Instagram">
-											<i class="icon-instagram"></i>
-											<i class="icon-instagram"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="team-desc team-desc-bg">
-								<div class="team-title">
-									<h4>Faith History</h4>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-					<div class="col-md-4 bottommargin" data-animate="fadeInRight" data-delay="600">
-
-						<div class="team">
-							<div class="team-image">
-								<img src={% static "images/team/3.jpg" %} alt="Coach MIA">
-								<div class="team-overlay">
-									<p>Coach MIA is a university of London graduate and a certified coach whose
-										main area of study is in the differences between men and women and how
-										best to create harmony within those differences. He is married with
-										children. </p>
-									<div class="team-social-icons">
-										<a href="#" class="social-icon si-borderless si-small si-twitter"
-											title="Twitter">
-											<i class="icon-twitter"></i>
-											<i class="icon-twitter"></i>
-										</a>
-										<a href="#" class="social-icon si-borderless si-small si-linkedin"
-											title="LinkedIn">
-											<i class="icon-linkedin"></i>
-											<i class="icon-linkedin"></i>
-										</a>
-										<a href="#" class="social-icon si-borderless si-small si-instagram"
-											title="Instagram">
-											<i class="icon-instagram"></i>
-											<i class="icon-instagram"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="team-desc team-desc-bg">
-								<div class="team-title">
-									<h4>Coach MIA</h4>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
 
 		</div>
 
@@ -600,8 +464,8 @@ Nigeria's best dating site for professionals
 			<div class="section dark nomargin"
 				style="background-image: url(images/page/hiwbg.jpg);background-attachment: fixed;background-size: cover;">
 				<div class="divcenter center" style="max-width: 900px;">
-					<h2 class="nobottommargin t300 ls1"><a href="#" data-scrollto="#template-contactform"
-							data-offset="140" data-easing="easeInOutExpo" data-speed="1250"
+					<h2 class="nobottommargin t300 ls1"><a href={% url 'login'  %} data-offset="140"
+							data-easing="easeInOutExpo" data-speed="1250"
 							class="button button-border button-circle button-light button-large notopmargin nobottommargin"
 							style="position: relative; top: -3px;">Get Started</a></h2>
 				</div>
