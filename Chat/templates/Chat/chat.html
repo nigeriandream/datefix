@@ -37,6 +37,7 @@
 
 <body class="az-body">
 
+  
   <div class="az-header">
     <div class="container">
       <div class="az-header-left">
@@ -144,7 +145,7 @@
               <img src="https://via.placeholder.com/500x500" alt="">
               <span>1</span>
             </div>
-            <div class="media-body">
+            <di\v class="media-body">
               <div class="media-contact-name">
                 <span>Yvonne Ifeoma</span>
                 <span>3 hours</span>
@@ -153,9 +154,7 @@
             </div><!-- media-body -->
           </div><!-- media -->
         </div><!-- az-chat-list -->
-
-      </div><!-- az-content-left -->
-      <div class="az-content-body az-content-body-chat">
+        <div class="az-content-body az-content-body-chat">
         <div class="az-chat-header">
           <div class="az-img-user"><img src="https://via.placeholder.com/500x500" alt=""></div>
           <div class="az-chat-msg-name">
@@ -171,8 +170,20 @@
           </nav>
         </div><!-- az-chat-header -->
         <div id="azChatBody" class="az-chat-body">
-          <div class="content-inner">
+          <div class="content-inner" id="app">
             <label class="az-chat-time"><span>3 days ago</span></label>
+            <div v-for='(message, index) in messages' :key='index'>
+            <div :class="[message.sender === 'you' ? 'media flex-row-reverse' : 'media']">
+              <div class="az-img-user online"><img src="https://via.placeholder.com/500x500" alt=""></div>
+              <div class="media-body">
+                <div class="az-msg-wrapper">
+                  [[ message.message ]]
+                </div><!-- az-msg-wrapper -->
+                
+                <div><span>[[ message.timeSend ]]</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a></div>
+              </div><!-- media-body -->
+            </div><!-- media -->
+            </div>
             <div class="media flex-row-reverse">
               <div class="az-img-user online"><img src="https://via.placeholder.com/500x500" alt=""></div>
               <div class="media-body">
@@ -265,6 +276,8 @@
           <a href="" class="az-msg-send"><i class="far fa-paper-plane"></i></a>
         </div><!-- az-chat-footer -->
       </div><!-- az-content-body -->
+
+      </div><!-- az-content-left -->
     </div>
   </div><!-- az-content -->
 
@@ -273,8 +286,11 @@
       <span>&copy; 2020 Datefix</span>
     </div><!-- container -->
   </div><!-- az-footer -->
-
+  </div>
+  <script src={% static 'js/vue.js' %}></script>
+  <script src={% static 'js/chat-vue.js' %}></script>
   <script src={% static 'js/jquery.js' %}></script>
+  
   <script src={% static 'js/plugins.js' %}></script>
   <script src={% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}></script>
   <script src={% static 'lib/ionicons/ionicons.js' %}></script>
