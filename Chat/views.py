@@ -59,6 +59,44 @@ def get_chat(request, id_):
         return HttpResponse(json.dumps(chat.get_chat(chat.position(request.user))))
 
 
+def get_profile(request, user_id):
+    if request.method == 'GET':
+        user = User.objects.get(id=user_id)
+        return HttpResponse(json.dumps({'username': user.username, 
+        'first_name': user.first_name, 'last_name': user.last_name, 'profile_pic': profile_picture(user.profile_picture)}))
+
+
+def get_chat_threads(request, user_id):
+    user = User.objects.get(id=user_id)
+    if request.method == 'GET':
+        chats = Chat_Thread.objects.filter(Q(first_user_id=request.user.id)|Q(second_user_id=request.user.id)).order_by('last_message_date')    
+        data = [{
+            "username": x.get_receiver(user).username,
+            "first_name": x.get_receiver(user).first_name,
+            "last_name": x.get_receiver(user).last_name,
+            "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
+                "last_message": last_message(x)     
+        } for x in chats]
+        return HttpResponse(json.dumps({'user_id': user_id, "chat_threads": data}))
+
+def profile_picture(image):
+    try: 
+        return image.url
+    except ValueError:
+        return None
+
+def last_message(chat):
+    if chat.last_message() is not None:
+        return {'id': chat.last_message().id, 
+                          'time': chat.last_message().datetime.time().__str__(),
+                          'message': chat.last_message_text(),
+                          'sender_id': chat.last_message().sender.id,
+                           'sender': chat.last_message().sender.username,
+                           'status': chat.last_message().send_status}
+    else:
+        return None
+
+
 def delete_message(request, chat_id, id_):
     chat = Chat_Thread.objects.get(id=chat_id)
     position = chat.position(request.user)
