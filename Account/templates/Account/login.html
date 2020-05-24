@@ -6,12 +6,57 @@
 {% endblock title %}
 
 {% block content %}
-	<!-- Page Title
-		============================================= -->
-		<section id="page-title">
 
-			<div class="container clearfix">
-				<h1>My Account</h1>
+
+<!-- Header
+		============================================= -->
+		<header id="header" class="full-header">
+
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href={% url 'home' %} class="standard-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img src={% static 'images/logo.png' %} alt="Canvas Logo"></a>
+						<a href={% url 'home' %} class="retina-logo" data-dark-logo={% static 'images/logo-dark@2x.png' %}><img src={% static 'images/logo@2x.png' %} alt="Canvas Logo"></a>
+					</div><!-- #logo end -->
+
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu">
+
+						<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+							<li><a href={% url 'home' %}>
+									<div>Home</div>
+								</a>
+							</li>
+							<li><a href="#">
+									<div>About Datefix</div>
+								</a>
+							</li>
+						</ul>
+
+
+					</nav><!-- #primary-menu end -->
+
+				</div>
+
+			</div>
+
+		</header><!-- #header end --><!-- #header end -->
+
+
+		<!-- Page Title
+		============================================= -->
+		<section id="page-title" class="page-title-parallax dark" style="background-image: url({% static "images/page/pfbgx.png" %}); padding: 120px 0; background-size:cover;" data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
+
+			<div class="container clearfix dark">
+				<h1 data-animate="fadeInUp" style="color:#eee;">My Account</h1>
+				<span data-animate="fadeInUp" style="color:#eee;" data-delay="300">Login or Signup</span>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Login</li>
@@ -22,18 +67,17 @@
 
 		<!-- Content
 		============================================= -->
-		<section id="content">
+		<section id="content" >
 
 			<div class="content-wrap">
 
 				<div class="container clearfix">
 
-					<div class="col_one_third nobottommargin">
+					<div class="accordion accordion-lg divcenter nobottommargin clearfix" style="max-width: 550px;">
 
-						<div class="well well-lg nobottommargin">
+						<div class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-unlock"></i>Login to your Account</div>
+						<div class="acc_content clearfix">
 							<form id="login-form" name="login-form" class="nobottommargin" action={% url 'login'  %} method="post">
-
-								<h3>Login to your Account</h3>
 
 								<div class="col_full">
 									<label for="email">Email Address:</label>
@@ -53,14 +97,9 @@
 							</form>
 						</div>
 
-					</div>
-
-					<div class="col_two_third col_last nobottommargin">
-
-
-						<h3>Don't have an Account? Register Now.</h3>
-						<form></form>
-						<form id="register-form" name="register-form" class="nobottommargin" action={% url 'signup' %}"#" method="post">
+						<div class="acctitle"><i class="acc-closed icon-user4"></i><i class="acc-open icon-ok-sign"></i>New Signup? Register for an Account</div>
+						<div class="acc_content clearfix">
+							<form id="register-form" name="register-form" class="nobottommargin" action={% url 'signup' %}"#" method="post">
 
 							<div class="col_half">
 								<label for="first-name">First Name:</label>
@@ -79,14 +118,8 @@
 								<input type="text" id="email" name="email" value="" class="form-control" />
 							</div>
 
+							
 							<div class="col_half col_last">
-								<label for="phone">Phone Number:</label>
-								<input type="text" id="phone" name="phone" value="" class="form-control" />
-							</div>
-
-							<div class="clear"></div>
-
-							<div class="col_half">
 								<label for="sex">Sex:</label>
 								<select name="sex" id="sex" class="form-control">
 									<option value="" selected="selected" disabled></option>
@@ -94,15 +127,14 @@
 									<option value="female">Female</option>
 								</select>
 							</div>
+							
+							<div class="clear"></div>
 
-							<div class="col_half col_last">
-								<label for="register-form-phone">Looking For:</label>
-								<select name="partner-sex" id="partner-sex" class="form-control">
-									<option value="" selected="selected" disabled></option>
-									<option value="male">Male</option>
-									<option value="female">Female</option>
-								</select>
+							<div class="col_full">
+								<label for="phone">Phone Number:</label>
+								<input type="text" id="phone" name="phone" value="" class="form-control" />
 							</div>
+
 
 							<div class="clear"></div>
 
@@ -122,6 +154,7 @@
 							</div>
 
 						</form>
+						</div>
 
 					</div>
 

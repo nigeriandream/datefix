@@ -1,470 +1,542 @@
 {% extends "index.html" %}
 {% load static %}
 {% block title %}
-   Nigeria's best dating site for professionals
+Nigeria's best dating site for professionals
 {% endblock title %}
 
 {% block content %}
-    <!-- Slider
+
+<!-- Header
 		============================================= -->
-		<section id="slider" class="slider-element slider-parallax full-screen force-full-screen">
+<header id="header" class="full-header transparent-header border-full-header dark static-sticky"
+	data-sticky-class="not-dark" data-sticky-offset="full" data-sticky-offset-negative="100">
 
-			<div class="slider-parallax-inner">
+	<div id="header-wrap">
 
-				<div class="full-screen force-full-screen dark section nopadding nomargin noborder ohidden" style="background-image: url('images/page/main.jpg'); background-size: cover; background-position: center center;">
+		<div class="container clearfix">
 
-					<div class="container center">
-						<div class="vertical-middle">
-							<div class="emphasis-title">
-								<h1>
-									<span class="text-rotater nocolor" data-separator="|" data-rotate="fadeInUp" data-speed="6000">
-										<span class="t-rotate t700 font-body opm-large-word" data-animate="fadeInUp">Welcome to Datefix.|Nigeria’s No. 1 dating site for
-											professionals.|Meet the partner of your dreams.|AI-assisted matching
-											algorithms.|Join Datefix now.</span>
-									</span>
-								</h1>
+			<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+			<!-- Logo
+					============================================= -->
+			<div id="logo">
+				<a href={% url 'home'  %} class="standard-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img
+						src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
+				<a href={% url 'home'  %} class="retina-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img
+						src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
+			</div><!-- #logo end -->
+
+
+			<!-- Primary Navigation
+					============================================= -->
+			<nav id="primary-menu">
+
+				<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+					<li><a href="#" data-href="#wrapper">
+							<div>Home</div>
+						</a></li>
+					<li><a href="#" data-href="#fixers">
+							<div>The Fixers</div>
+						</a></li>
+					<li><a href="#" data-href="#howitworks">
+							<div>How Datefix Works</div>
+						</a></li>
+					<li><a href={% url 'login' %}>
+							<div>Join Datefix / Login</div>
+						</a></li>
+				</ul>
+
+
+				<div id="side-panel-trigger" class="side-panel-trigger"><a href="#"><i class="icon-line-heart"></i></a>
+				</div>
+
+
+			</nav><!-- #primary-menu end -->
+
+
+		</div>
+
+	</div>
+
+</header><!-- #header end -->
+
+
+<!-- Slider
+		============================================= -->
+<section id="slider" class="slider-element slider-parallax full-screen force-full-screen">
+
+	<div class="slider-parallax-inner">
+
+		<div class="full-screen force-full-screen dark section nopadding nomargin noborder ohidden"
+			style="background-image: url({% static "images/page/main.jpg" %}); background-size: cover; background-position: center center;">
+
+			<div class="container center">
+				<div class="vertical-middle">
+					<div class="emphasis-title">
+						<h1>
+							<span class="text-rotater nocolor" data-separator="|" data-rotate="fadeInUp"
+								data-speed="6000">
+								<span class="t-rotate t700 font-body opm-large-word" data-animate="fadeInUp">Welcome to
+									Datefix.|Nigeria’s No. 1 dating site for
+									professionals.|Meet the partner of your dreams.|AI-assisted matching
+									algorithms.|Join Datefix now.</span>
+							</span>
+						</h1>
+					</div>
+					<a href="#" data-scrollto="#howitworks" class="button button-border button-light button-circle"
+						data-easing="easeInOutExpo" data-speed="1250" data-offset="70">How Datefix Works</a>
+					<a href={% url 'login'  %} class="button button-border button-light button-circle cta-join"
+						data-easing="easeInOutExpo" data-speed="1250" data-offset="70">Join Datefix Now</a>
+				</div>
+			</div>
+
+			<div class="video-wrap">
+				<div class="video-overlay" style="background-color: rgba(0,0,0,0.05);"></div>
+			</div>
+
+			<a href="#" data-scrollto="#section-about" data-easing="easeInOutExpo" data-speed="1250" data-offset="65"
+				class="one-page-arrow dark"><i class="icon-angle-down infinite animated fadeInDown"></i></a>
+
+		</div>
+
+	</div>
+
+</section><!-- #slider end -->
+
+<!-- Content
+		============================================= -->
+
+<section id="content"
+	style=" background-image: url({% static "images/page/bg.jpg"%}); background-size: cover; background-attachment: fixed;">
+
+	<div class="content-wrap nopadding">
+
+		<div id="section-about">
+
+			<div class="section nomargin parallax dark nobottommargin"
+				style="background-image: url({% static "images/page/pfbgx.png" %}); padding: 70px 50px; background-position: center center; background-color: #000;"
+				data-bottom-top="background-position:15px 80px;" data-top-bottom="background-position:-15px -80px;">
+				<div class="container clearfix topmargin-lg bottommargin-lg">
+
+					<div class="row grid-container" data-layout="masonry" style="overflow: visible">
+
+
+
+						<div class="col-lg-4 mb-4">
+							<div class="flip-card text-center top-to-bottom">
+								<div class="flip-card-front dark"
+									style="background-image: url({% static "images/page/tile2.jpg" %});">
+									<div class="flip-card-inner">
+										<div class="card nobg noborder text-center">
+											<div class="card-body">
+												<i class="icon-ok-sign h3"></i>
+												<h3 class="card-title">Intelligent Matchmaking</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="flip-card-back"
+									style="background-image: url({% static "images/page/back.jpg" %});">
+									<div class="flip-card-inner">
+										<p class="mb-2 text-white">Our matchmaking algorithm is tuned to deliver the
+											most relevant and active prospects based on your mutual preferences.</p>
+									</div>
+								</div>
 							</div>
-							<a href="#" data-href="#howitworks" class="button button-border button-light button-circle" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">How Datefix Works</a>
-							<a href={% url 'login'  %} class="button button-border button-light button-circle" data-easing="easeInOutExpo" data-speed="1250" data-offset="70">Join Datefix Now</a>
 						</div>
+
+						<div class="col-lg-4 mb-4">
+							<div class="flip-card text-center">
+								<div class="flip-card-front dark"
+									style="background-image:  url({% static "images/page/tile1.jpg" %})">
+									<div class="flip-card-inner">
+										<div class="card nobg noborder text-center">
+											<div class="card-body">
+												<i class="icon-line-bar-graph h3"></i>
+												<h3 class="card-title">High Success Rate</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="flip-card-back"
+									style="background-image: url({% static "images/page/back.jpg" %})" no-after>
+									<div class="flip-card-inner">
+										<p class="mb-2 text-white">Hundreds of singles find love through our platform
+											each month. Register today to find your special person on Datefix.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 mb-4">
+							<div class="flip-card text-center">
+								<div class="flip-card-front dark"
+									style="background-image: url({% static "images/page/tile4.jpg" %});">
+									<div class="flip-card-inner">
+										<div class="card nobg noborder text-center">
+											<div class="card-body">
+												<i class="icon-users h3"></i>
+												<h3 class="card-title">Meet eligible Nigerian Singles</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="flip-card-back"
+									style="background-image: url({% static "images/page/back.jpg" %});">
+									<div class="flip-card-inner">
+										<p class="mb-2 text-white">Datefix is only for those who want a serious
+											relationship. Over 90% of our members are 30+ and hold an above-average
+											education.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 
-					<div class="video-wrap">
-						<div class="video-overlay" style="background-color: rgba(0,0,0,0.2);"></div>
+				</div>
+
+				<div id="howitworks" class="divider divider-short divider-center topmargin-md"><i
+						class="icon-star3"></i></div>
+
+				<div class="heading-block center">
+					<h3>How Datefix Works</h3>
+				</div>
+
+				<div class="row divcenter center">
+
+
+					<div class="col-lg-4 featureline" data-animate="fadeInLeft" data-delay="5">
+						<i class="i-plain color i-large icon-play-circle inline-block" style="margin-bottom: 15px;"></i>
+						<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+							<h4 class="hoverline">Register</h4>
+						</div>
+						<p>Just tell us a couple of things about you. Say your phone number, location, sex
+							and email address so you can get on the platform.</p>
 					</div>
 
-					<a href="#" data-scrollto="#section-about" data-easing="easeInOutExpo" data-speed="1250" data-offset="65" class="one-page-arrow dark"><i class="icon-angle-down infinite animated fadeInDown"></i></a>
+					<div class="col-lg-4 featureline" data-animate="fadeInUp" data-delay="600">
+						<i class="i-plain color i-large icon-clipboard-list inline-block"
+							style="margin-bottom: 15px;"></i>
+						<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+							<h4 class="hoverline">Be Specific</h4>
+						</div>
+						<p>Not everyone likes tall dark and handsome. Just kidding. But we know your specs
+							are unique so we'll let you even pick a deal breaker.</p>
+					</div>
+
+					<div class="col-lg-4 featureline" data-animate="fadeInRight" data-delay="900">
+						<i class="i-plain color i-large icon-line-heart inline-block" style="margin-bottom: 15px;"></i>
+						<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+							<h4 class="hoverline">Get a Date</h4>
+						</div>
+						<p>Once in a while, we'll send you your perfect match and then you can get intouch
+							with each other and see if it's a perfect match.</p>
+					</div>
 
 				</div>
 
 			</div>
 
-		</section><!-- #slider end -->
+			<div class="section nomargin" style="padding-bottom: 0px;">
+				<div class="container clearfix">
+					<div class="divcenter center" style="max-width: 900px;">
 
-		<!-- Content
-		============================================= -->
-
-		<section id="content">
-
-			<div class="content-wrap nopadding">
-
-				<div id="section-about" class="center">
-
-					<div class="section nomargin">
-						<div class="container clearfix">
-							<div class="row divcenter center">
-
-								<div class="col-lg-4 featureline" data-animate="fadeInUp" data-delay="5">
-									<i class="i-plain color i-large icon-line-bar-graph inline-block" style="margin-bottom: 15px;"></i>
-									<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-										<h4 class="hoverline">High Success Rate</h4>
-									</div>
-									<p>Hundreds of singles find love through our platform each month. Register today to
-										find your special person on Datefix.</p>
-								</div>
-
-								<div class="col-lg-4 featureline" data-animate="fadeInUp" data-delay="300">
-									<i class="i-plain color i-large icon-ok-sign inline-block" style="margin-bottom: 15px;"></i>
-									<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-										<h4 class="hoverline">Intelligent Matchmaking</h4>
-									</div>
-									<p>Our matchmaking algorithm is tuned to deliver the most relevant and active
-										prospects based on your mutual preferences. </p>
-								</div>
-
-								<div class="col-lg-4 featureline" data-animate="fadeInUp" data-delay="600">
-									<i class="i-plain color i-large icon-users inline-block" style="margin-bottom: 15px;"></i>
-									<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-										<h4 class="hoverline">Meet Eligible Nigerian Singles</h4>
-									</div>
-									<p>Datefix is only for those who want a serious relationship. Over 90% of our
-										members are 30+ and hold an above-average education.</p>
-								</div>
-
-
-							</div>
-						</div>
-					</div>
-
-
-					<div class="section nomargin parallax dark nobottommargin" style="background-image: url('images/page/main-2.jpg'); padding: 100px 0; background-position: center center; background-color: #000;" data-bottom-top="background-position:15px 80px;" data-top-bottom="background-position:-15px -80px;">
-
-						<div class="heading-block center">
-							<h3>Engagement Rink</h3>
-						</div>
-
-						<div class="fslider testimonial testimonial-full" data-animation="fade" data-arrows="false">
-							<div class="flexslider">
-								<div class="slider-wrap">
-									<div class="slide">
-										<div class="testi-content">
-											<p>Engagement Rink is the only forum for professionals who want to find love
-												the right way. Our forum allows people like you to ask any type of
-												question as it concerns relationships, and get advice from peers and
-												more experienced people as well.
-												Sometimes, our coaches even pitch in.</p>
-											<div class="testi-meta" data-animate="fadeInUp" data-delay="10">
-												<span>COMING SOON</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<h1 class="notopmargin t300 ls1">For the Working Professional</h1>
 
 					</div>
 
-					<div id="howitworks" class="section nomargin">
-						<div class="container clearfix">
-							<div class="divcenter center" style="max-width: 900px;">
+					<div class="row divcenter center">
 
-								<h1 class="notopmargin t300 ls1">How DateFix Works</h1>
+						<p style="font-size: 20px;font-weight: 300;">Here at DateFix, we understand that the demands of
+							modern life leaves close to no room for socialization in the life of a Nigerian Professional
+							and so we aim to bridge this societal gap by bringing like-minded compatible singles to your
+							niche.</p>
 
+						<p style="font-size: 20px;font-weight: 300;">We do not claim to arrange a relationship for you
+							rather we bring potential life partners close to you, people who you would otherwise not
+							have the time and opportunity to meet. Ultimately, your destiny remains in your hands as you
+							take the initiative and call the shots in any given fix.</p>
+
+
+						<div class="col-lg-3 featureline" data-animate="fadeInLeft" data-delay="5">
+							<i class="i-plain color i-large icon-star inline-block" style="margin-bottom: 15px;"></i>
+							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+								<h4 class="hoverline">Exclusivity</h4>
 							</div>
-
-							<div class="row divcenter center">
-
-
-								<div class="col-lg-3 featureline" data-animate="fadeInLeft" data-delay="5">
-									<i class="i-plain color i-large icon-play-circle inline-block" style="margin-bottom: 15px;"></i>
-									<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-										<h4 class="hoverline">Register</h4>
-									</div>
-									<p>Just tell us a couple of things about you. Say your phone number, location, sex
-										and email address so you can get on the platform.</p>
-								</div>
-
-								<div class="col-lg-3 featureline" data-animate="fadeInUp" data-delay="300">
-									<i class="i-plain color i-large icon-diamond2 inline-block" style="margin-bottom: 15px;"></i>
-									<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-										<h4 class="hoverline">Make Payment</h4>
-									</div>
-									<p>Since we go the extra mile to get you your dream partner, we make sure only the
-										most serious of people are members of DateFix.</p>
-								</div>
-
-								<div class="col-lg-3 featureline" data-animate="fadeInUp" data-delay="600">
-									<i class="i-plain color i-large icon-clipboard-list inline-block" style="margin-bottom: 15px;"></i>
-									<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-										<h4 class="hoverline">Be Specific</h4>
-									</div>
-									<p>Not everyone likes tall dark and handsome. Just kidding. But we know your specs
-										are unique so we'll let you even pick a deal breaker.</p>
-								</div>
-
-								<div class="col-lg-3 featureline" data-animate="fadeInRight" data-delay="900">
-									<i class="i-plain color i-large icon-line-heart inline-block" style="margin-bottom: 15px;"></i>
-									<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-										<h4 class="hoverline">Get a Date</h4>
-									</div>
-									<p>Once in a while, we'll send you your perfect match and then you can get intouch
-										with each other and see if it's a perfect match.</p>
-								</div>
-
-							</div>
-						</div>
-					</div>
-
-					<div class="section nomargin parallax dark nobottommargin" style="background-image: url('images/page/main-3.jpg'); padding: 100px 0; background-position: center center; background-color: #000;" data-bottom-top="background-position:25px 80px;" data-top-bottom="background-position:-25px -80px;">
-
-
-						<div class="heading-block center">
-							<h3 class="divcenter">Some Online Dating Facts</h3>
+							<p>Our paid subscription ensures that our service is closed to a certain class of persons
+								and therefore not free for all</p>
 						</div>
 
-						<div class="row bottommargin-sm">
-
-							<div class="col-lg-4 col-md-6">
-
-								<div class="feature-box fbox-right" data-animate="fadeIn">
-									<div class="fbox-icon">
-										<a href="#"><i class="icon-glass"></i></a>
-									</div>
-									<h3>Little White Lies</h3>
-									<p>50% to 80% of people who use online dating lie about themselves on their profile
-									</p>
-								</div>
-
-								<div class="feature-box fbox-right" data-animate="fadeIn" data-delay="200">
-									<div class="fbox-icon">
-										<a href="#"><i class="icon-chart-pie"></i></a>
-									</div>
-									<h3>Venus and Mars</h3>
-									<p>Online dating users are 52.4% men and 47.6% women. This statistic varies from
-										site to site.</p>
-								</div>
-
-								<div class="feature-box fbox-right" data-animate="fadeIn" data-delay="400">
-									<div class="fbox-icon">
-										<a href="#"><i class="icon-user-friends"></i></a>
-									</div>
-									<h3>Second Opinion</h3>
-									<p>One in five people asks for help from a pal to set up their online dating
-										profile.</p>
-								</div>
-
+						<div class="col-lg-3 featureline" data-animate="fadeInUp" data-delay="300">
+							<i class="i-plain color i-large icon-star inline-block" style="margin-bottom: 15px;"></i>
+							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+								<h4 class="hoverline">Broad Search</h4>
 							</div>
-
-							<div class="col-lg-4 d-md-none d-lg-block center">
-								&nbsp;
-							</div>
-
-							<div class="col-lg-4 col-md-6">
-
-								<div class="feature-box fbox-left " data-animate="fadeIn">
-									<div class="fbox-icon">
-										<a href="#"><i class="icon-phone-portrait"></i></a>
-									</div>
-									<h3>Computer Love</h3>
-									<p>Between 2002-2012, more than 1/3 of newlyweds met through an online dating site.
-									</p>
-								</div>
-
-								<div class="feature-box fbox-left" data-animate="fadeIn" data-delay="200">
-									<div class="fbox-icon">
-										<a href="#"><i class="icon-hourglass-half"></i></a>
-									</div>
-									<h3>Putting in the Hours</h3>
-									<p>On average women spend 8.5 minutes per session on dating sites, while men spend
-										7.2.</p>
-								</div>
-
-								<div class="feature-box fbox-left" data-animate="fadeIn" data-delay="400">
-									<div class="fbox-icon">
-										<a href="#"><i class="icon-line-heart"></i></a>
-									</div>
-									<h3>Cuffing Season</h3>
-									<p> the busiest time of the year is between December 26 and February 14 in terms of
-										dates arranged.</p>
-								</div>
-
-							</div>
-
+							<p>Datefix breaks the barrier of meeting people outside your social circle or local
+								community by casting your net wider for people with similar interest.</p>
 						</div>
 
-
-
-					</div>
-
-					<div class="row clearfix align-items-stretch">
-
-						<div class="col-lg-6 center col-padding" style="background: url('images/page/main-4.jpg') center center no-repeat; background-size: cover;">
+						<div class="col-lg-3 featureline" data-animate="fadeInUp" data-delay="600">
+							<i class="i-plain color i-large icon-star inline-block" style="margin-bottom: 15px;"></i>
+							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+								<h4 class="hoverline">Your Choice</h4>
+							</div>
+							<p>Datefix runs an automated search then lets you take your time to choose which one result
+								you have the best connection with.</p>
 						</div>
 
-						<div class="col-lg-6 center col-padding" style="background-color: #F5F5F5;">
-							<div class="heading-block nobottomborder">
-								<span class="before-heading color">Sample text as placeholder</span>
-								<h3>Walkthrough Video</h3>
+						<div class="col-lg-3 featureline" data-animate="fadeInRight" data-delay="900">
+							<i class="i-plain color i-large icon-star inline-block" style="margin-bottom: 15px;"></i>
+							<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
+								<h4 class="hoverline">The Fixers</h4>
 							</div>
-
-							<div class="center bottommargin">
-								<a id="desc-video" href="https://www.youtube.com/watch?v=7AeyhvBtNPc" data-lightbox="iframe" style="position: relative;">
-									<img src="images/page/main.jpg" alt="Video">
-									<span class="i-overlay nobg"><i class="icon-youtube-play"></i></span>
-								</a>
-							</div>
-							<p class="lead nobottommargin">Place video here which explains important datefix matters</p>
+							<p>DateFix forums are superintended by professionals in the counseling, psychology and
+								medical fields who give expert advice to Datefix members</p>
 						</div>
 
 					</div>
+				</div>
 
-					<a href="portfolio.html" class="button button-full button-dark floral-banner center tright bottommargin-lg">
-						<div class="container clearfix">
-							Join Datefix Now <i class="icon-caret-right" style="top:4px;"></i>
+				<div id="video-corner" class="divider divider-short divider-center topmargin-md"><i
+						class="icon-star3"></i></div>
+
+				<div class="heading-block center">
+					<h3>Video Perspectives</h3>
+				</div>
+
+
+				<div class="masonry-thumbs grid-3 clearfix">
+					<a href="https://www.youtube.com/watch?v=haZnBJI7A68" data-lightbox="iframe">
+						<img src="{% static 'images/page/vidp.jpg' %}" />
+						<div class="overlay center">
+							<div class="overlay-wrap">
+								<div
+									style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 0px;">
+									<h3 class="nobottommargin" style="font-size: 20px;color: #fff;">HOW SHOULD MONEY BE
+										HANDLED IN A
+										RELATIONSHIP</h3>
+									<hr style="background-color: #fff;">
+
+									<p style="font-size: 15px;color: #fff;">
+										One of the biggest areas of conflict in a relationship is money. Finances. How
+										should
+										each person spend and on what? Should there be a joint account or just joint
+										accounting? Huge difference.
+										Coach Sylvia touches on this in this video and sheds some light on the issue.
+										What do you think?</p>
+								</div>
+							</div>
 						</div>
 					</a>
+					<a href="https://www.youtube.com/watch?v=pJ9J0yUlVww" data-lightbox="iframe">
+						<img src="{% static 'images/page/vidp.jpg' %}" />
+						<div class="overlay center">
+							<div class="overlay-wrap">
+								<div
+									style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 10px;">
+									<h3 class="nobottommargin" style="font-size: 20px;color: #fff;">“Money builds strong
+										affection in a
+										relationship” - Single lady on Datefix</h3>
+									<hr style="background-color: #fff;">
 
-
-					<div class="container clearfix" id="fixers" style="max-width: 1000px">
-
-						<h1 class="topmargin nobottommargin t300 ls1">The Fixers</h1>
-
-						<p class="lead divcenter nomargin" style="max-width: 800px;">Meet our coaches.</p>
-
-						<!-- <p class="bottommargin" style="font-size: 16px;"><a href="#" data-scrollto="#section-services" data-easing="easeInOutExpo" data-speed="1250" data-offset="70" class="more-link">Learn more <i class="icon-angle-right"></i></a></p> -->
-
-						<div class="row topmargin-sm divcenter">
-
-							<div class="col-md-4 bottommargin" data-animate="fadeInLeft" data-delay="5">
-
-								<div class="team">
-									<div class="team-image">
-										<img src="images/team/1.jpg" alt="Dr Ani">
-										<div class="team-overlay">
-											<p>Dr. Ani is a University of Chicago trained medical doctor and
-												relationship coach. She mentors and helps guide young women to better
-												understand relationships and the roles played by each party. She is
-												married ith 3 children. </p>
-											<div class="team-social-icons">
-												<a href="#" class="social-icon si-borderless si-small si-twitter" title="Twitter">
-													<i class="icon-twitter"></i>
-													<i class="icon-twitter"></i>
-												</a>
-												<a href="#" class="social-icon si-borderless si-small si-linkedin" title="LinkedIn">
-													<i class="icon-linkedin"></i>
-													<i class="icon-linkedin"></i>
-												</a>
-												<a href="#" class="social-icon si-borderless si-small si-instagram" title="Instagram">
-													<i class="icon-instagram"></i>
-													<i class="icon-instagram"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="team-desc team-desc-bg">
-										<div class="team-title">
-											<h4>Dr Ani</h4>
-										</div>
-									</div>
+									<p style="font-size: 15px;color: #fff;">
+										Here is a video about why Money is important in a relationship. What’s your take
+										on this?<br>
+										If you will like to see more opinions about
+										relationships, Subscribe to the channel and follow our IG page @datefix.me</p>
 								</div>
-
 							</div>
+						</div>
+					</a>
+					<a href="https://www.youtube.com/watch?v=LnXYqWf5awI" data-lightbox="iframe">
+						<img src="{% static 'images/page/vidp.jpg' %}" />
+						<div class="overlay center">
+							<div class="overlay-wrap">
+								<div
+									style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 10px;">
+									<h3 class="nobottommargin" style="font-size: 20px;color: #fff;">NOT SO SWEET SUGAR
+										DADDY?</h3>
+									<hr style="background-color: #fff;">
 
-							<div class="col-md-4 bottommargin" data-animate="fadeInUp" data-delay="300">
-
-								<div class="team">
-									<div class="team-image">
-										<img src="images/team/2.jpg" alt="Faith History">
-										<div class="team-overlay">
-											<p>Faith History is a University of Baltimore Communications graduate who
-												has worked extensively with young people in helping them achieve
-												work-life balance. As an On-Air Personality, Faith also helps young
-												people attain their dreams and potentials via technology, using her
-												digital platforms both on radio and online. She is happily married with
-												children. </p>
-											<div class="team-social-icons">
-												<a href="#" class="social-icon si-borderless si-small si-twitter" title="Twitter">
-													<i class="icon-twitter"></i>
-													<i class="icon-twitter"></i>
-												</a>
-												<a href="#" class="social-icon si-borderless si-small si-linkedin" title="LinkedIn">
-													<i class="icon-linkedin"></i>
-													<i class="icon-linkedin"></i>
-												</a>
-												<a href="#" class="social-icon si-borderless si-small si-instagram" title="Instagram">
-													<i class="icon-instagram"></i>
-													<i class="icon-instagram"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="team-desc team-desc-bg">
-										<div class="team-title">
-											<h4>Faith History</h4>
-										</div>
-									</div>
+									<p style="font-size: 15px;color: #fff;">
+										In this video, A single lady on datefix talks about the pros and cons of having
+										a sugar daddy.<br>
+										This is a totally objective review, not indicative of her preferences :)</p>
 								</div>
-
 							</div>
+						</div>
+					</a>
+				</div>
+			</div>
 
-							<div class="col-md-4 bottommargin" data-animate="fadeInRight" data-delay="600">
+			<div class="section nomargin parallax dark nobottommargin topmargin-sm"
+				style="background-image: url({% static "images/page/main2.jpg" %}); background-size: cover; padding: 100px 0; background-position: center center; background-color: #000;"
+				data-bottom-top="background-position:25px 80px;" data-top-bottom="background-position:-25px -80px;">
 
-								<div class="team">
-									<div class="team-image">
-										<img src="images/team/3.jpg" alt="Coach MIA">
-										<div class="team-overlay">
-											<p>Coach MIA is a university of London graduate and a certified coach whose
-												main area of study is in the differences between men and women and how
-												best to create harmony within those differences. He is married with
-												children. </p>
-											<div class="team-social-icons">
-												<a href="#" class="social-icon si-borderless si-small si-twitter" title="Twitter">
-													<i class="icon-twitter"></i>
-													<i class="icon-twitter"></i>
-												</a>
-												<a href="#" class="social-icon si-borderless si-small si-linkedin" title="LinkedIn">
-													<i class="icon-linkedin"></i>
-													<i class="icon-linkedin"></i>
-												</a>
-												<a href="#" class="social-icon si-borderless si-small si-instagram" title="Instagram">
-													<i class="icon-instagram"></i>
-													<i class="icon-instagram"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="team-desc team-desc-bg">
-										<div class="team-title">
-											<h4>Coach MIA</h4>
-										</div>
-									</div>
-								</div>
+				<div class="divider divider-short divider-center topmargin-md"><i class="icon-star3"></i></div>
+				<div class="heading-block center">
+					<h3 class="divcenter">Some Online Dating Facts</h3>
+				</div>
 
+				<div class="row bottommargin-sm">
+
+					<div class="col-lg-4 col-md-6">
+
+						<div class="feature-box fbox-right" data-animate="fadeIn">
+							<div class="fbox-icon">
+								<a href="#"><i class="icon-glass"></i></a>
 							</div>
+							<h3>Little White Lies</h3>
+							<p>50% to 80% of people who use online dating lie about themselves on their profile
+							</p>
+						</div>
 
+						<div class="feature-box fbox-right" data-animate="fadeIn" data-delay="200">
+							<div class="fbox-icon">
+								<a href="#"><i class="icon-chart-pie"></i></a>
+							</div>
+							<h3>Venus and Mars</h3>
+							<p>Online dating users are 52.4% men and 47.6% women. This statistic varies from
+								site to site.</p>
+						</div>
+
+						<div class="feature-box fbox-right" data-animate="fadeIn" data-delay="400">
+							<div class="fbox-icon">
+								<a href="#"><i class="icon-user-friends"></i></a>
+							</div>
+							<h3>Second Opinion</h3>
+							<p>One in five people asks for help from a pal to set up their online dating
+								profile.</p>
+						</div>
+
+					</div>
+
+					<div class="col-lg-4 d-md-none d-lg-block center">
+						&nbsp;
+					</div>
+
+					<div class="col-lg-4 col-md-6">
+
+						<div class="feature-box fbox-left " data-animate="fadeIn">
+							<div class="fbox-icon">
+								<a href="#"><i class="icon-phone-portrait"></i></a>
+							</div>
+							<h3>Computer Love</h3>
+							<p>Between 2002-2012, more than 1/3 of newlyweds met through an online dating site.
+							</p>
+						</div>
+
+						<div class="feature-box fbox-left" data-animate="fadeIn" data-delay="200">
+							<div class="fbox-icon">
+								<a href="#"><i class="icon-hourglass-half"></i></a>
+							</div>
+							<h3>Putting in the Hours</h3>
+							<p>On average women spend 8.5 minutes per session on dating sites, while men spend
+								7.2.</p>
+						</div>
+
+						<div class="feature-box fbox-left" data-animate="fadeIn" data-delay="400">
+							<div class="fbox-icon">
+								<a href="#"><i class="icon-line-heart"></i></a>
+							</div>
+							<h3>Cuffing Season</h3>
+							<p> the busiest time of the year is between December 26 and February 14 in terms of
+								dates arranged.</p>
 						</div>
 
 					</div>
 
 				</div>
 
-				<div id="section-services" class="page-section notoppadding">
 
-					<div class="section dark nomargin" style="background-image: url(images/page/hiwbg.jpg);background-attachment: fixed;background-size: cover;">
-						<div class="divcenter center" style="max-width: 900px;">
-							<h2 class="nobottommargin t300 ls1"><a href="#" data-scrollto="#template-contactform" data-offset="140" data-easing="easeInOutExpo" data-speed="1250" class="button button-border button-circle button-light button-large notopmargin nobottommargin" style="position: relative; top: -3px;">Get Started</a></h2>
-						</div>
-					</div>
 
+			</div>
+
+
+
+
+
+		</div>
+
+		<div id="section-services" class="page-section notoppadding">
+
+			<div class="section dark nomargin"
+				style="background-image: url(images/page/hiwbg.jpg);background-attachment: fixed;background-size: cover;">
+				<div class="divcenter center" style="max-width: 900px;">
+					<h2 class="nobottommargin t300 ls1"><a href={% url 'login'  %} data-offset="140"
+							data-easing="easeInOutExpo" data-speed="1250"
+							class="button button-border button-circle button-light button-large notopmargin nobottommargin"
+							style="position: relative; top: -3px;">Get Started</a></h2>
 				</div>
+			</div>
 
-				<div id="section-contact" class="page-section notoppadding">
+		</div>
 
-					<div class="container clearfix">
+		<div id="section-contact" class="page-section notoppadding">
 
-						<div class="divcenter topmargin" style="max-width: 850px;">
+			<div class="container clearfix">
 
-							<div class="form-widget">
+				<div class="divcenter topmargin" style="max-width: 850px;">
 
-								<div class="form-result"></div>
+					<div class="form-widget">
 
-								<form class="nobottommargin" id="template-contactform" name="template-contactform" action="../include/form.php" method="post">
+						<div class="form-result"></div>
 
-									<div class="form-process"></div>
+						<form class="nobottommargin" id="template-contactform" name="template-contactform"
+							action="../include/form.php" method="post">
 
-									<div class="col_half">
-										<input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="sm-form-control border-form-control required" placeholder="Name" />
-									</div>
-									<div class="col_half col_last">
-										<input type="email" id="template-contactform-email" name="template-contactform-email" value="" class="required email sm-form-control border-form-control" placeholder="Email Address" />
-									</div>
+							<div class="form-process"></div>
 
-									<div class="clear"></div>
-
-									<div class="col_one_third">
-										<input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control border-form-control" placeholder="Phone" />
-									</div>
-
-									<div class="col_two_third col_last">
-										<input type="text" id="template-contactform-subject" name="subject" value="" class="required sm-form-control border-form-control" placeholder="Subject" />
-									</div>
-
-									<div class="clear"></div>
-
-									<div class="col_full">
-										<textarea class="required sm-form-control border-form-control" id="template-contactform-message" name="template-contactform-message" rows="7" cols="30" placeholder="Your Message"></textarea>
-									</div>
-
-									<div class="col_full center">
-										<button class="button button-border button-circle t500 noleftmargin topmargin-sm" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Send Message</button>
-										<br>
-										<small style="display: block; font-size: 13px; margin-top: 15px;">We'll do our
-											best to get back to you within 6-8 working hours.</small>
-									</div>
-
-									<div class="clear"></div>
-
-									<div class="col_full hidden">
-										<input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="sm-form-control" />
-									</div>
-
-									<input type="hidden" name="prefix" value="template-contactform-">
-
-								</form>
-
+							<div class="col_half">
+								<input type="text" id="template-contactform-name" name="template-contactform-name"
+									value="" class="sm-form-control border-form-control required" placeholder="Name" />
+							</div>
+							<div class="col_half col_last">
+								<input type="email" id="template-contactform-email" name="template-contactform-email"
+									value="" class="required email sm-form-control border-form-control"
+									placeholder="Email Address" />
 							</div>
 
-						</div>
+							<div class="clear"></div>
+
+							<div class="col_one_third">
+								<input type="text" id="template-contactform-phone" name="template-contactform-phone"
+									value="" class="sm-form-control border-form-control" placeholder="Phone" />
+							</div>
+
+							<div class="col_two_third col_last">
+								<input type="text" id="template-contactform-subject" name="subject" value=""
+									class="required sm-form-control border-form-control" placeholder="Subject" />
+							</div>
+
+							<div class="clear"></div>
+
+							<div class="col_full">
+								<textarea class="required sm-form-control border-form-control"
+									id="template-contactform-message" name="template-contactform-message" rows="7"
+									cols="30" placeholder="Your Message"></textarea>
+							</div>
+
+							<div class="col_full center">
+								<button class="button button-border button-circle t500 noleftmargin topmargin-sm"
+									type="submit" id="template-contactform-submit" name="template-contactform-submit"
+									value="submit">Send Message</button>
+								<br>
+								<small style="display: block; font-size: 13px; margin-top: 15px;">We'll do our
+									best to get back to you within 6-8 working hours.</small>
+							</div>
+
+							<div class="clear"></div>
+
+							<div class="col_full hidden">
+								<input type="text" id="template-contactform-botcheck"
+									name="template-contactform-botcheck" value="" class="sm-form-control" />
+							</div>
+
+							<input type="hidden" name="prefix" value="template-contactform-">
+
+						</form>
 
 					</div>
 
@@ -472,21 +544,26 @@
 
 			</div>
 
-		</section><!-- #content end -->
+		</div>
 
-		<!-- Footer
+	</div>
+
+</section><!-- #content end -->
+
+<!-- Footer
 		============================================= -->
-		{% include "footer.html" %}
-		
-		<!-- #footer end -->
+{% include "footer.html" %}
+
+<!-- #footer end -->
 
 {% endblock content %}
 
 {% block script %}
-  
+
+
 
 {% endblock script %}
 
 {% block fixed %}
-  fixed-bottom
+fixed-bottom
 {% endblock fixed %}

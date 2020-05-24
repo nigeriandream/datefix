@@ -60,7 +60,10 @@ class Chat_Thread(models.Model):
                           'time': i.datetime.time().__str__(),
                           'message': self.decrypt(i.text),
                           'sender_id': i.sender.id,
+                          'sender_first_name':i.sender.first_name,
+                          'sender_last_name': i.sender.last_name,
                            'sender': i.sender.username,
+                           'sender_pic': i.sender.profile_picture,
                            'status': i.send_status})
         data = {'chat_list': data}
         return data
@@ -82,6 +85,8 @@ class Chat_Thread(models.Model):
             return None
         return msg[0]
     
+
+
     def last_message_text(self):
         return self.decrypt(self.last_message().text)
     
