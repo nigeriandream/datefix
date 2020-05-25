@@ -50,7 +50,7 @@ class ChatConsumer(AsyncConsumer):
                     {"type": "send_message",
                     "data": self.chat_data}
                 )
-            elif self.chat_data['function'] == 'isTyping' or self.chat_data['function'] == 'NotTyping':
+            elif self.chat_data['function'] in ['isTyping', 'notTyping', 'available']:
                 await self.channel_layer.group_send(
                     self.chat_room,
                     {"type": "send_message",
@@ -63,7 +63,8 @@ class ChatConsumer(AsyncConsumer):
                     self.chat_room,
                     {"type": "send_message", "data": self.chat_data}
                 )
-                
+
+            
     
     async def send_message(self, event):
         await self.send({"type":"websocket.send", "text": json.dumps(event['data'])})       
