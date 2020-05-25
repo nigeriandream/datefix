@@ -58,6 +58,8 @@ def get_chat_threads(request, user_id):
     if request.method == 'GET':
         chats = Chat_Thread.objects.filter(Q(first_user_id=request.user.id)|Q(second_user_id=request.user.id)).order_by('last_message_date')    
         data = [{
+            "chat_id" : x.id,
+            "chat_link": ''.join(['/chat/api/chat/', str(x.id)]),
             "username": x.get_receiver(user).username,
             "first_name": x.get_receiver(user).first_name,
             "last_name": x.get_receiver(user).last_name,
