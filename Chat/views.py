@@ -20,21 +20,8 @@ def all_chats(request):
     # else:
         return redirect('dashboard')
 
-def chat(request, thread_id):
-    user = User.objects.get(id=request.user.id)
-    chat = Chat_Thread.objects.get(id=thread_id)
-    chat.self_delete()
-    chat.show_detail()
-    # if request.method == 'GET' and user.payed is True and (chat.first_user == user or chat.second_user == user):
-    if request.method == 'GET' and (chat.first_user == user or chat.second_user == user):
-        return render(request, 'Chat/chat.html', {'messages': chat.chat_messages(chat.position(user)), 
-                                                  'show': chat.show_details, 'receiver': chat.get_receiver(user),
-                                                  'chat_id': chat.id})
-    elif request.method == 'POST':
-        return redirect('chatroom', chat.id)
-    else: 
-        return redirect('dashboard')
-    
+def chat(request):
+    return render(request, 'Chat/chat.html') 
 
 
 def request_(request, match_id):
