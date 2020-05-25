@@ -52,9 +52,25 @@ var app = new Vue({
       },
     ],
   },
+  async mounted() {
+    await this.getUser(1);
+    console.log(window.location.pathname.split("/", 3));
+  },
   methods: {
     greet: function (name) {
       console.log("Hello from " + name + "!");
+    },
+    async getUser(user_id) {
+      // let user_id = this.$route.params.id;
+      try {
+        const response = await fetch(`/chat/api/user/${user_id}`);
+        // const response = await axios.get(`/chat/api/user/${user_id}`);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+      // const data = await res.json();
+      // this.data = data;
     },
   },
 });
