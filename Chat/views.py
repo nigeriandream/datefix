@@ -12,13 +12,14 @@ import json
 def all_chats(request):
     # user = User.objects.get(id=request.user.id)
     # if request.method == 'GET' and user.payed is True:
-    #     chats = Chat_Thread.objects.filter(Q(first_user_id=request.user.id)|Q(second_user_id=request.user.id)).order_by('last_message_date')    
+    #     chats = Chat_Thread.objects.filter(Q(first_user_id=request.user.id)|Q(second_user_id=request.user.id)).order_by('last_message_date')
     #     unread_msg = [x.no_unread_msg(user) for x in chats]
     #     data = zip(chats, unread_msg)
     #     print(unread_msg[0])
     #     return render(request, 'Chat/all_chat.html', {'data': data})
     # else:
-        return redirect('dashboard')
+    return redirect('dashboard')
+
 
 def chat(request, thread_id):
     user = User.objects.get(id=request.user.id)
@@ -27,14 +28,13 @@ def chat(request, thread_id):
     chat.show_detail()
     # if request.method == 'GET' and user.payed is True and (chat.first_user == user or chat.second_user == user):
     if request.method == 'GET' and (chat.first_user == user or chat.second_user == user):
-        return render(request, 'Chat/chat.html', {'messages': chat.chat_messages(chat.position(user)), 
+        return render(request, 'Chat/chat.html', {'messages': chat.chat_messages(chat.position(user)),
                                                   'show': chat.show_details, 'receiver': chat.get_receiver(user),
                                                   'chat_id': chat.id})
     elif request.method == 'POST':
         return redirect('chatroom', chat.id)
-    else: 
+    else:
         return redirect('dashboard')
-    
 
 
 def request_(request, match_id):
@@ -51,7 +51,7 @@ def request_(request, match_id):
             elif reply is False:
                 request.session['change min'] = True
                 return redirect('data_details')
-                
+
 
 def get_chat(request, id_):
     if request.method == 'GET':
@@ -70,8 +70,8 @@ def delete_message(request, chat_id, id_):
     elif position == 'second':
         chat.second_deleted = ','.join(list_)
     return HttpResponse(id_)
-    
-    
+
+
 def create_key(request):
     key = create_private_key()
     return HttpResponse(key)

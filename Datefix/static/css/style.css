@@ -90,6 +90,29 @@
 
 ---------------------------------------------------------------- */
 
+.match-body-pills {
+	box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+	border-radius: 11px;
+	padding: 2px 9px;
+	width: 100%;
+	display: inline-block;
+	overflow: hidden;
+}
+
+.body-pill-attribute {
+	padding-right: 10px;
+	display: inline-block;
+	font-weight: 500;
+}
+
+.body-pill-value {
+	float: right;
+}
+
+.chosen-select {
+	width: 350px;
+}
+
 .cta-join {
 	color: #222 !important;
 	background: #f9f9f9 !important;
@@ -136,15 +159,16 @@ input[type="radio"],
 }
 
 .form-category {
-	margin: 25px 15px;
+	margin: 25px auto;
 	padding: 30px;
-	background: #fff;
+	background: rgba(255, 255, 255, 0.6);
 	border-radius: 15px;
-	transition: 0.4s ease box-shadow;
+	transition: 0.4s ease all;
 }
 
 .form-category:hover {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background: #fff;
 }
 
 form div h4 {
@@ -8727,6 +8751,11 @@ body:not(.device-touch) .button.button-full strong {
 /* ----------------------------------------------------------------
 	Featured Boxes
 -----------------------------------------------------------------*/
+
+.x-padding-40 {
+	padding-left: 40px !important;
+	padding-right: 40px !important;
+}
 
 .feature-box {
 	position: relative;

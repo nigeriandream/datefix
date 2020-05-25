@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import auth
-from .models import User 
+from .models import User
 import json
 from .algorithms import get_username, match_user
 from Chat.algorithms import in_my_chat
 # Create your views here.
+
 
 def login(request):
     # if request.method == 'POST':
@@ -22,6 +23,11 @@ def login(request):
     #         return redirect('dashboard')
     return render(request, 'Account/login.html')
 
+
+def results(request):
+    return render(request, 'Account/results.html')
+
+
 def signup(request):
     # if request.method == 'POST':
     #     if request.POST['password1'] == request.POST['password2'] :
@@ -32,11 +38,11 @@ def signup(request):
     #             first_name = request.POST['first-name'],
     #             last_name = request.POST['last-name'],
     #             sex= request.POST['sex'],
-    #             phone = request.POST['phone']    
+    #             phone = request.POST['phone']
     #         )
     #         user.save()
     #         return redirect('login')
-        
+
     # elif request.method == 'GET':
     #     if request.user.is_authenticated:
     #         return redirect('dashboard')
@@ -63,16 +69,16 @@ def dashboard(request):
     #         return redirect('login')
     return render(request, 'Account/profile.html')
 
-    
+
 def matching(request):
     if request.method == 'GET':
         user = User.objects.get(id=GET['user_id'])
         if user.sex == 'female':
             if match_user(user) is True:
                 return HttpResponse(json.dumps({'matches': user.matches_()}))
-        return HttpResponse(json.dumps({'matches': []}))
-        
-        
+    return HttpResponse(json.dumps({'matches': []}))
+
+
 def adjust_min(request):
     if request.method == 'GET':
         try:
@@ -83,13 +89,13 @@ def adjust_min(request):
             user.save()
             return HttpResponse('success')
 
-        
+
 def delete_notifications(request, id_):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
         notification = {}
         if user.notification == '' or user.notification is None:
-            notification['deleted'] =[str(id_)]
+            notification['deleted'] = [str(id_)]
             notification['read'] = []
             user.notification = json.dumps(notification)
             user.save()
@@ -101,43 +107,44 @@ def delete_notifications(request, id_):
         return HttpResponse('done')
     else:
         return HttpResponse('not done')
-    
+
 
 def read_notifications(request):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
-        notifications = {'read': [], 'deleted':[]}
+        notifications = {'read': [], 'deleted': []}
         if user.notification == None or user.notification == '':
             pass
         else:
             notifications = json.loads(user.notification)
-        new_notifications = [str(x.id) for x in user.notifications() if str(x.id) not in notifications['read']]
+        new_notifications = [str(x.id) for x in user.notifications() if str(
+            x.id) not in notifications['read']]
         notifications['read'] = new_notifications + notifications['read']
         user.notification = json.dumps(notifications)
         user.save()
         return HttpResponse('done')
     else:
         return HttpResponse('not done')
-    
-    
+
+
 def get_data(request, type_):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
-        if type_==  'user':
+        if type_ == 'user':
             user_data = json.loads(user.user_data)
             user_data.update(request.GET)
             user.user_data = json.dumps(user_data)
             user.save()
             return HttpResponse('success')
-        
+
         if type_ == 'partner':
             user_data = json.loads(user.choice_data)
             user_data.update(request.GET)
-            user.deal_breaker = json.dumps([user_data['dealbreaker1'], user_data['dealbreaker2']])
+            user.deal_breaker = json.dumps(
+                [user_data['dealbreaker1'], user_data['dealbreaker2']])
             del(user_data['dealbreaker1'], user_data['dealbreaker2'])
             user.choice_data = json.dumps(user_data)
             user.save()
             return HttpResponse('success')
-            
-        return HttpResponse('fail')    
- 
+
+        return HttpResponse('fail')

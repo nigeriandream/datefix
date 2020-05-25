@@ -35,11 +35,14 @@ Nigeria's best dating site for professionals
 					<li><a href="#" data-href="#wrapper">
 							<div>Home</div>
 						</a></li>
-					<li><a href="#" data-href="#fixers">
-							<div>The Fixers</div>
-						</a></li>
 					<li><a href="#" data-href="#howitworks">
 							<div>How Datefix Works</div>
+						</a></li>
+					<li><a href="#" data-href="#video-corner">
+							<div>Video Perspectives</div>
+						</a></li>
+					<li><a href="#" data-href="#questions">
+							<div>FAQs</div>
 						</a></li>
 					<li><a href={% url 'login' %}>
 							<div>Join Datefix / Login</div>
@@ -106,8 +109,9 @@ Nigeria's best dating site for professionals
 <!-- Content
 		============================================= -->
 
-<section id="content"
-	style=" background-image: url({% static "images/page/bg.jpg"%}); background-size: cover; background-attachment: fixed;">
+<section id="content" class="section parallax nomargin nopadding"
+	style=" background-image: url({% static "images/page/bg.jpg"%}); background-size: cover; background-attachment: fixed;"
+	data-bottom-top="background-position:15px 80px;" data-top-bottom="background-position:-15px -100px;">
 
 	<div class="content-wrap nopadding">
 
@@ -206,7 +210,7 @@ Nigeria's best dating site for professionals
 				<div class="row divcenter center">
 
 
-					<div class="col-lg-4 featureline" data-animate="fadeInLeft" data-delay="5">
+					<div class="col-lg-4 x-padding-40 featureline" data-animate="fadeInLeft" data-delay="5">
 						<i class="i-plain color i-large icon-play-circle inline-block" style="margin-bottom: 15px;"></i>
 						<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
 							<h4 class="hoverline">Register</h4>
@@ -215,7 +219,7 @@ Nigeria's best dating site for professionals
 							and email address so you can get on the platform.</p>
 					</div>
 
-					<div class="col-lg-4 featureline" data-animate="fadeInUp" data-delay="600">
+					<div class="col-lg-4 x-padding-40 featureline" data-animate="fadeInUp" data-delay="600">
 						<i class="i-plain color i-large icon-clipboard-list inline-block"
 							style="margin-bottom: 15px;"></i>
 						<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
@@ -225,7 +229,7 @@ Nigeria's best dating site for professionals
 							are unique so we'll let you even pick a deal breaker.</p>
 					</div>
 
-					<div class="col-lg-4 featureline" data-animate="fadeInRight" data-delay="900">
+					<div class="col-lg-4 x-padding-40 featureline" data-animate="fadeInRight" data-delay="900">
 						<i class="i-plain color i-large icon-line-heart inline-block" style="margin-bottom: 15px;"></i>
 						<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
 							<h4 class="hoverline">Get a Date</h4>
@@ -234,12 +238,8 @@ Nigeria's best dating site for professionals
 							with each other and see if it's a perfect match.</p>
 					</div>
 
-				</div>
+					<div class="divider divider-short divider-center topmargin-md"><i class="icon-star3"></i></div>
 
-			</div>
-
-			<div class="section nomargin" style="padding-bottom: 0px;">
-				<div class="container clearfix">
 					<div class="divcenter center" style="max-width: 900px;">
 
 						<h1 class="notopmargin t300 ls1">For the Working Professional</h1>
@@ -248,16 +248,45 @@ Nigeria's best dating site for professionals
 
 					<div class="row divcenter center">
 
-						<p style="font-size: 20px;font-weight: 300;">Here at DateFix, we understand that the demands of
-							modern life leaves close to no room for socialization in the life of a Nigerian Professional
-							and so we aim to bridge this societal gap by bringing like-minded compatible singles to your
-							niche.</p>
+						<div class="col_one_fifth" style="overflow: hidden;
+						border-radius: 15px; height: fit-content;" data-animate="fadeInLeft" data-delay="250">
+							<img src="{% static "images/page/pro1.jpg" %}" style="    width: fit-content;
+							height: 100%;"></img>
+						</div>
 
-						<p style="font-size: 20px;font-weight: 300;">We do not claim to arrange a relationship for you
-							rather we bring potential life partners close to you, people who you would otherwise not
-							have the time and opportunity to meet. Ultimately, your destiny remains in your hands as you
-							take the initiative and call the shots in any given fix.</p>
+						<div class="col_three_fifth">
 
+							<p style="font-size: 20px;font-weight: 300;">Here at DateFix, we understand that the
+								demands
+								of
+								modern life leaves close to no room for socialization in the life of a Nigerian
+								Professional
+								and so we aim to bridge this societal gap by bringing like-minded compatible singles
+								to
+								your
+								niche.</p>
+
+							<p style="font-size: 20px;font-weight: 300;">We do not claim to arrange a relationship
+								for
+								you
+								rather we bring potential life partners close to you, people who you would otherwise
+								not
+								have the time and opportunity to meet. Ultimately, your destiny remains in your
+								hands as
+								you
+								take the initiative and call the shots in any given fix.</p>
+						</div>
+
+						<div class="col_one_fifth col_last" style="overflow: hidden;
+						border-radius: 15px; height: fit-content;" data-animate="fadeInRight" data-delay="250">
+							<img src="{% static "images/page/pro2.jpg" %}" style="    width: fit-content;
+							height: 100%;"></img>
+						</div>
+					</div>
+
+					<hr style="background-color: #fff;">
+
+					<div class="row divcenter center">
 
 						<div class="col-lg-3 featureline" data-animate="fadeInLeft" data-delay="5">
 							<i class="i-plain color i-large icon-star inline-block" style="margin-bottom: 15px;"></i>
@@ -296,255 +325,414 @@ Nigeria's best dating site for professionals
 						</div>
 
 					</div>
+
+					<a href={% url 'login'  %}
+						class="topmargin button button-rounded button-reveal button-large button-red tright"
+						style="margin-left: auto; margin-right: auto;"><i class="icon-heart"></i><span>Join Datefix
+							Now</span></a>
+
+
 				</div>
 
-				<div id="video-corner" class="divider divider-short divider-center topmargin-md"><i
-						class="icon-star3"></i></div>
 
-				<div class="heading-block center">
-					<h3>Video Perspectives</h3>
-				</div>
-
-
-				<div class="masonry-thumbs grid-3 clearfix">
-					<a href="https://www.youtube.com/watch?v=haZnBJI7A68" data-lightbox="iframe">
-						<img src="{% static 'images/page/vidp.jpg' %}" />
-						<div class="overlay center">
-							<div class="overlay-wrap">
-								<div
-									style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 0px;">
-									<h3 class="nobottommargin" style="font-size: 20px;color: #fff;">HOW SHOULD MONEY BE
-										HANDLED IN A
-										RELATIONSHIP</h3>
-									<hr style="background-color: #fff;">
-
-									<p style="font-size: 15px;color: #fff;">
-										One of the biggest areas of conflict in a relationship is money. Finances. How
-										should
-										each person spend and on what? Should there be a joint account or just joint
-										accounting? Huge difference.
-										Coach Sylvia touches on this in this video and sheds some light on the issue.
-										What do you think?</p>
-								</div>
-							</div>
-						</div>
-					</a>
-					<a href="https://www.youtube.com/watch?v=pJ9J0yUlVww" data-lightbox="iframe">
-						<img src="{% static 'images/page/vidp.jpg' %}" />
-						<div class="overlay center">
-							<div class="overlay-wrap">
-								<div
-									style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 10px;">
-									<h3 class="nobottommargin" style="font-size: 20px;color: #fff;">“Money builds strong
-										affection in a
-										relationship” - Single lady on Datefix</h3>
-									<hr style="background-color: #fff;">
-
-									<p style="font-size: 15px;color: #fff;">
-										Here is a video about why Money is important in a relationship. What’s your take
-										on this?<br>
-										If you will like to see more opinions about
-										relationships, Subscribe to the channel and follow our IG page @datefix.me</p>
-								</div>
-							</div>
-						</div>
-					</a>
-					<a href="https://www.youtube.com/watch?v=LnXYqWf5awI" data-lightbox="iframe">
-						<img src="{% static 'images/page/vidp.jpg' %}" />
-						<div class="overlay center">
-							<div class="overlay-wrap">
-								<div
-									style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 10px;">
-									<h3 class="nobottommargin" style="font-size: 20px;color: #fff;">NOT SO SWEET SUGAR
-										DADDY?</h3>
-									<hr style="background-color: #fff;">
-
-									<p style="font-size: 15px;color: #fff;">
-										In this video, A single lady on datefix talks about the pros and cons of having
-										a sugar daddy.<br>
-										This is a totally objective review, not indicative of her preferences :)</p>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
 			</div>
 
-			<div class="section nomargin parallax dark nobottommargin topmargin-sm"
-				style="background-image: url({% static "images/page/main2.jpg" %}); background-size: cover; padding: 100px 0; background-position: center center; background-color: #000;"
-				data-bottom-top="background-position:25px 80px;" data-top-bottom="background-position:-25px -80px;">
+		</div>
 
-				<div class="divider divider-short divider-center topmargin-md"><i class="icon-star3"></i></div>
-				<div class="heading-block center">
-					<h3 class="divcenter">Some Online Dating Facts</h3>
+		<div class="section notopmargin bottommargin"
+			style="padding-bottom: 0px; margin-left: 30px; margin-right: 30px;">
+
+
+			<div id="video-corner" class="divider divider-short divider-center notopmargin"><i class="icon-star3"></i>
+			</div>
+
+			<div class="heading-block center">
+				<h3>Video Perspectives</h3>
+			</div>
+
+
+			<div id="oc-posts" class="owl-carousel posts-carousel carousel-widget" data-loop="true" data-autoplay="4500"
+				data-margin="20" data-nav="true" data-pagi="true" data-items-xs="1" data-items-sm="2" data-items-md="3"
+				data-items-lg="4" data-lightbox="gallery">
+
+				<div class="oc-item">
+					<div class="ipost clearfix">
+						<div class="entry-image" style="overflow: hidden; border-radius: 15px;">
+							<a href="https://www.youtube.com/watch?v=haZnBJI7A68" data-lightbox="iframe">
+								<img src="{% static 'images/page/vidp.jpg' %}" />
+								<div class="overlay center">
+									<div class="overlay-wrap">
+										<div
+											style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 0px;">
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="entry-title">
+							<h3><a href="https://www.youtube.com/watch?v=haZnBJI7A68" data-lightbox="iframe"><i
+										class="icon-film"></i>&nbsp;HOW SHOULD
+									MONEY BE HANDLED IN A RELATIONSHIP</a></h3>
+						</div>
+						<div class="entry-content">
+							<p>One of the biggest areas of conflict in a relationship is money.
+								Finances. How
+								should
+								each person spend and on what? Should there be a joint account or just
+								joint
+								accounting? Huge difference.
+								Coach Sylvia touches on this in this video and sheds some light on the
+								issue.
+								What do you think?</p>
+						</div>
+					</div>
 				</div>
 
-				<div class="row bottommargin-sm">
+				<div class="oc-item">
+					<div class="ipost clearfix">
+						<div class="entry-image" style="overflow: hidden; border-radius: 15px;">
+							<a href="https://www.youtube.com/watch?v=pJ9J0yUlVww" data-lightbox="iframe">
+								<img src="{% static 'images/page/vidp.jpg' %}" />
+								<div class="overlay center">
+									<div class="overlay-wrap">
+										<div
+											style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 0px;">
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="entry-title">
+							<h3><a href="https://www.youtube.com/watch?v=pJ9J0yUlVww" data-lightbox="iframe"><i
+										class="icon-film"></i>&nbsp;“Money builds strong
+									affection in a
+									relationship” - Single lady on Datefix</a></h3>
+						</div>
+						<div class="entry-content">
+							<p>
+								Here is a video about why Money is important in a relationship. What’s your take
+								on this?<br>
+								If you will like to see more opinions about
+								relationships, Subscribe to the channel and follow our IG page @datefix.me</p>
+						</div>
+					</div>
+				</div>
 
-					<div class="col-lg-4 col-md-6">
+				<div class="oc-item" style="overflow: hidden; border-radius: 15px;">
+					<div class="ipost clearfix">
+						<div class="entry-image">
+							<a href="https://www.youtube.com/watch?v=LnXYqWf5awI" data-lightbox="iframe">
+								<img src="{% static 'images/page/vidp.jpg' %}" />
+								<div class="overlay center">
+									<div class="overlay-wrap">
+										<div
+											style="position: absolute;bottom: 0px;padding-left: 30px;padding-right: 30px;padding-bottom: 0px;">
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="entry-title">
+							<h3><a href="https://www.youtube.com/watch?v=LnXYqWf5awI" data-lightbox="iframe"><i
+										class="icon-film"></i>&nbsp;NOT SO SWEET SUGAR
+									DADDY?</a></h3>
+						</div>
+						<div class="entry-content">
+							<p>In this video, A single lady on datefix talks about the pros and cons of having
+								a sugar daddy.<br>
+								This is a totally objective review, not indicative of her preferences :)</p>
+						</div>
+					</div>
+				</div>
 
-						<div class="feature-box fbox-right" data-animate="fadeIn">
-							<div class="fbox-icon">
-								<a href="#"><i class="icon-glass"></i></a>
-							</div>
-							<h3>Little White Lies</h3>
-							<p>50% to 80% of people who use online dating lie about themselves on their profile
+
+			</div>
+
+
+
+
+		</div>
+
+		<div class="section nomargin parallax dark nobottommargin topmargin-sm"
+			style="background-image: url({% static "images/page/bg1.jpg" %}); background-size: cover; padding: 100px 0; background-position: center center; background-color: #000;"
+			data-bottom-top="background-position:25px 80px;" data-top-bottom="background-position:-25px -80px;">
+
+			<div class="divider divider-short divider-center topmargin-md"><i class="icon-star3"></i></div>
+			<div class="heading-block center">
+				<h3 class="divcenter">Some Online Dating Facts</h3>
+			</div>
+
+			<div class="row bottommargin-sm">
+
+				<div class="col-lg-4 col-md-6">
+
+					<div class="feature-box fbox-right" data-animate="fadeIn">
+						<div class="fbox-icon">
+							<a href="#"><i class="icon-glass"></i></a>
+						</div>
+						<h3>Little White Lies</h3>
+						<p>50% to 80% of people who use online dating lie about themselves on their profile
+						</p>
+					</div>
+
+					<div class="feature-box fbox-right" data-animate="fadeIn" data-delay="200">
+						<div class="fbox-icon">
+							<a href="#"><i class="icon-chart-pie"></i></a>
+						</div>
+						<h3>Venus and Mars</h3>
+						<p>Online dating users are 52.4% men and 47.6% women. This statistic varies from
+							site to site.</p>
+					</div>
+
+					<div class="feature-box fbox-right" data-animate="fadeIn" data-delay="400">
+						<div class="fbox-icon">
+							<a href="#"><i class="icon-user-friends"></i></a>
+						</div>
+						<h3>Second Opinion</h3>
+						<p>One in five people asks for help from a pal to set up their online dating
+							profile.</p>
+					</div>
+
+				</div>
+
+				<div class="col-lg-4 d-md-none d-lg-block center">
+					&nbsp;
+				</div>
+
+				<div class="col-lg-4 col-md-6">
+
+					<div class="feature-box fbox-left " data-animate="fadeIn">
+						<div class="fbox-icon">
+							<a href="#"><i class="icon-phone-portrait"></i></a>
+						</div>
+						<h3>Computer Love</h3>
+						<p>Between 2002-2012, more than 1/3 of newlyweds met through an online dating site.
+						</p>
+					</div>
+
+					<div class="feature-box fbox-left" data-animate="fadeIn" data-delay="200">
+						<div class="fbox-icon">
+							<a href="#"><i class="icon-hourglass-half"></i></a>
+						</div>
+						<h3>Putting in the Hours</h3>
+						<p>On average women spend 8.5 minutes per session on dating sites, while men spend
+							7.2.</p>
+					</div>
+
+					<div class="feature-box fbox-left" data-animate="fadeIn" data-delay="400">
+						<div class="fbox-icon">
+							<a href="#"><i class="icon-line-heart"></i></a>
+						</div>
+						<h3>Cuffing Season</h3>
+						<p> the busiest time of the year is between December 26 and February 14 in terms of
+							dates arranged.</p>
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+		</div>
+
+
+
+
+
+	</div>
+
+	<div id="section-services" class="page-section notoppadding">
+
+		<div class="section dark nomargin"
+			style="background-image: url({% static "images/page/bg2.jpg" %}); background-attachment: fixed;background-size: cover;">
+			<div class="divcenter center" style="max-width: 900px;">
+				<h2 class="nobottommargin t300 ls1"><a href="/login/"
+						class="topmargin button button-rounded button-reveal button-large button-red tright"
+						style="margin-left: auto; margin-right: auto;"><i class="icon-heart"></i><span>Join Datefix
+							Now</span></a></h2>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="section-contact" class="page-section notoppadding">
+
+		<div class="container clearfix">
+
+			<div id="questions" class="divider divider-short divider-center notopmargin"><i class="icon-star3"></i>
+			</div>
+			<div class="heading-block center">
+				<h3>Frequently Asked Questions</h3>
+			</div>
+
+			<!-- Post Content
+					============================================= -->
+			<div class="postcontent nobottommargin clearfix">
+
+				<div class="clear"></div>
+
+				<div id="faqs" class="faqs">
+
+					<div class="toggle faq faq-marketplace faq-authors">
+						<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
+								class="toggle-open icon-question-sign"></i>How do I send a good first message?</div>
+						<div class="togglec">
+							<p>Sending a message is a great way to get to know someone on DateFix. To make
+								a great first impression, take some time to craft your hello.</p>
+							<p>When sending a first message to someone, consider these tips:
+								<ul>
+									<li>Before you message someone check out his or her profile to learn some
+										interesting things you
+										can use to start a conversation. Ask people about their interests and hobbies,
+										where they
+										went to college, or about something in their story.</li>
+									<li>Is there something specific that drew you to this person? Let him or her know
+										what it was!
+										Was it a beautiful smile, a favorite book, or a funny description that
+										interested you? Being
+										genuine and open about what you’re into can help you get a good response.</li>
+									<li>Always double-check for spelling errors.
+										It’s a good idea to read your message before pressing send to make sure you
+										didn’t
+										accidentally include a typo. Common spelling and grammar mistakes like “teh” or
+										“dont” can
+										ruin a great first impression and make someone think you’re not serious.</li>
+								</ul>
 							</p>
 						</div>
-
-						<div class="feature-box fbox-right" data-animate="fadeIn" data-delay="200">
-							<div class="fbox-icon">
-								<a href="#"><i class="icon-chart-pie"></i></a>
-							</div>
-							<h3>Venus and Mars</h3>
-							<p>Online dating users are 52.4% men and 47.6% women. This statistic varies from
-								site to site.</p>
-						</div>
-
-						<div class="feature-box fbox-right" data-animate="fadeIn" data-delay="400">
-							<div class="fbox-icon">
-								<a href="#"><i class="icon-user-friends"></i></a>
-							</div>
-							<h3>Second Opinion</h3>
-							<p>One in five people asks for help from a pal to set up their online dating
-								profile.</p>
-						</div>
-
 					</div>
 
-					<div class="col-lg-4 d-md-none d-lg-block center">
-						&nbsp;
-					</div>
-
-					<div class="col-lg-4 col-md-6">
-
-						<div class="feature-box fbox-left " data-animate="fadeIn">
-							<div class="fbox-icon">
-								<a href="#"><i class="icon-phone-portrait"></i></a>
-							</div>
-							<h3>Computer Love</h3>
-							<p>Between 2002-2012, more than 1/3 of newlyweds met through an online dating site.
+					<div class="toggle faq faq-marketplace faq-authors">
+						<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
+								class="toggle-open icon-question-sign"></i>What payment types does DateFix accept?</div>
+						<div class="togglec">
+							<p>DateFix accepts a variety of payment types that vary depending on the standard payment
+								method in your location and the device you’re using. Payment options include credit
+								cards, debit cards, Verve. To view the payment methods for your location, visit the
+								subscription page.
 							</p>
 						</div>
+					</div>
 
-						<div class="feature-box fbox-left" data-animate="fadeIn" data-delay="200">
-							<div class="fbox-icon">
-								<a href="#"><i class="icon-hourglass-half"></i></a>
-							</div>
-							<h3>Putting in the Hours</h3>
-							<p>On average women spend 8.5 minutes per session on dating sites, while men spend
-								7.2.</p>
+					<div class="toggle faq faq-marketplace faq-authors">
+						<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
+								class="toggle-open icon-question-sign"></i>How do i change or delete my personal
+							details?</div>
+						<div class="togglec">
+							<p>You can update or remove information any time by accessing your Account Settings page.
+								You will be
+								prompted to re-enter your new details and current password for verification.
+							</p>
 						</div>
+					</div>
 
-						<div class="feature-box fbox-left" data-animate="fadeIn" data-delay="400">
-							<div class="fbox-icon">
-								<a href="#"><i class="icon-line-heart"></i></a>
-							</div>
-							<h3>Cuffing Season</h3>
-							<p> the busiest time of the year is between December 26 and February 14 in terms of
-								dates arranged.</p>
+					<div class="toggle faq faq-marketplace faq-authors">
+						<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
+								class="toggle-open icon-question-sign"></i>How do i change or delete my personal
+							details?</div>
+						<div class="togglec">
+							<p>The following free features are available to basic members:<br>
+								• view your personality test results<br>
+								• receive partner suggestions<br>
+								• upload photos and details<br>
+								• send messages to in-house fixers and medical team<br>
+								We offer the basic membership as an introduction to our service. We do this to give
+								potential Premium members a realistic idea of our platform and our community.<br>
+								 As a Premium member, the following perks are included:<br>
+								• your personality test results are explained in more detail<br>
+								• you will be matched and paired with 2 best prospects based on your requirements<br>
+								• you can send and receive an unlimited number of messages<br>
+								Our priority, first and foremost, is to give our members the opportunity to find a
+								serious and loving relationship quickly and effectively. For this reason we encourage
+								all members to sign up for Premium features so they can take full advantage of what our
+								service has to offer.
+							</p>
 						</div>
-
 					</div>
 
 				</div>
 
 
-
-			</div>
-
-
-
-
+			</div><!-- .postcontent end -->
 
 		</div>
 
-		<div id="section-services" class="page-section notoppadding">
+	</div>
 
-			<div class="section dark nomargin"
-				style="background-image: url(images/page/hiwbg.jpg);background-attachment: fixed;background-size: cover;">
-				<div class="divcenter center" style="max-width: 900px;">
-					<h2 class="nobottommargin t300 ls1"><a href={% url 'login'  %} data-offset="140"
-							data-easing="easeInOutExpo" data-speed="1250"
-							class="button button-border button-circle button-light button-large notopmargin nobottommargin"
-							style="position: relative; top: -3px;">Get Started</a></h2>
-				</div>
-			</div>
 
-		</div>
+	<div id="section-contact" class="page-section notoppadding">
 
-		<div id="section-contact" class="page-section notoppadding">
+		<div class="container clearfix">
 
-			<div class="container clearfix">
+			<div class="divcenter topmargin" style="max-width: 850px;">
 
-				<div class="divcenter topmargin" style="max-width: 850px;">
+				<div class="form-widget">
 
-					<div class="form-widget">
+					<div class="form-result"></div>
 
-						<div class="form-result"></div>
+					<form class="nobottommargin" id="template-contactform" name="template-contactform"
+						action="../include/form.php" method="post">
 
-						<form class="nobottommargin" id="template-contactform" name="template-contactform"
-							action="../include/form.php" method="post">
+						<div class="form-process"></div>
 
-							<div class="form-process"></div>
+						<div class="col_half">
+							<input type="text" id="template-contactform-name" name="template-contactform-name" value=""
+								class="sm-form-control border-form-control required" placeholder="Name" />
+						</div>
+						<div class="col_half col_last">
+							<input type="email" id="template-contactform-email" name="template-contactform-email"
+								value="" class="required email sm-form-control border-form-control"
+								placeholder="Email Address" />
+						</div>
 
-							<div class="col_half">
-								<input type="text" id="template-contactform-name" name="template-contactform-name"
-									value="" class="sm-form-control border-form-control required" placeholder="Name" />
-							</div>
-							<div class="col_half col_last">
-								<input type="email" id="template-contactform-email" name="template-contactform-email"
-									value="" class="required email sm-form-control border-form-control"
-									placeholder="Email Address" />
-							</div>
+						<div class="clear"></div>
 
-							<div class="clear"></div>
+						<div class="col_one_third">
+							<input type="text" id="template-contactform-phone" name="template-contactform-phone"
+								value="" class="sm-form-control border-form-control" placeholder="Phone" />
+						</div>
 
-							<div class="col_one_third">
-								<input type="text" id="template-contactform-phone" name="template-contactform-phone"
-									value="" class="sm-form-control border-form-control" placeholder="Phone" />
-							</div>
+						<div class="col_two_third col_last">
+							<input type="text" id="template-contactform-subject" name="subject" value=""
+								class="required sm-form-control border-form-control" placeholder="Subject" />
+						</div>
 
-							<div class="col_two_third col_last">
-								<input type="text" id="template-contactform-subject" name="subject" value=""
-									class="required sm-form-control border-form-control" placeholder="Subject" />
-							</div>
+						<div class="clear"></div>
 
-							<div class="clear"></div>
+						<div class="col_full">
+							<textarea class="required sm-form-control border-form-control"
+								id="template-contactform-message" name="template-contactform-message" rows="7" cols="30"
+								placeholder="Your Message"></textarea>
+						</div>
 
-							<div class="col_full">
-								<textarea class="required sm-form-control border-form-control"
-									id="template-contactform-message" name="template-contactform-message" rows="7"
-									cols="30" placeholder="Your Message"></textarea>
-							</div>
+						<div class="col_full center">
+							<button class="button button-border button-circle t500 noleftmargin topmargin-sm"
+								type="submit" id="template-contactform-submit" name="template-contactform-submit"
+								value="submit">Send Message</button>
+							<br>
+							<small style="display: block; font-size: 13px; margin-top: 15px;">We'll do our
+								best to get back to you within 6-8 working hours.</small>
+						</div>
 
-							<div class="col_full center">
-								<button class="button button-border button-circle t500 noleftmargin topmargin-sm"
-									type="submit" id="template-contactform-submit" name="template-contactform-submit"
-									value="submit">Send Message</button>
-								<br>
-								<small style="display: block; font-size: 13px; margin-top: 15px;">We'll do our
-									best to get back to you within 6-8 working hours.</small>
-							</div>
+						<div class="clear"></div>
 
-							<div class="clear"></div>
+						<div class="col_full hidden">
+							<input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck"
+								value="" class="sm-form-control" />
+						</div>
 
-							<div class="col_full hidden">
-								<input type="text" id="template-contactform-botcheck"
-									name="template-contactform-botcheck" value="" class="sm-form-control" />
-							</div>
+						<input type="hidden" name="prefix" value="template-contactform-">
 
-							<input type="hidden" name="prefix" value="template-contactform-">
-
-						</form>
-
-					</div>
+					</form>
 
 				</div>
 
 			</div>
 
 		</div>
+
+	</div>
 
 	</div>
 

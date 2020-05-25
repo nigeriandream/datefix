@@ -52,7 +52,7 @@
 
 		<!-- Page Title
 		============================================= -->
-		<section id="page-title" class="page-title-parallax dark" style="background-image: url({% static "images/page/pfbgx.png" %}); padding: 120px 0; background-size:cover;" data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
+		<section id="page-title" class="page-title-parallax dark" style="background-image: url({% static "images/page/bg1.jpg" %}); padding: 120px 0; background-size:cover;" data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
 
 			<div class="container clearfix dark">
 				<h1 data-animate="fadeInUp" style="color:#eee;">My Account</h1>
@@ -67,7 +67,7 @@
 
 		<!-- Content
 		============================================= -->
-		<section id="content" >
+		<section id="content" style="overflow: inherit!important;  background-image: url({% static "images/page/bg.jpg"%}); background-size: cover; background-attachment: fixed;">
 
 			<div class="content-wrap">
 
@@ -135,6 +135,10 @@
 								<input type="text" id="phone" name="phone" value="" class="form-control" />
 							</div>
 
+							<div class="col_full">
+								<label for="phone">Profile Image:</label>
+								<input id="image" name="image" type="file" class="form-control file file-loading" data-allowed-file-extensions='["jpg", "jpeg", "png"]' accept="image/*" data-show-preview="false">
+							</div>
 
 							<div class="clear"></div>
 

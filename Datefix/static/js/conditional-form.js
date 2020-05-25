@@ -58,6 +58,14 @@
   $('#dealbreaker1').select2();
   $('#dealbreaker2').select2();
 
+  //IDs for the match multi-select form
+
+  $('#potential-matches').select2({
+    maximumSelectionLength: 2,
+    scrollAfterSelect: true,
+    closeOnSelect: false,
+  });
+
 
 
   $("#state1").change(function () {

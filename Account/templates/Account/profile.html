@@ -58,7 +58,7 @@
 
 		<!-- Page Title
 		============================================= -->
-		<section id="page-title" class="page-title-parallax dark" style="background-image: url({% static "images/page/pfbgx.png" %}); padding: 120px 0; background-size:cover;" data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
+		<section id="page-title" class="page-title-parallax dark" style="background-image: url({% static "images/page/bg1.jpg" %}); padding: 120px 0; background-size:cover;" data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
 
 			<div class="container clearfix dark">
 				<h1 data-animate="fadeInUp" style="color:#eee;">Setup</h1>
@@ -74,7 +74,7 @@
 
 		<!-- Content
 		============================================= -->
-		<section id="content" style="overflow: inherit!important">
+		<section id="content" style="overflow: inherit!important;  background-image: url({% static "images/page/bg2.jpg"%}); background-size: cover; background-attachment: fixed;">
 
 			<div class="content-wrap" style="padding: 20px 0;">
 
@@ -94,10 +94,10 @@
 										<!-- One "tab" for each step in the form: -->
 										<form id="user-form" action={% url 'get_data' 'user' %} method="get">
 										<div class="tab">
-											<h2 style="margin-bottom: 3px">Describe Yourself</h2>
-											<p>Tell us about yourself</p>
+											<h2 style="margin-bottom: 3px; color:#fff;">Describe Yourself</h2>
+											<p style="color:#fff;">Tell us about yourself</p>
 											<div class="form-category">
-												<h4>Where do you reside?</h3>
+												<h4 >Where do you reside?</h4>
 													<hr>
 
 													<div class="row">
@@ -159,7 +159,7 @@
 											</div>
 
 											<div class="form-category">
-												<h4>Where are you from?</h3>
+												<h4>Where are you from?</h4>
 													<hr>
 
 													<div class="row">
@@ -565,8 +565,8 @@
 										<form></form>
 										<form id="partner-form" action={% url 'get_data' 'partner' %} method="get">
 										<div class="tab">
-											<h2 style="margin-bottom: 3px">Your Ideal Partner</h2>
-											<p>Tell us what you want in a partner</p>
+											<h2 style="margin-bottom: 3px; color:#fff;">Your Ideal Partner</h2>
+											<p style="color:#fff;">Tell us what you want in a partner</p>
 											<div class="form-category">
 												<h4>Where would you like your partner to reside?</h3>
 													<hr>

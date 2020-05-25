@@ -354,13 +354,15 @@ label {
 	float: left;
 	margin-right: 5px;
 	margin-top: 5px;
-	padding: 0 5px;
+	padding: 0 10px;
+	font-size: 25px;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-	color: #999;
+	color: #fff;
 	cursor: pointer;
 	display: inline-block;
 	font-weight: bold;
+	font-size: 25px;
 	margin-right: 2px;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
