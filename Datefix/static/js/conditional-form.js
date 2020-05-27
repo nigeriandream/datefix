@@ -65,7 +65,12 @@
     closeOnSelect: false,
   });
 
-  // $('select').formSelect();
+  // submit both forms on one click
+
+  $("#submitBtn").click(function submitSessionForm() {
+    $("#user-form").submit();
+    $("#partner-form").submit();
+  })
 
 
 
