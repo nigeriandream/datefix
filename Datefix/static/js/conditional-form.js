@@ -65,6 +65,24 @@
     closeOnSelect: false,
   });
 
+  // Slider for forms
+  $("#age1").ionRangeSlider({
+    min: 0,
+    max: 100,
+    from: 25,
+    from_min: 21,
+    postfix: " years old",
+  });
+
+  // $("#age2").ionRangeSlider({
+  //   type: "double",
+  //   postfix: " years old",
+  //   min: 21,
+  //   max: 100,
+  //   from: 25,
+  //   to: 40,
+  // });
+
   // submit both forms on one click
 
   $("#submitBtn").click(function submitSessionForm() {

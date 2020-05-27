@@ -5,6 +5,7 @@
 <link href={% static 'css/select2.css' %} rel="stylesheet" />
 <link rel="stylesheet" href={% static 'css/form-elements.css' %}>
 <link rel="stylesheet" href={% static 'css/stylex.css' %}>
+<link rel="stylesheet" href={% static 'css/components/ion.rangeslider.css' %}>
 {% endblock css %}
 
 
@@ -87,6 +88,30 @@ Setup Session
 	label {
 		font-size: 1rem;
 		color: #777;
+	}
+
+	.irs--flat .irs-bar {
+		background-color: #ef478e;
+	}
+
+	.irs--flat .irs-handle>i:first-child {
+		width: 8px;
+		margin-left: -7px;
+		background-color: #7e50f8 !important;
+	}
+
+	.irs--flat .irs-from,
+	.irs--flat .irs-to,
+	.irs--flat .irs-single {
+		background-color: #7e50f8;
+		padding: 1px 6px;
+		font-size: 12px;
+	}
+
+	.irs--flat .irs-from:before,
+	.irs--flat .irs-to:before,
+	.irs--flat .irs-single:before {
+		border-top-color: #7e50f8;
 	}
 </style>
 
@@ -272,7 +297,7 @@ Setup Session
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="control-label">Your Age</label>
-												<input type="number" min="21" name="age" id="age1" class="form-control"
+												<input type="number" min="21" name="age" id="age1" class="range_01"
 													value="21">
 											</div>
 										</div>
@@ -1275,5 +1300,8 @@ Setup Session
 {% endblock content %}
 
 {% block script %}
+
+<script src={% static 'js/components/rangeslider.min.js' %}></script>
+<script src={% static 'js/components/moment.js' %}></script>
 
 {% endblock script %}

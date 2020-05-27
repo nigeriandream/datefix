@@ -89,6 +89,22 @@
 	- Youtube Video Backgrounds
 
 ---------------------------------------------------------------- */
+.card-category {
+	padding: 15px;
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 15px;
+	transition: 0.4s ease all;
+	font-size: 15px;
+	transition: 0.4s ease all;
+}
+
+.card-category:hover {
+	background: rgba(255, 255, 255, 1);
+}
+
+.card-header:first-child {
+	border-radius: 15px;
+}
 
 .oc-card {
 	padding: 10px;
@@ -12365,7 +12381,7 @@ body:not(.device-touch) .rounded-skill {
 	left: 0;
 	width: 0;
 	height: 100%;
-	background-color: #7e50f8;
+	background-color: #e64589;
 	overflow: visible !important;
 	border-radius: 2px;
 	-webkit-transition: width 1.2s ease-in-out;
@@ -12423,7 +12439,7 @@ body:not(.device-touch) .rounded-skill {
 	top: -23px;
 	left: 0;
 	line-height: 20px;
-	font-size: 12px;
+	font-size: 15px;
 	font-weight: bold;
 	text-transform: uppercase;
 	color: #222;
