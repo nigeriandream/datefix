@@ -173,8 +173,8 @@ def get_data(request, type_):
         if type_ == 'partner':
             user_data = json.loads(user.choice_data)
             user_data.update(request.GET)
-            user.deal_breaker = json.dumps(
-                [user_data['dealbreaker1'], user_data['dealbreaker2']]).replace(']', '').replace('[', '')
+            user.deal_breaker = "["+json.dumps(
+                [user_data['dealbreaker1'], user_data['dealbreaker2']]).replace(']', '').replace('[', '')+"]"
             del(user_data['dealbreaker1'], user_data['dealbreaker2'])
             user.choice_data = json.dumps(user_data).replace(']', '').replace('[', '')
             user.save()

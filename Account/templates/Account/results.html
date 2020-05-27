@@ -1,4 +1,4 @@
-g{% extends "index.html" %}
+{% extends "index.html" %}
 {% load static %}
 
 {% block css %}
@@ -366,32 +366,12 @@ Match Results
 								<form id="matches-form" action={% url 'results' %} method="post">
 								{% csrf_token %}
 
-									<div class="form-group">
-										<label for="">Select two potential partners to proceed</label>
-										<select name="matches" id="potential-matches" class="form-control"
-											multiple="multiple" data-width="100%" tabindex="-1" aria-hidden="true"
-											style="width:100%;">
-											<option value="uid1">nickname1</option>
-											<option value="uid2">nickname2</option>
-											<option value="uid3">nickname3</option>
-											<option value="uid4">nickname4</option>
-											<option value="uid5">nickname5</option>
-											<option value="uid6">nickname6</option>
-										</select>
-									</div>
-
-									<div class="form-group topmargin-sm">
-										<button type="submit"
-											class="button button-rounded button-reveal button-large button-border tright"
-											style="margin: 0 auto; font:inherit; display:block;"><i
-												class="icon-circle-arrow-right"></i><span>Confirm
-												Matches</span></button>
-									</div>
+									
 					<div class="form-category col_full" style="    background: rgba(255, 255, 255, 0.9)">
 
 						<div class="form-group">
 							<label for="matches">Select two potential partners to proceed</label>
-							<select name="potential-matches" id="potential-matches" class="form-control"
+							<select name="matches" id="potential-matches" class="form-control"
 								multiple="multiple" data-width="100%" tabindex="-1" aria-hidden="true"
 								style="width:100%;">
 								<option value="uid1">nickname1</option>
@@ -407,9 +387,9 @@ Match Results
 
 
 					<div class="center topmargin" data-easing="easeInOutExpo" data-speed="1500">
-						<a type="submit"
+						<button type="submit"
 							class="button button-rounded button-reveal button-xlarge button-yellow button-light tright"><i
-								class="icon-chat"></i><span>Confirm Matches</span></a>
+								class="icon-chat"></i><span>Confirm Matches</span></button>
 					</div>
 
 					</form>
