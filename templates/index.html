@@ -234,70 +234,14 @@
 	============================================= -->
 	<script src={% static 'js/functions.js' %}></script>
 
-	<script>
-	$(document).ready(function() {
-    $('#matches').select2();
-});
-</script>
 
-	<script>
-	{% comment %} jQuery(document).ready(function ($) {
+	
 
-		// Multiple Select
-		$(".select-1").select2({
-			placeholder: "Select two potential partners"
-		});
+							
 
-		// Loading array data
-		var data = [{
-			id: 0,
-			text: 'enhancement'
-		}, {
-			id: 1,
-			text: 'bug'
-		}, {
-			id: 2,
-			text: 'duplicate'
-		}, {
-			id: 3,
-			text: 'invalid'
-		}, {
-			id: 4,
-			text: 'wontfix'
-		}];
-		$(".select-data-array").select2({
-			data: data
-		})
-		$(".select-data-array-selected").select2({
-			data: data
-		});
+	{% block script %}
 
-		// Enabled/Disabled
-		$(".select-disabled").select2();
-		$(".select-enable").on("click", function () {
-			$(".select-disabled").prop("disabled", false);
-			$(".select-disabled-multi").prop("disabled", false);
-		});
-		$(".select-disable").on("click", function () {
-			$(".select-disabled").prop("disabled", true);
-			$(".select-disabled-multi").prop("disabled", true);
-		});
-
-		// Without Search
-		$(".select-hide").select2({
-			minimumResultsForSearch: Infinity
-		});
-
-		// select Tags
-		$(".select-tags").select2({
-			tags: true
-		});
-
-		// Select Splitter
-		$('.selectsplitter').selectsplitter();
-
-	}); {% endcomment %}
-</script>
+	{% endblock script %}
 
 </body>
 

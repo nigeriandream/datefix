@@ -49,6 +49,10 @@ def results(request):
 
 
 
+def forgotpassword(request):
+    return render(request, 'Account/forgotpassword.html')
+
+
 def signup(request):
     if request.method == 'POST':
         if request.POST['password1'] == request.POST['password2'] and request.POST['password1'] != '' :
