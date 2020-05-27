@@ -355,8 +355,8 @@ Match Results
 
 								</div>
 
-								<form id="matches-form" action={% url 'get_data' 'user' %} method="get">
-
+								<form id="matches-form" action={% url 'results' %} method="post">
+								{% csrf_token %}
 
 									<div class="form-group">
 										<label for="">Select two potential partners to proceed</label>

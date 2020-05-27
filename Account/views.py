@@ -3,51 +3,72 @@ from django.contrib import auth
 from .models import User
 import json
 from .algorithms import get_username, match_user
-from Chat.algorithms import in_my_chat
+from Chat.algorithms import in_my_chat, create_private_key
+from Chat.models import Chat_Thread
+import datetime
 # Create your views here.
 
 
 def login(request):
-    # if request.method == 'POST':
-    #     email = request.POST['email']
-    #     password = request.POST['password']
-    #     if email and password:
-    #         user = auth.authenticate(request, username=email, password=password)
-    #         if user is None:
-    #             return redirect('signup')
-    #         else:
-    #             auth.login(request, user)
-    #             return redirect('dashboard')
-    # elif request.method == 'GET':
-    #     if request.user.is_authenticated:
-    #         return redirect('dashboard')
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        if email and password:
+            user = auth.authenticate(request, username=email, password=password)
+            if user is None:
+                return redirect('signup')
+            else:
+                auth.login(request, user)
+                return redirect('dashboard')
+    elif request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('dashboard')
     return render(request, 'Account/login.html')
 
 
 def results(request):
-    return render(request, 'Account/results.html')
+    user = User.objects.get(id=request.user.id)
+    if request.method == 'GET':
+        return render(request, 'Account/results.html', {'matches': user.successful_list()})
+    if request.method == 'POST':
+        selected = request.POST['matches']
+        success = user.successful_list()
+        success = [x for x in success if x['id'] not in selected]
+        user.successful_matches = '///'.join(success)
+        user.matches = ','.join(selected)
+        user.save()
+        for i in selected:
+            chat = Chat_Thread()
+            chat.first_user = user
+            chat.second_user = User.objects.get(id=int(i))
+            chat.secret = create_private_key()
+            chat.date_created = datetime.datetime.now()
+            chat.save()
+        return redirect('chatroom')
+
+
 
 
 def signup(request):
-    # if request.method == 'POST':
-    #     if request.POST['password1'] == request.POST['password2'] :
-    #         user = User.objects.create_user(
-    #             username= get_username(),
-    #             email = request.POST['email'],
-    #             password = request.POST['password1'],
-    #             first_name = request.POST['first-name'],
-    #             last_name = request.POST['last-name'],
-    #             sex= request.POST['sex'],
-    #             phone = request.POST['phone']
-    #         )
-    #         user.save()
-    #         return redirect('login')
+    if request.method == 'POST':
+        if request.POST['password1'] == request.POST['password2'] and request.POST['password1'] != '' :
+            user = User.objects.create_user(
+                username= get_username(),
+                email = request.POST['email'],
+                password = request.POST['password1'],
+                first_name = request.POST['first-name'],
+                last_name = request.POST['last-name'],
+                sex= request.POST['sex'],
+                phone = request.POST['phone']
+            )
+            user.save()
+            return redirect('login')
 
-    # elif request.method == 'GET':
-    #     if request.user.is_authenticated:
-    #         return redirect('dashboard')
+    elif request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('dashboard')
 
-    return render(request, 'Account/signup.html')
+        return render(request, 'Account/signup.html')
 
 
 def dashboard(request):
@@ -72,17 +93,17 @@ def dashboard(request):
 
 def matching(request):
     if request.method == 'GET':
-        user = User.objects.get(id=GET['user_id'])
+        user = User.objects.get(id=request.user.id)
         if user.sex == 'female':
-            if match_user(user) is True:
-                return HttpResponse(json.dumps({'matches': user.matches_()}))
-    return HttpResponse(json.dumps({'matches': []}))
+            match_user(user)
+            return redirect('results')
+    return redirect('dashboard')
 
 
 def adjust_min(request):
     if request.method == 'GET':
         try:
-            user = User.objects.get(id=GET['user_id'])
+            user = User.objects.get(id=request.GET['user_id'])
             return HttpResponse('fail')
         except User.DoesNotExist:
             user.min_score = GET['min_score']
@@ -129,11 +150,19 @@ def read_notifications(request):
 
 def get_data(request, type_):
     if request.method == 'GET':
+        print(request.GET)
         user = User.objects.get(id=request.user.id)
+        if user.user_data is None:
+            user.user_data =  "{}"
+            user.save()
+        if user.choice_data is None:
+            user.choice_data =  "{}"
+            user.save()
+        
         if type_ == 'user':
             user_data = json.loads(user.user_data)
             user_data.update(request.GET)
-            user.user_data = json.dumps(user_data)
+            user.user_data = json.dumps(user_data).replace(']', '').replace('[', '')
             user.save()
             return HttpResponse('success')
 
@@ -141,9 +170,9 @@ def get_data(request, type_):
             user_data = json.loads(user.choice_data)
             user_data.update(request.GET)
             user.deal_breaker = json.dumps(
-                [user_data['dealbreaker1'], user_data['dealbreaker2']])
+                [user_data['dealbreaker1'], user_data['dealbreaker2']]).replace(']', '').replace('[', '')
             del(user_data['dealbreaker1'], user_data['dealbreaker2'])
-            user.choice_data = json.dumps(user_data)
+            user.choice_data = json.dumps(user_data).replace(']', '').replace('[', '')
             user.save()
             return HttpResponse('success')
 

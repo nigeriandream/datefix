@@ -25,12 +25,8 @@ class User(AbstractUser):
     def successful_list(self):
         if self.successful_matches is None or self.successful_matches == '':
             return []
-        return json.loads(self.successful_matches)['matches']
+        return self.successful_matches.split('///')
     
-    def successful_scores(self):
-        if self.successful_matches is None or self.successful_matches == '':
-            return []
-        return json.loads(self.successful_matches)['scores']
     
     def no_list(self):
         if self.no_matches == '' or self.no_matches is None:

@@ -65,7 +65,7 @@
 				<span data-animate="fadeInUp" style="color:#eee;" data-delay="300">Configure datefix session</span>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
-					<li class="breadcrumb-item"><a href="#">John Doe</a></li>
+					<li class="breadcrumb-item"><a href="">{{request.user.first_name}} {{request.user.last_name}}</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Setup</li>
 				</ol>
 			</div>
@@ -92,7 +92,7 @@
 
 									<!-- Multi step form -->
 										<!-- One "tab" for each step in the form: -->
-										<form id="user-form" action={% url 'get_data' 'user' %} method="get">
+										<form id="user-form" action={% url 'get_data' 'user' %} method="post">
 										<div class="tab">
 											<h2 style="margin-bottom: 3px; color:#fff;">Describe Yourself</h2>
 											<p style="color:#fff;">Tell us about yourself</p>
@@ -243,8 +243,8 @@
 															<div class="form-group">
 																<label class="control-label">Do you have children?</label>
 																<select name="children" id="children1" class="form-control" required>
-																	<option value="1">No</option>
-																	<option value="2">Yes</option>
+																	<option value="No">No</option>
+																	<option value="Yes">Yes</option>
 																</select>
 															</div>
 														</div>
@@ -563,7 +563,7 @@
 										</div>
 										</form>
 										<form></form>
-										<form id="partner-form" action={% url 'get_data' 'partner' %} method="get">
+										<form id="partner-form" action={% url 'get_data' 'partner' %} method="post">
 										<div class="tab">
 											<h2 style="margin-bottom: 3px; color:#fff;">Your Ideal Partner</h2>
 											<p style="color:#fff;">Tell us what you want in a partner</p>

@@ -8,23 +8,23 @@ from .models import Chat_Thread, Chat_Message
 class ChatConsumer(AsyncConsumer):
     async def websocket_connect(self, event):
         print("connected", event)
-        chat_id = self.scope['url_route']['kwargs']['id']
-        self.thread_obj = await self.get_thread(chat_id)
-        self.me = await self.get_user(self.scope['user'])
-        self.other_user = await self.get_receiver(self.thread_obj,self.me)
-        chat_room = f"thread_{self.thread_obj.id}"
-        print(chat_room)
-        self.chat_room = chat_room
-        await self.channel_layer.group_add(
-            chat_room,
-            self.channel_name
-        )
         await self.send({"type": "websocket.accept"})
         
     
     async def websocket_receive(self, event):
             self.chat_data = json.loads(event['text'])
-            print(self.chat_data)
+            if self.chat_data['function'] == 'connect':
+                chat_id = self.chat_data['chat_id']
+                self.thread_obj = await self.get_thread(chat_id)
+                self.me = await self.get_user(self.chat_data['username'])
+                self.other_user = await self.get_receiver(self.thread_obj,self.me)
+                chat_room = f"chat_{self.thread_obj.id}"
+                print("Connected to "+chat_room)
+                self.chat_room = chat_room
+                await self.channel_layer.group_add(
+                    chat_room,
+                    self.channel_name
+                )
             if self.chat_data['function'] == 'status':
                 await self.update_status(int(self.chat_data['message_id']))
                 print('updated - delivered')

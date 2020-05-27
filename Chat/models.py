@@ -52,6 +52,8 @@ class Chat_Thread(models.Model):
     
     def get_chat(self, user_position):
         list_ = {'first': self.first_deleted_(), 'second': self.second_deleted_()}
+        self.self_delete()
+        self.show_detail()
         chat_message_items = [x for x in Chat_Message.objects.all().filter(chat_id=self.id).order_by('datetime') \
                 if x.id not in list_[user_position]]
         data = []
