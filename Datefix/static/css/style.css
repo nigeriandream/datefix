@@ -90,6 +90,29 @@
 
 ---------------------------------------------------------------- */
 
+.oc-card {
+	padding: 10px;
+	background: rgba(255, 255, 255, 0.85);
+	border-radius: 15px;
+	min-height: 460px;
+	transition: 0.4s ease all;
+}
+
+.oc-card:hover {
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+	background: #fff;
+}
+
+.oc-item .ipost .entry-title h3 a,
+.oc-item .ipost .entry-content p {
+	transition: 0.4s ease color;
+}
+
+.oc-item:hover .ipost .entry-title h3 a,
+.oc-item:hover .ipost .entry-content p {
+	color: #000;
+}
+
 .match-body-pills {
 	box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
 	border-radius: 11px;
@@ -161,7 +184,7 @@ input[type="radio"],
 .form-category {
 	margin: 25px auto;
 	padding: 30px;
-	background: rgba(255, 255, 255, 0.6);
+	background: rgba(255, 255, 255, 0.85);
 	border-radius: 15px;
 	transition: 0.4s ease all;
 }
@@ -873,7 +896,7 @@ span.middot {
 	position: relative;
 	margin: 60px 0;
 	padding: 60px 0;
-	background-color: rgba(250, 250, 250, 0.1);
+	background-color: rgba(250, 250, 250, 0);
 	overflow: hidden;
 }
 
@@ -4224,6 +4247,11 @@ body.stretched .container-fullwidth .breadcrumb {
 .content-wrap {
 	position: relative;
 	padding: 35px 0;
+	background: linear-gradient(
+		217deg,
+		rgba(255, 27, 86, 0.5522408792618609) 0%,
+		rgba(25, 79, 232, 0.5522408792618609) 100%
+	);
 }
 
 #content .container {
@@ -6297,7 +6325,7 @@ body:not(.device-touch) .entry-link {
 
 .ipost .entry-title h3 a:hover,
 .ipost .entry-title h4 a:hover {
-	color: #7e50f8;
+	color: #000;
 }
 
 .ipost .entry-meta {
@@ -10871,6 +10899,7 @@ body:not(.device-touch) .social-icon i {
 
 .faqs .toggle .togglec {
 	padding-bottom: 10px;
+	color: #333;
 }
 
 /* ----------------------------------------------------------------

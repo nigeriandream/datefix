@@ -62,9 +62,11 @@
 
   $('#potential-matches').select2({
     maximumSelectionLength: 2,
-    scrollAfterSelect: true,
     closeOnSelect: false,
   });
+
+  // $('select').formSelect();
+
 
 
 

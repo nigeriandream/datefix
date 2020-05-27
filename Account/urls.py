@@ -7,6 +7,7 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('match/', matching, name='match'),
     path('results/', results, name='results'),
+    path('forgotpassword/', forgotpassword, name='forgotpassword'),
     path('notifications/read/', read_notifications, name='read_notifications'),
     path('notification/<int:id_>/delete/',
          delete_notifications, name='delete_notifications'),
