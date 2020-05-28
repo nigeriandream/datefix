@@ -3,7 +3,6 @@ var app = new Vue({
   el: "#app",
   name: "chat",
   data: {
-    message: "Hello Vue!",
     messages: [
       {
         message: "Nulla consequat massa quis enim. Donec pede juso, fringilla vell...",
@@ -51,26 +50,40 @@ var app = new Vue({
         timeSend: 10008,
       },
     ],
+    chat_threads: [],
+    chat_messages: [],
   },
   async mounted() {
-    await this.getUser(1);
-    console.log(window.location.pathname.split("/", 3));
+    await this.getAllChats();
+    await this.getSingleChat();
+    // console.log(window.location.pathname.split("/", 3));
   },
   methods: {
-    greet: function (name) {
-      console.log("Hello from " + name + "!");
-    },
-    async getUser(user_id) {
+    async getAllChats() {
       // let user_id = this.$route.params.id;
       try {
-        const response = await fetch(`/chat/api/user/${user_id}`);
-        // const response = await axios.get(`/chat/api/user/${user_id}`);
-        console.log(response);
+        await fetch(`/chat/api/threads/1`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("data>>>", data);
+            this.chat_threads = data.chat_threads;
+          });
       } catch (error) {
         console.error(error);
       }
-      // const data = await res.json();
-      // this.data = data;
+    },
+    async getSingleChat() {
+      // let user_id = this.$route.params.id;
+      try {
+        await fetch(`/chat/api/chat/1`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("data>>>", data);
+            this.chat_messages = data.chat_messages;
+          });
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 });
