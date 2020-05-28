@@ -25,13 +25,13 @@ class User(AbstractUser):
     def successful_list(self):
         if self.successful_matches is None or self.successful_matches == '':
             return []
-        return self.successful_matches.split('///')
+        return json.loads(self.successful_matches)
     
     
     def no_list(self):
         if self.no_matches == '' or self.no_matches is None:
             return []
-        return self.no_matches.split(',')
+        return json.loads(self.no_matches)
     
     
     def jilted_list(self):

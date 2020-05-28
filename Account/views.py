@@ -29,13 +29,15 @@ def login(request):
 def results(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
-        return render(request, 'Account/results.html', {'matches': user.successful_list()})
+        matches = user.successful_list()
+        select = [[x[0][0], x[1][1]] for x in matches]
+        return render(request, 'Account/results.html', {'matches': matches, "select": select, "matches_length": len(matches)})
     if request.method == 'POST':
         selected = request.POST['matches']
         success = user.successful_list()
-        success = [x for x in success if x['id'] not in selected]
-        user.successful_matches = '///'.join(success)
-        user.matches = ','.join(selected)
+        success = [x for x in success if x[0][1] not in selected]
+        user.successful_matches = json.dumps(success)
+        user.matches = json.dumps(selected)
         user.save()
         for i in selected:
             chat = Chat_Thread()
@@ -156,10 +158,10 @@ def get_data(request, type_):
     if request.method == 'GET':
         print(request.GET)
         user = User.objects.get(id=request.user.id)
-        if user.user_data is None:
+        if user.user_data is None or user.user_data == '':
             user.user_data =  "{}"
             user.save()
-        if user.choice_data is None:
+        if user.choice_data is None or user.choice_data == '':
             user.choice_data =  "{}"
             user.save()
         

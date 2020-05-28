@@ -64,14 +64,18 @@ def compare_users(me, you):
             return 0
     
     for i in absolute_match:
-        if me.choice_data_()[i] == you.user_data_()[i]:
+        if me.choice_data_()[i] == you.user_data_()[i] or me.choice_data()[i] == 'Does Not Matter':
             mark = mark + 1
             
     for i in _2_spectrum:
+        if me.choice_data()[i] == 'Does Not Matter':
+            mark = mark + 1
         mark = mark + _2_point(me.choice_data_()[i], 5, you.user_data_()[i])
     
     
     for i in _3_spectrum:
+        if me.choice_data()[i] == 'Does Not Matter':
+            mark = mark + 1
         mark = mark + _3_point(me.choice_data_()[i], 5, you.user_data_()[i])
     
     mark = mark + age_range(me, you)
@@ -86,27 +90,32 @@ def match_user(user):
                  .objects.all() \
                       if (x.complete_match() is False) \
                       and( str(x.id) not in user.jilted_list()) and (x.is_couple() is False )\
-                          and (str(x.id) not in user.no_list()) and x.sex == 'male']
+                          and (str(x.id) not in user.no_list()) and x.sex == 'male' and 
+                          (x.user_data is not None or x.user_data == '')]
     # compare filtered users with user and return matches
     
     for peep in all_users:
+        data = {}
         peep_score = compare_users(user, peep)
         my_score = compare_users(peep, user)
-        if peep_score >= user.min_score and my_score >= peep.min_score:
-            success_list.append({
-                "username": peep.username,
-                "score" : peep_score,
-                "residence": peep.user_data_['residence-state'],
-                "origin": peep.user_data_['origin-state'],
-                "religion": peep.user_data_['religion'],
+        if peep_score >= 50 and my_score >= 50:
+            data = {
+                "alpha" : peep.username,
+                str(peep.id): peep_score,
+                "Residence": peep.user_data_['residence-state'],
+                "Origin": peep.user_data_['origin-state'],
+                "Religion": peep.user_data_['religion'],
                 "denomination": peep.user_data_['denomination'],
-                "has children": peep.user_data_['children']           
-                })
+                "Has Children": peep.user_data_['children']           
+                }
+            
+            success_list.append(sorted(data.items()))
             
         else:
             no_list.append(str(peep.id))
-    user.successful_matches = ','.join(success_list)   
-    user.no_matches = '///'.join(no_list)
+    success_list = mergeSort(success_list)
+    user.successful_matches = json.dumps(success_list) 
+    user.no_matches = json.dumps(no_list)
     user.save()
     return    
     # matches = []
@@ -184,4 +193,30 @@ def jilt(user, id_):
     user.jilted_matches = ','.join(jilted_list)
     user.save()
     
-    
+def mergeSort(nlist):
+    if len(nlist)>1:
+        mid = len(nlist)//2
+        lefthalf = nlist[:mid]
+        righthalf = nlist[mid:]
+
+        mergeSort(lefthalf)
+        mergeSort(righthalf)
+        i = j =k = 0
+        while i < len(lefthalf) and j < len(righthalf):
+
+            if lefthalf[i][0][1] < righthalf[j][0][1]:
+                nlist[k]= lefthalf[i]
+                i = i + 1
+            else:
+                nlist[k] = righthalf[j]
+                j = j + 1
+            k = k+1
+        while i < len(lefthalf):
+            nlist[k] = lefthalf[i]
+            i = i + 1
+            k = k + 1
+        while j < len(righthalf):
+            nlist[k] = lefthalf[i]
+            j = j + 1
+            k = k + 1
+    return nlist[:9]

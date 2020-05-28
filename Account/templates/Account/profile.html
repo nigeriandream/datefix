@@ -5,6 +5,7 @@
 	<link href={% static 'css/select2.css' %} rel="stylesheet" />
 	<link rel="stylesheet" href={% static 'css/form-elements.css' %}>
 	<link rel="stylesheet" href={% static 'css/stylex.css' %}>
+	<link rel="stylesheet" href={% static 'css/components/ion.rangeslider.css' %}>
 {% endblock css %}
 
 {% block title %}
@@ -69,7 +70,41 @@
 					<li class="breadcrumb-item active" aria-current="page">Setup</li>
 				</ol>
 			</div>
+<style>
+	h4 {
+		font-size: 2em;
+		line-height: 110%;
+	}
 
+	label {
+		font-size: 1rem;
+		color: #777;
+	}
+
+	.irs--flat .irs-bar {
+		background-color: #ef478e;
+	}
+
+	.irs--flat .irs-handle>i:first-child {
+		width: 8px;
+		margin-left: -7px;
+		background-color: #7e50f8 !important;
+	}
+
+	.irs--flat .irs-from,
+	.irs--flat .irs-to,
+	.irs--flat .irs-single {
+		background-color: #7e50f8;
+		padding: 1px 6px;
+		font-size: 12px;
+	}
+
+	.irs--flat .irs-from:before,
+	.irs--flat .irs-to:before,
+	.irs--flat .irs-single:before {
+		border-top-color: #7e50f8;
+	}
+</style>
 		</section><!-- #page-title end -->
 
 		<!-- Content
@@ -1118,4 +1153,10 @@
 		<!-- #footer end -->
 
 {% endblock content %}
+{% block script %}
+
+<script src={% static 'js/components/rangeslider.min.js' %}></script>
+<script src={% static 'js/components/moment.js' %}></script>
+
+{% endblock script %} 
 		
