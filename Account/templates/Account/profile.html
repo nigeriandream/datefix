@@ -58,14 +58,14 @@
 
 		<!-- Page Title
 		============================================= -->
-		<section id="page-title" class="page-title-parallax dark" style="background-image: url({% static "images/page/pfbgx.png" %}); padding: 120px 0; background-size:cover;" data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
+		<section id="page-title" class="page-title-parallax dark" style="background-image: url({% static "images/page/bg1.jpg" %}); padding: 120px 0; background-size:cover;" data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
 
 			<div class="container clearfix dark">
 				<h1 data-animate="fadeInUp" style="color:#eee;">Setup</h1>
 				<span data-animate="fadeInUp" style="color:#eee;" data-delay="300">Configure datefix session</span>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
-					<li class="breadcrumb-item"><a href="#">John Doe</a></li>
+					<li class="breadcrumb-item"><a href="">{{request.user.first_name}} {{request.user.last_name}}</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Setup</li>
 				</ol>
 			</div>
@@ -74,7 +74,7 @@
 
 		<!-- Content
 		============================================= -->
-		<section id="content" style="overflow: inherit!important">
+		<section id="content" style="overflow: inherit!important;  background-image: url({% static "images/page/bg2.jpg"%}); background-size: cover; background-attachment: fixed;">
 
 			<div class="content-wrap" style="padding: 20px 0;">
 
@@ -92,12 +92,12 @@
 
 									<!-- Multi step form -->
 										<!-- One "tab" for each step in the form: -->
-										<form id="user-form" action={% url 'get_data' 'user' %} method="get">
+										<form id="user-form" action={% url 'get_data' 'user' %} method="post">
 										<div class="tab">
-											<h2 style="margin-bottom: 3px">Describe Yourself</h2>
-											<p>Tell us about yourself</p>
+											<h2 style="margin-bottom: 3px; color:#fff;">Describe Yourself</h2>
+											<p style="color:#fff;">Tell us about yourself</p>
 											<div class="form-category">
-												<h4>Where do you reside?</h3>
+												<h4 >Where do you reside?</h4>
 													<hr>
 
 													<div class="row">
@@ -159,7 +159,7 @@
 											</div>
 
 											<div class="form-category">
-												<h4>Where are you from?</h3>
+												<h4>Where are you from?</h4>
 													<hr>
 
 													<div class="row">
@@ -243,8 +243,8 @@
 															<div class="form-group">
 																<label class="control-label">Do you have children?</label>
 																<select name="children" id="children1" class="form-control" required>
-																	<option value="1">No</option>
-																	<option value="2">Yes</option>
+																	<option value="No">No</option>
+																	<option value="Yes">Yes</option>
 																</select>
 															</div>
 														</div>
@@ -563,10 +563,10 @@
 										</div>
 										</form>
 										<form></form>
-										<form id="partner-form" action={% url 'get_data' 'partner' %} method="get">
+										<form id="partner-form" action={% url 'get_data' 'partner' %} method="post">
 										<div class="tab">
-											<h2 style="margin-bottom: 3px">Your Ideal Partner</h2>
-											<p>Tell us what you want in a partner</p>
+											<h2 style="margin-bottom: 3px; color:#fff;">Your Ideal Partner</h2>
+											<p style="color:#fff;">Tell us what you want in a partner</p>
 											<div class="form-category">
 												<h4>Where would you like your partner to reside?</h3>
 													<hr>

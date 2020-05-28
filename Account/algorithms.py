@@ -51,10 +51,13 @@ def compare_users(me, you):
 
     _3_spectrum = ['complexion', 'height', 'body-type', 'drink', 'smoke', 'conscientiousness', 'openess',
             'extraversion', 'agreeableness', 'neurotism']
-    deal_breakers = me.deal_breaker.split(',')
+    deal_breakers = json.loads(me.deal_breaker)
+    print(deal_breakers)
     total = len(absolute_match) + len(_3_spectrum) + len(_2_spectrum) + 1
     
     for i in deal_breakers:
+        if i == 'No Dealbreaker':
+            continue
         if me.choice_data_()[i] == you.user_data_()[i]:
             mark = mark + 1
         else:
@@ -76,34 +79,49 @@ def compare_users(me, you):
     return (mark/total) * 100
 
 def match_user(user):
-    success_list = {}
+    success_list = []
     no_list = []
+    # filter users 
     all_users = [x for x in User
                  .objects.all() \
                       if (x.complete_match() is False) \
                       and( str(x.id) not in user.jilted_list()) and (x.is_couple() is False )\
-                          and (str(x.id) not in user.no_list()) and x.user_data_()['sex'] == user.choice_data_()['sex']]
+                          and (str(x.id) not in user.no_list()) and x.sex == 'male']
+    # compare filtered users with user and return matches
+    
     for peep in all_users:
         peep_score = compare_users(user, peep)
         my_score = compare_users(peep, user)
         if peep_score >= user.min_score and my_score >= peep.min_score:
-            success_list['matches'].append(str(peep.id))
-            success_list['scores'].append(str(peep_score))
+            success_list.append({
+                "username": peep.username,
+                "score" : peep_score,
+                "residence": peep.user_data_['residence-state'],
+                "origin": peep.user_data_['origin-state'],
+                "religion": peep.user_data_['religion'],
+                "denomination": peep.user_data_['denomination'],
+                "has children": peep.user_data_['children']           
+                })
+            
         else:
             no_list.append(str(peep.id))
-    matches = []
-    num = 2- user.matches.__len__()
-    if len(success_list['matches'])>= num:
-        for i in range(num):
-            matches.append(str(success_list['matches'][success_list['scores'].index(max(success_list['scores']))]))
-            success_list['matches'].remove(matches[0])
-            success_list['scores'].remove(max(success_list['scores']))
-        user.successful_matches = ','.join(success_list)   
-        user.no_matches = ','.join(no_list)
-        user.matches = ','.join(matches+user.matches_())
-        user.save()
-        return True
-    return False
+    user.successful_matches = ','.join(success_list)   
+    user.no_matches = '///'.join(no_list)
+    user.save()
+    return    
+    # matches = []
+    # num = 2- user.matches.__len__()
+    # if len(success_list['matches'])>= num:
+    #     for i in range(num):
+    #         matches.append(str(success_list['matches'][success_list['scores'].index(max(success_list['scores']))]))
+    #         success_list['matches'].remove(matches[0])
+    #         success_list['scores'].remove(max(success_list['scores']))
+    #     user.successful_matches = ','.join(success_list)   
+    #     user.no_matches = ','.join(no_list)
+    #     user.matches = ','.join(matches+user.matches_())
+    #     user.save()
+    #     return True
+    # return False
    
 def lucky_draw(num):
     lucky_ones = []

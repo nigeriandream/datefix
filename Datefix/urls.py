@@ -28,7 +28,8 @@ urlpatterns = [
     path('payment/', include('Payment.urls')),
     path('', home, name='home'),
     path('about/', about, name='about'),
-    path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
+    path('logout/', LogoutView.as_view(),
+         {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
