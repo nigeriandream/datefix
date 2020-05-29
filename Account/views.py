@@ -49,8 +49,6 @@ def results(request):
         return redirect('chatroom')
 
 
-
-
 def forgotpassword(request):
     return render(request, 'Account/forgotpassword.html')
 
@@ -78,23 +76,22 @@ def signup(request):
 
 
 def dashboard(request):
-    # if request.method == 'GET':
-    #     if request.user.is_authenticated:
-    #         user = User.objects.get(id=request.user.id)
-    #         user_details = user.user_data_()
-    #         choice_details = user.choice_data_()
-    #         matches = [User.objects.get(id=int(x)) for x in user.matches_()]
-    #         accepted = [i.id for i in matches if in_my_chat(user, i) is True]
-    #         notifications = user.notifications()
-    #         return render(request, 'Account/profile.html', {'user': user, 'user_details': user_details,
-    #                                                           'choice_details': choice_details,
-    #                                                           'matches': matches,
-    #                                                           'notifications': notifications,
-    #                                                           'new_notification': user.new_notifications(),
-    #                                                           'accepted': accepted})
-    #     else:
-    #         return redirect('login')
-    return render(request, 'Account/profile.html')
+    if request.method == 'GET':
+        if not  request.user.is_authenticated:
+            return redirect('login')
+
+        user = User.objects.get(id=request.user.id)
+
+        if user.user_data is None or user.user_data == '':
+                return render(request, 'Account/profile.html')
+        
+        
+        if (not user.complete_match() and not(user.user_data is None or user.user_data == '')):
+            user = User.objects.get(id=request.user.id)
+            user_details = user.user_data_()
+            user_details['registered'] = True
+            return render(request, 'Account/profile.html', user_details)
+        
 
 
 def matching(request):

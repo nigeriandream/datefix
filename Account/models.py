@@ -42,7 +42,7 @@ class User(AbstractUser):
     def matches_(self):
         if self.matches is None or self.matches == '':
             return []
-        return [x for x in self.matches.split(',') if x != '']
+        return json.loads(self.matches)
 
 
     def complete_match(self):
