@@ -44,9 +44,16 @@ Nigeria's best dating site for professionals
 					<li><a href="#" data-href="#questions">
 							<div>FAQs</div>
 						</a></li>
-					<li><a href={% url 'login' %}>
+					{% if not request.user.is_authenticated %}
+						<li><a href={% url 'login' %}>
 							<div>Join Datefix / Login</div>
 						</a></li>
+					{% else %}
+						<li><a href={% url 'logout' %}>
+							<div>Log Out</div>
+						</a></li>
+					{% endif %}
+					
 				</ul>
 
 

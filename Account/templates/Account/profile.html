@@ -45,6 +45,15 @@
 									<div>About Datefix</div>
 								</a>
 							</li>
+							{% if not request.user.is_authenticated %}
+								<li><a href={% url 'login' %}>
+									<div>Join Datefix / Login</div>
+								</a></li>
+							{% else %}
+								<li><a href={% url 'logout' %}>
+									<div>Log Out</div>
+								</a></li>
+							{% endif %}
 						</ul>
 
 
