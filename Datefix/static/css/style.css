@@ -10903,9 +10903,9 @@ body:not(.device-touch) .social-icon i {
 -----------------------------------------------------------------*/
 
 .faqs .toggle {
-	border-bottom: 1px solid #eee;
-	padding-bottom: 12px;
-	margin-bottom: 12px;
+	border-bottom: 0px solid #eee;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 .faqs .toggle .togglet,
