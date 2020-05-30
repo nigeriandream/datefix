@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
 def payment(request):
-    return render(request, 'Payment/payment.html')
+    return redirect('match')

@@ -21,7 +21,13 @@ function showTab(n) {
   //... and run a function that will display the correct step indicator:
   fixStepIndicator(n)
 }
-
+function objectifyForm(formArray){
+  var returnArray = {};
+  for (var i = 0; i < formArray.length; i++){
+    returnArray[formArray[i]['name']] = formArray[i]['value'];
+  }
+  return returnArray
+}
 function nextPrev(n) {
   // This function will figure out which tab to display
   var x = document.getElementsByClassName("tab");
@@ -34,8 +40,28 @@ function nextPrev(n) {
   // if you have reached the end of the form...
   if (currentTab >= x.length) {
     // ... the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
+    $.ajax({
+      url: "/get_data/user",
+      data : objectifyForm($("#user-form").serializeArray()),
+      type : "GET",
+      success: (data)=>{
+          if (data == 'success'){
+            $.ajax({
+              url: "/get_data/partner",
+              data : objectifyForm($("#partner-form").serializeArray()),
+              type : "GET",
+              success: (data)=>{
+                  if (data == 'success'){
+                    window.location.href = '/payment/pay'
+                  }
+              }
+            }
+            )
+            
+          }
+      }
+    })
+    ;
   }
   // Otherwise, display the correct tab:
   showTab(currentTab);
@@ -84,3 +110,4 @@ function topFunction() {
   // document.body.scrollTop = 0; // For Safari
   // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
+
