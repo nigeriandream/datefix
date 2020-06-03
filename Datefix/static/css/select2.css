@@ -182,7 +182,7 @@ label {
 }
 .select2-dropdown {
 	background-color: white;
-	border: 1px solid #aaa;
+	/* border: 1px solid #aaa; */
 	border-radius: 4px;
 	box-sizing: border-box;
 	display: block;

@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block css %}
-	<link href={% static 'css/select2.css' %} rel="stylesheet" />
-	<link rel="stylesheet" href={% static 'css/form-elements.css' %}>
-	<link rel="stylesheet" href={% static 'css/stylex.css' %}>
-	<link rel="stylesheet" href={% static 'css/components/ion.rangeslider.css' %}>
+<link href={% static 'css/select2.css' %} rel="stylesheet" />
+<link rel="stylesheet" href={% static 'css/form-elements.css' %}>
+<link rel="stylesheet" href={% static 'css/stylex.css' %}>
+<link rel="stylesheet" href={% static 'css/components/ion.rangeslider.css' %}>
 {% endblock css %}
 
 {% block title %}
@@ -17,323 +17,370 @@ Setup Session
 
 <!-- Header
 		============================================= -->
-		<header id="header" class="full-header">
+<header id="header" class="full-header">
 
-			<div id="header-wrap">
+	<div id="header-wrap">
 
-				<div class="container clearfix">
+		<div class="container clearfix">
 
-					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+			<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
-					<!-- Logo
+			<!-- Logo
 					============================================= -->
-					<div id="logo">
-						<a href={% url 'home' %} class="standard-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img src={% static 'images/logo.png' %} alt="Canvas Logo"></a>
-						<a href={% url 'home' %} class="retina-logo" data-dark-logo={% static 'images/logo-dark@2x.png' %}><img src={% static 'images/logo@2x.png' %} alt="Canvas Logo"></a>
-					</div><!-- #logo end -->
+			<div id="logo">
+				<a href={% url 'home' %} class="standard-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img
+						src={% static 'images/logo.png' %} alt="Canvas Logo"></a>
+				<a href={% url 'home' %} class="retina-logo" data-dark-logo={% static 'images/logo-dark@2x.png' %}><img
+						src={% static 'images/logo@2x.png' %} alt="Canvas Logo"></a>
+			</div><!-- #logo end -->
 
-					<!-- Primary Navigation
+			<!-- Primary Navigation
 					============================================= -->
-					<nav id="primary-menu">
+			<nav id="primary-menu">
 
-						<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
-							<li><a href={% url 'home' %}>
-									<div>Home</div>
-								</a>
-							</li>
-							<li><a href="#">
-									<div>About Datefix</div>
-								</a>
-							</li>
-						</ul>
-
-
-					</nav><!-- #primary-menu end -->
-
-				</div>
-
-			</div>
-
-		</header><!-- #header end --><!-- #header end -->
+				<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+					<li><a href={% url 'home' %}>
+							<div>Home</div>
+						</a>
+					</li>
+					<li><a href="#">
+							<div>About Datefix</div>
+						</a>
+					</li>
+				</ul>
 
 
-		<!-- Page Title
+			</nav><!-- #primary-menu end -->
+
+		</div>
+
+	</div>
+
+</header><!-- #header end -->
+<!-- #header end -->
+
+
+<!-- Page Title
 		============================================= -->
-		<section id="page-title" class="page-title-parallax dark" style="background-image: url({% static "images/page/bg1.jpg" %}); padding: 120px 0; background-size:cover;" data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
+<section id="page-title" class="page-title-parallax dark"
+	style="background-image: url({% static "images/page/bg1.jpg" %}); padding: 120px 0; background-size:cover;"
+	data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
 
-			<div class="container clearfix dark">
-				<h1 data-animate="fadeInUp" style="color:#eee;">Setup</h1>
-				<span data-animate="fadeInUp" style="color:#eee;" data-delay="300">Configure datefix session</span>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
-					<li class="breadcrumb-item"><a href="">{{request.user.first_name}} {{request.user.last_name}}</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Setup</li>
-				</ol>
-			</div>
-<style>
-	h4 {
-		font-size: 2em;
-		line-height: 110%;
-	}
+	<div class="container clearfix dark">
+		<h1 data-animate="fadeInUp" style="color:#eee;">Setup</h1>
+		<span data-animate="fadeInUp" style="color:#eee;" data-delay="300">Configure datefix session</span>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
+			<li class="breadcrumb-item"><a href="">{{request.user.first_name}} {{request.user.last_name}}</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Setup</li>
+		</ol>
+	</div>
+	<style>
+		h4 {
+			font-size: 2em;
+			line-height: 110%;
+		}
 
-	label {
-		font-size: 1rem;
-		color: #777;
-	}
+		.select2-container--default .select2-search--dropdown .select2-search__field {
+			border: 1px solid #aaa;
+			border-radius: 4px;
+		}
 
-	.irs--flat .irs-bar {
-		background-color: #ef478e;
-	}
+		.button.button-xlarge {
+			display: inline-block;
+		}
 
-	.irs--flat .irs-handle>i:first-child {
-		width: 8px;
-		margin-left: -7px;
-		background-color: #7e50f8 !important;
-	}
+		.form-category h4 {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+			font-weight: 400;
+		}
 
-	.irs--flat .irs-from,
-	.irs--flat .irs-to,
-	.irs--flat .irs-single {
-		background-color: #7e50f8;
-		padding: 1px 6px;
-		font-size: 12px;
-	}
+		label {
+			font-size: 1rem;
+			color: #777;
+		}
 
-	.irs--flat .irs-from:before,
-	.irs--flat .irs-to:before,
-	.irs--flat .irs-single:before {
-		border-top-color: #7e50f8;
-	}
-</style>
-		</section><!-- #page-title end -->
+		.irs--flat .irs-bar {
+			background-color: #ef478e;
+		}
 
-		<!-- Content
+		.irs--flat .irs-handle>i:first-child {
+			width: 8px;
+			margin-left: -7px;
+			background-color: #7e50f8 !important;
+		}
+
+		.irs--flat .irs-from,
+		.irs--flat .irs-to,
+		.irs--flat .irs-single {
+			background-color: #7e50f8;
+			padding: 1px 6px;
+			font-size: 12px;
+		}
+
+		.irs--flat .irs-from:before,
+		.irs--flat .irs-to:before,
+		.irs--flat .irs-single:before {
+			border-top-color: #7e50f8;
+		}
+	</style>
+</section><!-- #page-title end -->
+
+<!-- Content
 		============================================= -->
-		<section id="content" style="overflow: inherit!important;  background-image: url({% static "images/page/bg2.jpg"%}); background-size: cover; background-attachment: fixed;">
+<section id="content"
+	style="overflow: inherit!important;  background-image: url({% static "images/page/bg2.jpg"%}); background-size: cover; background-attachment: fixed;">
 
-			<div class="content-wrap" style="padding: 20px 0;">
+	<div class="content-wrap" style="padding: 20px 0;">
 
-				<div class="container clearfix">
+		<div class="container clearfix">
 
-					<div class="row clearfix">
 
-						<div class="col-md-12">
+			<div class="clear"></div>
 
-							<div class="clear"></div>
+			<div class="row clearfix">
 
-							<div class="row clearfix">
+				<div class="col_full">
 
-								<div class="col-lg-12">
+					<!-- Multi step form -->
+					<!-- One "tab" for each step in the form: -->
+					<form id="user-form" action={% url 'get_data' 'user' %} method="get">
+						<div class="tab">
+							<h2 style="margin-bottom: 3px; color:#fff;">Describe Yourself</h2>
+							<p style="color:#fff;">Tell us about yourself</p>
+							<div class="form-category">
+								<h4>Where do you reside?</h4>
+								<hr>
 
-									<!-- Multi step form -->
-										<!-- One "tab" for each step in the form: -->
-										<form id="user-form" action={% url 'get_data' 'user' %} method="post">
-										<div class="tab">
-											<h2 style="margin-bottom: 3px; color:#fff;">Describe Yourself</h2>
-											<p style="color:#fff;">Tell us about yourself</p>
-											<div class="form-category">
-												<h4 >Where do you reside?</h4>
-													<hr>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">State</label>
+											<select name="residence-state" id="state1" class="form-control">
+												<option value="" selected="selected" disabled></option>
+												<option value='Non-Nigerian Resident'>Non-Nigerian Resident</option>
+												<option value='Abia'>Abia</option>
+												<option value='Adamawa'>Adamawa</option>
+												<option value='AkwaIbom'>AkwaIbom</option>
+												<option value='Anambra'>Anambra</option>
+												<option value='Bauchi'>Bauchi</option>
+												<option value='Bayelsa'>Bayelsa</option>
+												<option value='Benue'>Benue</option>
+												<option value='Borno'>Borno</option>
+												<option value='Cross River'>Cross River</option>
+												<option value='Delta'>Delta</option>
+												<option value='Ebonyi'>Ebonyi</option>
+												<option value='Edo'>Edo</option>
+												<option value='Ekiti'>Ekiti</option>
+												<option value='Enugu'>Enugu</option>
+												<option value='FCT'>FCT</option>
+												<option value='Gombe'>Gombe</option>
+												<option value='Imo'>Imo</option>
+												<option value='Jigawa'>Jigawa</option>
+												<option value='Kaduna'>Kaduna</option>
+												<option value='Kano'>Kano</option>
+												<option value='Katsina'>Katsina</option>
+												<option value='Kebbi'>Kebbi</option>
+												<option value='Kogi'>Kogi</option>
+												<option value='Kwara'>Kwara</option>
+												<option value='Lagos'>Lagos</option>
+												<option value='Nasarawa'>Nasarawa</option>
+												<option value='Niger'>Niger</option>
+												<option value='Ogun'>Ogun</option>
+												<option value='Ondo'>Ondo</option>
+												<option value='Osun'>Osun</option>
+												<option value='Oyo'>Oyo</option>
+												<option value='Plateau'>Plateau</option>
+												<option value='Rivers'>Rivers</option>
+												<option value='Sokoto'>Sokoto</option>
+												<option value='Taraba'>Taraba</option>
+												<option value='Yobe'>Yobe</option>
+												<option value='Zamfara'>Zamafara</option>
+											</select>
+										</div>
+									</div>
 
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">State</label>
-																<select name="residence-state" id="state1" class="form-control">
-																	<option value="" selected="selected" disabled></option>
-																	<option value='Non-Nigerian Resident'>Non-Nigerian Resident</option>
-																	<option value='Abia'>Abia</option>
-																	<option value='Adamawa'>Adamawa</option>
-																	<option value='AkwaIbom'>AkwaIbom</option>
-																	<option value='Anambra'>Anambra</option>
-																	<option value='Bauchi'>Bauchi</option>
-																	<option value='Bayelsa'>Bayelsa</option>
-																	<option value='Benue'>Benue</option>
-																	<option value='Borno'>Borno</option>
-																	<option value='Cross River'>Cross River</option>
-																	<option value='Delta'>Delta</option>
-																	<option value='Ebonyi'>Ebonyi</option>
-																	<option value='Edo'>Edo</option>
-																	<option value='Ekiti'>Ekiti</option>
-																	<option value='Enugu'>Enugu</option>
-																	<option value='FCT'>FCT</option>
-																	<option value='Gombe'>Gombe</option>
-																	<option value='Imo'>Imo</option>
-																	<option value='Jigawa'>Jigawa</option>
-																	<option value='Kaduna'>Kaduna</option>
-																	<option value='Kano'>Kano</option>
-																	<option value='Katsina'>Katsina</option>
-																	<option value='Kebbi'>Kebbi</option>
-																	<option value='Kogi'>Kogi</option>
-																	<option value='Kwara'>Kwara</option>
-																	<option value='Lagos'>Lagos</option>
-																	<option value='Nasarawa'>Nasarawa</option>
-																	<option value='Niger'>Niger</option>
-																	<option value='Ogun'>Ogun</option>
-																	<option value='Ondo'>Ondo</option>
-																	<option value='Osun'>Osun</option>
-																	<option value='Oyo'>Oyo</option>
-																	<option value='Plateau'>Plateau</option>
-																	<option value='Rivers'>Rivers</option>
-																	<option value='Sokoto'>Sokoto</option>
-																	<option value='Taraba'>Taraba</option>
-																	<option value='Yobe'>Yobe</option>
-																	<option value='Zamfara'>Zamafara</option>
-																</select>
-															</div>
-														</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">LGA</label>
+											<select name="residence-lga" id="lga1" class="form-control" required>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
 
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">LGA</label>
-																<select name="residence-lga" id="lga1" class="form-control" required>
-																</select>
-															</div>
-														</div>
-													</div>
+							<div class="form-category">
+								<h4>Where are you from?</h4>
+								<hr>
+
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">State</label>
+											<select name="origin-state" id="state2" class="form-control">
+												<option value="" selected="selected" disabled></option>
+
+												<option value='Non-Nigerian'>Non-Nigerian</option>
+												<option value='Abia'>Abia</option>
+												<option value='Adamawa'>Adamawa</option>
+												<option value='AkwaIbom'>AkwaIbom</option>
+												<option value='Anambra'>Anambra</option>
+												<option value='Bauchi'>Bauchi</option>
+												<option value='Bayelsa'>Bayelsa</option>
+												<option value='Benue'>Benue</option>
+												<option value='Borno'>Borno</option>
+												<option value='Cross River'>Cross River</option>
+												<option value='Delta'>Delta</option>
+												<option value='Ebonyi'>Ebonyi</option>
+												<option value='Edo'>Edo</option>
+												<option value='Ekiti'>Ekiti</option>
+												<option value='Enugu'>Enugu</option>
+												<option value='FCT'>FCT</option>
+												<option value='Gombe'>Gombe</option>
+												<option value='Imo'>Imo</option>
+												<option value='Jigawa'>Jigawa</option>
+												<option value='Kaduna'>Kaduna</option>
+												<option value='Kano'>Kano</option>
+												<option value='Katsina'>Katsina</option>
+												<option value='Kebbi'>Kebbi</option>
+												<option value='Kogi'>Kogi</option>
+												<option value='Kwara'>Kwara</option>
+												<option value='Lagos'>Lagos</option>
+												<option value='Nasarawa'>Nasarawa</option>
+												<option value='Niger'>Niger</option>
+												<option value='Ogun'>Ogun</option>
+												<option value='Ondo'>Ondo</option>
+												<option value='Osun'>Osun</option>
+												<option value='Oyo'>Oyo</option>
+												<option value='Plateau'>Plateau</option>
+												<option value='Rivers'>Rivers</option>
+												<option value='Sokoto'>Sokoto</option>
+												<option value='Taraba'>Taraba</option>
+												<option value='Yobe'>Yobe</option>
+												<option value='Zamfara'>Zamafara</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">LGA</label>
+											<select name="origin-lga" id="lga2" class="form-control" required>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-category">
+								<h4>Your Sexuality & Status</h3>
+									<hr>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Marital Status?</label>
+												<select name="marital-status" id="marital-status1" class="form-control"
+													required>
+													<option value="" selected="selected" disabled></option>
+													<option value="Single">Single</option>
+													<option value="Seperated">Separated</option>
+													<option value="Divorced">Divorced</option>
+													<option value="Widowed">Widowed</option>
+												</select>
 											</div>
+										</div>
 
-											<div class="form-category">
-												<h4>Where are you from?</h4>
-													<hr>
-
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">State</label>
-																<select name="origin-state" id="state2" class="form-control">
-																	<option value="" selected="selected" disabled></option>
-
-																	<option value='Non-Nigerian'>Non-Nigerian</option>
-																	<option value='Abia'>Abia</option>
-																	<option value='Adamawa'>Adamawa</option>
-																	<option value='AkwaIbom'>AkwaIbom</option>
-																	<option value='Anambra'>Anambra</option>
-																	<option value='Bauchi'>Bauchi</option>
-																	<option value='Bayelsa'>Bayelsa</option>
-																	<option value='Benue'>Benue</option>
-																	<option value='Borno'>Borno</option>
-																	<option value='Cross River'>Cross River</option>
-																	<option value='Delta'>Delta</option>
-																	<option value='Ebonyi'>Ebonyi</option>
-																	<option value='Edo'>Edo</option>
-																	<option value='Ekiti'>Ekiti</option>
-																	<option value='Enugu'>Enugu</option>
-																	<option value='FCT'>FCT</option>
-																	<option value='Gombe'>Gombe</option>
-																	<option value='Imo'>Imo</option>
-																	<option value='Jigawa'>Jigawa</option>
-																	<option value='Kaduna'>Kaduna</option>
-																	<option value='Kano'>Kano</option>
-																	<option value='Katsina'>Katsina</option>
-																	<option value='Kebbi'>Kebbi</option>
-																	<option value='Kogi'>Kogi</option>
-																	<option value='Kwara'>Kwara</option>
-																	<option value='Lagos'>Lagos</option>
-																	<option value='Nasarawa'>Nasarawa</option>
-																	<option value='Niger'>Niger</option>
-																	<option value='Ogun'>Ogun</option>
-																	<option value='Ondo'>Ondo</option>
-																	<option value='Osun'>Osun</option>
-																	<option value='Oyo'>Oyo</option>
-																	<option value='Plateau'>Plateau</option>
-																	<option value='Rivers'>Rivers</option>
-																	<option value='Sokoto'>Sokoto</option>
-																	<option value='Taraba'>Taraba</option>
-																	<option value='Yobe'>Yobe</option>
-																	<option value='Zamfara'>Zamafara</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">LGA</label>
-																<select name="origin-lga" id="lga2" class="form-control" required>
-																</select>
-															</div>
-														</div>
-													</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Do you have children?</label>
+												<select name="children" id="children1" class="form-control" required>
+													<option value="1">No</option>
+													<option value="2">Yes</option>
+												</select>
 											</div>
-
-											<div class="form-category">
-												<h4>Your Sexuality & Status</h3>
-													<hr>
-
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Marital Status?</label>
-																<select name="marital-status" id="marital-status1" class="form-control" required>
-																	<option value="" selected="selected" disabled></option>
-																	<option value="Single">Single</option>
-																	<option value="Seperated">Separated</option>
-																	<option value="Divorced">Divorced</option>
-																	<option value="Widowed">Widowed</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Do you have children?</label>
-																<select name="children" id="children1" class="form-control" required>
-																	<option value="No">No</option>
-																	<option value="Yes">Yes</option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your Age</label>
-																<input type="number" min="21" name="age" id="age1" class="form-control" value="21">
-															</div>
-														</div>
-
-													</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label">Your Age</label>
+												<input type="number" min="21" name="age" id="age1" class="range_01"
+													value="21">
 											</div>
+										</div>
 
-											<div class="form-category">
-												<h4>Your Education & Work</h3>
-													<hr>
+									</div>
+							</div>
 
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your highest level of education</label>
-																<select name="education" id="education1" class="form-control" required>
-																	<option value="" selected="selected" disabled></option>
-																	<option value="1">SSCE</option>
-																	<option value="2">OND</option>
-																	<option value="3">HND</option>
-																	<option value="4">Bachelors</option>
-																	<option value="5">PGD/PCE</option>
-																	<option value="6">Masters</option>
-																	<option value="7">Doctorate</option>
-																</select>
-															</div>
-														</div>
+							<div class="form-category">
+								<h4>Your Education & Work</h3>
+									<hr>
 
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your average net worth</label>
-																<select name="net-worth" id="net-worth1" class="form-control" required>
-																	<option value="" selected disabled></option>
-																	<option value="1">Less than N100,000</option>
-																	<option value="2">N100,000 - N500,000</option>
-																	<option value="3">N500,000 - N1,000,000</option>
-																	<option value="4">N1,000,000 - N10,000,000</option>
-																	<option value="5">N10,000,000 - N100,000,000</option>
-																	<option value="6">N100,000,000 - 1 Billion</option>
-																	<option value="7">Above 1 Billion</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your highest level of education</label>
+												<select name="education" id="education1" class="form-control" required>
+													<option value="" selected="selected" disabled></option>
+													<option value="1">SSCE</option>
+													<option value="2">OND</option>
+													<option value="3">HND</option>
+													<option value="4">Bachelors</option>
+													<option value="5">PGD/PCE</option>
+													<option value="6">Masters</option>
+													<option value="7">Doctorate</option>
+												</select>
 											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your average net worth</label>
+												<select name="net-worth" id="net-worth1" class="form-control" required>
+													<option value="" selected disabled></option>
+													<option value="1">Less than N100,000</option>
+													<option value="2">N100,000 - N500,000</option>
+													<option value="3">N500,000 - N1,000,000</option>
+													<option value="4">N1,000,000 - N10,000,000</option>
+													<option value="5">N10,000,000 - N100,000,000</option>
+													<option value="6">N100,000,000 - 1 Billion</option>
+													<option value="7">Above 1 Billion</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+							</div>
+
+							<div class="form-category">
+								<h4>Your Body & Soul</h3>
+									<hr>
+									<div class="row">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="control-label">Your Blood Group</label>
+												<select name="blood-group" id="blood-group1" class="form-control">
+													<option value="" selected="selected" disabled></option>
+													<option value="1">A</option>
+													<option value="2">B</option>
+													<option value="3">AB</option>
+													<option value="4">O</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="control-label"> Your Rhesus Factor</label>
+												<select name="rhesus-factor" id="rhesus-factor1" class="form-control">
+													<option value="" selected="selected" disabled></option>
+													<option value="1">Positive (+)</option>
+													<option value="2">Negative (-)</option>
+												</select>
+											</div>
+										</div>
 
 										<div class="col-md-6">
 											<div class="form-group">
@@ -342,8 +389,10 @@ Setup Session
 													<option value="" selected disabled></option>
 													<option value="1">AA</option>
 													<option value="2">AS</option>
+													<option value="3">SS</option>
 													<option value="3">SC</option>
-													<option value="4">SS</option>
+													<option value="4">CC</option>
+													<option value="5">SS</option>
 												</select>
 											</div>
 										</div>
@@ -361,431 +410,498 @@ Setup Session
 													<option value='Other'>Other</option>
 												</select>
 											</div>
-
-											<div class="form-category">
-												<h4>Your Physique</h3>
-													<hr>
-
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your Complexion</label>
-																<select name="complexion" id="complexion1" class="form-control" required>
-																	<option value="" selected="selected" disabled></option>
-																	<option value="1">Very Light</option>
-																	<option value="2">Light Skinned</option>
-																	<option value="3">Normal Brown</option>
-																	<option value="4">Dark Brown</option>
-																	<option value="5">Deep Brown</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your Height</label>
-																<select name="height" id="height1" class="form-control" required>
-																	<option value="" selected disabled></option>
-																	<option value="1">Really Short</option>
-																	<option value="2">Short</option>
-																	<option value="3">Average</option>
-																	<option value="4">Tall</option>
-																	<option value="5">Really Tall</option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your Body Shape</label>
-																<select name="body-shape" id="body-shape1" class="form-control" required>
-																	<option value="" selected="selected" disabled></option>
-																	<option value="1">Straight</option>
-																	<option value="2">Pear</option>
-																	<option value="3">Apple</option>
-																	<option value="4">Hourglass</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your Body Type</label>
-																<select name="body-type" id="body-type1" class="form-control" required>
-																	<option value="" selected disabled></option>
-																	<option value="1">Ectomorphic</option>
-																	<option value="2">Mesomorphic</option>
-																	<option value="3">Endomorphic</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your Body Size</label>
-																<select name="body-size" id="body-size1" class="form-control" required>
-																	<option value="" selected disabled></option>
-																	<option value="1">Skinny</option>
-																	<option value="2">Slim</option>
-																	<option value="3">Average</option>
-																	<option value="4">Large</option>
-																	<option value="5">Extra Large</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-											</div>
-
-											<div class="form-category">
-												<h4>Your Social Habits</h3>
-													<hr>
-
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Do you drink?</label>
-																<select name="drink" id="drink1" class="form-control" required>
-																	<option value="" selected="selected" disabled></option>
-																	<option value="1">Yes</option>
-																	<option value="2">Socially</option>
-																	<option value="3">No</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Do you smoke?</label>
-																<select name="smoke" id="smoke1" class="form-control" required>
-																	<option value="" selected disabled></option>
-																	<option value="1">Yes</option>
-																	<option value="2">Socially</option>
-																	<option value="3">No</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-											</div>
-
-											<div class="form-category">
-												<h4>Your Personality</h3>
-													<hr>
-
-
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-8">
-
-																<label class="control-label"><strong>Openness *</strong> - How open minded are you?</label>
-															</div>
-															<div class="col-md-4">
-																<select name="openness" id="openness1" class="form-control" required>
-																	<option value="" selected="selected" disabled></option>
-																	<option value="1">Not really</option>
-																	<option value="2">Moderately</option>
-																	<option value="3">Very Open</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-8">
-
-																<label class="control-label"><strong>Conscientiousness *</strong> - How diligent and careful are you?</label>
-															</div>
-															<div class="col-md-4">
-																<select name="conscientiousness" id="conscientiousness1" class="form-control" required>
-																	<option value="" selected="selected" disabled></option>
-																	<option value="1">Careless</option>
-																	<option value="2">Moderately Diligent</option>
-																	<option value="3">Very Careful/Diligent</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-8">
-
-																<label class="control-label"><strong>Extraversion *</strong> - How socially outgoing are you?</label>
-															</div>
-															<div class="col-md-4">
-																<select name="extraversion" id="extraversion1" class="form-control" required>
-																	<option value="" selected="selected" disabled></option>
-																	<option value="1">Reserved</option>
-																	<option value="2">Moderately Outgoing</option>
-																	<option value="3">Very Outgoing</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-8">
-
-																<label class="control-label"><strong>Agreeableness *</strong> - How friendly or tactful are you?</label>
-															</div>
-															<div class="col-md-4">
-																<select name="agreeableness" id="agreeableness1" class="form-control" required>
-																	<option value="" selected="selected" disabled></option>
-																	<option value="1">Detatched</option>
-																	<option value="2">Challenging</option>
-																	<option value="3">Friendly</option>
-																	<option value="4">Compassionate</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-8">
-
-																<label class="control-label"><strong>Neurotism *</strong> <span>- How emotionally sensitive are you?</span></label>
-															</div>
-															<div class="col-md-4">
-																<select name="neurotism" id="neurotism1" class="form-control" required>
-																	<option value="" selected="selected" disabled></option>
-																	<option value="1">Cold and Distant</option>
-																	<option value="2">Moderately Sensitive</option>
-																	<option value="3">Very Sensitive</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-
-											</div>
-
-
-
-
-
 										</div>
-										</form>
-										<form></form>
-										<form id="partner-form" action={% url 'get_data' 'partner' %} method="post">
-										<div class="tab">
-											<h2 style="margin-bottom: 3px; color:#fff;">Your Ideal Partner</h2>
-											<p style="color:#fff;">Tell us what you want in a partner</p>
-											<div class="form-category">
-												<h4>Where would you like your partner to reside?</h3>
-													<hr>
 
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">State</label>
-																<select name="residence-state" id="state3" class="form-control">
-																	<option value="" selected="selected" disabled></option>
-																	<option value='Does Not Matter'>Does Not Matter</option>
-																	<option value='Non-Nigerian Resident'>Non-Nigerian Resident</option>
-																	<option value='Abia'>Abia</option>
-																	<option value='Adamawa'>Adamawa</option>
-																	<option value='AkwaIbom'>AkwaIbom</option>
-																	<option value='Anambra'>Anambra</option>
-																	<option value='Bauchi'>Bauchi</option>
-																	<option value='Bayelsa'>Bayelsa</option>
-																	<option value='Benue'>Benue</option>
-																	<option value='Borno'>Borno</option>
-																	<option value='Cross River'>Cross River</option>
-																	<option value='Delta'>Delta</option>
-																	<option value='Ebonyi'>Ebonyi</option>
-																	<option value='Edo'>Edo</option>
-																	<option value='Ekiti'>Ekiti</option>
-																	<option value='Enugu'>Enugu</option>
-																	<option value='FCT'>FCT</option>
-																	<option value='Gombe'>Gombe</option>
-																	<option value='Imo'>Imo</option>
-																	<option value='Jigawa'>Jigawa</option>
-																	<option value='Kaduna'>Kaduna</option>
-																	<option value='Kano'>Kano</option>
-																	<option value='Katsina'>Katsina</option>
-																	<option value='Kebbi'>Kebbi</option>
-																	<option value='Kogi'>Kogi</option>
-																	<option value='Kwara'>Kwara</option>
-																	<option value='Lagos'>Lagos</option>
-																	<option value='Nasarawa'>Nasarawa</option>
-																	<option value='Niger'>Niger</option>
-																	<option value='Ogun'>Ogun</option>
-																	<option value='Ondo'>Ondo</option>
-																	<option value='Osun'>Osun</option>
-																	<option value='Oyo'>Oyo</option>
-																	<option value='Plateau'>Plateau</option>
-																	<option value='Rivers'>Rivers</option>
-																	<option value='Sokoto'>Sokoto</option>
-																	<option value='Taraba'>Taraba</option>
-																	<option value='Yobe'>Yobe</option>
-																	<option value='Zamfara'>Zamafara</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">LGA</label>
-																<select name="residence-lga" id="lga3" class="form-control" required>
-																</select>
-															</div>
-														</div>
-													</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your Denomination</label>
+												<select name="denomination" id="denomination1" class="form-control"
+													required>
+												</select>
 											</div>
+										</div>
+									</div>
+							</div>
 
-											<div class="form-category">
-												<h4>Where would you like your partner to come from?</h3>
-													<hr>
+							<div class="form-category">
+								<h4>Your Physique</h3>
+									<hr>
 
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">State</label>
-																<select name="origin-state" id="state4" class="form-control">
-																	<option value="" selected="selected" disabled></option>
-
-																	<option value='Does Not Matter'>Does Not Matter</option>
-																	<option value='Non-Nigerian'>Non-Nigerian</option>
-																	<option value='Abia'>Abia</option>
-																	<option value='Adamawa'>Adamawa</option>
-																	<option value='AkwaIbom'>AkwaIbom</option>
-																	<option value='Anambra'>Anambra</option>
-																	<option value='Bauchi'>Bauchi</option>
-																	<option value='Bayelsa'>Bayelsa</option>
-																	<option value='Benue'>Benue</option>
-																	<option value='Borno'>Borno</option>
-																	<option value='Cross River'>Cross River</option>
-																	<option value='Delta'>Delta</option>
-																	<option value='Ebonyi'>Ebonyi</option>
-																	<option value='Edo'>Edo</option>
-																	<option value='Ekiti'>Ekiti</option>
-																	<option value='Enugu'>Enugu</option>
-																	<option value='FCT'>FCT</option>
-																	<option value='Gombe'>Gombe</option>
-																	<option value='Imo'>Imo</option>
-																	<option value='Jigawa'>Jigawa</option>
-																	<option value='Kaduna'>Kaduna</option>
-																	<option value='Kano'>Kano</option>
-																	<option value='Katsina'>Katsina</option>
-																	<option value='Kebbi'>Kebbi</option>
-																	<option value='Kogi'>Kogi</option>
-																	<option value='Kwara'>Kwara</option>
-																	<option value='Lagos'>Lagos</option>
-																	<option value='Nasarawa'>Nasarawa</option>
-																	<option value='Niger'>Niger</option>
-																	<option value='Ogun'>Ogun</option>
-																	<option value='Ondo'>Ondo</option>
-																	<option value='Osun'>Osun</option>
-																	<option value='Oyo'>Oyo</option>
-																	<option value='Plateau'>Plateau</option>
-																	<option value='Rivers'>Rivers</option>
-																	<option value='Sokoto'>Sokoto</option>
-																	<option value='Taraba'>Taraba</option>
-																	<option value='Yobe'>Yobe</option>
-																	<option value='Zamfara'>Zamafara</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">LGA</label>
-																<select name="origin-lga" id="lga4" class="form-control" required>
-																</select>
-															</div>
-														</div>
-													</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your Complexion</label>
+												<select name="complexion" id="complexion1" class="form-control"
+													required>
+													<option value="" selected="selected" disabled></option>
+													<option value="1">Very Light</option>
+													<option value="2">Light Skinned</option>
+													<option value="3">Normal Brown</option>
+													<option value="4">Dark Brown</option>
+													<option value="5">Deep Brown</option>
+												</select>
 											</div>
+										</div>
 
-											<div class="form-category">
-												<h4>Your Partner's Sexuality & Status</h3>
-													<hr>
-
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Preferred Partner's Marital Status?</label>
-																<select name="marital-status" id="marital-status2" class="form-control" required>
-																	<option value='Does Not Matter' selected="selected">Does Not Matter</option>
-																	<option value="Single">Single</option>
-																	<option value="Seperated">Separated</option>
-																	<option value="Divorced">Divorced</option>
-																	<option value="Widowed">Widowed</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your ideal partner must not have children?</label>
-																<select name="children" id="children2" class="form-control" required>
-																	<option value="Does Not Matter">Does Not Matter</option>
-																	<option value="Yes">Yes, No children please.</option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your Ideal Partner's Minimum Age</label>
-																<input type="number" min="21" name="min-age" id="age2" value="21" class="form-control">
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Your Ideal Partner's Maximum Age</label>
-																<input type="number" min="22" name="max-age" id="age3" value="99" class="form-control">
-															</div>
-														</div>
-
-													</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your Height</label>
+												<select name="height" id="height1" class="form-control" required>
+													<option value="" selected disabled></option>
+													<option value="1">Really Short</option>
+													<option value="2">Short</option>
+													<option value="3">Average</option>
+													<option value="4">Tall</option>
+													<option value="5">Really Tall</option>
+												</select>
 											</div>
-
-											<div class="form-category">
-												<h4>Your Ideal Partner's Education & Work</h3>
-													<hr>
-
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Minimum level of education</label>
-																<select name="education" id="education2" class="form-control" required>
-																	<option value="Does Not Matter" selected="selected">Does Not Matter</option>
-																	<option value="1">SSCE</option>
-																	<option value="2">OND</option>
-																	<option value="3">HND</option>
-																	<option value="4">Bachelors</option>
-																	<option value="5">PGD/PCE</option>
-																	<option value="6">Masters</option>
-																	<option value="7">Doctorate</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Average net worth</label>
-																<select name="net-worth" id="net-worth2" class="form-control" required>
-																	<option value="Does Not Matter" selected>Does Not Matter</option>
-																	<option value="1">Less than N100,000</option>
-																	<option value="2">N100,000 - N500,000</option>
-																	<option value="3">N500,000 - N1,000,000</option>
-																	<option value="4">N1,000,000 - N10,000,000</option>
-																	<option value="5">N10,000,000 - N100,000,000</option>
-																	<option value="6">N100,000,000 - 1 Billion</option>
-																	<option value="7">Above 1 Billion</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your Body Shape</label>
+												<select name="body-shape" id="body-shape1" class="form-control"
+													required>
+													<option value="" selected="selected" disabled></option>
+													<option value="1">Straight</option>
+													<option value="2">Pear</option>
+													<option value="3">Apple</option>
+													<option value="4">Hourglass</option>
+												</select>
 											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your Body Type</label>
+												<select name="body-type" id="body-type1" class="form-control" required>
+													<option value="" selected disabled></option>
+													<option value="1">Ectomorphic</option>
+													<option value="2">Mesomorphic</option>
+													<option value="3">Endomorphic</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your Body Size</label>
+												<select name="body-size" id="body-size1" class="form-control" required>
+													<option value="" selected disabled></option>
+													<option value="1">Skinny</option>
+													<option value="2">Slim</option>
+													<option value="3">Average</option>
+													<option value="4">Large</option>
+													<option value="5">Extra Large</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+							</div>
+
+							<div class="form-category">
+								<h4>Your Social Habits</h3>
+									<hr>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Do you drink?</label>
+												<select name="drink" id="drink1" class="form-control" required>
+													<option value="" selected="selected" disabled></option>
+													<option value="1">Yes</option>
+													<option value="2">Socially</option>
+													<option value="3">No</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Do you smoke?</label>
+												<select name="smoke" id="smoke1" class="form-control" required>
+													<option value="" selected disabled></option>
+													<option value="1">Yes</option>
+													<option value="2">Socially</option>
+													<option value="3">No</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+							</div>
+
+							<div class="form-category">
+								<h4>Your Personality</h3>
+									<hr>
+
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+
+												<label class="control-label"><strong>Openness *</strong> - How open
+													minded are you?</label>
+											</div>
+											<div class="col-md-4">
+												<select name="openness" id="openness1" class="form-control" required>
+													<option value="" selected="selected" disabled></option>
+													<option value="1">Not really</option>
+													<option value="2">Moderately</option>
+													<option value="3">Very Open</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+
+												<label class="control-label"><strong>Conscientiousness *</strong> - How
+													diligent and careful are you?</label>
+											</div>
+											<div class="col-md-4">
+												<select name="conscientiousness" id="conscientiousness1"
+													class="form-control" required>
+													<option value="" selected="selected" disabled></option>
+													<option value="1">Careless</option>
+													<option value="2">Moderately Diligent</option>
+													<option value="3">Very Careful/Diligent</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+
+												<label class="control-label"><strong>Extraversion *</strong> - How
+													socially outgoing are you?</label>
+											</div>
+											<div class="col-md-4">
+												<select name="extraversion" id="extraversion1" class="form-control"
+													required>
+													<option value="" selected="selected" disabled></option>
+													<option value="1">Reserved</option>
+													<option value="2">Moderately Outgoing</option>
+													<option value="3">Very Outgoing</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+
+												<label class="control-label"><strong>Agreeableness *</strong> - How
+													friendly or tactful are you?</label>
+											</div>
+											<div class="col-md-4">
+												<select name="agreeableness" id="agreeableness1" class="form-control"
+													required>
+													<option value="" selected="selected" disabled></option>
+													<option value="1">Detatched</option>
+													<option value="2">Challenging</option>
+													<option value="3">Friendly</option>
+													<option value="4">Compassionate</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+
+												<label class="control-label"><strong>Neurotism *</strong> <span>- How
+														emotionally sensitive are you?</span></label>
+											</div>
+											<div class="col-md-4">
+												<select name="neurotism" id="neurotism1" class="form-control" required>
+													<option value="" selected="selected" disabled></option>
+													<option value="1">Cold and Distant</option>
+													<option value="2">Moderately Sensitive</option>
+													<option value="3">Very Sensitive</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+
+							</div>
+
+
+
+
+
+						</div>
+					</form>
+					<form></form>
+					<form id="partner-form" action={% url 'get_data' 'partner' %} method="get">
+						<div class="tab">
+							<h2 style="margin-bottom: 3px; color:#fff;">Your Ideal Partner</h2>
+							<p style="color:#fff;">Tell us what you want in a partner</p>
+							<div class="form-category">
+								<h4>Where would you like your partner to reside?</h3>
+									<hr>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">State</label>
+												<select name="residence-state" id="state3" class="form-control">
+													<option value="" selected="selected" disabled></option>
+													<option value='Does Not Matter'>Does Not Matter</option>
+													<option value='Non-Nigerian Resident'>Non-Nigerian Resident</option>
+													<option value='Abia'>Abia</option>
+													<option value='Adamawa'>Adamawa</option>
+													<option value='AkwaIbom'>AkwaIbom</option>
+													<option value='Anambra'>Anambra</option>
+													<option value='Bauchi'>Bauchi</option>
+													<option value='Bayelsa'>Bayelsa</option>
+													<option value='Benue'>Benue</option>
+													<option value='Borno'>Borno</option>
+													<option value='Cross River'>Cross River</option>
+													<option value='Delta'>Delta</option>
+													<option value='Ebonyi'>Ebonyi</option>
+													<option value='Edo'>Edo</option>
+													<option value='Ekiti'>Ekiti</option>
+													<option value='Enugu'>Enugu</option>
+													<option value='FCT'>FCT</option>
+													<option value='Gombe'>Gombe</option>
+													<option value='Imo'>Imo</option>
+													<option value='Jigawa'>Jigawa</option>
+													<option value='Kaduna'>Kaduna</option>
+													<option value='Kano'>Kano</option>
+													<option value='Katsina'>Katsina</option>
+													<option value='Kebbi'>Kebbi</option>
+													<option value='Kogi'>Kogi</option>
+													<option value='Kwara'>Kwara</option>
+													<option value='Lagos'>Lagos</option>
+													<option value='Nasarawa'>Nasarawa</option>
+													<option value='Niger'>Niger</option>
+													<option value='Ogun'>Ogun</option>
+													<option value='Ondo'>Ondo</option>
+													<option value='Osun'>Osun</option>
+													<option value='Oyo'>Oyo</option>
+													<option value='Plateau'>Plateau</option>
+													<option value='Rivers'>Rivers</option>
+													<option value='Sokoto'>Sokoto</option>
+													<option value='Taraba'>Taraba</option>
+													<option value='Yobe'>Yobe</option>
+													<option value='Zamfara'>Zamafara</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">LGA</label>
+												<select name="residence-lga" id="lga3" class="form-control" required>
+												</select>
+											</div>
+										</div>
+									</div>
+							</div>
+
+							<div class="form-category">
+								<h4>Where would you like your partner to come from?</h3>
+									<hr>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">State</label>
+												<select name="origin-state" id="state4" class="form-control">
+													<option value="" selected="selected" disabled></option>
+
+													<option value='Does Not Matter'>Does Not Matter</option>
+													<option value='Non-Nigerian'>Non-Nigerian</option>
+													<option value='Abia'>Abia</option>
+													<option value='Adamawa'>Adamawa</option>
+													<option value='AkwaIbom'>AkwaIbom</option>
+													<option value='Anambra'>Anambra</option>
+													<option value='Bauchi'>Bauchi</option>
+													<option value='Bayelsa'>Bayelsa</option>
+													<option value='Benue'>Benue</option>
+													<option value='Borno'>Borno</option>
+													<option value='Cross River'>Cross River</option>
+													<option value='Delta'>Delta</option>
+													<option value='Ebonyi'>Ebonyi</option>
+													<option value='Edo'>Edo</option>
+													<option value='Ekiti'>Ekiti</option>
+													<option value='Enugu'>Enugu</option>
+													<option value='FCT'>FCT</option>
+													<option value='Gombe'>Gombe</option>
+													<option value='Imo'>Imo</option>
+													<option value='Jigawa'>Jigawa</option>
+													<option value='Kaduna'>Kaduna</option>
+													<option value='Kano'>Kano</option>
+													<option value='Katsina'>Katsina</option>
+													<option value='Kebbi'>Kebbi</option>
+													<option value='Kogi'>Kogi</option>
+													<option value='Kwara'>Kwara</option>
+													<option value='Lagos'>Lagos</option>
+													<option value='Nasarawa'>Nasarawa</option>
+													<option value='Niger'>Niger</option>
+													<option value='Ogun'>Ogun</option>
+													<option value='Ondo'>Ondo</option>
+													<option value='Osun'>Osun</option>
+													<option value='Oyo'>Oyo</option>
+													<option value='Plateau'>Plateau</option>
+													<option value='Rivers'>Rivers</option>
+													<option value='Sokoto'>Sokoto</option>
+													<option value='Taraba'>Taraba</option>
+													<option value='Yobe'>Yobe</option>
+													<option value='Zamfara'>Zamafara</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">LGA</label>
+												<select name="origin-lga" id="lga4" class="form-control" required>
+												</select>
+											</div>
+										</div>
+									</div>
+							</div>
+
+							<div class="form-category">
+								<h4>Your Partner's Sexuality & Status</h3>
+									<hr>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Preferred Partner's Marital Status?</label>
+												<select name="marital-status" id="marital-status2" class="form-control"
+													required>
+													<option value='Does Not Matter' selected="selected">Does Not Matter
+													</option>
+													<option value="Single">Single</option>
+													<option value="Seperated">Separated</option>
+													<option value="Divorced">Divorced</option>
+													<option value="Widowed">Widowed</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your ideal partner must not have
+													children?</label>
+												<select name="children" id="children2" class="form-control" required>
+													<option value="Does Not Matter">Does Not Matter</option>
+													<option value="Yes">Yes, No children please.</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label">Your Ideal Partner's Age Range</label>
+												<input type="text" id="age-range-slider" value="" />
+											</div>
+										</div>
+
+									</div>
+									<div class="row" style="display:none;">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your Ideal Partner's Minimum Age</label>
+												<input type="number" min="21" name="min-age" id="age2" value="21"
+													class="form-control">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your Ideal Partner's Maximum Age</label>
+												<input type="number" min="22" name="max-age" id="age3" value="99"
+													class="form-control">
+											</div>
+										</div>
+
+									</div>
+							</div>
+
+							<div class="form-category">
+								<h4>Your Ideal Partner's Education & Work</h3>
+									<hr>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Minimum level of education</label>
+												<select name="education" id="education2" class="form-control" required>
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">SSCE</option>
+													<option value="2">OND</option>
+													<option value="3">HND</option>
+													<option value="4">Bachelors</option>
+													<option value="5">PGD/PCE</option>
+													<option value="6">Masters</option>
+													<option value="7">Doctorate</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Average net worth</label>
+												<select name="net-worth" id="net-worth2" class="form-control" required>
+													<option value="Does Not Matter" selected>Does Not Matter</option>
+													<option value="1">Less than N100,000</option>
+													<option value="2">N100,000 - N500,000</option>
+													<option value="3">N500,000 - N1,000,000</option>
+													<option value="4">N1,000,000 - N10,000,000</option>
+													<option value="5">N10,000,000 - N100,000,000</option>
+													<option value="6">N100,000,000 - 1 Billion</option>
+													<option value="7">Above 1 Billion</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+							</div>
+
+							<div class="form-category">
+								<h4>Your Ideal Partner's Body & Soul</h3>
+									<hr>
+									<div class="row">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="control-label">Blood Group</label>
+												<select name="blood-group" id="blood-group2" class="form-control">
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">A</option>
+													<option value="2">B</option>
+													<option value="3">AB</option>
+													<option value="4">O</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="control-label">Rhesus Factor</label>
+												<select name="rhesus-factor" id="rhesus-factor2" class="form-control">
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">Positive (+)</option>
+													<option value="2">Negative (-)</option>
+												</select>
+											</div>
+										</div>
 
 										<div class="col-md-6">
 											<div class="form-group">
@@ -794,7 +910,7 @@ Setup Session
 													<option value="Does Not Matter" selected>Does Not Matter</option>
 													<option value="1">AA Only</option>
 													<option value="2">AA or AS</option>
-													<option value="3">AA, AS, SC, or SS</option>
+													<option value="3">AA, AS, SC, CC, or SS</option>
 												</select>
 											</div>
 										</div>
@@ -812,298 +928,449 @@ Setup Session
 													<option value='Other'>Other</option>
 												</select>
 											</div>
-
-											<div class="form-category">
-												<h4>Your Ideal Partner's Physique</h3>
-													<hr>
-
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Complexion</label>
-																<select name="complexion" id="complexion2" class="form-control" required>
-																	<option value="Does Not Matter" selected="selected">Does Not Matter</option>
-																	<option value="1">Albino</option>
-																	<option value="2">Light Skinned</option>
-																	<option value="3">Normal Brown</option>
-																	<option value="4">Dark Brown</option>
-																	<option value="5">Deep Brown</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Height</label>
-																<select name="height" id="height2" class="form-control" required>
-																	<option value="Does Not Matter" selected>Does Not Matter</option>
-																	<option value="1">Really Short</option>
-																	<option value="2">Short</option>
-																	<option value="3">Average</option>
-																	<option value="4">Tall</option>
-																	<option value="5">Really Tall</option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Body Shape</label>
-																<select name="body-shape" id="body-shape2" class="form-control" required>
-																	<option value="Does Not Matter" selected="selected">Does Not Matter</option>
-																	<option value="1">Straight</option>
-																	<option value="2">Pear</option>
-																	<option value="3">Apple</option>
-																	<option value="4">Hourglass</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Body Type</label>
-																<select name="body-type" id="body-type2" class="form-control" required>
-																	<option value="Does Not Matter" selected>Does Not Matter</option>
-																	<option value="1">Ectomorphic</option>
-																	<option value="2">Mesomorphic</option>
-																	<option value="3">Endomorphic</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Body Size</label>
-																<select name="body-size" id="body-size2" class="form-control" required>
-																	<option value="Does Not Matter" selected>Does Not Matter</option>
-																	<option value="1">Skinny</option>
-																	<option value="2">Slim</option>
-																	<option value="3">Average</option>
-																	<option value="4">Large</option>
-																	<option value="5">Extra Large</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-											</div>
-
-											<div class="form-category">
-												<h4>Your Ideal Partner's Social Habits</h3>
-													<hr>
-
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Does your ideal partner drink?</label>
-																<select name="drink" id="drink2" class="form-control" required>
-																	<option value="Does Not Matter" selected="selected">Does Not Matter</option>
-																	<option value="1">Yes</option>
-																	<option value="2">Socially</option>
-																	<option value="3">No</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Does your ideal partner smoke?</label>
-																<select name="smoke" id="smoke2" class="form-control" required>
-																	<option value="Does Not Matter" selected>Does Not Matter</option>
-																	<option value="1">Yes</option>
-																	<option value="2">Socially</option>
-																	<option value="3">No</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-											</div>
-
-											<div class="form-category">
-												<h4>Your Ideal Partner's Personality</h3>
-													<hr>
-
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-8">
-
-																<label class="control-label"><strong>Openness *</strong> - How open minded do you want your partner to be?</label>
-															</div>
-															<div class="col-md-4">
-																<select name="openness" id="openness2" class="form-control" required>
-																	<option value="Does Not Matter" selected="selected">Does Not Matter</option>
-																	<option value="1">Not really</option>
-																	<option value="2">Moderately</option>
-																	<option value="3">Very Open</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-8">
-
-																<label class="control-label"><strong>Conscientiousness *</strong> - How diligent and careful do you want your partner to be?</label>
-															</div>
-															<div class="col-md-4">
-																<select name="conscientiousness" id="conscientiousness2" class="form-control" required>
-																	<option value="Does Not Matter" selected="selected">Does Not Matter</option>
-																	<option value="1">Careless</option>
-																	<option value="2">Moderately Diligent</option>
-																	<option value="3">Very Careful/Diligent</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-8">
-
-																<label class="control-label"><strong>Extraversion *</strong> - How socially outgoing do you want your partner to be?</label>
-															</div>
-															<div class="col-md-4">
-																<select name="extraversion" id="extraversion2" class="form-control" required>
-																	<option value="Does Not Matter" selected="selected">Does Not Matter</option>
-																	<option value="1">Reserved</option>
-																	<option value="2">Moderately Outgoing</option>
-																	<option value="3">Very Outgoing</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-8">
-
-																<label class="control-label"><strong>Agreeableness *</strong> - How friendly or tactful do you want your partner to be?</label>
-															</div>
-															<div class="col-md-4">
-																<select name="agreeableness" id="agreeableness2" class="form-control" required>
-																	<option value="Does Not Matter" selected="selected">Does Not Matter</option>
-																	<option value="1">Detatched</option>
-																	<option value="2">Challenging</option>
-																	<option value="3">Friendly</option>
-																	<option value="4">Compassionate</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-8">
-
-																<label class="control-label"><strong>Neurotism *</strong> <span>- How emotionally sensitive do you want your partner to be?</span></label>
-															</div>
-															<div class="col-md-4">
-																<select name="neurotism" id="neurotism2" class="form-control" required>
-																	<option value="Does Not Matter" selected="selected">Does Not Matter</option>
-																	<option value="1">Cold and Distant</option>
-																	<option value="2">Moderately Sensitive</option>
-																	<option value="3">Very Sensitive</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-
-											</div>
-
-											<div class="form-category">
-												<h4>Choose Your Dealbreakers.</h3>
-													<span>These are two features that you absolutely will not compromise on. If these conditions are not exactly what you want, the potential partner will not be considered.</span>
-													<hr>
-
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">First Dealbreaker</label>
-																<select name="dealbreaker1" id="dealbreaker1" class="form-control">
-																	<option value="No Dealbreaker" selected="selected">No Dealbreaker</option>
-																	<option value="residence-state">State of Residence</option>
-																	<option value="origin-state">State of Origin</option>
-																	<option value="religion">Religion</option>
-																	<option value="denomination">Denomination</option>
-																	<option value="marital-status">Marital Status</option>
-																	<option value="children">Children</option>
-																	<option value="blood-group">Blood Group</option>
-																	<option value="genotype">Genotype</option>
-																	<option value="body-size">Body Size</option>
-																	<option value="drink">Drinks</option>
-																	<option value="smoke">Smokes</option>
-																</select>
-															</div>
-														</div>
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Second Dealbreaker</label>
-																<select name="dealbreaker2" id="dealbreaker2" class="form-control">
-																	<option value="No Dealbreaker" selected="selected">No Dealbreaker</option>
-																</select>
-															</div>
-														</div>
-													</div>
-
-											</div>
-
-
-										</div>
-										</form>
-										<form></form>
-
-										<div class="tab">
-
-											A bunch of lorem ipsums go here. rules and instructions and stuff, before client can submit form and make payment.
-
-
 										</div>
 
-										<div style="overflow:auto;">
-											<div style="float:right;">
-												<button type="button" id="prevBtn" onclick="nextPrev(-1);topFunction()">Previous</button>
-												<button type="button" id="nextBtn" onclick="nextPrev(1);topFunction()">Next</button>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Your Denomination</label>
+												<select name="denomination" id="denomination2" class="form-control"
+													required>
+												</select>
 											</div>
 										</div>
-										<!-- Circles which indicates the steps of the form: -->
-										<div style="text-align:center;margin-top:40px;">
-											<span class="step"></span>
-											<span class="step"></span>
-											<span class="step"></span>
-										</div>
-									
+									</div>
+							</div>
 
-								</div>
+							<div class="form-category">
+								<h4>Your Ideal Partner's Physique</h3>
+									<hr>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Complexion</label>
+												<select name="complexion" id="complexion2" class="form-control"
+													required>
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">Albino</option>
+													<option value="2">Light Skinned</option>
+													<option value="3">Normal Brown</option>
+													<option value="4">Dark Brown</option>
+													<option value="5">Deep Brown</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Height</label>
+												<select name="height" id="height2" class="form-control" required>
+													<option value="Does Not Matter" selected>Does Not Matter</option>
+													<option value="1">Really Short</option>
+													<option value="2">Short</option>
+													<option value="3">Average</option>
+													<option value="4">Tall</option>
+													<option value="5">Really Tall</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Body Shape</label>
+												<select name="body-shape" id="body-shape2" class="form-control"
+													required>
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">Straight</option>
+													<option value="2">Pear</option>
+													<option value="3">Apple</option>
+													<option value="4">Hourglass</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Body Type</label>
+												<select name="body-type" id="body-type2" class="form-control" required>
+													<option value="Does Not Matter" selected>Does Not Matter</option>
+													<option value="1">Ectomorphic</option>
+													<option value="2">Mesomorphic</option>
+													<option value="3">Endomorphic</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Body Size</label>
+												<select name="body-size" id="body-size2" class="form-control" required>
+													<option value="Does Not Matter" selected>Does Not Matter</option>
+													<option value="1">Skinny</option>
+													<option value="2">Slim</option>
+													<option value="3">Average</option>
+													<option value="4">Large</option>
+													<option value="5">Extra Large</option>
+												</select>
+											</div>
+										</div>
+									</div>
 
 							</div>
 
+							<div class="form-category">
+								<h4>Your Ideal Partner's Social Habits</h3>
+									<hr>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Does your ideal partner drink?</label>
+												<select name="drink" id="drink2" class="form-control" required>
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">Yes</option>
+													<option value="2">Socially</option>
+													<option value="3">No</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Does your ideal partner smoke?</label>
+												<select name="smoke" id="smoke2" class="form-control" required>
+													<option value="Does Not Matter" selected>Does Not Matter</option>
+													<option value="1">Yes</option>
+													<option value="2">Socially</option>
+													<option value="3">No</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+							</div>
+
+							<div class="form-category">
+								<h4>Your Ideal Partner's Personality</h3>
+									<hr>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+
+												<label class="control-label"><strong>Openness *</strong> - How open
+													minded do you want your partner to be?</label>
+											</div>
+											<div class="col-md-4">
+												<select name="openness" id="openness2" class="form-control" required>
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">Not really</option>
+													<option value="2">Moderately</option>
+													<option value="3">Very Open</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+
+												<label class="control-label"><strong>Conscientiousness *</strong> - How
+													diligent and careful do you want your partner to be?</label>
+											</div>
+											<div class="col-md-4">
+												<select name="conscientiousness" id="conscientiousness2"
+													class="form-control" required>
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">Careless</option>
+													<option value="2">Moderately Diligent</option>
+													<option value="3">Very Careful/Diligent</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+
+												<label class="control-label"><strong>Extraversion *</strong> - How
+													socially outgoing do you want your partner to be?</label>
+											</div>
+											<div class="col-md-4">
+												<select name="extraversion" id="extraversion2" class="form-control"
+													required>
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">Reserved</option>
+													<option value="2">Moderately Outgoing</option>
+													<option value="3">Very Outgoing</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+
+												<label class="control-label"><strong>Agreeableness *</strong> - How
+													friendly or tactful do you want your partner to be?</label>
+											</div>
+											<div class="col-md-4">
+												<select name="agreeableness" id="agreeableness2" class="form-control"
+													required>
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">Detatched</option>
+													<option value="2">Challenging</option>
+													<option value="3">Friendly</option>
+													<option value="4">Compassionate</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+
+												<label class="control-label"><strong>Neurotism *</strong> <span>- How
+														emotionally sensitive do you want your partner to
+														be?</span></label>
+											</div>
+											<div class="col-md-4">
+												<select name="neurotism" id="neurotism2" class="form-control" required>
+													<option value="Does Not Matter" selected="selected">Does Not Matter
+													</option>
+													<option value="1">Cold and Distant</option>
+													<option value="2">Moderately Sensitive</option>
+													<option value="3">Very Sensitive</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+
+							</div>
+
+							<div class="form-category">
+								<h4>Choose Your Dealbreakers.</h3>
+									<span>These are two features that you absolutely will not compromise on. If these
+										conditions are not exactly what you want, the potential partner will not be
+										considered.</span>
+									<hr>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">First Dealbreaker</label>
+												<select name="dealbreaker1" id="dealbreaker1" class="form-control">
+													<option value="No Dealbreaker" selected="selected">No Dealbreaker
+													</option>
+													<option value="residence-state">State of Residence</option>
+													<option value="origin-state">State of Origin</option>
+													<option value="religion">Religion</option>
+													<option value="denomination">Denomination</option>
+													<option value="marital-status">Marital Status</option>
+													<option value="children">Children</option>
+													<option value="blood-group">Blood Group</option>
+													<option value="genotype">Genotype</option>
+													<option value="body-size">Body Size</option>
+													<option value="drink">Drinks</option>
+													<option value="smoke">Smokes</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Second Dealbreaker</label>
+												<select name="dealbreaker2" id="dealbreaker2" class="form-control">
+													<option value="No Dealbreaker" selected="selected">No Dealbreaker
+													</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+							</div>
+
+
+						</div>
+					</form>
+					<form></form>
+
+					<div class="tab">
+						<form>
+							<h2 style="margin-bottom: 3px; color:#fff;">Online Dating Safety</h2>
+							<p style="color:#fff;">The DateFix guide to staying safe online <br>…and the effective use
+								of the provided <strong>jilt</strong> button</p>
+						</form>
+						<div class="form-category">
+
+							<p>While the majority of our members are sincere and honest in the information they provide,
+								as
+								always exceptions do exist. To counteract this, DateFix employs a team of agents whose
+								main
+								task is to check and verify each and every profile created on our site. Every partner
+								proposal you receive has been checked by a human and verified. This process removes the
+								majority of these rogue accounts. In recognition of the sophistication of modern day
+								scammers, here are six additional tips on how you can confirm the authenticity of a
+								profile
+								and protect yourself against fraud.</p>
 						</div>
 
-						<div class="w-100 line d-block d-md-none"></div>
+						<div class="form-category">
+							<h4>1. Question unrealistic information</h4>
+							<hr>
+							<p>If your match is a 22 year old local government chairman, or you come across a banker who
+								claims that money is not important in their life, then it is completely acceptable for
+								you
+								to be skeptical. It is best to avoid contact if you doubt the information provided on a
+								profile is legitimate.</p>
+						</div>
+
+						<div class="form-category">
+							<h4>2. Be mindful of your personal information</h4>
+							<hr>
+							<p>It is natural to be excited and curious about someone we have met over the internet. We
+								want to learn all we can about them and might prefer to call them as soon as possible to
+								hear the sympathetic voice behind the emails. </p>
+							<p>Before giving out ANY personal information such as your phone number or email address, it
+								is worth reflecting upon the fact that you cannot take this information back. We
+								therefore ask strongly that you keep as much personal information safe, not revealing
+								pictures, phone numbers or addresses before the 6 days specified on the platform. </p>
+							<p>DateFix is designed with security in mind, and we are always monitoring suspicious users’
+								activities and will alert you accordingly. Because of this, communicating via our
+								platform is often the safest way to proceed until you get to know the individual in
+								person.</p>
+						</div>
+
+						<div class="form-category">
+							<h4>3. Financial requests</h4>
+							<hr>
+							<p>If, your match requests for you to either make or receive any form of financial payment,
+								jilt the match immediately and report the profile to customer care. This is one of the
+								strongest indicators of a fraudulent account, and it often only becomes apparent after
+								initial contact has been made.</p>
+						</div>
+
+						<div class="form-category">
+							<h4>4. Don't Rush</h4>
+							<hr>
+							<p>It is important that you feel comfortable when making the decision to deepen your
+								relationship with a match. Do not let yourself be pressured into meeting someone you are
+								unsure of. It is important to explain this to your match, and if they do not take your
+								wishes into account, it is best to jilt them.</p>
+						</div>
+
+						<div class="form-category">
+							<h4>5. Plan a safe meeting</h4>
+							<hr>
+							<p>Your first meeting is something to be excited about! It is one of the many steps in the
+								process of getting to know your future partner. Even if you feel you have become closer
+								to them via email and phone, you should still remember that this person is still largely
+								a stranger to you. Therefore it is important that you take the following points into
+								consideration:</p>
+							<p>a) Choose a neutral location, such as a coffee shop or a restaurant. Do not go to their
+								house, or invite them to yours for the first date.<br>
+								b) Tell your friends or someone you trust that you are going on a date and with
+								whom.<br>
+								c) Try not to drink too much alcohol.<br>
+								d) Do not leave your personal belongings unattended.</p>
+						</div>
+
+						<div class="form-category">
+							<h4>6. Share your thoughts</h4>
+							<hr>
+							<p>In order to guarantee the authenticity of your recommended matches, we need your help.
+								Email our customer care department  if you suspect any profile contains false
+								information or is behaving in a fraudulent manner. We wish you all the best in your
+								search for a partner and would like you to remain safe while doing so.</p>
+						</div>
 
 					</div>
+
+					<!-- <div style="overflow:auto;">
+						<div style="float:right;">
+							<button type="button" id="prevBtn" onclick="nextPrev(-1);topFunction()">Previous</button>
+							<button type="button" id="nextBtn" onclick="nextPrev(1);topFunction()">Next</button>
+						</div>
+					</div> -->
+
+					<div class="center topmargin" data-easing="easeInOutExpo" data-speed="1500">
+						<a type="button" id="prevBtn" onclick="nextPrev(-1);topFunction()"
+							class="button button-rounded button-reveal button-xlarge button-white button-light tright"><i
+								class="icon-arrow-alt-circle-left"></i><span>Previous</span></a>
+						<a type="button" id="nextBtn" onclick="nextPrev(1);topFunction()"
+							class="button button-rounded button-reveal button-xlarge button-yellow button-light"><i
+								class="icon-arrow-alt-circle-right"></i><span>Next</span></a>
+						<a type="button" id="submitBtn"
+							class="button button-rounded button-reveal button-xlarge button-yellow button-light"><i
+								class="icon-check-circle"></i><span>Submit</span></a>
+					</div>
+					<!-- Circles which indicates the steps of the form: -->
+					<div style="text-align:center;margin-top:40px;">
+						<span class="step"></span>
+						<span class="step"></span>
+						<span class="step"></span>
+					</div>
+
 
 				</div>
 
 			</div>
 
-		</section><!-- #content end -->
+			<div class="w-100 line d-block d-md-none"></div>
 
-		<!-- Footer
+		</div>
+
+	</div>
+
+</section><!-- #content end -->
+
+<!-- Footer
 		============================================= -->
-		{% include "footer.html" %}
-		<!-- #footer end -->
+{% include "footer.html" %}
+<!-- #footer end -->
 
 {% endblock content %}
 {% block script %}
 
 <script src={% static 'js/components/rangeslider.min.js' %}></script>
 <script src={% static 'js/components/moment.js' %}></script>
+<script src={% static 'js/jquery.nicescroll.js' %}></script>
 
-{% endblock script %} 
-		
+
+<script>
+	$(document).ready(function () {
+
+		// $("body").niceScroll({
+		// 	cursorcolor: "rgba(238,67,140,0.5)",
+		// 	cursorwidth: "15px",
+		// 	cursorborder: "0px solid #fff",
+		// });
+
+		// $("select").select2();
+
+		$('select').select2()
+			.on("select2:open", function () {
+				$('.select2-results__options').niceScroll({
+					cursorcolor: "rgba(238,67,140,0.5)",
+					cursorwidth: "8px",
+					cursorborder: "0px solid #5fdfe8",
+				});
+			});
+	});
+</script>
+
+
+{% endblock script %}
