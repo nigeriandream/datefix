@@ -21,6 +21,7 @@ class User(AbstractUser):
     dating = models.BooleanField(default=False)
     payed = models.BooleanField(default=False)
     min_score = models.DecimalField(max_digits=5, decimal_places=2, default=None, null=True)
+    verified = models.BooleanField(default=False)
     
     def successful_list(self):
         if self.successful_matches is None or self.successful_matches == '':

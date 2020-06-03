@@ -6,6 +6,8 @@ from .algorithms import get_username, match_user
 from Chat.algorithms import in_my_chat, create_private_key
 from Chat.models import Chat_Thread
 import datetime
+from django.core.mail import send_mail
+
 # Create your views here.
 
 
@@ -16,10 +18,33 @@ def login(request):
         if email and password:
             user = auth.authenticate(request, username=email, password=password)
             if user is None:
-                return redirect('signup')
-            else:
+                return redirect('not_found')
+            if user is not None and user.verified == True :
                 auth.login(request, user)
                 return redirect('dashboard')
+
+            if user is not None and user.verified  == False:
+                if 'verified' in request.session and request.session['email'] == email:
+                    del request.session['verified'], request.session['email']
+                    user.verified = True
+                    user.save()
+                    auth.login(request, user)
+                    return redirect('dashboard')
+
+                request.session['code'] = request.POST['csrfmiddlewaretoken']
+                link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}?email={email}'
+                message = f'''
+                Dear {user.first_name}, \n We are excited to have you on Datefix. Below is the link to verify your email address, click on this link to continue.\n
+                \n {link} \n
+
+                If you have no account with Datefix, please ignore.
+
+                Cheers,
+                Datefix Team.
+                '''
+                send_mail('Email Verification', message, 'admin@datefix.me', email)
+                return redirect('verification')
+
     elif request.method == 'GET':
         if request.user.is_authenticated:
             return redirect('dashboard')
@@ -35,22 +60,34 @@ def results(request):
     if request.method == 'POST':
         selected = request.POST['matches']
         success = user.successful_list()
-        success = [x for x in success if x[0][1] not in selected]
-        user.successful_matches = json.dumps(success)
-        user.matches = json.dumps(selected)
-        user.save()
         for i in selected:
+            if User.objects.get(id=int(i)).complete_match():
+                continue      
+            success = [x for x in success if x[0][1] != i]
+            user.successful_matches = json.dumps(success)
+            user.matches = json.dumps(selected)
+            user.save()
             chat = Chat_Thread()
             chat.first_user = user
             chat.second_user = User.objects.get(id=int(i))
             chat.secret = create_private_key()
             chat.date_created = datetime.datetime.now()
             chat.save()
-        return redirect('chatroom')
+            selected.remove(i)
+            
+            return redirect('chatroom')
+        if len(selected) > 0:
+            match_comp = [x[1][1] for x in success if x[0][1] in selected]
+            verb = 'has'
+            if len(selected) > 1:
+                verb = 'have'
+            request.session['message'] = f'{"and ".join(match_comp)} {verb} complete matches, so choose another.'
+            request.session['staus'] = 'info'
+            return redirect('results')
+        return redirect('chatroom')    
 
+        
 
-def forgotpassword(request):
-    return render(request, 'Account/forgotpassword.html')
 
 
 def signup(request):
@@ -101,6 +138,7 @@ def matching(request):
             match_user(user)
             return redirect('results')
     return redirect('dashboard')
+
 
 
 def adjust_min(request):
@@ -180,3 +218,23 @@ def get_data(request, type_):
             return HttpResponse('success')
 
         return HttpResponse('fail')
+
+def verified(request):
+    return render(request, 'Account/account-verified.html')
+
+def verify(request):
+    if request.method == 'GET' and 'code' in request.session:
+        if request.session['code'] == request.GET['code']:
+            del request.session['code']
+            request.session['verified'] = True
+            request.session['email'] = request.GET['email']
+            return redirect('verification')
+    return redirect('login')
+
+def not_found(request):
+    return render(request, 'Account/account-not-found.html')
+
+
+def verification(request):
+    return render(request, 'Account/verification-link-sent.html')
+

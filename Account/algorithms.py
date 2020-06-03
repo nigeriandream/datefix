@@ -3,6 +3,9 @@ import random
 import json
 
 
+def get_path(request):
+    return f'http://{str(request.get_host())}{str(request.get_full_path(True))}'
+
 
 
 def _3_point(yourChoice, maximum, Choice):
