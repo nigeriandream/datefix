@@ -9,7 +9,7 @@
 {% endblock css %}
 
 {% block title %}
-	Dashboard
+	Setup Session
 {% endblock title %}
 
 {% block content %}
@@ -80,40 +80,54 @@
 				</ol>
 			</div>
 <style>
-	h4 {
-		font-size: 2em;
-		line-height: 110%;
-	}
+		h4 {
+			font-size: 2em;
+			line-height: 110%;
+		}
 
-	label {
-		font-size: 1rem;
-		color: #777;
-	}
+		.select2-container--default .select2-search--dropdown .select2-search__field {
+			border: 1px solid #aaa;
+			border-radius: 4px;
+		}
 
-	.irs--flat .irs-bar {
-		background-color: #ef478e;
-	}
+		.button.button-xlarge {
+			display: inline-block;
+		}
 
-	.irs--flat .irs-handle>i:first-child {
-		width: 8px;
-		margin-left: -7px;
-		background-color: #7e50f8 !important;
-	}
+		.form-category h4 {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+			font-weight: 400;
+		}
 
-	.irs--flat .irs-from,
-	.irs--flat .irs-to,
-	.irs--flat .irs-single {
-		background-color: #7e50f8;
-		padding: 1px 6px;
-		font-size: 12px;
-	}
+		label {
+			font-size: 1rem;
+			color: #777;
+		}
 
-	.irs--flat .irs-from:before,
-	.irs--flat .irs-to:before,
-	.irs--flat .irs-single:before {
-		border-top-color: #7e50f8;
-	}
-</style>
+		.irs--flat .irs-bar {
+			background-color: #ef478e;
+		}
+
+		.irs--flat .irs-handle>i:first-child {
+			width: 8px;
+			margin-left: -7px;
+			background-color: #7e50f8 !important;
+		}
+
+		.irs--flat .irs-from,
+		.irs--flat .irs-to,
+		.irs--flat .irs-single {
+			background-color: #7e50f8;
+			padding: 1px 6px;
+			font-size: 12px;
+		}
+
+		.irs--flat .irs-from:before,
+		.irs--flat .irs-to:before,
+		.irs--flat .irs-single:before {
+			border-top-color: #7e50f8;
+		}
+	</style>
 		</section><!-- #page-title end -->
 
 		<!-- Content
@@ -333,9 +347,9 @@
 															<div class="form-group">
 																<label class="control-label">Your Age</label>
 																{% if age %}
-																	<input type="number" min="21" disabled name="age" id="age1" class="form-control" value={{age}}>
+																	<input type="number" min="21" disabled name="age" id="age1" class="range_01" value={{age}}>
 																{% else %}
-																	<input type="number" min="21" name="age" id="age1" class="form-control" value="21">
+																	<input type="number" min="21" name="age" id="age1" class="range_01" value="21">
 																{% endif %}
 																
 															</div>
@@ -400,7 +414,7 @@
 												<h4>Your Body & Soul</h3>
 													<hr>
 													<div class="row">
-														<div class="col-md-6">
+														<div class="col-md-3">
 															<div class="form-group">
 																<label class="control-label">Your Blood Group</label>
 																<select name="blood_group" id="blood-group1" class="form-control" {% if blood_group %} disabled{% endif %}>
@@ -416,6 +430,20 @@
 															</div>
 														</div>
 
+													<div class="col-md-3">
+														<div class="form-group">
+															<label class="control-label"> Your Rhesus Factor</label>
+															<select name="rhesus_factor" id="rhesus-factor1" class="form-control" {% if rhesus_factor %} disabled{% endif %}>
+																{% if not rhesus_factor %} 
+																	<option value="" selected="selected" disabled></option
+																{% endif %}
+																>
+																<option value="1" {% if rhesus_factor == 1 %} selected {% endif %}>Positive (+)</option>
+																<option value="2" {% if rhesus_factor == 2 %} selected {% endif %}>Negative (-)</option>
+															</select>
+														</div>
+													</div>
+
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label">Your Genotype</label>
@@ -427,6 +455,8 @@
 																	<option value="1" {% if genotype == 1 %} selected{% endif %}>AA</option>
 																	<option value="2" {% if genotype == 2 %} selected{% endif %}>AS</option>
 																	<option value="3" {% if genotype == 3 %} selected{% endif %}>SS</option>
+																	<option value="4" {% if genotype == 4 %} selected{% endif %}>SC</option>
+																	<option value="5" {% if genotype == 5 %} selected{% endif %}>CC</option>
 																</select>
 															</div>
 														</div>
@@ -871,23 +901,23 @@
 															</div>
 														</div>
 													</div>
-													<div class="row">
+													<div class="row" style="display:block">
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label">Your Ideal Partner's Minimum Age</label>
-																<input type="number" min="21" name="min-age" id="age2" value="21" class="form-control">
+																<input type="number" min="21" name="min-age" id="age2" value="21"
+																	class="form-control">
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label">Your Ideal Partner's Maximum Age</label>
-																<input type="number" min="22" name="max-age" id="age3" value="99" class="form-control">
+																<input type="number" min="22" name="max-age" id="age3" value="99"
+																	class="form-control">
 															</div>
 														</div>
-
-													</div>
-											</div>
-
+													</div>										
+												</div>
 											<div class="form-category">
 												<h4>Your Ideal Partner's Education & Work</h3>
 													<hr>
@@ -932,7 +962,7 @@
 												<h4>Your Ideal Partner's Body & Soul</h3>
 													<hr>
 													<div class="row">
-														<div class="col-md-6">
+														<div class="col-md-3">
 															<div class="form-group">
 																<label class="control-label">Blood Group</label>
 																<select name="blood_group" id="blood-group2" class="form-control">
@@ -945,6 +975,18 @@
 															</div>
 														</div>
 
+														<div class="col-md-3">
+															<div class="form-group">
+																<label class="control-label">Rhesus Factor</label>
+																<select name="rhesus_factor" id="rhesus-factor2" class="form-control">
+																	<option value="Does Not Matter" disabled selected="selected">Does Not Matter
+																	</option>
+																	<option value="1">Positive (+)</option>
+																	<option value="2">Negative (-)</option>
+																</select>
+															</div>
+														</div>
+
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label">Your Ideal Partner's Genotype</label>
@@ -952,6 +994,7 @@
 																	<option value="Does Not Matter" selected>Does Not Matter</option>
 																	<option value="1">AA Only</option>
 																	<option value="2">AA or AS</option>
+																	<option value="3">AA, AS, SC, CC, or SS</option>
 																</select>
 															</div>
 														</div>
@@ -1231,18 +1274,23 @@
 
 										</div>
 
-										<div style="overflow:auto;">
-											<div style="float:right;">
-												<button type="button" id="prevBtn" onclick="nextPrev(-1);topFunction()">Previous</button>
-												<button type="button" id="nextBtn" onclick="nextPrev(1);topFunction()">Next</button>
-											</div>
-										</div>
-										<!-- Circles which indicates the steps of the form: -->
-										<div style="text-align:center;margin-top:40px;">
-											<span class="step"></span>
-											<span class="step"></span>
-											<span class="step"></span>
-										</div>
+										<div class="center topmargin" data-easing="easeInOutExpo" data-speed="1500">
+						<a type="button" id="prevBtn" onclick="nextPrev(-1);topFunction()"
+							class="button button-rounded button-reveal button-xlarge button-white button-light tright"><i
+								class="icon-arrow-alt-circle-left"></i><span>Previous</span></a>
+						<a type="button" id="nextBtn" onclick="nextPrev(1);topFunction()"
+							class="button button-rounded button-reveal button-xlarge button-yellow button-light"><i
+								class="icon-arrow-alt-circle-right"></i><span>Next</span></a>
+						<a type="button" id="submitBtn"
+							class="button button-rounded button-reveal button-xlarge button-yellow button-light"><i
+								class="icon-check-circle"></i><span>Submit</span></a>
+					</div>
+					<!-- Circles which indicates the steps of the form: -->
+					<div style="text-align:center;margin-top:40px;">
+						<span class="step"></span>
+						<span class="step"></span>
+						<span class="step"></span>
+					</div>
 									
 
 								</div>

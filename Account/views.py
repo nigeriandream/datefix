@@ -19,31 +19,31 @@ def login(request):
             user = auth.authenticate(request, username=email, password=password)
             if user is None:
                 return redirect('not_found')
-            if user is not None and user.verified == True :
+            if user is not None :
                 auth.login(request, user)
                 return redirect('dashboard')
 
-            if user is not None and user.verified  == False:
-                if 'verified' in request.session and request.session['email'] == email:
-                    del request.session['verified'], request.session['email']
-                    user.verified = True
-                    user.save()
-                    auth.login(request, user)
-                    return redirect('dashboard')
+            # if user is not None and user.verified  == False:
+            #     if 'verified' in request.session and request.session['email'] == email:
+            #         del request.session['verified'], request.session['email']
+            #         user.verified = True
+            #         user.save()
+            #         auth.login(request, user)
+            #         return redirect('dashboard')
 
-                request.session['code'] = request.POST['csrfmiddlewaretoken']
-                link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}?email={email}'
-                message = f'''
-                Dear {user.first_name}, \n We are excited to have you on Datefix. Below is the link to verify your email address, click on this link to continue.\n
-                \n {link} \n
+            #     request.session['code'] = request.POST['csrfmiddlewaretoken']
+            #     link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}?email={email}'
+            #     message = f'''
+            #     Dear {user.first_name}, \n We are excited to have you on Datefix. Below is the link to verify your email address, click on this link to continue.\n
+            #     \n {link} \n
 
-                If you have no account with Datefix, please ignore.
+            #     If you have no account with Datefix, please ignore.
 
-                Cheers,
-                Datefix Team.
-                '''
-                send_mail('Email Verification', message, 'admin@datefix.me', email)
-                return redirect('verification')
+            #     Cheers,
+            #     Datefix Team.
+            #     '''
+            #     send_mail('Email Verification', message, 'admin@datefix.me', [email])
+            #     return redirect('verification')
 
     elif request.method == 'GET':
         if request.user.is_authenticated:
