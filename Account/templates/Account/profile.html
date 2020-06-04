@@ -1319,6 +1319,30 @@
 
 <script src={% static 'js/components/rangeslider.min.js' %}></script>
 <script src={% static 'js/components/moment.js' %}></script>
+<script src={% static 'js/jquery.nicescroll.js' %}></script>
 
-{% endblock script %} 
-		
+
+<script>
+	$(document).ready(function () {
+
+		// $("body").niceScroll({
+		// 	cursorcolor: "rgba(238,67,140,0.5)",
+		// 	cursorwidth: "15px",
+		// 	cursorborder: "0px solid #fff",
+		// });
+
+		// $("select").select2();
+
+		$('select').select2()
+			.on("select2:open", function () {
+				$('.select2-results__options').niceScroll({
+					cursorcolor: "rgba(238,67,140,0.5)",
+					cursorwidth: "8px",
+					cursorborder: "0px solid #5fdfe8",
+				});
+			});
+	});
+</script>
+
+
+{% endblock script %}
