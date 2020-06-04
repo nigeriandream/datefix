@@ -11,13 +11,13 @@ def about(request):
     return render(request, 'about.html')
 
 
-# def handler404(request):
-#     return render(request, '404.html', status=404)
+def handler404(request):
+    return render(request, '404.html', status=404)
 
 
-# def handler500(request):
-#     return render(request, '404.html', status=500)
+def handler500(request):
+    return render(request, '404.html', status=500)
 
 
-# def handler403(request):
-#     return render(request, '404.html', status=403)
+def handler403(request):
+    return render(request, '404.html', status=403)
