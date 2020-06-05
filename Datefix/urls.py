@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.conf.urls import handler404, handler500, handler403
 from django.contrib.auth.views import LogoutView
 from django.conf import settings
-from .views import home, about, handler404_, handler400_, handler500_
+from .views import home, about, handler404_, handler403_, handler500_
 
 urlpatterns = [
     path('admin/', admin.site.urls),
