@@ -81,7 +81,7 @@ $(function () {
 
 });
 
-const url = 'ws://127.0.0.1:8000/chat/'
+const url = window.location.href.replace('http', 'ws')
 const socket = new WebSocket(url)
 socket.onclose = (e)=>{
   console.log('WebSocket Disconnected', e)
