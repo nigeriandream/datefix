@@ -1453,7 +1453,9 @@ body.top-search-open .dark #header-wrap:not(.not-dark) #top-search a,
 
 #footer.dark,
 .dark #footer {
-	background-color: #333;
+	background: url(../images/page/footer-bg.jpg);
+	background-attachment: fixed;
+	background-size: cover;
 	color: #ccc;
 	border-top-color: rgba(0, 0, 0, 0.2);
 }

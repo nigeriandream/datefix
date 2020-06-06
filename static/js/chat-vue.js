@@ -3,7 +3,6 @@ var app = new Vue({
   el: "#app",
   name: "chat",
   data: {
-    message: "Hello Vue!",
     messages: [
       {
         message: "Nulla consequat massa quis enim. Donec pede juso, fringilla vell...",
@@ -51,10 +50,61 @@ var app = new Vue({
         timeSend: 10008,
       },
     ],
+    chat_threads: [],
+    chat_messages: [],
+  },
+  async mounted() {
+    await this.getAllChats();
+    await this.getSingleChat();
+    await this.websocket();
+    // console.log(window.location.pathname.split("/", 3));
   },
   methods: {
-    greet: function (name) {
-      console.log("Hello from " + name + "!");
+    async getAllChats() {
+      // let user_id = this.$route.params.id;
+      try {
+        await fetch(`/chat/api/threads/1`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("data>>>", data);
+            this.chat_threads = data.chat_threads;
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getSingleChat() {
+      // let user_id = this.$route.params.id;
+      try {
+        await fetch(`/chat/api/chat/1`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("data>>>", data);
+            this.chat_messages = data.chat_messages;
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async websocket() {
+      const url = "ws://127.0.0.1:8000/chat/";
+      const socket = new WebSocket(url);
+      socket.onclose = (e) => {
+        console.log("WebSocket Disconnected", e);
+      };
+
+      socket.onopen = (e) => {
+        console.log("WebSocket Connected", e);
+        socket.send(JSON.stringify({ chat_id: 1, username: "Louisane", function: "connect" }));
+      };
+
+      socket.onerror = (e) => {
+        console.log("WebSocket Error", e);
+      };
+
+      socket.onmessage = (e) => {
+        console.log("WebSocket received message", e);
+      };
     },
   },
 });
