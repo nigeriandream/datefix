@@ -6,6 +6,8 @@ from .algorithms import get_username, match_user
 from Chat.algorithms import in_my_chat, create_private_key
 from Chat.models import Chat_Thread
 import datetime
+from django.core.mail import send_mail
+
 # Create your views here.
 
 
@@ -16,10 +18,33 @@ def login(request):
         if email and password:
             user = auth.authenticate(request, username=email, password=password)
             if user is None:
-                return redirect('signup')
-            else:
+                return redirect('not_found')
+            if user is not None :
                 auth.login(request, user)
                 return redirect('dashboard')
+
+            # if user is not None and user.verified  == False:
+            #     if 'verified' in request.session and request.session['email'] == email:
+            #         del request.session['verified'], request.session['email']
+            #         user.verified = True
+            #         user.save()
+            #         auth.login(request, user)
+            #         return redirect('dashboard')
+
+            #     request.session['code'] = request.POST['csrfmiddlewaretoken']
+            #     link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}?email={email}'
+            #     message = f'''
+            #     Dear {user.first_name}, \n We are excited to have you on Datefix. Below is the link to verify your email address, click on this link to continue.\n
+            #     \n {link} \n
+
+            #     If you have no account with Datefix, please ignore.
+
+            #     Cheers,
+            #     Datefix Team.
+            #     '''
+            #     send_mail('Email Verification', message, 'admin@datefix.me', [email])
+            #     return redirect('verification')
+
     elif request.method == 'GET':
         if request.user.is_authenticated:
             return redirect('dashboard')
@@ -29,28 +54,40 @@ def login(request):
 def results(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
-        return render(request, 'Account/results.html', {'matches': user.successful_list()})
+        matches = user.successful_list()
+        select = [[x[0][0], x[1][1]] for x in matches]
+        return render(request, 'Account/results.html', {'matches': matches, "select": select, "matches_length": len(matches)})
     if request.method == 'POST':
         selected = request.POST['matches']
         success = user.successful_list()
-        success = [x for x in success if x['id'] not in selected]
-        user.successful_matches = '///'.join(success)
-        user.matches = ','.join(selected)
-        user.save()
         for i in selected:
+            if User.objects.get(id=int(i)).complete_match():
+                continue      
+            success = [x for x in success if x[0][1] != i]
+            user.successful_matches = json.dumps(success)
+            user.matches = json.dumps(selected)
+            user.save()
             chat = Chat_Thread()
             chat.first_user = user
             chat.second_user = User.objects.get(id=int(i))
             chat.secret = create_private_key()
             chat.date_created = datetime.datetime.now()
             chat.save()
-        return redirect('chatroom')
+            selected.remove(i)
+            
+            return redirect('chatroom')
+        if len(selected) > 0:
+            match_comp = [x[1][1] for x in success if x[0][1] in selected]
+            verb = 'has'
+            if len(selected) > 1:
+                verb = 'have'
+            request.session['message'] = f'{"and ".join(match_comp)} {verb} complete matches, so choose another.'
+            request.session['staus'] = 'info'
+            return redirect('results')
+        return redirect('chatroom')    
 
+        
 
-
-
-def forgotpassword(request):
-    return render(request, 'Account/forgotpassword.html')
 
 
 def signup(request):
@@ -76,23 +113,22 @@ def signup(request):
 
 
 def dashboard(request):
-    # if request.method == 'GET':
-    #     if request.user.is_authenticated:
-    #         user = User.objects.get(id=request.user.id)
-    #         user_details = user.user_data_()
-    #         choice_details = user.choice_data_()
-    #         matches = [User.objects.get(id=int(x)) for x in user.matches_()]
-    #         accepted = [i.id for i in matches if in_my_chat(user, i) is True]
-    #         notifications = user.notifications()
-    #         return render(request, 'Account/profile.html', {'user': user, 'user_details': user_details,
-    #                                                           'choice_details': choice_details,
-    #                                                           'matches': matches,
-    #                                                           'notifications': notifications,
-    #                                                           'new_notification': user.new_notifications(),
-    #                                                           'accepted': accepted})
-    #     else:
-    #         return redirect('login')
-    return render(request, 'Account/profile.html')
+    if request.method == 'GET':
+        if not  request.user.is_authenticated:
+            return redirect('login')
+
+        user = User.objects.get(id=request.user.id)
+
+        if user.user_data is None or user.user_data == '':
+                return render(request, 'Account/profile.html')
+        
+        
+        if (not user.complete_match() and not(user.user_data is None or user.user_data == '')):
+            user = User.objects.get(id=request.user.id)
+            user_details = user.user_data_()
+            user_details['registered'] = True
+            return render(request, 'Account/profile.html', user_details)
+        
 
 
 def matching(request):
@@ -102,6 +138,7 @@ def matching(request):
             match_user(user)
             return redirect('results')
     return redirect('dashboard')
+
 
 
 def adjust_min(request):
@@ -156,10 +193,10 @@ def get_data(request, type_):
     if request.method == 'GET':
         print(request.GET)
         user = User.objects.get(id=request.user.id)
-        if user.user_data is None:
+        if user.user_data is None or user.user_data == '':
             user.user_data =  "{}"
             user.save()
-        if user.choice_data is None:
+        if user.choice_data is None or user.choice_data == '':
             user.choice_data =  "{}"
             user.save()
         
@@ -181,3 +218,23 @@ def get_data(request, type_):
             return HttpResponse('success')
 
         return HttpResponse('fail')
+
+def verified(request):
+    return render(request, 'Account/account-verified.html')
+
+def verify(request):
+    if request.method == 'GET' and 'code' in request.session:
+        if request.session['code'] == request.GET['code']:
+            del request.session['code']
+            request.session['verified'] = True
+            request.session['email'] = request.GET['email']
+            return redirect('verification')
+    return redirect('login')
+
+def not_found(request):
+    return render(request, 'Account/account-not-found.html')
+
+
+def verification(request):
+    return render(request, 'Account/verification-link-sent.html')
+

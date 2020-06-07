@@ -44,9 +44,16 @@ Nigeria's best dating site for professionals
 					<li><a href="#" data-href="#questions">
 							<div>FAQs</div>
 						</a></li>
-					<li><a href={% url 'login' %}>
+					{% if not request.user.is_authenticated %}
+						<li><a href={% url 'login' %}>
 							<div>Join Datefix / Login</div>
 						</a></li>
+					{% else %}
+						<li><a href={% url 'logout' %}>
+							<div>Log Out</div>
+						</a></li>
+					{% endif %}
+					
 				</ul>
 
 
@@ -110,7 +117,7 @@ Nigeria's best dating site for professionals
 		============================================= -->
 
 <section id="content" class="section parallax nomargin nopadding"
-	style=" background-image: url({% static "images/page/bg.jpg"%}); background-size: cover; background-attachment: fixed;"
+	style=" background-image: url({% static "images/page/bg1.jpg"%}); background-size: cover; background-attachment: fixed;"
 	data-bottom-top="background-position:15px 80px;" data-top-bottom="background-position:-15px -100px;">
 
 	<div class="content-wrap nopadding">
@@ -189,7 +196,7 @@ Nigeria's best dating site for professionals
 									style="background-image: url({% static "images/page/back.jpg" %});">
 									<div class="flip-card-inner">
 										<p class="mb-2 text-white">Datefix is only for those who want a serious
-											relationship. Over 90% of our members are 30+ and hold an above-average
+											relationship. Over 90% of our members are 25+ and hold an above-average
 											education.</p>
 									</div>
 								</div>
@@ -347,7 +354,7 @@ Nigeria's best dating site for professionals
 			</div>
 
 			<div class="heading-block center">
-				<h3>Video Perspectives</h3>
+				<h3 style="color:#fff!important;">Video Perspectives</h3>
 			</div>
 
 
@@ -544,14 +551,14 @@ Nigeria's best dating site for professionals
 
 		</div>
 
-		<div class="page-section">
+		<div class="page-section" style="style=" background-image: url({% static "images/page/bg.jpg" %});"">
 
 			<div class="container clearfix">
 
 				<div id="questions" class="divider divider-short divider-center notopmargin"><i class="icon-star3"></i>
 				</div>
 				<div class="heading-block center">
-					<h3>Frequently Asked Questions</h3>
+					<h3 style="color:#fff">Frequently Asked Questions</h3>
 				</div>
 
 				<!-- Post Content
@@ -561,105 +568,119 @@ Nigeria's best dating site for professionals
 					<div class="clear"></div>
 
 					<div id="faqs" class="faqs" style="font-size: 15px;">
+						<div class="form-category">
 
-						<div class="toggle faq faq-marketplace faq-authors">
-							<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
-									class="toggle-open icon-question-sign"></i>How do I send a good first message?</div>
-							<div class="togglec">
-								<p>Sending a message is a great way to get to know someone on DateFix. To make
-									a great first impression, take some time to craft your hello.</p>
-								<p>When sending a first message to someone, consider these tips:
-									<ul>
-										<li>Before you message someone check out his or her profile to learn some
-											interesting things you
-											can use to start a conversation. Ask people about their interests and
-											hobbies,
-											where they
-											went to college, or about something in their story.</li>
-										<li>Is there something specific that drew you to this person? Let him or her
-											know
-											what it was!
-											Was it a beautiful smile, a favorite book, or a funny description that
-											interested you? Being
-											genuine and open about what you’re into can help you get a good response.
-										</li>
-										<li>Always double-check for spelling errors.
-											It’s a good idea to read your message before pressing send to make sure you
-											didn’t
-											accidentally include a typo. Common spelling and grammar mistakes like “teh”
-											or
-											“dont” can
-											ruin a great first impression and make someone think you’re not serious.
-										</li>
-									</ul>
-								</p>
+							<div class="toggle faq faq-marketplace faq-authors">
+								<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
+										class="toggle-open icon-question-sign"></i>How do I send a good first message?
+								</div>
+								<div class="togglec">
+									<p>Sending a message is a great way to get to know someone on DateFix. To make
+										a great first impression, take some time to craft your hello.</p>
+									<p>When sending a first message to someone, consider these tips:
+										<ul>
+											<li>Before you message someone check out his or her profile to learn some
+												interesting things you
+												can use to start a conversation. Ask people about their interests and
+												hobbies,
+												where they
+												went to college, or about something in their story.</li>
+											<li>Is there something specific that drew you to this person? Let him or her
+												know
+												what it was!
+												Was it a beautiful smile, a favorite book, or a funny description that
+												interested you? Being
+												genuine and open about what you’re into can help you get a good
+												response.
+											</li>
+											<li>Always double-check for spelling errors.
+												It’s a good idea to read your message before pressing send to make sure
+												you
+												didn’t
+												accidentally include a typo. Common spelling and grammar mistakes like
+												“teh”
+												or
+												“dont” can
+												ruin a great first impression and make someone think you’re not serious.
+											</li>
+										</ul>
+									</p>
+								</div>
 							</div>
 						</div>
-
-						<div class="toggle faq faq-marketplace faq-authors">
-							<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
-									class="toggle-open icon-question-sign"></i>What payment types does DateFix accept?
-							</div>
-							<div class="togglec">
-								<p>DateFix accepts a variety of payment types that vary depending on the standard
-									payment
-									method in your location and the device you’re using. Payment options include credit
-									cards, debit cards, Verve. To view the payment methods for your location, visit the
-									subscription page.
-								</p>
-							</div>
-						</div>
-
-						<div class="toggle faq faq-marketplace faq-authors">
-							<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
-									class="toggle-open icon-question-sign"></i>How do i change or delete my personal
-								details?</div>
-							<div class="togglec">
-								<p>You can update or remove information any time by accessing your Account Settings
-									page.
-									You will be
-									prompted to re-enter your new details and current password for verification.
-								</p>
+						<div class="form-category">
+							<div class="toggle faq faq-marketplace faq-authors">
+								<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
+										class="toggle-open icon-question-sign"></i>What payment types does DateFix
+									accept?
+								</div>
+								<div class="togglec nobottommargin nobottompadding">
+									<p>DateFix accepts a variety of payment types that vary depending on the standard
+										payment
+										method in your location and the device you’re using. Payment options include
+										credit
+										cards, debit cards, Verve. To view the payment methods for your location, visit
+										the
+										subscription page.
+									</p>
+								</div>
 							</div>
 						</div>
+						<div class="form-category">
 
-						<div class="toggle faq faq-marketplace faq-authors">
-							<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
-									class="toggle-open icon-question-sign"></i>How do i change or delete my personal
-								details?</div>
-							<div class="togglec">
-								<p>The following free features are available to basic members:<br>
-									• view your personality test results<br>
-									• receive partner suggestions<br>
-									• upload photos and details<br>
-									• send messages to in-house fixers and medical team<br>
-									We offer the basic membership as an introduction to our service. We do this to give
-									potential Premium members a realistic idea of our platform and our community.<br>
-									 As a Premium member, the following perks are included:<br>
-									• your personality test results are explained in more detail<br>
-									• you will be matched and paired with 2 best prospects based on your
-									requirements<br>
-									• you can send and receive an unlimited number of messages<br>
-									Our priority, first and foremost, is to give our members the opportunity to find a
-									serious and loving relationship quickly and effectively. For this reason we
-									encourage
-									all members to sign up for Premium features so they can take full advantage of what
-									our
-									service has to offer.
-								</p>
+							<div class="toggle faq faq-marketplace faq-authors">
+								<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
+										class="toggle-open icon-question-sign"></i>How do i change or delete my personal
+									details?</div>
+								<div class="togglec">
+									<p>You can update or remove information any time by accessing your Account Settings
+										page.
+										You will be
+										prompted to re-enter your new details and current password for verification.
+									</p>
+								</div>
 							</div>
 						</div>
+						<div class="form-category">
+							<div class="toggle faq faq-marketplace faq-authors">
+								<div class="togglet"><i class="toggle-closed icon-question-sign"></i><i
+										class="toggle-open icon-question-sign"></i>How do i change or delete my personal
+									details?</div>
+								<div class="togglec">
+									<p>The following free features are available to basic members:<br>
+										• view your personality test results<br>
+										• receive partner suggestions<br>
+										• upload photos and details<br>
+										• send messages to in-house fixers and medical team<br>
+										We offer the basic membership as an introduction to our service. We do this to
+										give
+										potential Premium members a realistic idea of our platform and our
+										community.<br>
+										 As a Premium member, the following perks are included:<br>
+										• your personality test results are explained in more detail<br>
+										• you will be matched and paired with 2 best prospects based on your
+										requirements<br>
+										• you can send and receive an unlimited number of messages<br>
+										Our priority, first and foremost, is to give our members the opportunity to find
+										a
+										serious and loving relationship quickly and effectively. For this reason we
+										encourage
+										all members to sign up for Premium features so they can take full advantage of
+										what
+										our
+										service has to offer.
+									</p>
+								</div>
+							</div>
+
+
+						</div><!-- .postcontent end -->
 
 					</div>
 
-
-				</div><!-- .postcontent end -->
+				</div>
 
 			</div>
-
-		</div>
-
-	</div>
 
 </section><!-- #content end -->
 

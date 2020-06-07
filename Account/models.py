@@ -21,17 +21,18 @@ class User(AbstractUser):
     dating = models.BooleanField(default=False)
     payed = models.BooleanField(default=False)
     min_score = models.DecimalField(max_digits=5, decimal_places=2, default=None, null=True)
+    verified = models.BooleanField(default=False)
     
     def successful_list(self):
         if self.successful_matches is None or self.successful_matches == '':
             return []
-        return self.successful_matches.split('///')
+        return json.loads(self.successful_matches)
     
     
     def no_list(self):
         if self.no_matches == '' or self.no_matches is None:
             return []
-        return self.no_matches.split(',')
+        return json.loads(self.no_matches)
     
     
     def jilted_list(self):
@@ -42,7 +43,7 @@ class User(AbstractUser):
     def matches_(self):
         if self.matches is None or self.matches == '':
             return []
-        return [x for x in self.matches.split(',') if x != '']
+        return json.loads(self.matches)
 
 
     def complete_match(self):

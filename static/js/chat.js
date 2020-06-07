@@ -79,17 +79,21 @@ $(function () {
   });
 });
 
-// const url = 'ws://127.0.0.1:8000/chat/'
-// const socket = new WebSocket(url)
-// socket.onclose = (e)=>{
-//   console.log('WebSocket Disconnected', e)
-// }
+// const url = window.location.href.replace("http", "ws");
+// const socket = new WebSocket(url);
+// socket.onclose = (e) => {
+//   console.log("WebSocket Disconnected", e);
+// };
 
-// socket.onopen = (e) =>{
-//   console.log('WebSocket Connected', e)
-//   socket.send(JSON.stringify({"chat_id": 1, "username": "Louisane",  "function": "connect"}))
-// }
+// socket.onopen = (e) => {
+//   console.log("WebSocket Connected", e);
+//   socket.send(JSON.stringify({ chat_id: 1, username: "Louisane", function: "connect" }));
+// };
 
-// socket.onerror = (e) =>{
-//   console.log('WebSocket Error', e)
-// }
+// socket.onerror = (e) => {
+//   console.log("WebSocket Error", e);
+// };
+
+// socket.onmessage = (e) => {
+//   console.log("WebSocket received message", e);
+// };
