@@ -52,10 +52,17 @@ var app = new Vue({
     ],
     chat_threads: [],
     chat_messages: [],
+    chat_id: "",
+    message: "",
+    // url: "",
+    socket: {},
   },
-  async mounted() {
+  async created() {
     await this.getAllChats();
     await this.getSingleChat();
+    // const url = "wss://echo.websocket.org/";
+    const url = "ws://127.0.0.1:8000/chat/";
+    this.socket = new WebSocket(url);
     await this.websocket();
     // console.log(window.location.pathname.split("/", 3));
   },
@@ -80,31 +87,50 @@ var app = new Vue({
           .then((response) => response.json())
           .then((data) => {
             console.log("data>>>", data);
-            this.chat_messages = data.chat_messages;
+            this.chat_id = data.chat_id;
+            this.chat_messages = data.chat_list;
           });
       } catch (error) {
         console.error(error);
       }
     },
     async websocket() {
-      const url = "ws://127.0.0.1:8000/chat/";
-      const socket = new WebSocket(url);
-      socket.onclose = (e) => {
+      // // const url = "ws://127.0.0.1:8000/chat/";
+      // const url = "wss://echo.websocket.org/";
+      // const socket = new WebSocket(url);
+      this.socket.onclose = (e) => {
         console.log("WebSocket Disconnected", e);
       };
 
-      socket.onopen = (e) => {
+      this.socket.onopen = (e) => {
         console.log("WebSocket Connected", e);
-        socket.send(JSON.stringify({ chat_id: 1, username: "Louisane", function: "connect" }));
+        // this.socket.send(JSON.stringify({ chat_id: 1, username: "Louisane", function: "connect" }));
       };
 
-      socket.onerror = (e) => {
+      this.socket.onerror = (e) => {
         console.log("WebSocket Error", e);
       };
 
-      socket.onmessage = (e) => {
+      this.socket.onmessage = (e) => {
+        this.messages.push(JSON.parse(e.data));
         console.log("WebSocket received message", e);
       };
+    },
+
+    sendMessage() {
+      // const url = "wss://echo.websocket.org/";
+      // const socket = new WebSocket(url);
+      // send message from the form
+      this.socket.onopen();
+      let outgoingMessage = {
+        // chat_id: this.chat_id,
+        message: this.message,
+        timeSend: Date.now(),
+        sender: "you",
+      };
+      // console.log(outgoingMessage);
+      this.socket.send(JSON.stringify(outgoingMessage));
+      this.message = "";
     },
   },
 });
