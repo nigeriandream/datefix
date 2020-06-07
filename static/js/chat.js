@@ -90,10 +90,11 @@ $(function () {
 //   socket.send(JSON.stringify({ chat_id: 1, username: "Louisane", function: "connect" }));
 // };
 
-// socket.onerror = (e) => {
-//   console.log("WebSocket Error", e);
-// };
+// socket.onopen = (e) =>{
+//   console.log('WebSocket Connected', e)
+//   socket.send(JSON.stringify({"chat_id": 1, "username": "Louisane",  "function": "connect"}))
+// }
 
-// socket.onmessage = (e) => {
-//   console.log("WebSocket received message", e);
-// };
+// socket.onerror = (e) =>{
+//   console.log('WebSocket Error', e)
+// }

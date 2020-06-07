@@ -61,7 +61,7 @@ var app = new Vue({
     await this.getAllChats();
     await this.getSingleChat();
     // const url = "wss://echo.websocket.org/";
-    const url = "ws://127.0.0.1:8000/chat/";
+    const url = window.location.href.replace("http", "ws");
     this.socket = new WebSocket(url);
     await this.websocket();
     // console.log(window.location.pathname.split("/", 3));
