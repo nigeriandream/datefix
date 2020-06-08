@@ -67,7 +67,7 @@ def compare_users(me, you):
             return 0
     
     for i in absolute_match:
-        if me.choice_data_()[i] == you.user_data_()[i] or me.choice_data()[i] == 'Does Not Matter':
+        if you.user_data_()[i] in  me.choice_data_()[i].split(',') or 'Does Not Matter' in me.choice_data()[i].split(','):
             mark = mark + 1
             
     for i in _2_spectrum:
