@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import dj_database_url
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vkg&nnb_%1b&ojkbm6c37m1zh0z$&v^=!lb8uj=023+__@$eg!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =False
+DEBUG = True
 
 # ALLOWED_HOSTS = [
 #     'localhost',
@@ -79,10 +80,11 @@ TEMPLATES = [
 CHANNEL_LAYERS = {"default": {
     "BACKEND": "channels_redis.core.RedisChannelLayer",
     "CONFIG": {
-        "hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
-        }
-    
+        # "hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
+        "hosts": [('localhost', 6379)],
     }
+
+}
 }
 
 
@@ -113,7 +115,7 @@ EMAIL_PORT = 587
 
 EMAIL_HOST_USER = 'louis.paul9095'
 
-EMAIL_HOST_PASSWORD =  'monkeysEX'
+EMAIL_HOST_PASSWORD = 'monkeysEX'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -167,8 +169,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-import dj_database_url 
-prod_db  =  dj_database_url.config()
+prod_db = dj_database_url.config()
 DATABASES['default'].update(prod_db)
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
