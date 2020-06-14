@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .algorithms import reply_request, create_private_key
-from .models import Chat_Message, Chat_Thread
+from .models import ChatMessage, ChatThread
 from Account.models import User
 from django.utils.datetime_safe import datetime
 from django.db.models import Q
@@ -42,7 +42,7 @@ def request_(request, match_id):
 
 def get_chat(request, id_):
     if request.method == 'GET':
-        chat = Chat_Thread.objects.get(id=id_)
+        chat = ChatThread.objects.get(id=id_)
         return HttpResponse(json.dumps(chat.get_chat(chat.position(request.user))))
 
 
@@ -56,7 +56,7 @@ def get_profile(request, user_id):
 def get_chat_threads(request, user_id):
     user = User.objects.get(id=user_id)
     if request.method == 'GET':
-        chats = Chat_Thread.objects.filter(Q(first_user_id=request.user.id) | Q(
+        chats = ChatThread.objects.filter(Q(first_user_id=request.user.id) | Q(
             second_user_id=request.user.id)).order_by('last_message_date')
         data = [{
             "chat_id": x.id,
@@ -90,7 +90,7 @@ def last_message(chat):
 
 
 def delete_message(request, chat_id, id_):
-    chat = Chat_Thread.objects.get(id=chat_id)
+    chat = ChatThread.objects.get(id=chat_id)
     position = chat.position(request.user)
     list_ = {'first': chat.first_deleted_(), 'second': chat.second_deleted_()}
     list_ = list_[position]

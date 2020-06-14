@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from Datefix import settings
 import json
 from django.db.models import Q
+
+
 # Create your models here.
 
 class User(AbstractUser):
@@ -22,35 +24,31 @@ class User(AbstractUser):
     payed = models.BooleanField(default=False)
     min_score = models.DecimalField(max_digits=5, decimal_places=2, default=None, null=True)
     verified = models.BooleanField(default=False)
-    
+
     def successful_list(self):
         if self.successful_matches is None or self.successful_matches == '':
             return []
         return json.loads(self.successful_matches)
-    
-    
+
     def no_list(self):
         if self.no_matches == '' or self.no_matches is None:
             return []
         return json.loads(self.no_matches)
-    
-    
+
     def jilted_list(self):
         if self.jilted_matches == '' or self.jilted_matches is None:
             return []
         return self.jilted_matches.split(',')
-    
+
     def matches_(self):
         if self.matches is None or self.matches == '':
             return []
         return json.loads(self.matches)
 
-
     def complete_match(self):
         if self.matches_().__len__() < 2:
             return False
         return True
-
 
     def is_couple(self):
         try:
@@ -62,42 +60,42 @@ class User(AbstractUser):
                 return True
             except Couple.DoesNotExist:
                 return False
+
     def user_data_(self):
-        if self.user_data == None or self.user_data == '':
-            return {}    
+        if self.user_data is None or self.user_data == '':
+            return {}
         return json.loads(self.user_data)
-    
+
     def choice_data_(self):
-        if self.choice_data == None or self.choice_data == '':
+        if self.choice_data is None or self.choice_data == '':
             return {}
         return json.loads(self.choice_data)
-    
+
     def notifications(self):
-        notifications = Notification.objects.filter(Q(receiver=self.id)|Q(general=True)).order_by('-datetime')
-        if self.notification == None or self.notification == '':
+        notifications = Notification.objects.filter(Q(receiver=self.id) | Q(general=True)).order_by('-datetime')
+        if self.notification is None or self.notification == '':
             return notifications
         notify = json.loads(self.notification)
-        return [x for x in notifications if str(x.id) not in notify['deleted'] ]
-            
+        return [x for x in notifications if str(x.id) not in notify['deleted']]
+
     def new_notifications(self):
-        notifications = Notification.objects.filter(Q(receiver=self.id)|Q(general=True)).order_by('-datetime')
-        if self.notification == None or self.notification == '':
+        notifications = Notification.objects.filter(Q(receiver=self.id) | Q(general=True)).order_by('-datetime')
+        if self.notification is None or self.notification == '':
             return notifications.count()
         notify = json.loads(self.notification)
-        return [x for x in notifications if (str(x.id) not in notify['read']) and (str(x.id) not in notify['deleted'])].__len__()  
+        return [x for x in notifications if
+                (str(x.id) not in notify['read']) and (str(x.id) not in notify['deleted'])].__len__()
+
 
 class Couple(models.Model):
     first_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match1')
     second_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match2')
     datetime = models.DateTimeField()
-    
-    
+
+
 class Notification(models.Model):
     title = models.CharField(max_length=256)
     message = models.TextField()
     datetime = models.DateTimeField()
     general = models.BooleanField(default=True)
     receiver = models.IntegerField(default=None, null=True)
-    
-    
-    
