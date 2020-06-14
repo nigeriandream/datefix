@@ -89,7 +89,7 @@ socket.onclose = (e)=>{
 
 socket.onopen = (e) =>{
   console.log('WebSocket Connected', e)
-  socket.send(JSON.stringify({"chat_id": 1, "username": "Louisane",  "function": "connect"}))
+
 }
 
 socket.onerror = (e) =>{
