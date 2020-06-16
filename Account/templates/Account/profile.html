@@ -174,7 +174,6 @@ Setup Session
 													<select name="residence_state" id="state1" if class="form-control"
 														{% if residence_state %}>
 														<option value={{residence_state}} selected="selected" disabled>
-															{{ residence_state }}</option>
 														{% else %}
 														>
 														<option value="" selected="selected" disabled></option>
@@ -484,7 +483,6 @@ Setup Session
 															{% if not genotype %}
 															<option value="" selected disabled></option>
 															{% endif %}
-
 															        <option value="AA" {% if genotype == 'AA' %} selected{% endif %}>AA</option>
 																	<option value="AS" {% if genotype == 'AS' %} selected{% endif %}>AS</option>
 																	<option value="SS" {% if genotype == 'SS' %} selected{% endif %}>SS</option>
@@ -1130,6 +1128,7 @@ Setup Session
 															<option value="AA">AA Only</option>
                                                             <option value="AA,AS">AA or AS</option>
                                                             <option value="AA,AS,SC,CC,SS">AA, AS, SC, CC, or SS</option>
+															>>>>>>> master
 														</select>
 													</div>
 												</div>
@@ -1574,6 +1573,7 @@ Setup Session
 								<button type="button" id="nextBtn" onclick="nextPrev(1);topFunction()"
 									class="button button-rounded button-reveal button-xlarge button-yellow button-light"><i
 										class="icon-arrow-alt-circle-right"></i><span>Next</span></button>
+								
 							</div>
 							<!-- Circles which indicates the steps of the form: -->
 							<div style="text-align:center;margin-top:40px;">

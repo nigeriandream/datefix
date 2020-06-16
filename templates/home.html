@@ -44,21 +44,23 @@ Nigeria's best dating site for professionals
 					<li><a href="#" data-href="#questions">
 							<div>FAQs</div>
 						</a></li>
-					{% if not request.user.is_authenticated %}
-						<li><a href={% url 'login' %}>
-							<div>Join Datefix / Login</div>
-						</a></li>
-					{% else %}
-						<li><a href={% url 'logout' %}>
-							<div>Log Out</div>
-						</a></li>
-					{% endif %}
-					
+
 				</ul>
 
-
-				<div id="side-panel-trigger" class="side-panel-trigger"><a href="#"><i class="icon-line-heart"></i></a>
+				{% if not request.user.is_authenticated %}
+				<li><a href={% url 'login' %}>
+						<div><i class="icon-line2-user"></i>Enter</div>
+					</a></li>
+				{% else %}
+				<div id="side-panel-trigger" class="side-panel-trigger"
+					style="font-size: 12px;	font-weight: 400;	letter-spacing: 3px;    text-transform: uppercase; line-height: 22px;">
+					<a href="#" style="width: fit-content; font-size: inherit;"><i class="icon-line-heart"></i>
+						Menu</a>
 				</div>
+				{% endif %}
+
+
+
 
 
 			</nav><!-- #primary-menu end -->
@@ -563,7 +565,7 @@ Nigeria's best dating site for professionals
 
 				<!-- Post Content
 					============================================= -->
-				<div class="nobottommargin clearfix" style="margin: 0px auto; width:900px">
+				<div class="nobottommargin clearfix" style="margin: 0px auto;">
 
 					<div class="clear"></div>
 

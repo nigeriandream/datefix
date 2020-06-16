@@ -48,6 +48,18 @@ Match Results
 					</li>
 				</ul>
 
+				{% if not request.user.is_authenticated %}
+				<li><a href={% url 'login' %}>
+						<div><i class="icon-line2-user"></i>Enter</div>
+					</a></li>
+				{% else %}
+				<div id="side-panel-trigger" class="side-panel-trigger"
+					style="font-size: 12px;	font-weight: 400;	letter-spacing: 3px;    text-transform: uppercase; line-height: 22px;">
+					<a href="#" style="width: fit-content; font-size: inherit;"><i class="icon-line-heart"></i>
+						Menu</a>
+				</div>
+				{% endif %}
+
 
 			</nav><!-- #primary-menu end -->
 
@@ -126,88 +138,87 @@ Match Results
 
 							<form class="row" id="matches-form" action={% url 'get_data' 'user' %} method="get">
 								{% for item in matches  %}
-									<div class="col_one_third card col_last card-category m-3">
+								<div class="col_one_third card col_last card-category m-3">
 									<div class="p-2">
-									{% for key, value in item  %}
+										{% for key, value in item  %}
 										{% if value > 0 %}
-											<div class="card-header mb-2">
-												<ul class="skills">
-													<li data-percent={{value}}>
-														<span><i class="i-plain i-small color icon-bar-chart inline"
-																style="    margin: 0px 5px;"></i></span>
-														<div class="progress">
-															<div class="progress-percent">
-																<div class="counter counter-inherit counter-instant">
-																	<span data-from="0" data-to={{value}} data-refresh-interval="30"
-																		data-speed="1100"></span>%</div>
-															</div>
+										<div class="card-header mb-2">
+											<ul class="skills">
+												<li data-percent={{value}}>
+													<span><i class="i-plain i-small color icon-bar-chart inline"
+															style="    margin: 0px 5px;"></i></span>
+													<div class="progress">
+														<div class="progress-percent">
+															<div class="counter counter-inherit counter-instant">
+																<span data-from="0" data-to={{value}}
+																	data-refresh-interval="30"
+																	data-speed="1100"></span>%</div>
 														</div>
-													</li>
-												</ul>
-											</div>
-										{% endif %}
-										 
-											{% if key != 'id' and not value > 0  %}
-												<div class="card-text match-body-pills">
-													<div class="body-pill-attribute color">
-													{% if key == 'alpha' %}
-														Username
-													{% else %}
-														{{key}}
-													{% endif %}
 													</div>
-													<div class="body-pill-value">{{value}}</div>
-												</div>
-											{% endif %}
-										
-									{% endfor %}
-								</div>
+												</li>
+											</ul>
+										</div>
+										{% endif %}
+
+										{% if key != 'id' and not value > 0  %}
+										<div class="card-text match-body-pills">
+											<div class="body-pill-attribute color">
+												{% if key == 'alpha' %}
+												Username
+												{% else %}
+												{{key}}
+												{% endif %}
+											</div>
+											<div class="body-pill-value">{{value}}</div>
+										</div>
+										{% endif %}
+
+										{% endfor %}
+									</div>
 								</div>
 								{% empty %}
-									<h3 class="text text-center text-white py-3">&#128577 Awww.....No Results</h3>
-								
+								<h3 class="text text-center text-white py-3">&#128577 Awww.....No Results</h3>
+
 								{% endfor %}
-								
+
 							</form>
 						</div>
 					</div>
 
-								<form id="matches-form" {% if matches_length > 0 %}
-									action={% url 'results' %} method="post">
-									{% csrf_token %}
-								{% else %}
-									action={% url 'dashboard' %} method="get">
-								{% endif %} 
-								
+					<form id="matches-form" {% if matches_length > 0 %} action={% url 'results' %} method="post">
+						{% csrf_token %}
+						{% else %}
+						action={% url 'dashboard' %} method="get">
+						{% endif %}
 
-					{% if matches_length > 0 %}
+
+						{% if matches_length > 0 %}
 						<div class="form-category col_full" style="    background: rgba(255, 255, 255, 0.9)">
 
-						<div class="form-group">
-							<label for="matches">Select two potential partners to proceed</label>
-							<select name="matches" id="potential-matches" class="form-control"
-								multiple="multiple" data-width="100%" tabindex="-1" aria-hidden="true"
-								style="width:100%;">
-								{% for key, value in select  %}
+							<div class="form-group">
+								<label for="matches">Select two potential partners to proceed</label>
+								<select name="matches" id="potential-matches" class="form-control" multiple="multiple"
+									data-width="100%" tabindex="-1" aria-hidden="true" style="width:100%;">
+									{% for key, value in select  %}
 									<option value={{key}}>{{value}}</option>
-								{% endfor %}
-							</select>
+									{% endfor %}
+								</select>
+							</div>
+
 						</div>
 
-					</div>
+						{% endif %}
 
-				{% endif %}				
-					
-					
-					<div class="center topmargin" data-easing="easeInOutExpo" data-speed="1500">
-						<button type="submit"
-							class="button button-rounded button-reveal button-xlarge button-yellow button-light tright">
+
+						<div class="center topmargin" data-easing="easeInOutExpo" data-speed="1500">
+							<button type="submit"
+								class="button button-rounded button-reveal button-xlarge button-yellow button-light tright">
 								{% if matches_length > 0 %}
-									<i class="icon-chat"></i><span> Confirm Matches
-								{% else %}
+								<i class="icon-chat"></i><span> Confirm Matches
+									{% else %}
 									<span> Back to Dashboard
-								{% endif %} </span></button>
-					</div>
+										{% endif %} </span></button>
+						</div>
 
 					</form>
 
