@@ -162,12 +162,12 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="control-label">State</label>
-																<select name="residence_state"  id="state1" if class="form-control"
-																   {% if 'residence_state' %}
+																<select name="residence_state"  id="state1" class="form-control"
+																   {% if residence_state %}
 																   		disabled>
 																	<option value={{residence_state}} selected="selected" >{{ residence_state }}</option>
 																   {% else %}
-																   	>
+                                                                        >
 																	<option value="" selected="selected" disabled></option>
 																   {% endif %}
 																	<option value='Non-Nigerian Resident'>Non-Nigerian Resident</option>
@@ -452,11 +452,11 @@
 																		<option value="" selected disabled></option>
 																	{% endif %}
 																	
-																	<option value="1" {% if genotype == 1 %} selected{% endif %}>AA</option>
-																	<option value="2" {% if genotype == 2 %} selected{% endif %}>AS</option>
-																	<option value="3" {% if genotype == 3 %} selected{% endif %}>SS</option>
-																	<option value="4" {% if genotype == 4 %} selected{% endif %}>SC</option>
-																	<option value="5" {% if genotype == 5 %} selected{% endif %}>CC</option>
+																	<option value="AA" {% if genotype == 'AA' %} selected{% endif %}>AA</option>
+																	<option value="AS" {% if genotype == 'AS' %} selected{% endif %}>AS</option>
+																	<option value="SS" {% if genotype == 'SS' %} selected{% endif %}>SS</option>
+																	<option value="SC" {% if genotype == 'SC' %} selected{% endif %}>SC</option>
+																	<option value="CC" {% if genotype == 'CC' %} selected{% endif %}>CC</option>
 																</select>
 															</div>
 														</div>
@@ -992,9 +992,9 @@
 																<label class="control-label">Your Ideal Partner's Genotype</label>
 																<select name="genotype" id="genotype2" class="form-control" required>
 																	<option value="Does Not Matter" selected>Does Not Matter</option>
-																	<option value="1">AA Only</option>
-																	<option value="2">AA or AS</option>
-																	<option value="3">AA, AS, SC, CC, or SS</option>
+																	<option value="AA">AA Only</option>
+																	<option value="AA,AS">AA or AS</option>
+																	<option value="AA,AS,SC,CC,SS">AA, AS, SC, CC, or SS</option>
 																</select>
 															</div>
 														</div>
@@ -1254,7 +1254,7 @@
 															<div class="form-group">
 																<label class="control-label">Second Dealbreaker</label>
 																<select name="dealbreaker2" id="dealbreaker2" class="form-control">
-																	<option value="No Dealbreaker" selected="selected">No Dealbreaker</option>
+															 		<option value="No Dealbreaker" selected="selected">No Dealbreaker</option>
 																</select>
 															</div>
 														</div>
@@ -1275,15 +1275,12 @@
 										</div>
 
 										<div class="center topmargin" data-easing="easeInOutExpo" data-speed="1500">
-						<a type="button" id="prevBtn" onclick="nextPrev(-1);topFunction()"
+						<button type="button" id="prevBtn" onclick="nextPrev(-1);topFunction(); "
 							class="button button-rounded button-reveal button-xlarge button-white button-light tright"><i
-								class="icon-arrow-alt-circle-left"></i><span>Previous</span></a>
-						<a type="button" id="nextBtn" onclick="nextPrev(1);topFunction()"
+								class="icon-arrow-alt-circle-left"></i><span>Previous</span></button>
+						<button type="button" id="nextBtn" onclick="nextPrev(1);topFunction()"
 							class="button button-rounded button-reveal button-xlarge button-yellow button-light"><i
-								class="icon-arrow-alt-circle-right"></i><span>Next</span></a>
-						<a type="button" id="submitBtn"
-							class="button button-rounded button-reveal button-xlarge button-yellow button-light"><i
-								class="icon-check-circle"></i><span>Submit</span></a>
+								class="icon-arrow-alt-circle-right"></i><span>Next</span></button>
 					</div>
 					<!-- Circles which indicates the steps of the form: -->
 					<div style="text-align:center;margin-top:40px;">
@@ -1316,13 +1313,11 @@
 
 {% endblock content %}
 {% block script %}
+    <script src={% static 'js/components/rangeslider.min.js' %}></script>
+    <script src={% static 'js/components/moment.js' %}></script>
+    <script src={% static 'js/jquery.nicescroll.js' %}></script>
 
-<script src={% static 'js/components/rangeslider.min.js' %}></script>
-<script src={% static 'js/components/moment.js' %}></script>
-<script src={% static 'js/jquery.nicescroll.js' %}></script>
-
-
-<script>
+    <script>
 	$(document).ready(function () {
 
 		// $("body").niceScroll({
@@ -1344,5 +1339,6 @@
 	});
 </script>
 
+    <script src="{% static 'js/msform.js' %}"></script>
 
 {% endblock script %}

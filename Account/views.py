@@ -133,7 +133,7 @@ def matching(request):
         if user.sex == 'female':
             match_user(user)
             return redirect('results')
-    return redirect('dashboard')
+    return redirect('chatroom')
 
 
 def adjust_min(request):
