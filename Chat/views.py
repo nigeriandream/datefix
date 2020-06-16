@@ -6,6 +6,7 @@ from django.utils.datetime_safe import datetime
 from django.db.models import Q
 import json
 
+
 # Create your views here.
 
 
@@ -23,6 +24,7 @@ def all_chats(request):
 
 def chat(request):
     return render(request, 'Chat/chat.html')
+
 
 def request_(request, match_id):
     user = User.objects.get(id=request.user.id)
@@ -50,7 +52,8 @@ def get_profile(request, user_id):
     if request.method == 'GET':
         user = User.objects.get(id=user_id)
         return HttpResponse(json.dumps({'username': user.username,
-                                        'first_name': user.first_name, 'last_name': user.last_name, 'profile_pic': profile_picture(user.profile_picture)}))
+                                        'first_name': user.first_name, 'last_name': user.last_name,
+                                        'profile_pic': profile_picture(user.profile_picture)}))
 
 
 def get_chat_threads(request, user_id):
@@ -65,8 +68,8 @@ def get_chat_threads(request, user_id):
             "first_name": x.get_receiver(user).first_name,
             "last_name": x.get_receiver(user).last_name,
             "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
-                "last_message": last_message(x)
-                } for x in chats]
+            "last_message": last_message(x)
+        } for x in chats]
         return HttpResponse(json.dumps({'user_id': user_id, "chat_threads": data}))
 
 

@@ -1,3 +1,6 @@
+
+
+
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -40,28 +43,7 @@ function nextPrev(n) {
   // if you have reached the end of the form...
   if (currentTab >= x.length) {
     // ... the form gets submitted:
-    $.ajax({
-      url: "/get_data/user",
-      data : objectifyForm($("#user-form").serializeArray()),
-      type : "GET",
-      success: (data)=>{
-          if (data == 'success'){
-            $.ajax({
-              url: "/get_data/partner",
-              data : objectifyForm($("#partner-form").serializeArray()),
-              type : "GET",
-              success: (data)=>{
-                  if (data == 'success'){
-                    window.location.href = '/payment/pay'
-                  }
-              }
-            }
-            )
-            
-          }
-      }
-    })
-    ;
+    submit_form()
   }
   // Otherwise, display the correct tab:
   showTab(currentTab);
@@ -111,3 +93,28 @@ function topFunction() {
   // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
+function submit_form() {
+  console.log('date fix');
+  $.ajax({
+      url: "/get_data/user",
+      data : objectifyForm($("#user-form").serializeArray()),
+      type : "GET",
+      success: (data)=>{
+          if (data === 'success'){
+            $.ajax({
+              url: "/get_data/partner",
+              data : objectifyForm($("#partner-form").serializeArray()),
+              type : "GET",
+              success: (data)=>{
+                  if (data === 'success'){
+                    window.location.href = '/payment/pay'
+                  }
+              }
+            }
+            )
+
+          }
+      }
+    })
+    ;
+}
