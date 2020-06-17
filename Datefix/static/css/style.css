@@ -154,13 +154,15 @@
 
 .cta-join {
 	color: #222 !important;
-	background: #f9f9f9 !important;
+	background: url(../images/page/gif1.gif) !important;
+	background-size: cover;
+	background-position: center;
 	border-color: #f9f9f9 !important;
 }
 
 .cta-join:hover {
 	background-color: rgba(255, 255, 255, 0.8) !important;
-	transform: scale(1.03);
+	transform: scale(1.02);
 	font-weight: 700 !important;
 }
 
@@ -7814,6 +7816,7 @@ body:not(.device-touch) .button {
 	letter-spacing: 2px;
 	height: 52px;
 	line-height: 52px;
+	font-family: inherit;
 }
 
 .button.button-desc {

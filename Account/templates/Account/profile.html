@@ -65,6 +65,9 @@ Setup Session
 			</nav><!-- #primary-menu end -->
 
 		</div>
+		<div class="progress-container">
+			<div class="progress-bar" id="myBar"></div>
+		</div>
 
 	</div>
 
@@ -161,7 +164,7 @@ Setup Session
 							<!-- One "tab" for each step in the form: -->
 							<form id="user-form" action={% url 'get_data' 'user' %} method="post">
 								<div class="tab">
-									<h2 style="margin-bottom: 3px; color:#fff;">Describe Yourself</h2>
+									<h2 style="margin-bottom: 3px; color:#fff;">STEP 1: Describe Yourself</h2>
 									<p style="color:#fff;">Tell us about yourself</p>
 									<div class="form-category">
 										<h4>Where do you reside?</h4>
@@ -174,8 +177,8 @@ Setup Session
 													<select name="residence_state" id="state1" if class="form-control"
 														{% if residence_state %}>
 														<option value={{residence_state}} selected="selected" disabled>
-														{% else %}
-														>
+															{% else %}
+															>
 														<option value="" selected="selected" disabled></option>
 														{% endif %}
 														<option value='Non-Nigerian Resident'>Non-Nigerian Resident
@@ -483,11 +486,16 @@ Setup Session
 															{% if not genotype %}
 															<option value="" selected disabled></option>
 															{% endif %}
-															        <option value="AA" {% if genotype == 'AA' %} selected{% endif %}>AA</option>
-																	<option value="AS" {% if genotype == 'AS' %} selected{% endif %}>AS</option>
-																	<option value="SS" {% if genotype == 'SS' %} selected{% endif %}>SS</option>
-																	<option value="SC" {% if genotype == 'SC' %} selected{% endif %}>SC</option>
-																	<option value="CC" {% if genotype == 'CC' %} selected{% endif %}>CC</option>
+															<option value="AA" {% if genotype == 'AA' %}
+																selected{% endif %}>AA</option>
+															<option value="AS" {% if genotype == 'AS' %}
+																selected{% endif %}>AS</option>
+															<option value="SS" {% if genotype == 'SS' %}
+																selected{% endif %}>SS</option>
+															<option value="SC" {% if genotype == 'SC' %}
+																selected{% endif %}>SC</option>
+															<option value="CC" {% if genotype == 'CC' %}
+																selected{% endif %}>CC</option>
 														</select>
 													</div>
 												</div>
@@ -845,7 +853,7 @@ Setup Session
 							<form></form>
 							<form id="partner-form" action={% url 'get_data' 'partner' %} method="post">
 								<div class="tab">
-									<h2 style="margin-bottom: 3px; color:#fff;">Your Ideal Partner</h2>
+									<h2 style="margin-bottom: 3px; color:#fff;">STEP 2: Your Ideal Partner</h2>
 									<p style="color:#fff;">Tell us what you want in a partner</p>
 									<div class="form-category">
 										<h4>Where would you like your partner to reside?</h3>
@@ -1126,8 +1134,9 @@ Setup Session
 															<option value="Does Not Matter" selected>Does Not Matter
 															</option>
 															<option value="AA">AA Only</option>
-                                                            <option value="AA,AS">AA or AS</option>
-                                                            <option value="AA,AS,SC,CC,SS">AA, AS, SC, CC, or SS</option>
+															<option value="AA,AS">AA or AS</option>
+															<option value="AA,AS,SC,CC,SS">AA, AS, SC, CC, or SS
+															</option>
 															>>>>>>> master
 														</select>
 													</div>
@@ -1567,13 +1576,15 @@ Setup Session
 
 
 							<div class="center topmargin" data-easing="easeInOutExpo" data-speed="1500">
-								<button type="button" id="prevBtn" onclick="nextPrev(-1);topFunction()"
+								<a type="button" id="prevBtn" onclick="nextPrev(-1);topFunction()"
 									class="button button-rounded button-reveal button-xlarge button-white button-light tright"><i
-										class="icon-arrow-alt-circle-left"></i><span>Previous</span></button>
-								<button type="button" id="nextBtn" onclick="nextPrev(1);topFunction()"
+										class="icon-arrow-alt-circle-left"></i><span>Previous</span></a>
+								<a type="button" id="nextBtn" onclick="nextPrev(1);topFunction()"
 									class="button button-rounded button-reveal button-xlarge button-yellow button-light"><i
-										class="icon-arrow-alt-circle-right"></i><span>Next</span></button>
-								
+										class="icon-arrow-alt-circle-right"></i><span>Next</span></a>
+								<a type="button" id="submitBtn" onclick="submit_form()"
+									class="button button-rounded button-reveal button-xlarge button-yellow button-light"><i
+										class="icon-check-circle"></i><span>Submit</span></a>
 							</div>
 							<!-- Circles which indicates the steps of the form: -->
 							<div style="text-align:center;margin-top:40px;">
@@ -1632,6 +1643,20 @@ Setup Session
 				});
 			});
 	});
+</script>
+
+<script>
+	// When the user scrolls the page, execute myFunction 
+	window.onscroll = function () {
+		myFunction()
+	};
+
+	function myFunction() {
+		var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+		var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		var scrolled = (winScroll / height) * 100;
+		document.getElementById("myBar").style.width = scrolled + "%";
+	}
 </script>
 
 
