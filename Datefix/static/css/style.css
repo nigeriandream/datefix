@@ -154,13 +154,15 @@
 
 .cta-join {
 	color: #222 !important;
-	background: #f9f9f9 !important;
+	background: url(../images/page/gif1.gif) !important;
+	background-size: cover;
+	background-position: center;
 	border-color: #f9f9f9 !important;
 }
 
 .cta-join:hover {
 	background-color: rgba(255, 255, 255, 0.8) !important;
-	transform: scale(1.03);
+	transform: scale(1.02);
 	font-weight: 700 !important;
 }
 
@@ -3379,7 +3381,7 @@ body.side-panel-left.side-push-panel.stretched #header.sticky-header .container 
 	width: 330px;
 	height: 100%;
 	overflow: auto;
-	padding: 50px 70px 50px 40px;
+	padding: 30px 50px 30px 20px;
 }
 
 body.device-touch #side-panel .side-panel-wrap {
@@ -7814,6 +7816,7 @@ body:not(.device-touch) .button {
 	letter-spacing: 2px;
 	height: 52px;
 	line-height: 52px;
+	font-family: inherit;
 }
 
 .button.button-desc {
@@ -13536,7 +13539,7 @@ input[type="checkbox"]:not(:checked) + label.error {
 	display: block;
 	margin-top: 30px;
 	width: 40px;
-	border-top: 2px solid #444;
+	border-top: 2px solid #fff;
 }
 
 .center .heading-block:after,

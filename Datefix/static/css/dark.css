@@ -2031,6 +2031,8 @@ body #side-panel.dark #side-panel-trigger-close a {
 
 .dark a.list-group-item {
 	color: #bbb;
+	transition: 0.4s ease all;
+	text-transform: uppercase !important;
 }
 
 .dark a.list-group-item .list-group-item-heading {

@@ -1,6 +1,3 @@
-
-
-
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -24,13 +21,15 @@ function showTab(n) {
   //... and run a function that will display the correct step indicator:
   fixStepIndicator(n)
 }
-function objectifyForm(formArray){
+
+function objectifyForm(formArray) {
   var returnArray = {};
-  for (var i = 0; i < formArray.length; i++){
+  for (var i = 0; i < formArray.length; i++) {
     returnArray[formArray[i]['name']] = formArray[i]['value'];
   }
   return returnArray
 }
+
 function nextPrev(n) {
   // This function will figure out which tab to display
   var x = document.getElementsByClassName("tab");
@@ -96,25 +95,23 @@ function topFunction() {
 function submit_form() {
   console.log('date fix');
   $.ajax({
-      url: "/get_data/user",
-      data : objectifyForm($("#user-form").serializeArray()),
-      type : "GET",
-      success: (data)=>{
-          if (data === 'success'){
-            $.ajax({
-              url: "/get_data/partner",
-              data : objectifyForm($("#partner-form").serializeArray()),
-              type : "GET",
-              success: (data)=>{
-                  if (data === 'success'){
-                    window.location.href = '/payment/pay'
-                  }
-              }
+    url: "/get_data/user",
+    data: objectifyForm($("#user-form").serializeArray()),
+    type: "GET",
+    success: (data) => {
+      if (data === 'success') {
+        $.ajax({
+          url: "/get_data/partner",
+          data: objectifyForm($("#partner-form").serializeArray()),
+          type: "GET",
+          success: (data) => {
+            if (data === 'success') {
+              window.location.href = '/payment/pay'
             }
-            )
-
           }
+        })
+
       }
-    })
-    ;
+    }
+  });
 }
