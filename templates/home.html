@@ -8,14 +8,14 @@ Nigeria's best dating site for professionals
 
 <!-- Header
 		============================================= -->
-<header id="header" class="full-header transparent-header border-full-header dark static-sticky"
+<header id="header" class="full-header transparent-header border-full-header static-sticky dark transheader"
 	data-sticky-class="not-dark" data-sticky-offset="full" data-sticky-offset-negative="100">
 
 	<div id="header-wrap">
 
 		<div class="container clearfix">
 
-			<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+			<div id="primary-menu-trigger"><i class="icon-reorder" style="color: #444;"></i></div>
 
 			<!-- Logo
 					============================================= -->
@@ -47,17 +47,11 @@ Nigeria's best dating site for professionals
 
 				</ul>
 
-				{% if not request.user.is_authenticated %}
-				<li><a href={% url 'login' %}>
-						<div><i class="icon-line2-user"></i>Enter</div>
-					</a></li>
-				{% else %}
-				<div id="side-panel-trigger" class="side-panel-trigger"
+				<div id="side-panel-trigger" class="side-panel-trigger user-sidebar-trigger"
 					style="font-size: 12px;	font-weight: 400;	letter-spacing: 3px;    text-transform: uppercase; line-height: 22px;">
-					<a href="#" style="width: fit-content; font-size: inherit;"><i class="icon-line-heart"></i>
+					<a href="#" style="width: auto; font-size: inherit;"><i class="icon-line-heart"></i>
 						Menu</a>
 				</div>
-				{% endif %}
 
 
 
@@ -95,7 +89,7 @@ Nigeria's best dating site for professionals
 							</span>
 						</h1>
 					</div>
-					<div style="margin: 0 auto;	width: auto; display: inline-block;">
+					<div style="margin: 0 auto;	width: auto; display: inline-block; padding: 0 10%;">
 						<div class="row">
 							<a href="#" data-scrollto="#howitworks"
 								class="button button-border button-light button-circle" data-easing="easeInOutExpo"
@@ -139,7 +133,7 @@ Nigeria's best dating site for professionals
 		<div id="section-about">
 
 			<div class="section nomargin parallax dark nobottommargin"
-				style="background-image: url({% static "images/page/pfbgx.png" %}); padding: 70px 50px; background-position: center center; background-color: #000;"
+				style="background-image: url({% static "images/page/pfbgx.png" %}); padding: 70px 25px; background-position: center center; background-color: #000;"
 				data-bottom-top="background-position:15px 80px;" data-top-bottom="background-position:-15px -80px;">
 				<div class="container clearfix topmargin-lg bottommargin-lg">
 
@@ -763,8 +757,17 @@ Nigeria's best dating site for professionals
 {% endblock content %}
 
 {% block script %}
+<script>
+	function mobileViewUpdate() {
+		var viewportWidth = $(window).width();
+		if (viewportWidth < 600) {
+			$("header").removeClass("dark").addClass("not-dark");
+		}
+	}
 
-
+	$(window).load(mobileViewUpdate);
+	$(window).resize(mobileViewUpdate);
+</script>
 
 {% endblock script %}
 

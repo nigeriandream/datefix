@@ -150,6 +150,11 @@ body.side-panel-left.side-push-panel.side-panel-open.stretched #header .containe
 	margin-bottom: 25px;
 }
 
+.login-trigger {
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
 /* ----------------------------------------------------------------------------
 	Page Section
 ---------------------------------------------------------------------------- */
@@ -774,6 +779,11 @@ textarea.border-form-control {
 	}
 
 	#side-panel-trigger {
+		margin: 25px 0 !important;
+		right: 15px !important;
+	}
+
+	.login-trigger {
 		margin: 25px 0 !important;
 		right: 15px !important;
 	}
