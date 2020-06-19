@@ -89,6 +89,51 @@
 	- Youtube Video Backgrounds
 
 ---------------------------------------------------------------- */
+.login-trigger a {
+	display: block;
+	position: relative;
+	width: 14px;
+	height: 14px;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	color: #333;
+	-webkit-transition: color 0.3s ease-in-out;
+	-o-transition: color 0.3s ease-in-out;
+	transition: color 0.3s ease-in-out;
+}
+
+.login-trigger {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: block;
+	cursor: pointer;
+	z-index: 11;
+	margin-right: 5px;
+	float: right;
+	margin: 40px 0 40px 15px;
+}
+
+.user-sidebar-trigger a {
+	background: #740484;
+	padding: 0px 6px 0px 6px;
+	height: 21px !important;
+	border-radius: 7px;
+	color: #fff !important;
+	transition: 0.4s ease background;
+}
+
+.user-sidebar-trigger:hover a {
+	background: #2d0932;
+}
+
+.transheader {
+}
+
+.dark #primary-menu:not(.not-dark) ul li {
+	border-top-color: #444 !important;
+}
+
 .card-category {
 	padding: 15px;
 	background: rgba(255, 255, 255, 0.9);

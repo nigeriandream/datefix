@@ -17,7 +17,8 @@ def login(request):
         email = request.POST['email']
         password = request.POST['password']
         if email and password:
-            user = auth.authenticate(request, username=email, password=password)
+            user = auth.authenticate(
+                request, username=email, password=password)
             if user is None:
                 return redirect('not_found')
             if user is not None:
@@ -49,6 +50,10 @@ def login(request):
         if request.user.is_authenticated:
             return redirect('dashboard')
     return render(request, 'Account/login.html')
+
+
+def test(request):
+    return render(request, 'Account/test.html')
 
 
 def results(request):
@@ -199,7 +204,8 @@ def get_data(request, type_):
         if type_ == 'user':
             user_data = json.loads(user.user_data)
             user_data.update(request.GET)
-            user.user_data = json.dumps(user_data).replace(']', '').replace('[', '')
+            user.user_data = json.dumps(user_data).replace(
+                ']', '').replace('[', '')
             user.save()
             return HttpResponse('success')
 
@@ -209,7 +215,8 @@ def get_data(request, type_):
             user.deal_breaker = "[" + json.dumps(
                 [user_data['dealbreaker1'], user_data['dealbreaker2']]).replace(']', '').replace('[', '') + "]"
             del (user_data['dealbreaker1'], user_data['dealbreaker2'])
-            user.choice_data = json.dumps(user_data).replace(']', '').replace('[', '')
+            user.choice_data = json.dumps(
+                user_data).replace(']', '').replace('[', '')
             user.save()
             return HttpResponse('success')
 

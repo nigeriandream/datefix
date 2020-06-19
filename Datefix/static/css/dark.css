@@ -2292,7 +2292,7 @@ body #side-panel.dark #side-panel-trigger-close a {
 	.dark #primary-menu:not(.not-dark) ul li .mega-menu-content.grid-4 > ul,
 	.dark #primary-menu:not(.not-dark) ul li .mega-menu-content.grid-5 > ul,
 	.dark #primary-menu:not(.not-dark) ul li .mega-menu-content.style-2 li {
-		border-top-color: rgba(255, 255, 255, 0.1) !important;
+		border-top-color: rgba(255, 255, 255, 0.1);
 	}
 
 	.dark #primary-menu:not(.not-dark) > ul > li.sub-menu > a,
