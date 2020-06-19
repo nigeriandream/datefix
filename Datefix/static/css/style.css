@@ -89,6 +89,51 @@
 	- Youtube Video Backgrounds
 
 ---------------------------------------------------------------- */
+.login-trigger a {
+	display: block;
+	position: relative;
+	width: 14px;
+	height: 14px;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	color: #333;
+	-webkit-transition: color 0.3s ease-in-out;
+	-o-transition: color 0.3s ease-in-out;
+	transition: color 0.3s ease-in-out;
+}
+
+.login-trigger {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: block;
+	cursor: pointer;
+	z-index: 11;
+	margin-right: 5px;
+	float: right;
+	margin: 40px 0 40px 15px;
+}
+
+.user-sidebar-trigger a {
+	background: #740484;
+	padding: 0px 6px 0px 6px;
+	height: 21px !important;
+	border-radius: 7px;
+	color: #fff !important;
+	transition: 0.4s ease background;
+}
+
+.user-sidebar-trigger:hover a {
+	background: #2d0932;
+}
+
+.transheader {
+}
+
+.dark #primary-menu:not(.not-dark) ul li {
+	border-top-color: #444 !important;
+}
+
 .card-category {
 	padding: 15px;
 	background: rgba(255, 255, 255, 0.9);
@@ -154,13 +199,15 @@
 
 .cta-join {
 	color: #222 !important;
-	background: #f9f9f9 !important;
+	background: url(../images/page/gif1.gif) !important;
+	background-size: cover;
+	background-position: center;
 	border-color: #f9f9f9 !important;
 }
 
 .cta-join:hover {
 	background-color: rgba(255, 255, 255, 0.8) !important;
-	transform: scale(1.03);
+	transform: scale(1.02);
 	font-weight: 700 !important;
 }
 
@@ -3379,7 +3426,7 @@ body.side-panel-left.side-push-panel.stretched #header.sticky-header .container 
 	width: 330px;
 	height: 100%;
 	overflow: auto;
-	padding: 50px 70px 50px 40px;
+	padding: 30px 50px 30px 20px;
 }
 
 body.device-touch #side-panel .side-panel-wrap {
@@ -7814,6 +7861,7 @@ body:not(.device-touch) .button {
 	letter-spacing: 2px;
 	height: 52px;
 	line-height: 52px;
+	font-family: inherit;
 }
 
 .button.button-desc {
@@ -13536,7 +13584,7 @@ input[type="checkbox"]:not(:checked) + label.error {
 	display: block;
 	margin-top: 30px;
 	width: 40px;
-	border-top: 2px solid #444;
+	border-top: 2px solid #fff;
 }
 
 .center .heading-block:after,

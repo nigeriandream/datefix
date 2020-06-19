@@ -9,7 +9,8 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Roboto:300,400,500,700"
+		rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href={% static 'css/bootstrap.css' %} type="text/css" />
 	<link rel="stylesheet" href={% static 'css/style.css' %} type="text/css" />
 
@@ -27,7 +28,7 @@
 
 	<link rel="stylesheet" href={% static 'css/responsive.css' %} type="text/css" />
 	{% block css %}
-	
+
 	{% endblock css %}
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -41,156 +42,90 @@
 
 	<div class="body-overlay"></div>
 
-	<div id="side-panel" class="dark">
+	<div id="side-panel" class="">
 
 		<div id="side-panel-trigger-close" class="side-panel-trigger"><a href="#"><i class="icon-line-cross"></i></a>
 		</div>
 
 		<div class="side-panel-wrap">
 
-			<div class="widget widget_links clearfix">
-				<!--
-
-				<h4>Signup/Login forms and user sidebar will be added here</h4>
-
-				<h4>Datefix</h4> -->
 
 
-				<div id="tab" class="widget clearfix">
+			<style>
+				.table-bordered th,
+				.table-bordered td {
+					border: 0px;
+				}
 
-					<div class="tabs nobottommargin clearfix" id="sidebar-tabs">
-
-						<ul class="tab-nav clearfix">
-							<li><a href="#tabs-1">Popular</a></li>
-							<li><a href="#tabs-2">Recent</a></li>
-						</ul>
-
-						<div class="tab-container">
-
-							<div class="tab-content clearfix" id="tabs-1">
-								<div id="instagram" class="widget clearfix">
+				.table th,
+				.table td {
+					font-weight: 300;
+				}
+			</style>
 
 
+			<div class="clearfix">
 
-									<h4 class="highlight-me">Instagram Photos</h4>
-									<div id="instagram-photos" class="instagram-photos masonry-thumbs grid-4" data-user="29537872997" data-count="12" data-type="user"></div>
 
-								</div>
-							</div>
-							<div class="tab-content clearfix" id="tabs-2">
-								<div id="recent-post-list-sidebar">
+				{% if not request.user.is_authenticated %}
 
-									<div class="spost clearfix">
-										<div class="entry-image">
-											<a href="#" class="nobg"><img class="rounded-circle" src={% static 'images/magazine/small/1.jpg' %} alt=""></a>
-										</div>
-										<div class="entry-c">
-											<div class="entry-title">
-												<h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
-											</div>
-											<ul class="entry-meta">
-												<li>10th July 2014</li>
-											</ul>
-										</div>
-									</div>
+				<div class="fancy-title title-border">
+					<h4></h4>
+				</div>
 
-									<div class="spost clearfix">
-										<div class="entry-image">
-											<a href="#" class="nobg"><img class="rounded-circle" src={% static 'images/magazine/small/2.jpg' %} alt=""></a>
-										</div>
-										<div class="entry-c">
-											<div class="entry-title">
-												<h4><a href="#">Elit Assumenda vel amet dolorum quasi</a></h4>
-											</div>
-											<ul class="entry-meta">
-												<li>10th July 2014</li>
-											</ul>
-										</div>
-									</div>
-
-									<div class="spost clearfix">
-										<div class="entry-image">
-											<a href="#" class="nobg"><img class="rounded-circle" src={% static 'images/magazine/small/3.jpg' %} alt=""></a>
-										</div>
-										<div class="entry-c">
-											<div class="entry-title">
-												<h4><a href="#">Debitis nihil placeat, illum est nisi</a></h4>
-											</div>
-											<ul class="entry-meta">
-												<li>10th July 2014</li>
-											</ul>
-										</div>
-									</div>
-
-								</div>
-							</div>
-
-						</div>
-
+				<div class="list-group">
+					<a href={% url 'login' %} class="list-group-item list-group-item-action clearfix">Login to Datefix
+						<i class="icon-line2-login float-right"></i></a>
+				</div>
+				{% else %}<div class="feature-box fbox-center fbox-border fbox-dark fbox-effect noborder">
+					<div class="fbox-icon">
+						<a href="#"><img src={% static "images/icons/avatar.jpg" %}
+								class="img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar"></a>
 					</div>
-
+					<h3> John Doe Machiavelli{{request.user.first_name}} {{request.user.last_name}}<span
+							class="subtitle">Personality test result summary here</span></h3>
 				</div>
 
 
-				<div style="font-size: 14px; line-height: 1.7;">
-					<!-- <address style="line-height: 1.7;">
-						795 Rd 11, Chevron Drive<br>
-						Lekki Phase 1, Lagos<br>
-					</address>
+				<table class="table table-bordered table-striped">
+					<tbody>
+						<tr>
+							<th style="padding-right: 4px;">
+								<abbr title="Username"><i class="icon-user"></i></abbr>
+							</th>
+							<td>{{request.user.username}}</td>
+						</tr>
+						<tr>
+							<th style="padding-right: 4px;">
+								<abbr title="E-mail Address"><i class="icon-email"></i></abbr>
+							</th>
+							<td>{{request.user.email}}</td>
+						</tr>
+						<tr>
+							<th style="padding-right: 4px;">
+								<abbr title="Phone Number"><i class="icon-phone"></i></abbr>
+							</th>
+							<td>+1234567890123</td>
+						</tr>
+					</tbody>
+				</table>
 
-					<div class="clear topmargin-sm"></div>
-
-					<abbr title="Phone Number">Phone:</abbr> (234) 012 345 6789<br>
-					<abbr title="Whatsapp">Whatsapp:</abbr> (234) 012 345 6789<br>
-					<abbr title="Email Address">Email:</abbr> info@datefix.me -->
+				<div class="list-group">
+					<a href={% url 'dashboard' %} class="list-group-item list-group-item-action clearfix">Datefix
+						Session
+						<i class="icon-heart float-right"></i></a>
+					<a href="#" class="list-group-item list-group-item-action clearfix">Chat <i
+							class="icon-envelope2 float-right"></i></a>
+					<a href="#" class="list-group-item list-group-item-action clearfix">Billing <i
+							class="icon-credit-cards float-right"></i></a>
+					<a href="#" class="list-group-item list-group-item-action clearfix">Edit Profile <i
+							class="icon-cog float-right"></i></a>
+					<a href={% url 'logout' %} class="list-group-item list-group-item-action clearfix">Logout <i
+							class="icon-line2-logout float-right"></i></a>
 				</div>
+				{% endif %}
 
-			</div>
 
-			<div class="widget clearfix side-widget-social">
-
-				<h4>Connect With Us</h4>
-
-				<a href="#" class="social-icon si-small si-colored si-facebook" title="Facebook">
-					<i class="icon-facebook"></i>
-					<i class="icon-facebook"></i>
-				</a>
-				<a href="#" class="social-icon si-small si-colored si-twitter" title="Twitter">
-					<i class="icon-twitter"></i>
-					<i class="icon-twitter"></i>
-				</a>
-				<a href="#" class="social-icon si-small si-colored si-github" title="Github">
-					<i class="icon-github"></i>
-					<i class="icon-github"></i>
-				</a>
-				<a href="#" class="social-icon si-small si-colored si-pinterest" title="Pinterest">
-					<i class="icon-pinterest"></i>
-					<i class="icon-pinterest"></i>
-				</a>
-				<a href="#" class="social-icon si-small si-colored si-forrst" title="Forrst">
-					<i class="icon-forrst"></i>
-					<i class="icon-forrst"></i>
-				</a>
-				<a href="#" class="social-icon si-small si-colored si-linkedin" title="LinkedIn">
-					<i class="icon-linkedin"></i>
-					<i class="icon-linkedin"></i>
-				</a>
-				<a href="#" class="social-icon si-small si-colored si-gplus" title="Google Plus">
-					<i class="icon-gplus"></i>
-					<i class="icon-gplus"></i>
-				</a>
-				<a href="#" class="social-icon si-small si-colored si-instagram" title="Instagram">
-					<i class="icon-instagram"></i>
-					<i class="icon-instagram"></i>
-				</a>
-				<a href="#" class="social-icon si-small si-colored si-flickr" title="Flickr">
-					<i class="icon-flickr"></i>
-					<i class="icon-flickr"></i>
-				</a>
-				<a href="#" class="social-icon si-small si-colored si-skype" title="Skype">
-					<i class="icon-skype"></i>
-					<i class="icon-skype"></i>
-				</a>
 
 			</div>
 
@@ -205,10 +140,10 @@
 
 		<div class="container-fluid" style="padding:0px;">
 			{% block content %}
-			
+
 			{% endblock content %}
 		</div>
-		
+
 	</div><!-- #wrapper end -->
 
 	<!-- Go To Top
@@ -239,9 +174,9 @@
 	</script>
 
 
-	
 
-							
+
+
 
 	{% block script %}
 
