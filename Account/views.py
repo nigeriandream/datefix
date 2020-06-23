@@ -59,7 +59,11 @@ def test(request):
 def results(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
-        matches = user.successful_list()
+        matches = None
+        if user.sex == 'female':
+            matches = user.successful_list()
+        if user.sex == 'male':
+            matches = user.matches_()
         select = [[x[0][0], x[1][1]] for x in matches]
         return render(request, 'Account/results.html',
                       {'matches': matches, "select": select, "matches_length": len(matches)})
@@ -73,14 +77,17 @@ def results(request):
             user.successful_matches = json.dumps(success)
             user.matches = json.dumps(selected)
             user.save()
+            # add user to match chatters
+            user_ = user.objects.get(id=int(i))
+            user_.matches = json.loads(user_.matches).append(user.id)
+            user_.save()
             chat = ChatThread()
             chat.first_user = user
-            chat.second_user = User.objects.get(id=int(i))
+            chat.second_user = user_
             chat.secret = create_private_key()
             chat.date_created = datetime.datetime.now()
             chat.save()
             selected.remove(i)
-
             return redirect('chatroom')
         if len(selected) > 0:
             match_comp = [x[1][1] for x in success if x[0][1] in selected]
@@ -95,7 +102,13 @@ def results(request):
 
 def signup(request):
     if request.method == 'POST':
-        if request.POST['password1'] == request.POST['password2'] and request.POST['password1'] != '':
+        if not (request.POST['password1'] == request.POST['password2'] and request.POST['password1'] != ''):
+            return redirect('login')
+
+        try:
+            User.objects.get(email=request.POST['email'])
+            return redirect('login')
+        except User.DoesNotExist:
             user = User.objects.create_user(
                 username=get_username(),
                 email=request.POST['email'],
@@ -108,7 +121,7 @@ def signup(request):
             user.save()
             return redirect('login')
 
-    elif request.method == 'GET':
+    if request.method == 'GET':
         if request.user.is_authenticated:
             return redirect('dashboard')
 
@@ -137,8 +150,7 @@ def matching(request):
         user = User.objects.get(id=request.user.id)
         if user.sex == 'female':
             match_user(user)
-            return redirect('results')
-    return redirect('chatroom')
+        return redirect('results')
 
 
 def adjust_min(request):
