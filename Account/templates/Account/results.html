@@ -76,7 +76,7 @@ Match Results
 		<span data-animate="fadeInUp" style="color:#eee;" data-delay="300">Best matches from mutual preferences</span>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
-			<li class="breadcrumb-item"><a href="#">John Doe</a></li>
+			<li class="breadcrumb-item"><a href="#">{{request.user.first_name}} {{ request.user.last_name }}</a></li>
 			<li class="breadcrumb-item active" aria-current="page">Match Results</li>
 		</ol>
 	</div>
