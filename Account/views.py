@@ -62,11 +62,14 @@ def results(request):
         matches = None
         if user.sex == 'female':
             matches = user.successful_list()
+            select = [[x[0][0], x[1][1]] for x in matches]
+            return render(request, 'Account/results.html',
+                          {'matches': matches, "select": select, "matches_length": len(matches)})
         if user.sex == 'male':
-            matches = user.matches_()
-        select = [[x[0][0], x[1][1]] for x in matches]
-        return render(request, 'Account/results.html',
-                      {'matches': matches, "select": select, "matches_length": len(matches)})
+            matches = [User.objects.get(id=x) for x in user.matches_()]
+            return render(request, 'Account/results_m.html',
+                          {'matches': matches, "matches_length": len(matches)})
+
     if request.method == 'POST':
         selected = request.POST['matches']
         success = user.successful_list()
@@ -143,6 +146,8 @@ def dashboard(request):
             user_details = user.user_data_()
             user_details['registered'] = True
             return render(request, 'Account/profile.html', user_details)
+        if user.complete_match():
+            return redirect('chatroom')
 
 
 def matching(request):

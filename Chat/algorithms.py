@@ -1,4 +1,6 @@
-from Account.models import User
+import json
+
+from Account.models import User, Couple
 from datetime import datetime
 from Account.algorithms import get_new_match
 from .models import ChatThread, ChatMessage
@@ -84,3 +86,37 @@ def in_my_chat(user, match):
             return True
         except ChatThread.DoesNotExist:
             return False
+
+
+def select_match(user, id_):
+    chat_thread = ChatThread.objects.get(id=id_)
+    if chat_thread.position(user) == 'first':
+        chat_thread.date_first = True
+    if chat_thread.position(user) == 'second':
+        chat_thread.date_second = True
+    return
+
+
+def end_session(id_):
+    chat_thread = ChatThread.objects.get(id=id_)
+    if chat_thread.date_first is True and chat_thread.date_second is True:
+        # send mail to both partners
+        Couple.objects.create(first_partner_id=chat_thread.first_user.id,
+                              second_partner_id=chat_thread.second_user.id,
+                              datetime=datetime.now())
+    f = User.objects.get(id=chat_thread.first_user_id)
+    s = User.objects.get(id=chat_thread.second_user_id)
+    jilt(f, s)
+    jilt(s, f)
+    chat_thread.delete()
+    f.matches = "[]"
+    s.matches = "[]"
+    f.save()
+    s.save()
+    return
+
+
+def jilt(you, user):
+    you.jilted_matches = json.loads(user.jilted_matches).append(user.id)
+    you.save()
+    return

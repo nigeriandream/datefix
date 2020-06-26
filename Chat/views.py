@@ -44,8 +44,8 @@ def request_(request, match_id):
 
 def get_chat(request, id_):
     if request.method == 'GET':
-        chat = ChatThread.objects.get(id=id_)
-        return HttpResponse(json.dumps(chat.get_chat(chat.position(request.user))))
+        chat_thread = ChatThread.objects.get(id=id_)
+        return HttpResponse(json.dumps(chat_thread.get_chat(chat_thread.position(request.user))))
 
 
 def get_profile(request, user_id):
@@ -80,14 +80,14 @@ def profile_picture(image):
         return None
 
 
-def last_message(chat):
-    if chat.last_message() is not None:
-        return {'id': chat.last_message().id,
-                'time': chat.last_message().datetime.time().__str__(),
-                'message': chat.last_message_text(),
-                'sender_id': chat.last_message().sender.id,
-                'sender': chat.last_message().sender.username,
-                'status': chat.last_message().send_status}
+def last_message(chat_thread):
+    if chat_thread.last_message() is not None:
+        return {'id': chat_thread.last_message().id,
+                'time': chat_thread.last_message().datetime.time().__str__(),
+                'message': chat_thread.last_message_text(),
+                'sender_id': chat_thread.last_message().sender.id,
+                'sender': chat_thread.last_message().sender.username,
+                'status': chat_thread.last_message().send_status}
     else:
         return None
 
@@ -108,3 +108,4 @@ def delete_message(request, chat_id, id_):
 def create_key(request):
     key = create_private_key()
     return HttpResponse(key)
+

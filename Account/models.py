@@ -86,6 +86,21 @@ class User(AbstractUser):
         return [x for x in notifications if
                 (str(x.id) not in notify['read']) and (str(x.id) not in notify['deleted'])].__len__()
 
+    def origin(self):
+        return self.user_data_()['origin-state']
+
+    def residence(self):
+        return self.user_data_()['residence-state']
+
+    def religion(self):
+        return self.user_data_()['religion']
+
+    def denomination(self):
+        return self.user_data_()['denomination']
+
+    def has_children(self):
+        return self.user_data_()['children']
+
 
 class Couple(models.Model):
     first_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match1')
