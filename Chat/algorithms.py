@@ -88,35 +88,49 @@ def in_my_chat(user, match):
             return False
 
 
-def select_match(user, id_):
-    chat_thread = ChatThread.objects.get(id=id_)
+def select_match(chat_thread, user, you):
     if chat_thread.position(user) == 'first':
         chat_thread.date_first = True
+
     if chat_thread.position(user) == 'second':
         chat_thread.date_second = True
+
+    if (chat_thread.position(user) == 'first' and chat_thread.date_second) or (
+            chat_thread.position(user) == 'second' and chat_thread.date_first):
+        try:
+            Couple.objects.get(couple_name=chat_thread.chat_name())
+        except Couple.DoesNotExist:
+            Couple.objects.create(first_partner_id=chat_thread.first_user.id,
+                                  second_partner_id=chat_thread.second_user.id,
+                                  datetime=datetime.now(), couple_name=chat_thread.chat_name())
+        end_session(chat_thread, user, you)
     return
 
 
-def end_session(id_):
-    chat_thread = ChatThread.objects.get(id=id_)
-    if chat_thread.date_first is True and chat_thread.date_second is True:
-        # send mail to both partners
-        Couple.objects.create(first_partner_id=chat_thread.first_user.id,
-                              second_partner_id=chat_thread.second_user.id,
-                              datetime=datetime.now())
-    f = User.objects.get(id=chat_thread.first_user_id)
-    s = User.objects.get(id=chat_thread.second_user_id)
-    jilt(f, s)
-    jilt(s, f)
-    chat_thread.delete()
-    f.matches = "[]"
-    s.matches = "[]"
-    f.save()
-    s.save()
-    return
-
-
-def jilt(you, user):
-    you.jilted_matches = json.loads(user.jilted_matches).append(user.id)
+def end_session(chat_thread, user, you):
+    list_ = you.matches_()
+    list_.remove(user.id)
+    you.matches = json.dumps(list_)
     you.save()
+    list_ = user.matches_()
+    list_.remove(you.id)
+    user.matches = json.dumps(list_)
+    user.save()
+    chat_thread.delete()
+    return
+
+
+def reject(you, user):
+    if user.id not in json.loads(you.jilted_matches):
+        list_ = json.loads(you.jilted_matches)
+        list_.append(user.id)
+        you.jilted_matches = json.dumps(list_)
+        you.save()
+    return
+
+
+def jilt(chat, you, user):
+    reject(you, user)
+    reject(user, you)
+    end_session(chat, user, you)
     return

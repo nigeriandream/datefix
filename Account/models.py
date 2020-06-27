@@ -105,6 +105,7 @@ class User(AbstractUser):
 class Couple(models.Model):
     first_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match1')
     second_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match2')
+    couple_name = models.CharField(max_length=30)
     datetime = models.DateTimeField()
 
 

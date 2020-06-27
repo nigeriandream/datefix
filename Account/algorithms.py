@@ -170,7 +170,7 @@ def get_new_match(user, id_):
     return False
 
 
-def update_list_field(user, item, value):
+def update_profile_field(user, item, value):
     data = json.loads(user.user_data)
     data[item] = value
     user.profile_changed = True
@@ -183,13 +183,6 @@ def adjust_minimum(user, score):
         user.min_score = score
         user.save()
         match_user(user)
-
-
-def jilt(user, id_):
-    jilted_list = user.jilted_list()
-    jilted_list.append(str(id_))
-    user.jilted_matches = ','.join(jilted_list)
-    user.save()
 
 
 def merge_sort(n_list):
