@@ -1,5 +1,7 @@
 import json
 
+from django.db.models import Q
+
 from Account.models import User, Couple
 from datetime import datetime
 from Account.algorithms import get_new_match
@@ -134,3 +136,66 @@ def jilt(chat, you, user):
     reject(user, you)
     end_session(chat, user, you)
     return
+
+
+def get_chat(request, id_):
+    if request.method == 'GET':
+        chat_thread = ChatThread.objects.get(id=id_)
+        return json.dumps(chat_thread.get_chat(chat_thread.position(request.user)))
+
+
+def get_chat_threads(request, user_id):
+    user = User.objects.get(id=user_id)
+    if request.method == 'GET':
+        chats = ChatThread.objects.filter(Q(first_user_id=request.user.id) | Q(
+            second_user_id=request.user.id)).order_by('last_message_date')
+        data = [{
+            "chat_id": x.id,
+            "chat_link": ''.join(['/chat/api/chat/', str(x.id)]),
+            "username": x.get_receiver(user).username,
+            "first_name": x.get_receiver(user).first_name,
+            "last_name": x.get_receiver(user).last_name,
+            "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
+            "last_message": last_message(x)
+        } for x in chats]
+        return json.dumps({'user_id': user_id, "chat_threads": data})
+
+
+def delete_message(request, chat_id, id_):
+    chat = ChatThread.objects.get(id=chat_id)
+    position = chat.position(request.user)
+    list_ = {'first': chat.first_deleted_(), 'second': chat.second_deleted_()}
+    list_ = list_[position]
+    list_.append(str(id_))
+    if position == 'first':
+        chat.first_deleted = ','.join(list_)
+    elif position == 'second':
+        chat.second_deleted = ','.join(list_)
+    return id_
+
+
+def profile_picture(image):
+    try:
+        return image.url
+    except ValueError:
+        return None
+
+
+def last_message(chat_thread):
+    if chat_thread.last_message() is not None:
+        return {'id': chat_thread.last_message().id,
+                'time': chat_thread.last_message().datetime.time().__str__(),
+                'message': chat_thread.last_message_text(),
+                'sender_id': chat_thread.last_message().sender.id,
+                'sender': chat_thread.last_message().sender.username,
+                'status': chat_thread.last_message().send_status}
+    else:
+        return None
+
+
+def get_profile(request, user_id):
+    if request.method == 'GET':
+        user = User.objects.get(id=user_id)
+        return json.dumps({'username': user.username,
+                           'first_name': user.first_name, 'last_name': user.last_name,
+                           'profile_pic': profile_picture(user.profile_picture)})

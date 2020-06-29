@@ -6,8 +6,8 @@ from django.utils.datetime_safe import datetime
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.PublicKey import RSA
 
+
 # Create your models here.
-from Chat.algorithms import end_session
 
 
 class ChatThread(models.Model):
@@ -22,7 +22,7 @@ class ChatThread(models.Model):
     first_deleted = models.TextField()
     second_deleted = models.TextField()
     secret = models.CharField(max_length=64)
-    expiry_date = models.DateTimeField()
+    expiry_date = models.DateTimeField(default=None)
     last_message_date = models.DateTimeField(default=None, null=True)
 
     def chat_name(self):
@@ -34,9 +34,6 @@ class ChatThread(models.Model):
 
         if self.date_first is False or self.date_second is False:
             self.delete()
-
-        if self.expiry_date.__lt__(datetime.now()):
-            end_session(self)
 
     def show_detail(self):
         if self.date_created == (self.date_created + (timedelta(days=7))):

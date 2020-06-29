@@ -270,3 +270,5 @@ def not_found(request):
 # verified
 def verification(request):
     return render(request, 'Account/verification-link-sent.html')
+
+
