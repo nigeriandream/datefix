@@ -9,7 +9,6 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('match/', matching, name='match'),
     path('results/', results, name='results'),
-    path('test/', test, name='test'),
     path('account/not_found/', not_found, name='not_found'),
     path('account/verify/', verify, name="verify"),
     path('account/verified/', verified, name='verified'),

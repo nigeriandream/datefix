@@ -1,3 +1,6 @@
+from django.core.mail import send_mail
+from django.shortcuts import redirect
+
 from .models import User, Couple
 import random
 import json
@@ -212,3 +215,30 @@ def merge_sort(n_list):
             j = j + 1
             k = k + 1
     return n_list[:9]
+
+
+def flash(request, message, status):
+    request.session['message'] = message
+    request.session['status'] = status
+    return
+
+
+def display(request):
+    if 'message' in request.session:
+        message = request.session['message']
+        status = request.session['status']
+        del request.session['message'], request.session['status']
+        return message, status
+    return None
+
+
+def send_verification(request):
+    if not request.session['verification_sent']:
+        request.session['code'] = request.POST['csrfmiddlewaretoken']
+        link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}?email={request.POST["email"]}'
+        message = f''' Dear {request.user.first_name}, \n We are excited to have you on Datefix. Below is the link to 
+    verify your email address, click on this link to continue.\n \n {link} \nIf you have no account with Datefix, 
+    please ignore.\n\nCheers,\nDatefix Team. '''
+        send_mail('Email Verification', message, 'admin@datefix.me', [request.POST['email']])
+        request.session['verification_sent'] = True
+    return
