@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .algorithms import create_private_key, get_chat, get_profile, get_chat_threads, delete_message
+from .algorithms import create_private_key, get_chat, get_profile, get_chat_threads, delete_message, update_secret
 
 from Account.models import User
 
@@ -30,3 +30,8 @@ def user_chats(request, user_id):
 
 def delete_msg(request, chat_id, id_):
     return HttpResponse(delete_message(request, chat_id, id_))
+
+
+def update_chat_secret(request, chat_id):
+    return HttpResponse(f'The chat with ID {chat_id} has '
+                        f'updated its secret to {update_secret(chat_id)}.')
