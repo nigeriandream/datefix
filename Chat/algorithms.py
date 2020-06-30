@@ -1,6 +1,9 @@
-from Account.models import User
+import json
+
+from django.db.models import Q
+
+from Account.models import User, Couple
 from datetime import datetime
-from Account.algorithms import get_new_match
 from .models import ChatThread, ChatMessage
 from Crypto.PublicKey import RSA
 import secrets
@@ -19,68 +22,134 @@ def create_private_key():
         return secret
 
 
+def update_secret(chat_id):
+    chat = ChatThread.objects.get(id=chat_id)
+    chat.secret = create_private_key()
+    chat.save()
+    return chat.secret
+
+
 def create_chat(user, match):
     try:
-        ChatThread.objects.get(first_user=user, second_user=match)
+        ChatThread.objects.get(first_user_id=user.id, second_user_id=match.id)
     except ChatThread.DoesNotExist:
         try:
-            ChatThread.objects.get(first_user=match, second_user=user)
+            ChatThread.objects.get(first_user_id=match.id, second_user_id=user.id)
         except ChatThread.DoesNotExist:
-            peep = User.objects.get(id=match.id)
             chat = ChatThread()
             chat.first_user = user
-            chat.second_user = peep
+            chat.second_user = match
             chat.datetime = datetime.now()
             chat.secret = create_private_key()
             chat.save()
 
 
-def delete_chat(user, match):
-    try:
-        ChatThread.objects.get(first_user=user, second_user=match).delete()
-    except ChatThread.DoesNotExist:
+def select_match(chat_thread, user, you):
+    if chat_thread.position(user) == 'first':
+        chat_thread.date_first = True
+
+    if chat_thread.position(user) == 'second':
+        chat_thread.date_second = True
+
+    if (chat_thread.position(user) == 'first' and chat_thread.date_second) or (
+            chat_thread.position(user) == 'second' and chat_thread.date_first):
         try:
-            ChatThread.objects.get(first_user=match, second_user=user).delete()
-        except ChatThread.DoesNotExist:
-            pass
+            Couple.objects.get(couple_name=chat_thread.chat_name())
+        except Couple.DoesNotExist:
+            Couple.objects.create(first_partner_id=chat_thread.first_user.id,
+                                  second_partner_id=chat_thread.second_user.id,
+                                  datetime=datetime.now(), couple_name=chat_thread.chat_name())
+        end_session(chat_thread, user, you)
+    return
 
 
-def reply_request(choice, user, match):
-    if choice is True:
-        create_chat(user, match)
-        send_message(user, match)
-        return True
+def end_session(chat_thread, user, you):
+    list_ = you.matches_()
+    list_.remove(user.id)
+    you.matches = json.dumps(list_)
+    you.save()
+    list_ = user.matches_()
+    list_.remove(you.id)
+    user.matches = json.dumps(list_)
+    user.save()
+    chat_thread.delete()
+    return
 
+
+def reject(you, user):
+    if user.id not in json.loads(you.jilted_matches):
+        list_ = json.loads(you.jilted_matches)
+        list_.append(user.id)
+        you.jilted_matches = json.dumps(list_)
+        you.save()
+    return
+
+
+def jilt(chat, you, user):
+    reject(you, user)
+    reject(user, you)
+    end_session(chat, user, you)
+    return
+
+
+def get_chat(request, id_):
+    if request.method == 'GET':
+        chat_thread = ChatThread.objects.get(id=id_)
+        return json.dumps(chat_thread.get_chat(chat_thread.position(request.user)))
+
+
+def get_chat_threads(request, user_id):
+    user = User.objects.get(id=user_id)
+    if request.method == 'GET':
+        chats = ChatThread.objects.filter(Q(first_user_id=request.user.id) | Q(
+            second_user_id=request.user.id)).order_by('last_message_date')
+        data = [{
+            "chat_id": x.id,
+            "chat_link": ''.join(['/chat/api/chat/', str(x.id)]),
+            "username": x.get_receiver(user).username,
+            "first_name": x.get_receiver(user).first_name,
+            "last_name": x.get_receiver(user).last_name,
+            "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
+            "last_message": last_message(x)
+        } for x in chats]
+        return json.dumps({'user_id': user_id, "chat_threads": data})
+
+
+def delete_message(request, chat_id, id_):
+    chat = ChatThread.objects.get(id=chat_id)
+    position = chat.position(request.user)
+    list_ = {'first': chat.first_deleted_(), 'second': chat.second_deleted_()}
+    list_ = list_[position]
+    list_.append(str(id_))
+    if position == 'first':
+        chat.first_deleted = ','.join(list_)
+    elif position == 'second':
+        chat.second_deleted = ','.join(list_)
+    return id_
+
+
+def profile_picture(image):
+    try:
+        return image.url
+    except ValueError:
+        return None
+
+
+def last_message(chat_thread):
+    if chat_thread.last_message() is not None:
+        return {'id': chat_thread.last_message().id,
+                'time': chat_thread.last_message().datetime.time().__str__(),
+                'message': chat_thread.last_message_text(),
+                'sender_id': chat_thread.last_message().sender.id,
+                'sender': chat_thread.last_message().sender.username,
+                'status': chat_thread.last_message().send_status}
     else:
-        delete_chat(user, match)
-        if get_new_match(user, match) is True:
-            return None
-        else:
-            return False
+        return None
 
 
-def send_message(user, match):
-    pass
-
-
-def delete_msg(user, msg_id, chat, type_):
-    if type_ == 'me':
-        if chat.position(user) == 'first':
-            chat.first_deleted = ','.join(chat.first_deleted_().append(str(msg_id)))
-        else:
-            chat.second_deleted = ','.join(chat.second_deleted_().append(str(msg_id)))
-    elif type_ == 'everyone':
-        ChatMessage.objects.get(id=msg_id).delete()
-    chat.save()
-
-
-def in_my_chat(user, match):
-    try:
-        ChatThread.objects.get(first_user=user, second_user=match)
-        return True
-    except ChatThread.DoesNotExist:
-        try:
-            ChatThread.objects.get(first_user=match, second_user=user)
-            return True
-        except ChatThread.DoesNotExist:
-            return False
+def get_profile(request, user_id):
+    if request.method == 'GET':
+        user = User.objects.get(id=user_id)
+        return json.dumps({'username': user.username,
+                           'first_name': user.first_name, 'last_name': user.last_name,
+                           'profile_pic': profile_picture(user.profile_picture)})

@@ -1,72 +1,76 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import auth
-from .models import User
+from .models import User, PersonalityTest
 import json
-from .algorithms import get_username, match_user
-from Chat.algorithms import in_my_chat, create_private_key
-from Chat.models import ChatThread
-import datetime
-from django.core.mail import send_mail
+from .algorithms import get_username, match_user, flash, display, send_verification
+from Chat.algorithms import create_chat
 
 
 # Create your views here.
 
-
+# login function verified
 def login(request):
     if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        if email and password:
+        if not request.POST.get('email', False) or not request.POST.get('password', False):
+            flash(request, 'No login details was entered !', 'danger')
+            return redirect('login')
+        try:
+            user = User.objects.get(email=request.POST['email'])
+
+            if not user.verified:
+                send_verification(request)
+                return redirect('verification')
+
             user = auth.authenticate(
-                request, username=email, password=password)
+                request, username=request.POST['email'], password=request.POST['password'])
             if user is None:
-                return redirect('not_found')
+                flash(request, 'Password Incorrect !', 'danger')
+                return redirect('login')
             if user is not None:
                 auth.login(request, user)
+                flash(request, f'{user.username} is logged in successfully !', 'success')
                 return redirect('dashboard')
+        except User.DoesNotExist:
+            flash(request, 'There is no Account with this email address !', 'info')
+            return redirect('not_found')
 
-            # if user is not None and user.verified  == False:
-            #     if 'verified' in request.session and request.session['email'] == email:
-            #         del request.session['verified'], request.session['email']
-            #         user.verified = True
-            #         user.save()
-            #         auth.login(request, user)
-            #         return redirect('dashboard')
-
-            # request.session['code'] = request.POST['csrfmiddlewaretoken'] link = f'http://{request.get_host(
-            # )}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}?email={email}' message = f''' Dear {
-            # user.first_name}, \n We are excited to have you on Datefix. Below is the link to verify your email
-            # address, click on this link to continue.\n \n {link} \n
-
-            #     If you have no account with Datefix, please ignore.
-
-            #     Cheers,
-            #     Datefix Team.
-            #     '''
-            #     send_mail('Email Verification', message, 'admin@datefix.me', [email])
-            #     return redirect('verification')
-
-    elif request.method == 'GET':
+    if request.method == 'GET':
         if request.user.is_authenticated:
             return redirect('dashboard')
-    return render(request, 'Account/login.html')
+        flash_ = display(request)
+        if flash_ is None:
+            return render(request, 'Account/login.html')
+        return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1]})
 
 
-def test(request):
-    return render(request, 'Account/test.html')
+def personality(request):
+    if request.method == 'GET':
+        test_ = PersonalityTest()
+        try:
+            test_ = PersonalityTest.objects.get(email=request.GET['email'])
+        except PersonalityTest.DoesNotExist:
+            test_.email = request.GET['email']
+        test_.personalities = request.GET['personality']
+        test_.scores = request.GET['score']
+        test_.save()
+        return HttpResponse('Personality Test Taken')
 
 
+# verified
 def results(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
         matches = None
         if user.sex == 'female':
             matches = user.successful_list()
+            select = [[x[0][0], x[1][1]] for x in matches]
+            return render(request, 'Account/results.html',
+                          {'matches': matches, "select": select, "matches_length": len(matches)})
         if user.sex == 'male':
-            matches = user.matches_()
-        select = [[x[0][0], x[1][1]] for x in matches]
-        return render(request, 'Account/results.html',
-                      {'matches': matches, "select": select, "matches_length": len(matches)})
+            matches = [User.objects.get(id=x) for x in user.matches_()]
+            return render(request, 'Account/results_m.html',
+                          {'matches': matches, "matches_length": len(matches)})
+
     if request.method == 'POST':
         selected = request.POST['matches']
         success = user.successful_list()
@@ -79,14 +83,12 @@ def results(request):
             user.save()
             # add user to match chatters
             user_ = user.objects.get(id=int(i))
-            user_.matches = json.loads(user_.matches).append(user.id)
+            match_list = json.loads(user_.matches)
+            match_list.append(user.id)
+            user_.matches = json.dumps(match_list)
             user_.save()
-            chat = ChatThread()
-            chat.first_user = user
-            chat.second_user = user_
-            chat.secret = create_private_key()
-            chat.date_created = datetime.datetime.now()
-            chat.save()
+            create_chat(user, user_)
+            # send notification to both partners
             selected.remove(i)
             return redirect('chatroom')
         if len(selected) > 0:
@@ -100,13 +102,21 @@ def results(request):
         return redirect('chatroom')
 
 
+# signup verified
 def signup(request):
     if request.method == 'POST':
         if not (request.POST['password1'] == request.POST['password2'] and request.POST['password1'] != ''):
+            flash(request, 'The passwords are not equal !', 'danger')
+            return redirect('login')
+
+        if not request.POST.get('email', False) or not request.POST.get('last-name', False) or not request.POST.get(
+                'first-name', False):
+            flash(request, 'Some Fields are empty !', 'danger')
             return redirect('login')
 
         try:
             User.objects.get(email=request.POST['email'])
+            flash(request, 'This email already exists !', 'danger')
             return redirect('login')
         except User.DoesNotExist:
             user = User.objects.create_user(
@@ -119,15 +129,19 @@ def signup(request):
                 phone=request.POST['phone']
             )
             user.save()
+            flash(request, f"{request.POST['first-name']}, your account has been created successfully.", 'success')
             return redirect('login')
 
     if request.method == 'GET':
         if request.user.is_authenticated:
             return redirect('dashboard')
+        flash_ = display(request)
+        if flash_ is None:
+            return render(request, 'Account/login.html')
+        return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1]})
 
-        return render(request, 'Account/login.html')
 
-
+# verified
 def dashboard(request):
     if request.method == 'GET':
         if not request.user.is_authenticated:
@@ -143,26 +157,20 @@ def dashboard(request):
             user_details = user.user_data_()
             user_details['registered'] = True
             return render(request, 'Account/profile.html', user_details)
+        if user.complete_match():
+            return redirect('chatroom')
 
 
+# verified
 def matching(request):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
         if user.sex == 'female':
-            match_user(user)
-        return redirect('results')
+            matched = match_user(user)
+            if not matched:
+                return HttpResponse('fail')
 
-
-def adjust_min(request):
-    user = None
-    if request.method == 'GET':
-        try:
-            user = User.objects.get(id=request.GET['user_id'])
-            return HttpResponse('fail')
-        except User.DoesNotExist:
-            user.min_score = request.GET['min_score']
-            user.save()
-            return HttpResponse('success')
+        return HttpResponse('success')
 
 
 def delete_notifications(request, id_):
@@ -202,9 +210,9 @@ def read_notifications(request):
         return HttpResponse('not done')
 
 
+# verified
 def get_data(request, type_):
     if request.method == 'GET':
-        print(request.GET)
         user = User.objects.get(id=request.user.id)
         if user.user_data is None or user.user_data == '':
             user.user_data = "{}"
@@ -235,23 +243,37 @@ def get_data(request, type_):
         return HttpResponse('fail')
 
 
+# verified
 def verified(request):
     return render(request, 'Account/account-verified.html')
 
 
+# verify function is verified
 def verify(request):
-    if request.method == 'GET' and 'code' in request.session:
-        if request.session['code'] == request.GET['code']:
-            del request.session['code']
-            request.session['verified'] = True
-            request.session['email'] = request.GET['email']
-            return redirect('verification')
-    return redirect('login')
+    if request.method == 'POST':
+        flash(request, 'Invalid Request !', 'danger')
+        return redirect('login')
+
+    if 'code' not in request.session:
+        flash(request, 'Code has expired !', 'danger')
+        return redirect('login')
+
+    del request.session['code']
+    request.session['verified'] = True
+    request.session['email'] = request.GET['email']
+    return redirect('verification')
 
 
+# verified
 def not_found(request):
     return render(request, 'Account/account-not-found.html')
 
 
+# verified
 def verification(request):
     return render(request, 'Account/verification-link-sent.html')
+
+
+# verified
+def test(request):
+    return render(request, 'Account/test.html')

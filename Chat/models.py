@@ -9,6 +9,7 @@ from Crypto.PublicKey import RSA
 
 # Create your models here.
 
+
 class ChatThread(models.Model):
     first_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='chatter1')
     second_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='chatter2')
@@ -21,7 +22,11 @@ class ChatThread(models.Model):
     first_deleted = models.TextField()
     second_deleted = models.TextField()
     secret = models.CharField(max_length=64)
+    expiry_date = models.DateTimeField(default=None)
     last_message_date = models.DateTimeField(default=None, null=True)
+
+    def chat_name(self):
+        return f'User_{self.first_user_id} and User_{self.second_user_id}'
 
     def self_delete(self):
         if not self.show_first and not self.show_second:
@@ -36,6 +41,11 @@ class ChatThread(models.Model):
 
     def first_deleted_(self):
         return str(self.first_deleted).split(',')
+
+    def expired(self):
+        if self.expiry_date.__lt__(datetime.now()):
+            return True
+        return False
 
     def second_deleted_(self):
         return str(self.second_deleted).split(',')
@@ -68,13 +78,13 @@ class ChatThread(models.Model):
         return data
 
     def get_receiver(self, user):
-        if self.first_user.id == user.id:
+        if self.first_user_id == user.id:
             return self.second_user
         else:
             return self.first_user
 
     def position(self, user):
-        if self.first_user.id == user.id:
+        if self.first_user_id == user.id:
             return 'first'
         return 'second'
 
