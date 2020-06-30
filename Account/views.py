@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import auth
-from .models import User
+from .models import User, PersonalityTest
 import json
 from .algorithms import get_username, match_user, flash, display, send_verification
 from Chat.algorithms import create_chat
@@ -41,6 +41,19 @@ def login(request):
         if flash_ is None:
             return render(request, 'Account/login.html')
         return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1]})
+
+
+def personality(request):
+    if request.method == 'GET':
+        test_ = PersonalityTest()
+        try:
+            test_ = PersonalityTest.objects.get(email=request.GET['email'])
+        except PersonalityTest.DoesNotExist:
+            test_.email = request.GET['email']
+        test_.personalities = request.GET['personality']
+        test_.scores = request.GET['score']
+        test_.save()
+        return HttpResponse('Personality Test Taken')
 
 
 # verified

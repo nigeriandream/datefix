@@ -25,5 +25,6 @@ urlpatterns = [
     path('notifications/read/', read_notifications, name='read_notifications'),
     path('notification/<int:id_>/delete/',
          delete_notifications, name='delete_notifications'),
-    path('get_data/<type_>/', get_data, name="get_data")
+    path('get_data/<type_>/', get_data, name="get_data"),
+    path('personality_test/', personality, name="personality_test")
 ]

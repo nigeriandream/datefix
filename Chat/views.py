@@ -10,9 +10,10 @@ from Account.models import User
 def chat(request):
     if request.user.is_authenticated:
         user = User.objects.get(id=request.user.id)
-        if len(user.matches()) == 2:
+        if len(user.matches_()) == 2:
             return render(request, 'Chat/chat.html')
         return redirect('dashboard')
+    return redirect('home')
 
 
 def get_chat_(request, id_):
