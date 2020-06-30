@@ -79,10 +79,15 @@
 				</div>
 				{% else %}<div class="feature-box fbox-center fbox-border fbox-dark fbox-effect noborder">
 					<div class="fbox-icon">
-						<a href="#"><img src={% static "images/icons/avatar.jpg" %}
+						<a href="#"><img
+                            {% if user.profile_pic %}
+                                src={{ user.profile_pic.url }}
+                            {% else %}
+                                src={% static "images/icons/avatar.jpg" %}
+                            {% endif %}
 								class="img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar"></a>
 					</div>
-					<h3> John Doe Machiavelli{{request.user.first_name}} {{request.user.last_name}}<span
+					<h3> {{request.user.first_name}} {{request.user.last_name}}<span
 							class="subtitle">Personality test result summary here</span></h3>
 				</div>
 
@@ -105,7 +110,7 @@
 							<th style="padding-right: 4px;">
 								<abbr title="Phone Number"><i class="icon-phone"></i></abbr>
 							</th>
-							<td>+1234567890123</td>
+							<td>{{ user.phone }}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -114,11 +119,11 @@
 					<a href={% url 'dashboard' %} class="list-group-item list-group-item-action clearfix">Datefix
 						Session
 						<i class="icon-heart float-right"></i></a>
-					<a href="#" class="list-group-item list-group-item-action clearfix">Chat <i
+					<a href="{% url 'chatroom' %}" class="list-group-item list-group-item-action clearfix">Chat <i
 							class="icon-envelope2 float-right"></i></a>
-					<a href="#" class="list-group-item list-group-item-action clearfix">Billing <i
+					<a href="{% url 'payment' %}" class="list-group-item list-group-item-action clearfix">Billing <i
 							class="icon-credit-cards float-right"></i></a>
-					<a href="#" class="list-group-item list-group-item-action clearfix">Edit Profile <i
+					<a href="{% url 'dashboard' %}" class="list-group-item list-group-item-action clearfix">Edit Profile <i
 							class="icon-cog float-right"></i></a>
 					<a href={% url 'logout' %} class="list-group-item list-group-item-action clearfix">Logout <i
 							class="icon-line2-logout float-right"></i></a>
