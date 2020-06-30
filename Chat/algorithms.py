@@ -22,6 +22,13 @@ def create_private_key():
         return secret
 
 
+def update_secret(chat_id):
+    chat = ChatThread.objects.get(id=chat_id)
+    chat.secret = create_private_key()
+    chat.save()
+    return chat.secret
+
+
 def create_chat(user, match):
     try:
         ChatThread.objects.get(first_user_id=user.id, second_user_id=match.id)

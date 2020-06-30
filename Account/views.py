@@ -12,7 +12,7 @@ from Chat.algorithms import create_chat
 def login(request):
     if request.method == 'POST':
         if not request.POST.get('email', False) or not request.POST.get('password', False):
-            flash(request, 'No login details was entered !', 'danger')
+            flash(request, 'No login details was entered !', 'danger', 'remove-sign')
             return redirect('login')
         try:
             user = User.objects.get(email=request.POST['email'])
@@ -24,14 +24,14 @@ def login(request):
             user = auth.authenticate(
                 request, username=request.POST['email'], password=request.POST['password'])
             if user is None:
-                flash(request, 'Password Incorrect !', 'danger')
+                flash(request, 'Password Incorrect !', 'danger', 'remove-sign')
                 return redirect('login')
             if user is not None:
                 auth.login(request, user)
-                flash(request, f'{user.username} is logged in successfully !', 'success')
+                flash(request, f'{user.username} is logged in successfully !', 'success', 'thumbs-up')
                 return redirect('dashboard')
         except User.DoesNotExist:
-            flash(request, 'There is no Account with this email address !', 'info')
+            flash(request, 'There is no Account with this email address !', 'info', 'info-sign')
             return redirect('not_found')
 
     if request.method == 'GET':
@@ -40,7 +40,7 @@ def login(request):
         flash_ = display(request)
         if flash_ is None:
             return render(request, 'Account/login.html')
-        return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1]})
+        return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1], "icon": flash_[2]})
 
 
 def personality(request):
@@ -106,17 +106,17 @@ def results(request):
 def signup(request):
     if request.method == 'POST':
         if not (request.POST['password1'] == request.POST['password2'] and request.POST['password1'] != ''):
-            flash(request, 'The passwords are not equal !', 'danger')
+            flash(request, 'The passwords are not equal !', 'danger', 'remove-sign')
             return redirect('login')
 
         if not request.POST.get('email', False) or not request.POST.get('last-name', False) or not request.POST.get(
                 'first-name', False):
-            flash(request, 'Some Fields are empty !', 'danger')
+            flash(request, 'Some Fields are empty !', 'danger', 'remove-sign')
             return redirect('login')
 
         try:
             User.objects.get(email=request.POST['email'])
-            flash(request, 'This email already exists !', 'danger')
+            flash(request, 'This email already exists !', 'danger', 'remove-sign')
             return redirect('login')
         except User.DoesNotExist:
             user = User.objects.create_user(
@@ -129,7 +129,8 @@ def signup(request):
                 phone=request.POST['phone']
             )
             user.save()
-            flash(request, f"{request.POST['first-name']}, your account has been created successfully.", 'success')
+            flash(request, f"{request.POST['first-name']}, your account has been "
+                           f"created successfully.", 'success', 'thumbs-up')
             return redirect('login')
 
     if request.method == 'GET':
@@ -138,7 +139,7 @@ def signup(request):
         flash_ = display(request)
         if flash_ is None:
             return render(request, 'Account/login.html')
-        return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1]})
+        return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1], 'icon': flash_[2]})
 
 
 # verified
@@ -255,7 +256,7 @@ def verify(request):
         return redirect('login')
 
     if 'code' not in request.session:
-        flash(request, 'Code has expired !', 'danger')
+        flash(request, 'Code has expired !', 'danger', 'remove-sign')
         return redirect('login')
 
     del request.session['code']
