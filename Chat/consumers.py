@@ -5,6 +5,7 @@ from channels.consumer import AsyncConsumer
 from channels.db import database_sync_to_async
 from django.utils.datetime_safe import datetime
 from .models import ChatThread, ChatMessage
+from .algorithms import select_match, jilt
 
 
 class ChatConsumer(AsyncConsumer):
@@ -24,6 +25,7 @@ class ChatConsumer(AsyncConsumer):
         self.chat_data = json.loads(event['text'])
         if self.chat_data['function'] == 'connect':
             chat_id = self.chat_data['chat_id']
+            self.chat_data['status'] = 'Online'
             self.thread_obj = await self.get_thread(chat_id)
             self.me = await self.get_user(self.chat_data['username'])
             self.other_user = await self.get_receiver(self.thread_obj, self.me)
@@ -34,6 +36,10 @@ class ChatConsumer(AsyncConsumer):
                 chat_room,
                 self.channel_name
             )
+            await self.channel_layer.group_send(
+                self.chat_room,
+                {"type": "send_message",
+                 "data": self.chat_data})
         if self.chat_data['function'] == 'status':
             await self.update_status(int(self.chat_data['message_id']))
             print('updated - delivered')
@@ -41,7 +47,7 @@ class ChatConsumer(AsyncConsumer):
                 self.chat_room,
                 {"type": "send_message",
                  "data": self.chat_data})
-        elif self.chat_data['function'] == 'message':
+        if self.chat_data['function'] == 'message':
             self.chat_data['datetime'] = datetime.now()
             self.chat_data['status'] = 'sent'
             await self.save_message(self.thread_obj, self.chat_data)
@@ -52,21 +58,21 @@ class ChatConsumer(AsyncConsumer):
                 {"type": "send_message",
                  "data": self.chat_data}
             )
-        elif self.chat_data['function'] == 'isDelivered':
+        if self.chat_data['function'] == 'isDelivered':
             await self.update_status(int(self.chat_data['message_id']))
             await self.channel_layer.group_send(
                 self.chat_room,
                 {"type": "send_message",
                  "data": self.chat_data}
             )
-        elif self.chat_data['function'] in ['isTyping', 'notTyping', 'available']:
+        if self.chat_data['function'] in ['isTyping', 'notTyping', 'available']:
             await self.channel_layer.group_send(
                 self.chat_room,
                 {"type": "send_message",
                  "data": self.chat_data}
             )
 
-        elif self.chat_data['function'] == 'delete':
+        if self.chat_data['function'] == 'delete':
             await self.delete_message(int(self.chat_data['message_id']))
             await self.channel_layer.group_send(
                 self.chat_room,
@@ -108,6 +114,15 @@ class ChatConsumer(AsyncConsumer):
         msg.save()
         self.chat_data['status'] = 'delivered'
         return msg
+
+    @database_sync_to_async
+    def choose(self):
+        select_match(self.thread_obj, self.other_user, self.me)
+
+    @database_sync_to_async
+    def reject(self):
+        jilt(self.thread_obj, self.other_user, self.me)
+
 
     @database_sync_to_async
     def delete_message(self, id_):

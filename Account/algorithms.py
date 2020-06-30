@@ -1,5 +1,4 @@
 from django.core.mail import send_mail
-from django.shortcuts import redirect
 
 from .models import User, Couple
 import random
@@ -86,53 +85,43 @@ def compare_users(me, you):
 
 
 def match_user(user):
-    success_list = []
-    no_list = []
-    # filter users 
-    all_users = [x for x in User.objects.all()
-                 if (x.complete_match() is False)
-                 and (str(x.id) not in user.jilted_list()) and (x.is_couple() is False)
-                 and (str(x.id) not in user.no_list()) and x.sex == 'male' and
-                 (x.user_data is not None or x.user_data == '')]
-    # compare filtered users with user and return matches
+    try:
+        success_list = []
+        no_list = []
+        # filter users
+        all_users = [x for x in User.objects.all()
+                     if (x.complete_match() is False)
+                     and (str(x.id) not in user.jilted_list()) and (x.is_couple() is False)
+                     and (str(x.id) not in user.no_list()) and x.sex == 'male' and
+                     (x.user_data is not None or x.user_data == '')]
+        # compare filtered users with user and return matches
 
-    for peep in all_users:
-        data = {}
-        peep_score = compare_users(user, peep)
-        my_score = compare_users(peep, user)
-        if peep_score >= 50 and my_score >= 50:
-            data = {
-                "alpha": peep.username,
-                str(peep.id): peep_score,
-                "Residence": peep.user_data_['residence-state'],
-                "Origin": peep.user_data_['origin-state'],
-                "Religion": peep.user_data_['religion'],
-                "denomination": peep.user_data_['denomination'],
-                "Has Children": peep.user_data_['children']
-            }
+        for peep in all_users:
+            data = {}
+            peep_score = compare_users(user, peep)
+            my_score = compare_users(peep, user)
+            if peep_score >= 50 and my_score >= 50:
+                data = {
+                    "alpha": peep.username,
+                    str(peep.id): peep_score,
+                    "Residence": peep.user_data_['residence-state'],
+                    "Origin": peep.user_data_['origin-state'],
+                    "Religion": peep.user_data_['religion'],
+                    "denomination": peep.user_data_['denomination'],
+                    "Has Children": peep.user_data_['children']
+                }
 
-            success_list.append(sorted(data.items()))
+                success_list.append(sorted(data.items()))
 
-        else:
-            no_list.append(str(peep.id))
-    success_list = merge_sort(success_list)
-    user.successful_matches = json.dumps(success_list)
-    user.no_matches = json.dumps(no_list)
-    user.save()
-    return
-    # matches = []
-    # num = 2- user.matches.__len__()
-    # if len(success_list['matches'])>= num:
-    #     for i in range(num):
-    #         matches.append(str(success_list['matches'][success_list['scores'].index(max(success_list['scores']))]))
-    #         success_list['matches'].remove(matches[0])
-    #         success_list['scores'].remove(max(success_list['scores']))
-    #     user.successful_matches = ','.join(success_list)   
-    #     user.no_matches = ','.join(no_list)
-    #     user.matches = ','.join(matches+user.matches_())
-    #     user.save()
-    #     return True
-    # return False
+            else:
+                no_list.append(str(peep.id))
+        success_list = merge_sort(success_list)
+        user.successful_matches = json.dumps(success_list)
+        user.no_matches = json.dumps(no_list)
+        user.save()
+        return True
+    except:
+        return False
 
 
 def lucky_draw(num):
@@ -151,41 +140,6 @@ def get_username():
         get_username()
     except User.DoesNotExist:
         return username
-
-
-def get_new_match(user, id_):
-    jilted_list = user.jilted_list()
-    jilted_list.append(str(id_))
-    user.jilted_matches = ','.join(jilted_list)
-    success_list = {'scores': user.successful_scores(), 'matches': user.successful_list()}
-    user.save()
-    if len(user.successful_list()) >= 1:
-        new_match = success_list['matches'][success_list['scores'].index(max(success_list['scores']))]
-        success_list['scores'].remove(user.successful_scores[user.successful_list.index(str(new_match))])
-        success_list['matches'].remove(str(new_match))
-        user.successful_matches = json.dumps(success_list)
-        user_matches = user.matches_()
-        user_matches.remove(str(id_))
-        user_matches.append(new_match)
-        user.matches = ','.join(user_matches)
-        user.save()
-        return True
-    return False
-
-
-def update_profile_field(user, item, value):
-    data = json.loads(user.user_data)
-    data[item] = value
-    user.profile_changed = True
-    user.user_data = json.dumps(data)
-    user.save()
-
-
-def adjust_minimum(user, score):
-    if score != user.min_score:
-        user.min_score = score
-        user.save()
-        match_user(user)
 
 
 def merge_sort(n_list):

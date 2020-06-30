@@ -3,10 +3,7 @@ from django.contrib import auth
 from .models import User
 import json
 from .algorithms import get_username, match_user, flash, display, send_verification
-from Chat.algorithms import in_my_chat, create_private_key
-from Chat.models import ChatThread
-import datetime
-from django.core.mail import send_mail
+from Chat.algorithms import create_chat
 
 
 # Create your views here.
@@ -46,6 +43,7 @@ def login(request):
         return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1]})
 
 
+# verified
 def results(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
@@ -72,14 +70,12 @@ def results(request):
             user.save()
             # add user to match chatters
             user_ = user.objects.get(id=int(i))
-            user_.matches = json.loads(user_.matches).append(user.id)
+            match_list = json.loads(user_.matches)
+            match_list.append(user.id)
+            user_.matches = json.dumps(match_list)
             user_.save()
-            chat = ChatThread()
-            chat.first_user = user
-            chat.second_user = user_
-            chat.secret = create_private_key()
-            chat.date_created = datetime.datetime.now()
-            chat.save()
+            create_chat(user, user_)
+            # send notification to both partners
             selected.remove(i)
             return redirect('chatroom')
         if len(selected) > 0:
@@ -132,6 +128,7 @@ def signup(request):
         return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1]})
 
 
+# verified
 def dashboard(request):
     if request.method == 'GET':
         if not request.user.is_authenticated:
@@ -151,24 +148,16 @@ def dashboard(request):
             return redirect('chatroom')
 
 
+# verified
 def matching(request):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
         if user.sex == 'female':
-            match_user(user)
-        return redirect('results')
+            matched = match_user(user)
+            if not matched:
+                return HttpResponse('fail')
 
-
-def adjust_min(request):
-    user = None
-    if request.method == 'GET':
-        try:
-            user = User.objects.get(id=request.GET['user_id'])
-            return HttpResponse('fail')
-        except User.DoesNotExist:
-            user.min_score = request.GET['min_score']
-            user.save()
-            return HttpResponse('success')
+        return HttpResponse('success')
 
 
 def delete_notifications(request, id_):
@@ -208,9 +197,9 @@ def read_notifications(request):
         return HttpResponse('not done')
 
 
+# verified
 def get_data(request, type_):
     if request.method == 'GET':
-        print(request.GET)
         user = User.objects.get(id=request.user.id)
         if user.user_data is None or user.user_data == '':
             user.user_data = "{}"
@@ -272,3 +261,6 @@ def verification(request):
     return render(request, 'Account/verification-link-sent.html')
 
 
+# verified
+def test(request):
+    return render(request, 'Account/test.html')
