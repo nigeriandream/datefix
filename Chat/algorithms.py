@@ -99,7 +99,7 @@ def profile_picture(image):
 def last_message(chat_thread):
     if chat_thread.last_message() is not None:
         return {'id': chat_thread.last_message().id,
-                'time': chat_thread.last_message().datetime.time().__str__(),
+                'time': chat_thread.last_message().datetime.time().strftime('%I:%M %p'),
                 'message': chat_thread.last_message_text(),
                 'sender_id': chat_thread.last_message().sender.id,
                 'sender': chat_thread.last_message().sender.username,
