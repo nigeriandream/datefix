@@ -1,8 +1,12 @@
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import auth
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import User, PersonalityTest
 import json
-from .algorithms import get_username, match_user, flash, display, send_verification
+from .algorithms import match_user, flash, display, send_verification, get_username
 from Chat.algorithms import create_chat
 
 
@@ -87,7 +91,7 @@ def results(request):
             match_list.append(user.id)
             user_.matches = json.dumps(match_list)
             user_.save()
-            create_chat(user, user_)
+            create_chat(request, user.id, user_.id)
             # send notification to both partners
             selected.remove(i)
             return redirect('chatroom')
@@ -119,14 +123,17 @@ def signup(request):
             flash(request, 'This email already exists !', 'danger', 'remove-sign')
             return redirect('login')
         except User.DoesNotExist:
+            from Datefix.algorithms import get_key
+            username = get_username()
             user = User.objects.create_user(
-                username=get_username(),
+                username=username,
                 email=request.POST['email'],
                 password=request.POST['password1'],
                 first_name=request.POST['first-name'],
                 last_name=request.POST['last-name'],
                 sex=request.POST['sex'],
-                phone=request.POST['phone']
+                phone=request.POST['phone'],
+                secret=get_key(f"{request.POST['email']}{username}")
             )
             user.save()
             flash(request, f"{request.POST['first-name']}, your account has been "
@@ -278,3 +285,23 @@ def verification(request):
 # verified
 def test(request):
     return render(request, 'Account/test.html')
+
+
+@csrf_exempt
+@login_required
+def decrypt(request):
+    if request.method == 'POST':
+        user = User.objects.get(id=request.user.id)
+        data = {"status": 200, "message": user.decrypt(request.POST['message'])}
+        return JsonResponse(data)
+    return JsonResponse({"status": 400, "message": "Bad Request"})
+
+
+@csrf_exempt
+@login_required
+def encrypt(request):
+    if request.method == 'POST':
+        user = User.objects.get(id=request.user.id)
+        data = {"status": 200, "message": user.encrypt(request.POST['message'])}
+        return JsonResponse(data)
+    return JsonResponse({"status": 400, "message": "Bad Request"})

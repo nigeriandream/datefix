@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from Datefix import settings
@@ -6,6 +8,8 @@ from django.db.models import Q
 
 
 # Create your models here.
+from Datefix.algorithms import get_key
+
 
 class User(AbstractUser):
     sex = models.CharField(max_length=6, default=None, null=True)
@@ -22,6 +26,7 @@ class User(AbstractUser):
     profile_changed = models.BooleanField(default=False)
     dating = models.BooleanField(default=False)
     payed = models.BooleanField(default=False)
+    secret = models.BinaryField(default=get_key(os.urandom(16).__str__()))
     min_score = models.DecimalField(max_digits=5, decimal_places=2, default=None, null=True)
     verified = models.BooleanField(default=False)
 
@@ -34,6 +39,15 @@ class User(AbstractUser):
         if self.no_matches == '' or self.no_matches is None:
             return []
         return json.loads(self.no_matches)
+
+    def encrypt(self, data):
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).encrypt(data.encode())
+
+    def decrypt(self, cipher_text):
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).decrypt(cipher_text).decode()
+
 
     def jilted_list(self):
         if self.jilted_matches == '' or self.jilted_matches is None:

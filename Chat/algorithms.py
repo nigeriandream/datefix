@@ -1,47 +1,9 @@
 import json
-
 from django.db.models import Q
 
 from Account.models import User, Couple
-from datetime import datetime
-from .models import ChatThread, ChatMessage
-from Crypto.PublicKey import RSA
-import secrets
-
-
-def create_private_key():
-    secret = secrets.token_hex(32)
-    try:
-        ChatThread.objects.get(secret=secret)
-        create_private_key()
-    except ChatThread.DoesNotExist:
-        secret_file = f'Secret/{secret}.pem'
-        private_key = RSA.generate(1024).export_key().decode()
-        with open(secret_file, 'w') as pr:
-            pr.write(private_key)
-        return secret
-
-
-def update_secret(chat_id):
-    chat = ChatThread.objects.get(id=chat_id)
-    chat.secret = create_private_key()
-    chat.save()
-    return chat.secret
-
-
-def create_chat(user, match):
-    try:
-        ChatThread.objects.get(first_user_id=user.id, second_user_id=match.id)
-    except ChatThread.DoesNotExist:
-        try:
-            ChatThread.objects.get(first_user_id=match.id, second_user_id=user.id)
-        except ChatThread.DoesNotExist:
-            chat = ChatThread()
-            chat.first_user = user
-            chat.second_user = match
-            chat.datetime = datetime.now()
-            chat.secret = create_private_key()
-            chat.save()
+from datetime import datetime, timedelta
+from .models import ChatThread
 
 
 def select_match(chat_thread, user, you):
@@ -92,10 +54,9 @@ def jilt(chat, you, user):
     return
 
 
-def get_chat(request, id_):
-    if request.method == 'GET':
-        chat_thread = ChatThread.objects.get(id=id_)
-        return json.dumps(chat_thread.get_chat(chat_thread.position(request.user)))
+def get_chat(chat_id, user):
+    chat_thread = ChatThread.objects.get(id=chat_id)
+    return json.dumps(chat_thread.get_chat(chat_thread.position(user)))
 
 
 def get_chat_threads(request, user_id):
@@ -153,3 +114,25 @@ def get_profile(request, user_id):
         return json.dumps({'username': user.username,
                            'first_name': user.first_name, 'last_name': user.last_name,
                            'profile_pic': profile_picture(user.profile_picture)})
+
+
+def create_chat(request, your_id, user_id):
+    try:
+        ChatThread.objects.get(first_user_id=your_id, second_user_id=user_id)
+        return 'This Chat Thread Object Already Exists'
+    except ChatThread.DoesNotExist:
+        try:
+            ChatThread.objects.get(first_user_id=user_id, second_user_id=your_id)
+            return 'This Chat Thread Object Already Exists'
+        except ChatThread.DoesNotExist:
+            from Datefix.algorithms import get_key
+            chat = ChatThread()
+            chat.first_user_id = your_id
+            chat.second_user_id = user_id
+            chat.secret = get_key(f'{request.user.id}{datetime.now().__str__()}{user_id}')
+            chat.expiry_date = datetime.now() + timedelta(days=7)
+            chat.date_created = datetime.now()
+            chat.save()
+            return {"status": 200, "message": f'A Chat Thread Object has been created for you and the '
+                                              f'user with ID {user_id}',
+                    "data": get_chat(chat.id, user=request.user)}
