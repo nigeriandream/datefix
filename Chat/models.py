@@ -63,14 +63,15 @@ class ChatThread(models.Model):
                               if x.id not in list_[user_position]]
         data = []
         for i in chat_message_items:
+            from Chat.algorithms import profile_picture
             data.append({'id': i.id,
-                         'time': i.datetime.time().__str__(),
+                         'time': i.datetime.time().strftime('%I:%M %p'),
                          'message': self.decrypt(i.text),
                          'sender_id': i.sender.id,
                          'sender_first_name': i.sender.first_name,
                          'sender_last_name': i.sender.last_name,
                          'sender': i.sender.username,
-                         'sender_pic': i.sender.profile_picture,
+                         'sender_pic': profile_picture(i.sender.profile_picture),
                          'status': i.send_status})
         data = {'chat_id': self.id, 'chat_list': data}
         return data

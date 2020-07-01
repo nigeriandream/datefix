@@ -25,7 +25,6 @@ class ChatConsumer(AsyncConsumer):
         self.chat_data = json.loads(event['text'])
         if self.chat_data['function'] == 'connect':
             chat_id = self.chat_data['chat_id']
-            self.chat_data['status'] = 'Online'
             self.thread_obj = await self.get_thread(chat_id)
             self.me = await self.get_user(self.chat_data['username'])
             self.other_user = await self.get_receiver(self.thread_obj, self.me)
@@ -36,10 +35,6 @@ class ChatConsumer(AsyncConsumer):
                 chat_room,
                 self.channel_name
             )
-            await self.channel_layer.group_send(
-                self.chat_room,
-                {"type": "send_message",
-                 "data": self.chat_data})
         if self.chat_data['function'] == 'status':
             await self.update_status(int(self.chat_data['message_id']))
             print('updated - delivered')
@@ -49,6 +44,7 @@ class ChatConsumer(AsyncConsumer):
                  "data": self.chat_data})
         if self.chat_data['function'] == 'message':
             self.chat_data['datetime'] = datetime.now()
+            self.chat_data['time'] = datetime.now().time().strftime('%I:%M %p')
             self.chat_data['status'] = 'sent'
             await self.save_message(self.thread_obj, self.chat_data)
             del self.chat_data['datetime']

@@ -292,7 +292,7 @@ def test(request):
 def decrypt(request):
     if request.method == 'POST':
         user = User.objects.get(id=request.user.id)
-        data = {"status": 200, "message": user.decrypt(request.POST['message'])}
+        data = {"status": 200, "message": user.decrypt(request.POST['message'].encode())}
         return JsonResponse(data)
     return JsonResponse({"status": 400, "message": "Bad Request"})
 
@@ -302,6 +302,6 @@ def decrypt(request):
 def encrypt(request):
     if request.method == 'POST':
         user = User.objects.get(id=request.user.id)
-        data = {"status": 200, "message": user.encrypt(request.POST['message'])}
+        data = {"status": 200, "message": user.encrypt(request.POST['message']).decode()}
         return JsonResponse(data)
     return JsonResponse({"status": 400, "message": "Bad Request"})
