@@ -26,7 +26,7 @@ Now youre ready for the proper setup
                 python manage.py makemigrations
                 python manage.py migrate
 6,      Create superuser with this command
-                python manage.py cretesuperuser
+                python manage.py createsuperuser
 
         Type in your username and password
 7,      Type in this command

@@ -13,6 +13,7 @@
 
   <title>Datefix | Chat</title>
 
+  {% block css %}
   <!-- vendor css -->
   <link href={% static 'lib/fontawesome-free/css/all.min.css' %} rel="stylesheet">
   <link href={% static 'lib/ionicons/css/ionicons.min.css' %} rel="stylesheet">
@@ -32,11 +33,13 @@
   <link rel="stylesheet" href={% static 'css/et-line.css' %} type="text/css" />
   <link rel="stylesheet" href={% static 'css/animate.css' %} type="text/css" />
   <link rel="stylesheet" href={% static 'css/magnific-popup.css' %} type="text/css" />
+  {% endblock css %}
 
 </head>
 
 <body class="az-body">
 
+  
   <div class="az-header">
     <div class="container">
       <div class="az-header-left">
@@ -117,49 +120,37 @@
       </div><!-- az-header-right -->
     </div><!-- container -->
   </div><!-- az-header -->
-
-  <div class="az-content az-content-app pd-b-0">
+  <div class="az-content az-content-app pd-b-0" id="app">
     <div class="container">
       <div class="az-content-left az-content-left-chat">
         <div class="az-chat-contacts-wrapper">
           <h6 style="font-weight: bold; font-size: 20px;">MATCHED CONTACTS</h6>
+          <input type="text" value="{{request.user.id}}" class="d-none" ref="userID">
         </div><!-- az-chat-active-contacts -->
 
         <div id="azChatList" class="az-chat-list">
-          <div class="media new">
-            <div class="az-img-user online">
-              <img src="https://via.placeholder.com/500x500" alt="">
-              <span>2</span>
-            </div>
-            <div class="media-body">
-              <div class="media-contact-name">
-                <span>Jennifer Echenim</span>
-                <span>2 hours</span>
+          <div v-for="(chat, index) in chat_threads" :key="index">
+            <div class="media new" @click="getSingleChat(chat)">
+              <div class="az-img-user online">
+                <img :src="[[chat.profile_picture]]" alt="">
+                <span>2</span>
               </div>
-              <p>Nam quam nunc, blandit vel aecenas et ante tincid</p>
-            </div><!-- media-body -->
-          </div><!-- media -->
-          <div class="media selected">
-            <div class="az-img-user">
-              <img src="https://via.placeholder.com/500x500" alt="">
-              <span>1</span>
-            </div>
-            <div class="media-body">
-              <div class="media-contact-name">
-                <span>Yvonne Ifeoma</span>
-                <span>3 hours</span>
-              </div>
-              <p>Maec enas tempus, tellus eget con dime ntum rhoncus, sem quam</p>
-            </div><!-- media-body -->
+              <div class="media-body">
+                <div class="media-contact-name">
+                  <span>[[chat.first_name]] [[chat.last_name]]</span>
+                  <span>2 hours ago</span>
+                </div>
+                <p>[[chat.last_message]]</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div>
           </div><!-- media -->
         </div><!-- az-chat-list -->
-
-      </div><!-- az-content-left -->
-      <div class="az-content-body az-content-body-chat">
+        <div class="az-content-body az-content-body-chat">
         <div class="az-chat-header">
-          <div class="az-img-user"><img src="https://via.placeholder.com/500x500" alt=""></div>
+          <div class="az-img-user"><img :src="[[chat_object.profile_picture]]" alt=""></div>
           <div class="az-chat-msg-name">
-            <h6>Jennifer Echenim</h6>
+            <h6>[[chat_object.first_name]] [[chat_object.last_name]]</h6>
             <small>Last seen: 2 minutes ago</small>
           </div>
           <nav class="nav">
@@ -173,85 +164,18 @@
         <div id="azChatBody" class="az-chat-body">
           <div class="content-inner">
             <label class="az-chat-time"><span>3 days ago</span></label>
-            <div class="media flex-row-reverse">
+            <div v-for='(message, index) in messages' :key='index'>
+            <div :class="[message.sender == username ? 'media flex-row-reverse' : 'media']">
               <div class="az-img-user online"><img src="https://via.placeholder.com/500x500" alt=""></div>
               <div class="media-body">
                 <div class="az-msg-wrapper">
-                  Nulla consequat massa quis enim. Donec pede justo, fringilla vel...
+                  [[ message.text ]]
                 </div><!-- az-msg-wrapper -->
-                <div class="az-msg-wrapper">rhoncus ut, imperdiet a, venenatis vitae, justo...</div>
-                <div class="az-msg-wrapper pd-0">
-                  <img src="https://via.placeholder.com/500x334" class="wd-200" alt="">
-                </div><!-- az-msg-wrapper -->
-                <div><span>9:48 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a></div>
+                
+                <div><span>[[ message.timeSend ]]</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a></div>
               </div><!-- media-body -->
             </div><!-- media -->
-            <div class="media">
-              <div class="az-img-user online"><img src="https://via.placeholder.com/500x500" alt=""></div>
-              <div class="media-body">
-                <div class="az-msg-wrapper">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                </div><!-- az-msg-wrapper -->
-                <div><span>9:32 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a></div>
-              </div><!-- media-body -->
-            </div><!-- media -->
-            <div class="media flex-row-reverse">
-              <div class="az-img-user online"><img src="https://via.placeholder.com/500x500" alt=""></div>
-              <div class="media-body">
-                <div class="az-msg-wrapper">
-                  Nullam dictum felis eu pede mollis pretium
-                </div><!-- az-msg-wrapper -->
-                <div><span>11:22 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a></div>
-              </div><!-- media-body -->
-            </div><!-- media -->
-            <label class="az-chat-time"><span>Yesterday</span></label>
-            <div class="media">
-              <div class="az-img-user online"><img src="https://via.placeholder.com/500x500" alt=""></div>
-              <div class="media-body">
-                <div class="az-msg-wrapper">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                </div><!-- az-msg-wrapper -->
-                <div><span>9:32 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a></div>
-              </div><!-- media-body -->
-            </div><!-- media -->
-            <div class="media flex-row-reverse">
-              <div class="az-img-user online"><img src="https://via.placeholder.com/500x500" alt=""></div>
-              <div class="media-body">
-                <div class="az-msg-wrapper">
-                  Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-                </div><!-- az-msg-wrapper -->
-                <div class="az-msg-wrapper">
-                  Nullam dictum felis eu pede mollis pretium
-                </div><!-- az-msg-wrapper -->
-                <div><span>9:48 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a></div>
-              </div><!-- media-body -->
-            </div><!-- media -->
-
-            <label class="az-chat-time"><span>Today</span></label>
-            <div class="media">
-              <div class="az-img-user online"><img src="https://via.placeholder.com/500x500" alt=""></div>
-              <div class="media-body">
-                <div class="az-msg-wrapper">
-                  Maecenas tempus, tellus eget condimentum rhoncus
-                </div><!-- az-msg-wrapper -->
-                <div class="az-msg-wrapper">
-                  Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.
-                </div><!-- az-msg-wrapper -->
-                <div><span>10:12 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a></div>
-              </div><!-- media-body -->
-            </div><!-- media -->
-            <div class="media flex-row-reverse">
-              <div class="az-img-user online"><img src="https://via.placeholder.com/500x500" alt=""></div>
-              <div class="media-body">
-                <div class="az-msg-wrapper">
-                  Maecenas tempus, tellus eget condimentum rhoncus
-                </div><!-- az-msg-wrapper -->
-                <div class="az-msg-wrapper">
-                  Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.
-                </div><!-- az-msg-wrapper -->
-                <div><span>09:40 am</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a></div>
-              </div><!-- media-body -->
-            </div><!-- media -->
+            </div>
           </div><!-- content-inner -->
         </div><!-- az-chat-body -->
         <div class="az-chat-footer">
@@ -261,11 +185,12 @@
             <a href="" class="nav-link" data-toggle="tooltip" title="Add Emoticons"><i class="far fa-smile"></i></a>
             <a href="" class="nav-link"><i class="fas fa-ellipsis-v"></i></a>
           </nav>
-          <input type="text" class="form-control" placeholder="Type your message here...">
-          <a href="" class="az-msg-send"><i class="far fa-paper-plane"></i></a>
+          <input @keyup.enter="sendMessage" type="text" class="form-control" v-model="message" placeholder="Type your message here...">
+          <span @click="sendMessage" class="az-msg-send"><i class="far fa-paper-plane"></i></span>
         </div><!-- az-chat-footer -->
-      </div><!-- az-content-body -->
-    </div>
+        </div><!-- az-content-body -->
+      </div><!-- az-content-left -->
+    <!-- </div> -->
   </div><!-- az-content -->
 
   <div class="az-footer">
@@ -273,15 +198,16 @@
       <span>&copy; 2020 Datefix</span>
     </div><!-- container -->
   </div><!-- az-footer -->
+{% block script %}
 
   <script src={% static 'js/jquery.js' %}></script>
   <script src={% static 'js/plugins.js' %}></script>
-  <script src={% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}></script>
+  <!-- <script src={% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}></script> -->
   <script src={% static 'lib/ionicons/ionicons.js' %}></script>
   <script src={% static 'lib/perfect-scrollbar/perfect-scrollbar.min.js' %}></script>
   <script src={% static 'lib/lightslider/js/lightslider.min.js' %}></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js">
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"> -->
   </script>
   <script src={% static 'js/chat.js' %}></script>
   <script>
@@ -327,6 +253,12 @@
 
     });
   </script>
+  <script src={% static 'js/vue.js' %}></script>
+  <script src={% static 'js/axios.min.js' %}></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
+  <script src={% static 'js/chat-vue.js' %}></script>
+{% endblock script %}
+
 </body>
 
 </html>
