@@ -1,7 +1,4 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .algorithms import create_private_key, get_chat, get_profile, get_chat_threads, delete_message, update_secret
-
-from Account.models import User
 
 
 # Create your views here.
@@ -9,6 +6,7 @@ from Account.models import User
 
 def chat(request):
     if request.user.is_authenticated:
+        from Account.models import User
         user = User.objects.get(id=request.user.id)
         if len(user.matches_()) == 2:
             return render(request, 'Chat/chat.html')
@@ -17,21 +15,26 @@ def chat(request):
 
 
 def get_chat_(request, id_):
-    return HttpResponse(get_chat(request, id_))
+    if request.method == 'GET':
+        from Chat.algorithms import get_chat
+        return HttpResponse(get_chat(id_, request.user))
 
 
 def get_user(request, user_id):
+    from Chat.algorithms import get_profile
     return HttpResponse(get_profile(request, user_id))
 
 
 def user_chats(request, user_id):
+    from Chat.algorithms import get_chat_threads
     return HttpResponse(get_chat_threads(request, user_id))
 
 
 def delete_msg(request, chat_id, id_):
+    from Chat.algorithms import delete_message
     return HttpResponse(delete_message(request, chat_id, id_))
 
 
-def update_chat_secret(request, chat_id):
-    return HttpResponse(f'The chat with ID {chat_id} has '
-                        f'updated its secret to {update_secret(chat_id)}.')
+def create_chat_api(request, user_id):
+    from Chat.algorithms import create_chat
+    return HttpResponse(create_chat(request, request.user.id, user_id))

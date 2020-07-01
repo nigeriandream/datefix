@@ -171,9 +171,10 @@ def merge_sort(n_list):
     return n_list[:9]
 
 
-def flash(request, message, status):
+def flash(request, message, status, icon):
     request.session['message'] = message
     request.session['status'] = status
+    request.session['icon'] = icon
     return
 
 
@@ -181,8 +182,9 @@ def display(request):
     if 'message' in request.session:
         message = request.session['message']
         status = request.session['status']
-        del request.session['message'], request.session['status']
-        return message, status
+        icon = request.session['icon']
+        del request.session['message'], request.session['status'], request.session['icon']
+        return message, status, icon
     return None
 
 

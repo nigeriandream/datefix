@@ -3,8 +3,6 @@ from Account.models import User
 from django.conf import settings
 from datetime import timedelta, timezone
 from django.utils.datetime_safe import datetime
-from Crypto.Cipher import PKCS1_OAEP
-from Crypto.PublicKey import RSA
 
 
 # Create your models here.
@@ -19,9 +17,9 @@ class ChatThread(models.Model):
     date_first = models.NullBooleanField(default=None, blank=True, null=True)
     date_second = models.NullBooleanField(default=None, blank=True, null=True)
     show_details = models.BooleanField(default=False)
-    first_deleted = models.TextField()
-    second_deleted = models.TextField()
-    secret = models.CharField(max_length=64)
+    first_deleted = models.TextField(default='[]')
+    second_deleted = models.TextField(default='[]')
+    secret = models.BinaryField()
     expiry_date = models.DateTimeField(default=None)
     last_message_date = models.DateTimeField(default=None, null=True)
 
@@ -95,17 +93,18 @@ class ChatThread(models.Model):
         return msg[0]
 
     def last_message_text(self):
-        return self.decrypt(self.last_message().text)
+        try:
+            return self.decrypt(self.last_message().text)
+        except AttributeError:
+            return None
 
     def encrypt(self, data):
-        pr = RSA.import_key(open(f'Secret/{self.secret}.pem', 'r').read())
-        cipher_text = PKCS1_OAEP.new(key=pr.publickey()).encrypt(data.encode())
-        return cipher_text
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).encrypt(data.encode())
 
     def decrypt(self, cipher_text):
-        pr = RSA.import_key(open(f'Secret/{self.secret}.pem', 'r').read())
-        decrypt = PKCS1_OAEP.new(key=pr)
-        return decrypt.decrypt(cipher_text).decode()
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).decrypt(cipher_text).decode()
 
     def no_unread_msg(self, user):
         receiver = self.get_receiver(user)
