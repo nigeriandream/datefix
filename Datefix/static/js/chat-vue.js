@@ -15,7 +15,7 @@ var app = new Vue({
   },
   async mounted() {
     this.id = this.$refs.userID.value;
-    await this.createThread();
+    // await this.createThread();
     await this.getUser();
     await this.getAllChats();
     const url = window.location.href.replace("http", "ws");

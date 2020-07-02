@@ -360,7 +360,10 @@ body.side-panel-left.side-push-panel.side-panel-open.stretched #header .containe
 	border-left: transparent;
 	border-bottom-width: 1px;
 	font-family: 'Source Sans Pro', sans-serif;
+<<<<<<< HEAD
 	border-bottom-color: #000;
+=======
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 .border-form-control::-moz-placeholder {

@@ -79,6 +79,7 @@ $(function () {
   });
 
 
+<<<<<<< HEAD
 });
 
 const url = window.location.href.replace('http', 'ws')
@@ -99,3 +100,6 @@ socket.onerror = (e) =>{
 socket.onmessage = (e) =>{
   console.log('WebSocket received message', e)
 }
+=======
+});
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48

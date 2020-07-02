@@ -2,6 +2,7 @@
 
   //IDs for the first form
 
+<<<<<<< HEAD
   // $('#lga1').select2();
   // $("#state1").select2();
   // $('#lga2').select2();
@@ -157,6 +158,63 @@
   //   $("#partner-form").submit();
   // })
 
+=======
+  $('#lga1').select2();
+  $("#state1").select2();
+  $('#lga2').select2();
+  $("#state2").select2();
+  $('#denomination1').select2();
+  $("#religion1").select2();
+  $('#net-worth1').select2();
+  $("#education1").select2();
+  $("#marital-status1").select2();
+  $('#children1').select2();
+  $("#blood-group1").select2();
+  $('#genotype1').select2();
+  $('#complexion1').select2();
+  $('#height1').select2();
+  $('#body-type1').select2();
+  $('#body-shape1').select2();
+  $('#body-size1').select2();
+  $('#drink1').select2();
+  $('#smoke1').select2();
+  $('#drink1').select2();
+  $('#conscientiousness1').select2();
+  $('#openness1').select2();
+  $('#extraversion1').select2();
+  $('#agreeableness1').select2();
+  $('#neurotism1').select2();
+
+  //IDs for the second form
+
+  $('#lga3').select2();
+  $("#state3").select2();
+  $('#lga4').select2();
+  $("#state4").select2();
+  $('#denomination2').select2();
+  $("#religion2").select2();
+  $('#net-worth2').select2();
+  $("#education2").select2();
+  $("#marital-status2").select2();
+  $('#children2').select2();
+  $("#blood-group2").select2();
+  $('#genotype2').select2();
+  $('#complexion2').select2();
+  $('#height2').select2();
+  $('#body-type2').select2();
+  $('#body-shape2').select2();
+  $('#body-size2').select2();
+  $('#drink2').select2();
+  $('#smoke2').select2();
+  $('#drink2').select2();
+  $('#conscientiousness2').select2();
+  $('#openness2').select2();
+  $('#extraversion2').select2();
+  $('#agreeableness2').select2();
+  $('#neurotism2').select2();
+  $('#dealbreaker1').select2();
+  $('#dealbreaker2').select2();
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 
 
 

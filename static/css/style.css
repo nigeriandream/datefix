@@ -89,6 +89,7 @@
 	- Youtube Video Backgrounds
 
 ---------------------------------------------------------------- */
+<<<<<<< HEAD
 .card-category {
 	padding: 15px;
 	background: rgba(255, 255, 255, 0.9);
@@ -151,6 +152,8 @@
 .chosen-select {
 	width: 350px;
 }
+=======
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 
 .cta-join {
 	color: #222 !important;
@@ -198,6 +201,7 @@ input[type="radio"],
 }
 
 .form-category {
+<<<<<<< HEAD
 	margin: 25px auto;
 	padding: 30px;
 	background: rgba(255, 255, 255, 0.85);
@@ -208,11 +212,21 @@ input[type="radio"],
 
 .form-category p {
 	font-size: 15px;
+=======
+	margin: 25px 15px;
+	padding: 30px;
+	background: #fff;
+	border-radius: 15px;
+	transition: 0.4s ease box-shadow;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 .form-category:hover {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+<<<<<<< HEAD
 	background: #fff;
+=======
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 form div h4 {
@@ -917,7 +931,11 @@ span.middot {
 	position: relative;
 	margin: 60px 0;
 	padding: 60px 0;
+<<<<<<< HEAD
 	background-color: rgba(250, 250, 250, 0);
+=======
+	background-color: rgba(250, 250, 250, 0.1);
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 	overflow: hidden;
 }
 
@@ -4268,11 +4286,14 @@ body.stretched .container-fullwidth .breadcrumb {
 .content-wrap {
 	position: relative;
 	padding: 35px 0;
+<<<<<<< HEAD
 	background: linear-gradient(
 		217deg,
 		rgba(255, 27, 86, 0.5522408792618609) 0%,
 		rgba(25, 79, 232, 0.5522408792618609) 100%
 	);
+=======
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 #content .container {
@@ -6346,7 +6367,11 @@ body:not(.device-touch) .entry-link {
 
 .ipost .entry-title h3 a:hover,
 .ipost .entry-title h4 a:hover {
+<<<<<<< HEAD
 	color: #000;
+=======
+	color: #7e50f8;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 .ipost .entry-meta {
@@ -8801,11 +8826,14 @@ body:not(.device-touch) .button.button-full strong {
 	Featured Boxes
 -----------------------------------------------------------------*/
 
+<<<<<<< HEAD
 .x-padding-40 {
 	padding-left: 40px !important;
 	padding-right: 40px !important;
 }
 
+=======
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 .feature-box {
 	position: relative;
 	margin-top: 20px;
@@ -10903,9 +10931,15 @@ body:not(.device-touch) .social-icon i {
 -----------------------------------------------------------------*/
 
 .faqs .toggle {
+<<<<<<< HEAD
 	border-bottom: 0px solid #eee;
 	padding-bottom: 0px;
 	margin-bottom: 0px;
+=======
+	border-bottom: 1px solid #eee;
+	padding-bottom: 12px;
+	margin-bottom: 12px;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 .faqs .toggle .togglet,
@@ -10920,7 +10954,10 @@ body:not(.device-touch) .social-icon i {
 
 .faqs .toggle .togglec {
 	padding-bottom: 10px;
+<<<<<<< HEAD
 	color: #333;
+=======
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 /* ----------------------------------------------------------------
@@ -12381,7 +12418,11 @@ body:not(.device-touch) .rounded-skill {
 	left: 0;
 	width: 0;
 	height: 100%;
+<<<<<<< HEAD
 	background-color: #e64589;
+=======
+	background-color: #7e50f8;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 	overflow: visible !important;
 	border-radius: 2px;
 	-webkit-transition: width 1.2s ease-in-out;
@@ -12439,7 +12480,11 @@ body:not(.device-touch) .rounded-skill {
 	top: -23px;
 	left: 0;
 	line-height: 20px;
+<<<<<<< HEAD
 	font-size: 15px;
+=======
+	font-size: 12px;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 	font-weight: bold;
 	text-transform: uppercase;
 	color: #222;

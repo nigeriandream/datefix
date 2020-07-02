@@ -14,107 +14,187 @@
 
 /* iPhone X ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
+<<<<<<< HEAD
 	/* .form-category {
+=======
+	.form-category {
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 		margin: 0px 0px !important;
 		padding: 0px !important;
 	}
 	.form-category:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+<<<<<<< HEAD
 	} */
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
 	/* .form-category {
+=======
+	}
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+	.form-category {
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 		margin: 0px 0px !important;
 		padding: 0px !important;
 	}
 	.form-category:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+<<<<<<< HEAD
 	} */
+=======
+	}
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 /* iPhone XS Max, XR ----------- */
 @media only screen and (min-device-width: 414px) and (max-device-height: 896px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
+<<<<<<< HEAD
 	/* .form-category {
+=======
+	.form-category {
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 		margin: 0px 0px !important;
 		padding: 0px !important;
 	}
 	.form-category:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+<<<<<<< HEAD
 	} */
 }
 
 @media only screen and (min-device-width: 414px) and (max-device-height: 896px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
 	/* .form-category {
+=======
+	}
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 896px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+	.form-category {
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 		margin: 0px 0px !important;
 		padding: 0px !important;
 	}
 	.form-category:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+<<<<<<< HEAD
 	} */
+=======
+	}
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 /* iPhone 6, 7, 8 ----------- */
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+<<<<<<< HEAD
 	/* .form-category {
+=======
+	.form-category {
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 		margin: 0px 0px !important;
 		padding: 0px !important;
 	}
 	.form-category:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+<<<<<<< HEAD
 	} */
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
 	/* .form-category {
+=======
+	}
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+	.form-category {
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 		margin: 0px 0px !important;
 		padding: 0px !important;
 	}
 	.form-category:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+<<<<<<< HEAD
 	} */
+=======
+	}
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 /* iPhone 6+, 7+, 8+ ----------- */
 @media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+<<<<<<< HEAD
 	/* .form-category {
+=======
+	.form-category {
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 		margin: 0px 0px !important;
 		padding: 0px !important;
 	}
 	.form-category:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+<<<<<<< HEAD
 	} */
 }
 
 @media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
 	/* .form-category {
+=======
+	}
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+	.form-category {
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 		margin: 0px 0px !important;
 		padding: 0px !important;
 	}
 	.form-category:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+<<<<<<< HEAD
 	} */
+=======
+	}
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 /* Samsung Galaxy S5 ----------- */
 @media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
+<<<<<<< HEAD
 	/* .form-category {
+=======
+	.form-category {
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 		margin: 0px 0px !important;
 		padding: 0px !important;
 	}
 	.form-category:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+<<<<<<< HEAD
 	} */
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
 	/* .form-category {
+=======
+	}
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+	.form-category {
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 		margin: 0px 0px !important;
 		padding: 0px !important;
 	}
 	.form-category:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+<<<<<<< HEAD
 	} */
+=======
+	}
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 
 .select2-container {
@@ -182,7 +262,11 @@ label {
 }
 .select2-dropdown {
 	background-color: white;
+<<<<<<< HEAD
 	/* border: 1px solid #aaa; */
+=======
+	border: 1px solid #aaa;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 	border-radius: 4px;
 	box-sizing: border-box;
 	display: block;
@@ -200,10 +284,14 @@ label {
 	padding: 0;
 }
 .select2-results__option {
+<<<<<<< HEAD
 	font-size: 16px;
 	color: #7e50f8;
 	line-height: 22px;
 	padding: 14px 16px;
+=======
+	padding: 6px;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 	user-select: none;
 	-webkit-user-select: none;
 }
@@ -214,6 +302,7 @@ label {
 	left: 0;
 }
 .select2-container--open .select2-dropdown--above {
+<<<<<<< HEAD
 	/* border-bottom: none;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0; */
@@ -240,6 +329,16 @@ label {
 	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12),
 		0 1px 5px 0 rgba(0, 0, 0, 0.2);
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+=======
+	border-bottom: none;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.select2-container--open .select2-dropdown--below {
+	border-top: none;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 .select2-search--dropdown {
 	display: block;
@@ -286,6 +385,7 @@ label {
 	white-space: nowrap !important;
 }
 .select2-container--default .select2-selection--single {
+<<<<<<< HEAD
 	background-color: transparent;
 	border: none;
 	border-bottom: 1px solid #9e9e9e;
@@ -312,6 +412,12 @@ label {
 	box-shadow: 0 1px 0 0 #7e50f8;
 }
 
+=======
+	background-color: #fff;
+	border: 1px solid #cdcdcd;
+	border-radius: 5px;
+}
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 .select2-container--default .select2-selection--single .select2-selection__rendered {
 	color: #444;
 	line-height: 28px;
@@ -330,7 +436,10 @@ label {
 	top: 1px;
 	right: 1px;
 	width: 20px;
+<<<<<<< HEAD
 	transform: scale(1.5);
+=======
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 }
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
 	border-color: #888 transparent transparent transparent;
@@ -398,6 +507,7 @@ label {
 	float: left;
 	margin-right: 5px;
 	margin-top: 5px;
+<<<<<<< HEAD
 	padding: 0 10px;
 	font-size: 25px;
 }
@@ -407,6 +517,15 @@ label {
 	display: inline-block;
 	font-weight: bold;
 	font-size: 25px;
+=======
+	padding: 0 5px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+	color: #999;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: bold;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 	margin-right: 2px;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
@@ -518,7 +637,11 @@ label {
 	padding-left: 6em;
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
+<<<<<<< HEAD
 	background-color: #7e50f8;
+=======
+	background-color: #5897fb;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
 	color: white;
 }
 .select2-container--default .select2-results__group {

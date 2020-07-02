@@ -24,6 +24,7 @@
   <link rel="stylesheet" href={% static 'css/chat.css' %}>
 
   <!-- datefix css -->
+  {% block css %}
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href={% static 'css/bootstrap.css' %} type="text/css" />
@@ -201,6 +202,7 @@
 {% block script %}
 
   <script src={% static 'js/jquery.js' %}></script>
+  
   <script src={% static 'js/plugins.js' %}></script>
   <!-- <script src={% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}></script> -->
   <script src={% static 'lib/ionicons/ionicons.js' %}></script>
