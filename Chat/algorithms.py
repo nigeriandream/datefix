@@ -59,8 +59,8 @@ def get_chat(chat_id, user):
     return json.dumps(chat_thread.get_chat(chat_thread.position(user)))
 
 
-def get_chat_threads(request, user_id):
-    user = User.objects.get(id=user_id)
+def get_chat_threads(request):
+    user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
         chats = ChatThread.objects.filter(Q(first_user_id=request.user.id) | Q(
             second_user_id=request.user.id)).order_by('last_message_date')
@@ -73,7 +73,7 @@ def get_chat_threads(request, user_id):
             "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
             "last_message": last_message(x)
         } for x in chats]
-        return json.dumps({'user_id': user_id, "chat_threads": data})
+        return json.dumps({'user_id': request.user.id, "chat_threads": data})
 
 
 def delete_message(request, chat_id, id_):

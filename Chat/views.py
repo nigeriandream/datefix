@@ -25,9 +25,9 @@ def get_user(request, user_id):
     return HttpResponse(get_profile(request, user_id))
 
 
-def user_chats(request, user_id):
+def user_chats(request):
     from Chat.algorithms import get_chat_threads
-    return HttpResponse(get_chat_threads(request, user_id))
+    return HttpResponse(get_chat_threads(request))
 
 
 def delete_msg(request, chat_id, id_):
