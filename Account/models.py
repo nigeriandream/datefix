@@ -29,6 +29,7 @@ class User(AbstractUser):
     secret = models.BinaryField(default=get_key(os.urandom(16).__str__()))
     min_score = models.DecimalField(max_digits=5, decimal_places=2, default=None, null=True)
     verified = models.BooleanField(default=False)
+    status = models.CharField(max_length=32, default='Offline')
 
     def successful_list(self):
         if self.successful_matches is None or self.successful_matches == '':

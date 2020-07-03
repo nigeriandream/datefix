@@ -35,6 +35,18 @@ class ChatConsumer(AsyncConsumer):
                 chat_room,
                 self.channel_name
             )
+            await self.set_user_status('Online')
+
+            await self.channel_layer.group_send(
+                self.chat_room,
+                {"type": "send_message",
+                 "data": self.chat_data})
+        if self.chat_data['function'] == 'disconnect':
+            await self.set_user_status('Offline')
+            await self.channel_layer.group_send(
+                self.chat_room,
+                {"type": "send_message",
+                 "data": self.chat_data})
         if self.chat_data['function'] == 'status':
             await self.update_status(int(self.chat_data['message_id']))
             print('updated - delivered')
@@ -129,3 +141,21 @@ class ChatConsumer(AsyncConsumer):
             return 'Deleted'
         self.chat_data['result'] = 'Not Deleted'
         return 'Not Deleted'
+
+
+    @database_sync_to_async
+    def set_user_status(self, status):
+        user = self.me
+        if status == 'Online' and (user.status == 'Offline' or 'Last seen' in user.status):
+            user.status = 'Online'
+            user.save()
+
+        if status == 'Offline' and user.status == 'Online':
+            user.status = f"Last seen at {datetime.now().time().strftime('%I:%M %p')} "\
+                          f"on {datetime.now().date().strftime('%e - %b - %Y')}."
+            user.save()
+
+        self.chat_data['status'] = user.status
+        return
+
+
