@@ -23,6 +23,10 @@ var app = new Vue({
     this.websocket();
   },
   methods: {
+    scrollToBottom() {
+      let container = this.$el.querySelector("#container");
+      container.scrollTop = container.scrollHeight;
+    },
     async websocket() {
       this.socket.onclose = (e) => {
         console.log("WebSocket Disconnected", e);
@@ -30,7 +34,6 @@ var app = new Vue({
 
       this.socket.onopen = (e) => {
         console.log("WebSocket Connected", e);
-        // this.socket.send(JSON.stringify({ chat_id: 1, username: "Louisane", function: "connect" }));
       };
 
       this.socket.onerror = (e) => {
@@ -38,8 +41,11 @@ var app = new Vue({
       };
 
       this.socket.onmessage = (e) => {
-        this.messages.push(JSON.parse(e.data));
+        this.chat_messages.push(JSON.parse(e.data));
         console.log("WebSocket received message", e);
+        this.getSingleChat(this.chat_object);
+        // this.$refs.container.scrollIntoView();
+        console.log(JSON.parse(e.data));
       };
     },
     async createThread() {
@@ -48,10 +54,6 @@ var app = new Vue({
           .then((response) => response.json())
           .then((data) => {
             console.log("thread>>>", data);
-            // if (data !== 'None'){
-            //   this.user = data;
-            //   this.username=data.username;
-            // }
           });
       } catch (error) {
         console.log("error>>>", error);
@@ -94,6 +96,7 @@ var app = new Vue({
             this.chat_id = data.chat_id;
             this.chat_messages = data.chat_list;
           });
+        // this.$refs.container.scrollIntoView();
         this.connect();
       } catch (error) {
         console.log("error>>>", error);
@@ -111,15 +114,14 @@ var app = new Vue({
     sendMessage() {
       let thread_obj = {
         sender_id: this.id,
-        text: this.message,
+        message: this.message,
         sender: this.username,
         function: "message",
       };
-      this.messages.push(thread_obj);
       this.socket.send(JSON.stringify(thread_obj));
       console.log("thread_obj>>>", thread_obj);
-      this.getSingleChat(this.chat_object);
       this.message = "";
+      this.getSingleChat(this.chat_object);
     },
   },
 });
