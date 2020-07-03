@@ -305,3 +305,15 @@ def encrypt(request):
         data = {"status": 200, "message": user.encrypt(request.POST['message']).decode()}
         return JsonResponse(data)
     return JsonResponse({"status": 400, "message": "Bad Request"})
+
+
+def encrypt_(message):
+    user = User.objects.get(id=3)
+    data = {"status": 200, "message": user.encrypt(message).decode()}
+    return JsonResponse(data)
+
+
+def decrypt_(message):
+    user = User.objects.get(id=3)
+    data = {"status": 200, "message": user.decrypt(message.encode())}
+    return JsonResponse(data)

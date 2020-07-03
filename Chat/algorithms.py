@@ -59,8 +59,8 @@ def get_chat(chat_id, user):
     return json.dumps(chat_thread.get_chat(chat_thread.position(user)))
 
 
-def get_chat_threads(request, user_id):
-    user = User.objects.get(id=user_id)
+def get_chat_threads(request):
+    user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
         chats = ChatThread.objects.filter(Q(first_user_id=request.user.id) | Q(
             second_user_id=request.user.id)).order_by('last_message_date')
@@ -73,7 +73,7 @@ def get_chat_threads(request, user_id):
             "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
             "last_message": last_message(x)
         } for x in chats]
-        return json.dumps({'user_id': user_id, "chat_threads": data})
+        return json.dumps({'user_id': request.user.id, "chat_threads": data})
 
 
 def delete_message(request, chat_id, id_):
@@ -99,7 +99,7 @@ def profile_picture(image):
 def last_message(chat_thread):
     if chat_thread.last_message() is not None:
         return {'id': chat_thread.last_message().id,
-                'time': chat_thread.last_message().datetime.time().__str__(),
+                'time': chat_thread.last_message().datetime.time().strftime('%I:%M %p'),
                 'message': chat_thread.last_message_text(),
                 'sender_id': chat_thread.last_message().sender.id,
                 'sender': chat_thread.last_message().sender.username,
@@ -113,7 +113,8 @@ def get_profile(request, user_id):
         user = User.objects.get(id=user_id)
         return json.dumps({'username': user.username,
                            'first_name': user.first_name, 'last_name': user.last_name,
-                           'profile_pic': profile_picture(user.profile_picture)})
+                           'profile_pic': profile_picture(user.profile_picture),
+                           'status': user.status})
 
 
 def create_chat(request, your_id, user_id):
