@@ -73,7 +73,8 @@ def get_chat_threads(request):
             "first_name": x.get_receiver(user).first_name,
             "last_name": x.get_receiver(user).last_name,
             "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
-            "last_message": last_message(x)
+            "last_message": last_message(x),
+            "expired": x.expired()
         } for x in chats]
         return json.dumps({'user_id': request.user.id, "chat_threads": data})
 
