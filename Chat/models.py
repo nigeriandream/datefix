@@ -41,7 +41,7 @@ class ChatThread(models.Model):
         return str(self.first_deleted).split(',')
 
     def expired(self):
-        if self.expiry_date.__lt__(datetime.now()):
+        if self.expiry_date.__lt__(datetime.now().astimezone()):
             return True
         return False
 
