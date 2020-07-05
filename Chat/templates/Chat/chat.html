@@ -124,23 +124,25 @@
     <div class="container">
       <div class="az-content-left az-content-left-chat">
         <div class="az-chat-contacts-wrapper">
-          <h6 style="font-weight: bold; font-size: 20px;">MATCHED CONTACTS</h6>
+          <h6 style="font-weight: bold; font-size: 20px;">ACTIVE CHATS</h6>
           <input type="text" value="{{request.user.id}}" class="d-none" ref="userID">
         </div><!-- az-chat-active-contacts -->
 
         <div id="azChatList" class="az-chat-list">
           <div v-for="(chat, index) in chat_threads" :key="index">
-            <div class="media new" @click="getSingleChat(chat)">
-              <div class="az-img-user online">
+            <div class="media new" @click="connect(chat)">
+              <div :class="[status === 'Online' ? 'az-img-user online' : 'az-img-user']">
                 <img :src="[[chat.profile_picture]]" alt="">
                 <span>2</span>
               </div>
               <div class="media-body">
                 <div class="media-contact-name">
                   <span>[[chat.first_name]] [[chat.last_name]]</span>
-                  <span>[[chat.last_message.time]]</span>
+                  <span v-if="chat.last_message">[[chat.last_message.time]]</span>
+                  <span v-else></span>
                 </div>
-                <p>[[chat.last_message.message]]</p>
+                <p v-if="chat.last_message">[[chat.last_message.message]]</p>
+                <p v-else></p>
               </div><!-- media-body -->
             </div><!-- media -->
           </div>
@@ -149,10 +151,12 @@
         <div class="az-content-body az-content-body-chat">
           <template v-if="loading === false">
         <div class="az-chat-header">
-          <div class="az-img-user"><img :src="[[chat_object.profile_picture]]" alt=""></div>
+          <div :class="[status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[chat_object.profile_picture]]" alt=""></div>
           <div class="az-chat-msg-name">
             <h6>[[chat_object.first_name]] [[chat_object.last_name]]</h6>
-            <small>Last seen: 2 minutes ago</small>
+            <small v-if="status === 'Online'">Online</small>
+            <small v-if="status === ''">Offline</small>
+            <!-- <small v-else>Last seen: 2 minutes ago</small> -->
           </div>
           <nav class="nav">
             <a href="" class="nav-link"><i class="icon ion-md-more"></i></a>
@@ -166,14 +170,14 @@
           <div class="content-inner" ref="container">
             <label class="az-chat-time"><span>3 days ago</span></label>
             <div v-for='(message, index) in chat_messages' :key='index'>
-            <div :class="[message.sender == username ? 'media flex-row-reverse' : 'media']">
-              <div class="az-img-user online"><img :src="[[message.sender_pic]]" alt=""></div>
+            <div :class="[message.sender == loggedInUser ? 'media flex-row-reverse' : 'media']">
+              <div :class="[status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[message.sender_pic]]" alt=""></div>
               <div class="media-body">
                 <div class="az-msg-wrapper">
                   [[ message.message ]]
+                  <span style="font-size: 7px; margin-left: 2em;">[[ message.time ]]</span> 
                 </div><!-- az-msg-wrapper -->
-                
-                <div><span>[[ message.time ]]</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a></div>
+                <a href=""><i class="icon ion-android-more-horizontal"></i></a>
               </div><!-- media-body -->
             </div><!-- media -->
             </div>
@@ -193,9 +197,9 @@
       <template v-else>
         <div class="col-md-12 col-lg-12">
           <div class="default-ImageEmpty">
-            <img :src="`/assets/img/${image}`" alt style="width: 300px;" />
-            <h3 class="defaultTitle">{{title}}</h3>
-            <p>{{subtitle}}</p>
+            <img :src="`/static/images/undraw_online_dating_yruf.svg`" alt style="width: 300px;" />
+            <h3 class="defaultTitle">Datefix</h3>
+            <p>Stay Connected with Datefix</p>
             <slot></slot>
           </div>
         </div>
@@ -267,6 +271,7 @@
     });
   </script>
   <script src={% static 'js/vue.js' %}></script>
+  <script src={% static 'js/vue-ScrollTo.js' %}></script>
   <script src={% static 'js/axios.min.js' %}></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
   <script src={% static 'js/chat-vue.js' %}></script>

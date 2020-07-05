@@ -11,7 +11,10 @@ var app = new Vue({
     message: "",
     user: "",
     id: "",
-    username: "",
+    loggedInUser: "",
+    loading: true,
+    status: "",
+    messageStatus: "",
   },
   async mounted() {
     this.id = this.$refs.userID.value;
@@ -23,12 +26,9 @@ var app = new Vue({
     this.websocket();
   },
   methods: {
-    scrollToBottom() {
-      let container = this.$el.querySelector("#container");
-      container.scrollTop = container.scrollHeight;
-    },
     async websocket() {
       this.socket.onclose = (e) => {
+        this.disconnect();
         console.log("WebSocket Disconnected", e);
       };
 
@@ -44,8 +44,22 @@ var app = new Vue({
         this.chat_messages.push(JSON.parse(e.data));
         console.log("WebSocket received message", e);
         this.getSingleChat(this.chat_object);
-        // this.$refs.container.scrollIntoView();
         console.log(JSON.parse(e.data));
+        let data = JSON.parse(e.data);
+        if (
+          data.username !== this.loggedInUser &&
+          data.function === "connect"
+        ) {
+          this.status = data.status;
+          console.log(this.status);
+        }
+        if (
+          data.username !== this.loggedInUser &&
+          data.function === "message"
+        ) {
+          this.messageStatus = data.status;
+          console.log(this.messageStatus);
+        }
       };
     },
     async createThread() {
@@ -67,7 +81,7 @@ var app = new Vue({
             console.log("user>>>", data);
             if (data !== "None") {
               this.user = data;
-              this.username = data.username;
+              this.loggedInUser = data.username;
             }
           });
       } catch (error) {
@@ -76,7 +90,7 @@ var app = new Vue({
     },
     async getAllChats() {
       try {
-        await fetch(`/chat/api/threads/${this.id}`)
+        await fetch(`/chat/api/threads`)
           .then((response) => response.json())
           .then((data) => {
             console.log("all chats>>>", data);
@@ -87,7 +101,6 @@ var app = new Vue({
       }
     },
     async getSingleChat(chat) {
-      this.chat_object = chat;
       try {
         await fetch(`/chat/api/chat/${chat.chat_id}`)
           .then((response) => response.json())
@@ -96,17 +109,27 @@ var app = new Vue({
             this.chat_id = data.chat_id;
             this.chat_messages = data.chat_list;
           });
-        // this.$refs.container.scrollIntoView();
-        this.connect();
+        this.loading = false;
       } catch (error) {
         console.log("error>>>", error);
       }
     },
-    connect() {
+    connect(chat) {
+      this.chat_object = chat;
       let chat_thread = {
-        username: this.username,
-        chat_id: this.chat_id,
+        username: this.loggedInUser,
+        chat_id: chat.chat_id,
         function: "connect",
+      };
+      console.log("chat_thread>>>", chat_thread);
+      this.socket.send(JSON.stringify(chat_thread));
+      this.getSingleChat(chat);
+    },
+    disconnect() {
+      let chat_thread = {
+        username: this.loggedInUser,
+        chat_id: this.chat_id,
+        function: "disconnect",
       };
       console.log("chat_thread>>>", chat_thread);
       this.socket.send(JSON.stringify(chat_thread));
@@ -115,13 +138,19 @@ var app = new Vue({
       let thread_obj = {
         sender_id: this.id,
         message: this.message,
-        sender: this.username,
+        sender: this.loggedInUser,
         function: "message",
       };
       this.socket.send(JSON.stringify(thread_obj));
       console.log("thread_obj>>>", thread_obj);
       this.message = "";
       this.getSingleChat(this.chat_object);
+    },
+  },
+  watch: {
+    status(newValue, oldValue) {
+      console.log("value:", newValue, oldValue);
+      this.status = newValue;
     },
   },
 });
