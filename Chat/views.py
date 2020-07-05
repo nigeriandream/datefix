@@ -8,7 +8,8 @@ def chat(request):
     if request.user.is_authenticated:
         from Account.models import User
         user = User.objects.get(id=request.user.id)
-        if len(user.matches_()) == 2:
+        from Chat.algorithms import has_chat
+        if has_chat(user):
             return render(request, 'Chat/chat.html')
         return redirect('dashboard')
     return redirect('home')

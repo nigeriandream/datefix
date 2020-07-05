@@ -21,6 +21,7 @@ def select_match(chat_thread, user, you):
             Couple.objects.create(first_partner_id=chat_thread.first_user.id,
                                   second_partner_id=chat_thread.second_user.id,
                                   datetime=datetime.now(), couple_name=chat_thread.chat_name())
+        # send email to each other
         end_session(chat_thread, user, you)
     return
 
@@ -50,6 +51,7 @@ def reject(you, user):
 def jilt(chat, you, user):
     reject(you, user)
     reject(user, you)
+    # send email to each other
     end_session(chat, user, you)
     return
 
@@ -71,7 +73,8 @@ def get_chat_threads(request):
             "first_name": x.get_receiver(user).first_name,
             "last_name": x.get_receiver(user).last_name,
             "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
-            "last_message": last_message(x)
+            "last_message": last_message(x),
+            "expired": x.expired()
         } for x in chats]
         return json.dumps({'user_id': request.user.id, "chat_threads": data})
 
@@ -137,3 +140,13 @@ def create_chat(request, your_id, user_id):
             return {"status": 200, "message": f'A Chat Thread Object has been created for you and the '
                                               f'user with ID {user_id}',
                     "data": get_chat(chat.id, user=request.user)}
+
+
+def has_chat(user):
+    no_of_chats = user.matches_()
+    chats = ChatThread.objects.filter(Q(first_user_id=user.id) | Q(
+        second_user_id=user.id)).order_by('last_message_date')
+    expired_chats = [x.id for x in chats if x.expired()]
+    if len(no_of_chats) == 2 or (len(no_of_chats) == 1 and len(expired_chats) == 1):
+        return True
+    return False

@@ -73,7 +73,7 @@ class ChatThread(models.Model):
                          'sender': i.sender.username,
                          'sender_pic': profile_picture(i.sender.profile_picture),
                          'status': i.send_status})
-        data = {'chat_id': self.id, 'chat_list': data}
+        data = {'chat_id': self.id, 'expired': self.expired(), 'chat_list': data}
         return data
 
     def get_receiver(self, user):

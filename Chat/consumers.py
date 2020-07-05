@@ -5,7 +5,6 @@ from channels.consumer import AsyncConsumer
 from channels.db import database_sync_to_async
 from django.utils.datetime_safe import datetime
 from .models import ChatThread, ChatMessage
-from .algorithms import select_match, jilt
 
 
 class ChatConsumer(AsyncConsumer):
@@ -79,13 +78,24 @@ class ChatConsumer(AsyncConsumer):
                 {"type": "send_message",
                  "data": self.chat_data}
             )
-
         if self.chat_data['function'] == 'delete':
             await self.delete_message(int(self.chat_data['message_id']))
             await self.channel_layer.group_send(
                 self.chat_room,
                 {"type": "send_message", "data": self.chat_data}
             )
+        if self.chat_data['function'] == 'jilt':
+            await self.reject()
+            await self.channel_layer.group_send(
+                self.chat_room,
+                {"type": "send_message",
+                 "data": self.chat_data})
+        if self.chat_data['function'] == 'accept':
+            await self.choose()
+            await self.channel_layer.group_send(
+                self.chat_room,
+                {"type": "send_message",
+                 "data": self.chat_data})
 
     async def send_message(self, event):
         await self.send({"type": "websocket.send", "text": json.dumps(event['data'])})
@@ -108,6 +118,8 @@ class ChatConsumer(AsyncConsumer):
         chat_msg = ChatMessage.objects.create(sender_id=int(data['sender_id']), chat=chat,
                                               text=encrypted_data, datetime=data['datetime'],
                                               send_status=data['status'])
+        self.thread_obj.last_message_date = chat_msg.datetime
+        self.thread_obj.save()
         self.chat_data['message_id'] = chat_msg.id
         return chat_msg
 
@@ -125,12 +137,16 @@ class ChatConsumer(AsyncConsumer):
 
     @database_sync_to_async
     def choose(self):
+        from Chat.algorithms import select_match
         select_match(self.thread_obj, self.other_user, self.me)
+        self.chat_data['result'] = 'successful'
 
     @database_sync_to_async
     def reject(self):
+        from Chat.algorithms import jilt
         jilt(self.thread_obj, self.other_user, self.me)
-
+        self.chat_data['result'] = 'succeed'
+        return
 
     @database_sync_to_async
     def delete_message(self, id_):
@@ -142,7 +158,6 @@ class ChatConsumer(AsyncConsumer):
         self.chat_data['result'] = 'Not Deleted'
         return 'Not Deleted'
 
-
     @database_sync_to_async
     def set_user_status(self, status):
         user = self.me
@@ -151,11 +166,9 @@ class ChatConsumer(AsyncConsumer):
             user.save()
 
         if status == 'Offline' and user.status == 'Online':
-            user.status = f"Last seen at {datetime.now().time().strftime('%I:%M %p')} "\
+            user.status = f"Last seen at {datetime.now().time().strftime('%I:%M %p')} " \
                           f"on {datetime.now().date().strftime('%e - %b - %Y')}."
             user.save()
 
         self.chat_data['status'] = user.status
         return
-
-

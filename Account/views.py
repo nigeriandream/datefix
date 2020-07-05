@@ -78,32 +78,32 @@ def results(request):
     if request.method == 'POST':
         selected = request.POST['matches']
         success = user.successful_list()
-        for i in selected:
-            if User.objects.get(id=int(i)).complete_match():
-                continue
-            success = [x for x in success if x[0][1] != i]
-            user.successful_matches = json.dumps(success)
-            user.matches = json.dumps(selected)
-            user.save()
-            # add user to match chatters
-            user_ = user.objects.get(id=int(i))
-            match_list = json.loads(user_.matches)
-            match_list.append(user.id)
-            user_.matches = json.dumps(match_list)
-            user_.save()
-            create_chat(request, user.id, user_.id)
-            # send notification to both partners
-            selected.remove(i)
-            return redirect('chatroom')
-        if len(selected) > 0:
-            match_comp = [x[1][1] for x in success if x[0][1] in selected]
-            verb = 'has'
-            if len(selected) > 1:
+        match_comp = [x for x in selected if User.objects.get(id=int(x)).complete_match()]
+        verb = ''
+        if len(match_comp) > 0:
+            if len(match_comp) == 2:
+                verb = 'has'
+            if len(match_comp) == 1:
                 verb = 'have'
             request.session['message'] = f'{"and ".join(match_comp)} {verb} complete matches, so choose another.'
             request.session['staus'] = 'info'
             return redirect('results')
-        return redirect('chatroom')
+        if len(match_comp) == 0:
+            for i in selected:
+                success = [x for x in success if x[0][1] != i]
+                user.successful_matches = json.dumps(success)
+                user.matches = json.dumps(selected)
+                user.save()
+                # add user to match chatters
+                user_ = user.objects.get(id=int(i))
+                match_list = json.loads(user_.matches)
+                match_list.append(user.id)
+                user_.matches = json.dumps(match_list)
+                user_.save()
+                create_chat(request, user.id, user_.id)
+                # send notification to both partners
+                selected.remove(i)
+                return redirect('chatroom')
 
 
 # signup verified
