@@ -134,5 +134,8 @@ class Notification(models.Model):
 
 class PersonalityTest(models.Model):
     email = models.EmailField()
-    scores = models.CharField(max_length=20, default='[]')
-    personalities = models.TextField(default='[]')
+    extraversion = models.TextField(default='{}')
+    neuroticism = models.TextField(default='{}')
+    agreeableness = models.TextField(default='{}')
+    conscientiousness = models.TextField(default='{}')
+    openness = models.TextField(default='{}')

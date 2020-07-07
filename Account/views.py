@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import User, PersonalityTest
 import json
-from .algorithms import match_user, flash, display, send_verification, get_username
+from .algorithms import match_user, flash, display, send_verification, get_username, get_personality
 from Chat.algorithms import create_chat
 
 
@@ -47,17 +47,40 @@ def login(request):
         return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1], "icon": flash_[2]})
 
 
+@csrf_exempt
 def personality(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
+        if 'email' not in request.session:
+            request.session['email'] = request.POST['email']
         test_ = PersonalityTest()
         try:
-            test_ = PersonalityTest.objects.get(email=request.GET['email'])
+            test_ = PersonalityTest.objects.get(email=request.POST['email'])
         except PersonalityTest.DoesNotExist:
-            test_.email = request.GET['email']
-        test_.personalities = request.GET['personality']
-        test_.scores = request.GET['score']
+            test_.email = request.POST['email']
+        if request.POST['category'] == 'Extraversion':
+            request.session['category'] = 'Neuroticism'
+            test_.extraversion = get_personality(request.POST['score'], request.POST['category'])
+
+        if request.POST['category'] == 'Neuroticism':
+            request.session['category'] = 'Agreeableness'
+            test_.neuroticism = get_personality(request.POST['score'], request.POST['category'])
+
+        if request.POST['category'] == 'Agreeableness':
+            request.session['category'] = 'Conscientiousness'
+            test_.agreeableness = get_personality(request.POST['score'], request.POST['category'])
+
+        if request.POST['category'] == 'Conscientiousness':
+            request.session['category'] = 'Openness'
+            test_.conscientiousness = get_personality(request.POST['score'], request.POST['category'])
+
+        if request.POST['category'] == 'Openness':
+            request.session['category'] = 'End'
+            test_.openness = get_personality(request.POST['score'], request.POST['category'])
+            test_.save()
+            return HttpResponse('Finished')
+
         test_.save()
-        return HttpResponse('Personality Test Taken')
+        return HttpResponse('Remaining')
 
 
 # verified
@@ -283,8 +306,64 @@ def verification(request):
 
 
 # verified
-def test(request):
-    return render(request, 'Account/test.html')
+def personality_test(request):
+    from .algorithms import dict_to_zip
+    data = None
+    category = ''
+    email = ''
+    if 'category' not in request.session:
+        from .algorithms import category_1
+        data = dict_to_zip(category_1)
+        category = 'Extraversion'
+
+    else:
+        category = request.session['category']
+        if category == 'Neuroticism':
+            from .algorithms import category_2
+            data = dict_to_zip(category_2)
+        if category == 'Agreeableness':
+            from .algorithms import category_3
+            data = dict_to_zip(category_3)
+        if category == 'Conscientiousness':
+            from .algorithms import category_4
+            data = dict_to_zip(category_4)
+        if category == 'Openness':
+            from .algorithms import category_5
+            data = dict_to_zip(category_5)
+        email = request.session['email']
+
+    return render(request, 'Account/test.html', {'email': email, 'data': data, 'category': category})
+
+
+def test_result(request):
+    if request.method == 'GET':
+        from .algorithms import categories
+        try:
+            your_personality = PersonalityTest.objects.get(email=request.session['email'])
+            data = zip(
+                categories,
+                [
+                    json.loads(your_personality.extraversion)['title'],
+                    json.loads(your_personality.neuroticism)['title'],
+                    json.loads(your_personality.agreeableness)['title'],
+                    json.loads(your_personality.conscientiousness)['title'],
+                    json.loads(your_personality.openness)['title']
+                ],
+                [
+                    json.loads(your_personality.extraversion)['description'],
+                    json.loads(your_personality.neuroticism)['description'],
+                    json.loads(your_personality.agreeableness)['description'],
+                    json.loads(your_personality.conscientiousness)['description'],
+                    json.loads(your_personality.openness)['description'],
+                ]
+            )
+            return render(request, 'Account/personality.html', {'data': data, "email": request.session['email']})
+        except PersonalityTest.DoesNotExist:
+            return redirect('personality_test')
+
+    if request.method == 'POST':
+        del request.session['category'], request.session['email']
+        return redirect('personality_test')
 
 
 @csrf_exempt

@@ -27,4 +27,5 @@ urlpatterns = [
          delete_notifications, name='delete_notifications'),
     path('get_data/<type_>/', get_data, name="get_data"),
     path('personality_test/', personality, name="personality_test"),
+    path('personality_test/result', test_result, name="test_result")
 ]
