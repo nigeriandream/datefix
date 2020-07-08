@@ -156,6 +156,16 @@ var app = new Vue({
       this.socket.send(JSON.stringify(jilt_thread));
       this.$refs.close.click();
     },
+    accept() {
+      let accept_thread = {
+        username: this.loggedInUser,
+        chat_id: this.chat_id,
+        function: "accept",
+      };
+      console.log("accept_thread>>>", accept_thread);
+      this.socket.send(JSON.stringify(accept_thread));
+      this.$refs.close.click();
+    },
   },
   watch: {
     status(newValue, oldValue) {
