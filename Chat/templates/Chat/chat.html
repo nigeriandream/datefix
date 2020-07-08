@@ -124,7 +124,7 @@
     <div class="container">
       <div class="az-content-left az-content-left-chat">
         <div class="az-chat-contacts-wrapper">
-          <h6 style="font-weight: bold; font-size: 20px;">ACTIVE CHATS</h6>
+          <h6 style="font-weight: bold; font-size: 20px;">MATCHED CONTACTS</h6>
           <input type="text" value="{{request.user.id}}" class="d-none" ref="userID">
         </div><!-- az-chat-active-contacts -->
 
@@ -133,7 +133,7 @@
             <div class="media new" @click="connect(chat)">
               <div :class="[status === 'Online' ? 'az-img-user online' : 'az-img-user']">
                 <img :src="[[chat.profile_picture]]" alt="">
-                <span>2</span>
+                <!-- <span>2</span> -->
               </div>
               <div class="media-body">
                 <div class="media-contact-name">
@@ -149,8 +149,8 @@
           </div><!-- media -->
         </div><!-- az-chat-list -->
         <div class="az-content-body az-content-body-chat">
-          <template v-if="loading === false">
-        <div class="az-chat-header">
+          <template v-show="loading === false">
+        <div class="az-chat-header" v-show="loading === false">
           <div :class="[status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[chat_object.profile_picture]]" alt=""></div>
           <div class="az-chat-msg-name">
             <h6>[[chat_object.first_name]] [[chat_object.last_name]]</h6>
@@ -160,13 +160,13 @@
           </div>
           <nav class="nav">
             <a href="" class="nav-link"><i class="icon ion-md-more"></i></a>
-            <a href="" class="nav-link" data-toggle="tooltip" title="Call"><i class="icon ion-ios-call"></i></a>
-            <a href="" class="nav-link" data-toggle="tooltip" title="Archive"><i class="icon ion-ios-filing"></i></a>
-            <a href="" class="nav-link" data-toggle="tooltip" title="Trash"><i class="icon ion-md-trash"></i></a>
-            <a href="" class="nav-link" data-toggle="tooltip" title="View Info"><i class="icon ion-md-information-circle"></i></a>
+            <span class="nav-link" data-toggle="modal" title="Jilt" data-target="#jiltModal"><i class="icon ion-ios-heart-half" ></i></span>
+            <!-- <a href="" class="nav-link" data-toggle="tooltip" title="Archive"><i class="icon ion-ios-filing"></i></a> -->
+            <!-- <a href="" class="nav-link" data-toggle="tooltip" title="Trash"><i class="icon ion-md-trash"></i></a> -->
+            <!-- <a href="" class="nav-link" data-toggle="tooltip" title="View Info"><i class="icon ion-md-information-circle"></i></a> -->
           </nav>
         </div><!-- az-chat-header -->
-        <div id="azChatBody" class="az-chat-body">
+        <div id="azChatBody" class="az-chat-body" v-show="loading === false">
           <div class="content-inner" ref="container">
             <label class="az-chat-time"><span>3 days ago</span></label>
             <div v-for='(message, index) in chat_messages' :key='index'>
@@ -183,7 +183,7 @@
             </div>
           </div><!-- content-inner -->
         </div><!-- az-chat-body -->
-        <div class="az-chat-footer">
+        <div class="az-chat-footer" v-show="loading === false">
           <nav class="nav">
             <a href="" class="nav-link" data-toggle="tooltip" title="Add Photo"><i class="fas fa-camera"></i></a>
             <a href="" class="nav-link" data-toggle="tooltip" title="Attach a File"><i class="fas fa-paperclip"></i></a>
@@ -194,8 +194,8 @@
           <span @click="sendMessage" class="az-msg-send"><i class="far fa-paper-plane"></i></span>
         </div><!-- az-chat-footer -->
       </template>
-      <template v-else>
-        <div class="col-md-12 col-lg-12">
+      <template v-if="loading === true">
+        <div class="col-md-12 col-lg-12 mt-4">
           <div class="default-ImageEmpty">
             <img :src="`/static/images/undraw_online_dating_yruf.svg`" alt style="width: 300px;" />
             <h3 class="defaultTitle">Datefix</h3>
@@ -206,6 +206,55 @@
         </template>
       </div><!-- az-content-body -->
       </div>
+      <div
+      class="modal fade"
+      id="jiltModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header d-flex justify-content-between align-items-center">
+            <div>
+              <h5
+                class="modal-title fs-17 font-weight-bold"
+                id="exampleModalCenterTitle"
+              >JAre you sure you want to do this jilt contact?</h5>
+            </div>
+            <button type="button" class="close" data-dismiss="modal" ref="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+                <img
+                src="/static/images/warning.svg"
+                  height="100"
+                  width="100"
+                  alt
+                />
+                <h6 class="text-muted fs-16 mt-3 text-center">Datefix will permanently remove this contact from your possible matches</h6>
+              </div>
+            </div>
+          </div>
+
+          <!-- action button -->
+          <div class="modal-footer border-0 justify-content-center">
+            <button class="btn btn-danger rounded-md px-4" @click="jilt" :disabled="approving">
+              <template v-if="approving === false">Jilt</template>
+              <template v-if="approving === true">
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Jilting...
+              </template>
+            </button>
+
+            <button class="btn btn-dark rounded-md" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
       </div><!-- az-content-left -->
     <!-- </div> -->
   </div><!-- az-content -->
@@ -248,6 +297,10 @@
         });
 
         $('#azChatBody').scrollTop($('#azChatBody').prop('scrollHeight'));
+
+        $('#azChatBody').on('azChatBody-y-reach-end', () => {
+        azChatBody.update();
+        })
       }
 
 

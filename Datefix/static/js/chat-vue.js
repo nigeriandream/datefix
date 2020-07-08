@@ -15,6 +15,7 @@ var app = new Vue({
     loading: true,
     status: "",
     messageStatus: "",
+    approving: false,
   },
   async mounted() {
     this.id = this.$refs.userID.value;
@@ -24,6 +25,9 @@ var app = new Vue({
     const url = window.location.href.replace("http", "ws");
     this.socket = new WebSocket(url);
     this.websocket();
+  },
+  beforeDestroy() {
+    this.disconnect(this.chat_object);
   },
   methods: {
     async websocket() {
@@ -42,7 +46,6 @@ var app = new Vue({
 
       this.socket.onmessage = (e) => {
         this.chat_messages.push(JSON.parse(e.data));
-        console.log("WebSocket received message", e);
         this.getSingleChat(this.chat_object);
         console.log(JSON.parse(e.data));
         let data = JSON.parse(e.data);
@@ -51,7 +54,6 @@ var app = new Vue({
           data.function === "connect"
         ) {
           this.status = data.status;
-          console.log(this.status);
         }
         if (
           data.username !== this.loggedInUser &&
@@ -116,23 +118,22 @@ var app = new Vue({
     },
     connect(chat) {
       this.chat_object = chat;
-      let chat_thread = {
+      let connect_thread = {
         username: this.loggedInUser,
         chat_id: chat.chat_id,
         function: "connect",
       };
-      console.log("chat_thread>>>", chat_thread);
-      this.socket.send(JSON.stringify(chat_thread));
-      this.getSingleChat(chat);
+      console.log("connect_thread>>>", connect_thread);
+      this.socket.send(JSON.stringify(connect_thread));
     },
     disconnect() {
-      let chat_thread = {
+      let disconnect_thread = {
         username: this.loggedInUser,
         chat_id: this.chat_id,
         function: "disconnect",
       };
-      console.log("chat_thread>>>", chat_thread);
-      this.socket.send(JSON.stringify(chat_thread));
+      console.log("disconnect_thread>>>", disconnect_thread);
+      this.socket.send(JSON.stringify(disconnect_thread));
     },
     sendMessage() {
       let thread_obj = {
@@ -144,11 +145,21 @@ var app = new Vue({
       this.socket.send(JSON.stringify(thread_obj));
       console.log("thread_obj>>>", thread_obj);
       this.message = "";
-      this.getSingleChat(this.chat_object);
+    },
+    jilt() {
+      let jilt_thread = {
+        username: this.loggedInUser,
+        chat_id: this.chat_id,
+        function: "jilt",
+      };
+      console.log("jilt_thread>>>", jilt_thread);
+      this.socket.send(JSON.stringify(jilt_thread));
+      this.$refs.close.click();
     },
   },
   watch: {
     status(newValue, oldValue) {
+      this.connect(this.chat_object);
       console.log("value:", newValue, oldValue);
       this.status = newValue;
     },
