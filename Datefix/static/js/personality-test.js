@@ -1,89 +1,111 @@
 // A personality quiz
 
-// This is an array of objects that stores the personality trait that is prompted to the user and the weight for each prompt. 
-// If a personality trait is considered more introverted, it will have a negative weight.
-// If a personlity trait is considered more extroverted, it will have a positive weight.
 
-let email = $('#email').val()
-let category = $('#category').val()
 let total = 0;
+let scores = [0,0,0,0,0,0,0,0,0,0]
+let selected = [null, null, null, null, null, null, null, null, null, null]
+let buttons = document.getElementsByClassName('value-btn')
 
 
-
-// Keep a running total of the values they have selected. If the total is negative, the user is introverted. If positive, user is extroverted.
-// Calculation will sum all of the answers to the prompts using weight of the value * the weight of the prompt.
-
-
-// Get the weight associated to group number
-function findPromptWeight(prompts, group) {
-  var weight = 0;
-
-  for (var i = 0; i < prompts.length; i++) {
-    if (prompts[i].class === group) {
-      weight = prompts[i].weight;
-    }
-  }
-
-  return weight;
-}
 
 // Get the weight associated to the value
-function findValueWeight(values, value) {
-  let weight = 0;
-
-  for (let i = 0; i < values.length; i++) {
-    if (values[i].value === value) {
-      weight = values[i].weight;
-    }
+const findValueWeight = (value) => {
+  switch(value){
+      case 'Strongly Agree': return 5;
+      case 'Agree': return 3;
+      case 'Neutral': return 0;
+      case 'Disagree': return -3;
+      case 'Strongly Disagree': return -5;
   }
-
-  return weight;
 }
 
 // When user clicks a value to agree/disagree with the prompt, display to the user what they selected
-$('.value-btn').mousedown(function () {
-  let classList = $(this).attr('class');
-  // console.log(classList);
-  let  classArr = classList.split(" ");
-  // console.log(classArr);
-  let this_group = classArr[0];
-  // console.log(this_group);
 
-  // If button is already selected, de-select it when clicked and subtract any previously added values to the total
-  // Otherwise, de-select any selected buttons in group and select the one just clicked
-  // And subtract deselected weighted value and add the newly selected weighted value to the total
-  if ($(this).hasClass('active')) {
-    $(this).removeClass('active');
-    total -= (findPromptWeight(prompts, this_group) * findValueWeight(prompt_values, $(this).text()));
-  } else {
-    // $('[class='thisgroup).prop('checked', false);
-    total -= (findPromptWeight(prompts, this_group) * findValueWeight(prompt_values, $('.' + this_group + '.active').text()));
-    // console.log($('.'+this_group+'.active').text());
-    $('.' + this_group).removeClass('active');
+let curr_prompt_btn = null
 
-    // console.log('group' + findValueWeight(prompt_values, $('.'+this_group).text()));
-    // $(this).prop('checked', true);
-    $(this).addClass('active');
-    total += (findPromptWeight(prompts, this_group) * findValueWeight(prompt_values, $(this).text()));
+let prev_btn = null
+
+const theAction = (item) => {
+  if (curr_prompt_btn === item){
+      return
+    }
+    prev_btn = curr_prompt_btn
+    curr_prompt_btn = item
+    const prompt_id = item.classList[0]
+    selected[Number(prompt_id.replace('prompt', ''))] = item
+    const prompt = document.getElementById(prompt_id)
+    curr_prompt_btn = item
+    const buttons_ = document.getElementsByClassName(prompt_id)
+    if (prev_btn !== null){
+      prev_btn.classList.remove('active')
+      prev_btn.classList.remove('marked')
+      scores[Number(prompt_id.replace('prompt', ''))] = (Number(prompt.className) *
+          findValueWeight(prev_btn.innerText));
+      returnTotal()
+    }
+
+    curr_prompt_btn.classList.add('active')
+    curr_prompt_btn.classList.add('marked')
+    scores[Number(prompt_id.replace('prompt', ''))] = (Number(prompt.className) *
+        findValueWeight(curr_prompt_btn.innerText));
+    returnTotal()
+
   }
 
-  console.log(total);
-})
 
 
-
-$('#submit-btn').click(function () {
-  $.ajax({
-    url: window.location.host + '/personality_test/',
-    type: 'POST',
-    data: {"score": total, "category": category, "email": email},
-    success: (data) => {
-      if (data === 'finished')
-        window.open(window.location.host + '/personality_test/result/', '_self')
-
-      if (data === 'remaining')
-        window.open(window.location.href, '_self')
+function returnTotal(){
+  total = 0
+  scores.forEach((item)=>{
+    total = total + item
+  })
+  selected.forEach((item)=>{
+    if (item !== null){
+       item.classList.add('active')
     }
 
   })
-})
+  for (let i = 0; i < buttons.length; i++){
+    if (! selected.includes(buttons[i])){
+      buttons[i].classList.remove('active')
+    }
+  }
+}
+
+
+
+
+
+
+  $('#submit-btn').click(function () {
+    let email = document.getElementById('email').classList[2]
+    let input_email = document.getElementsByName('email')[0].value
+    if (selected.includes(null) ||
+        (email === undefined && input_email === '')) {
+      console.log('You have not finished filling your form')
+      return 0
+    } else {
+      email = document.getElementById('email').classList[2]
+
+
+      let category = document.getElementById('category').classList[1]
+
+      if (email === '') {
+        email = document.getElementsByName('email')[0].value
+      }
+      $.ajax({
+        url: 'http://127.0.0.1:8000/personality_test/submit/',
+        type: 'GET',
+        data: {"score": total, "category": category, "email": email},
+        success: (data) => {
+          if (data === 'finished')
+            window.open(window.location.host + '/personality_test/result/', '_self')
+
+          if (data === 'remaining')
+            window.open(window.location.href, '_self')
+        }
+
+      })
+      return 1;
+    }
+  })

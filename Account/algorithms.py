@@ -458,5 +458,6 @@ def send_verification(request):
 
 def dict_to_zip(data):
     questions = set([x['Question'] for x in data])
-    weights = set([x['Weight'] for x in data])
-    return zip(questions, weights)
+    weights = ([x['Weight'] for x in data])
+    count = set([data.index(x) for x in data])
+    return zip(count, questions, weights)

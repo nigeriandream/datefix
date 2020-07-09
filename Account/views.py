@@ -49,33 +49,33 @@ def login(request):
 
 @csrf_exempt
 def personality(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         if 'email' not in request.session:
-            request.session['email'] = request.POST['email']
+            request.session['email'] = request.GET['email']
         test_ = PersonalityTest()
         try:
-            test_ = PersonalityTest.objects.get(email=request.POST['email'])
+            test_ = PersonalityTest.objects.get(email=request.GET['email'])
         except PersonalityTest.DoesNotExist:
-            test_.email = request.POST['email']
-        if request.POST['category'] == 'Extraversion':
+            test_.email = request.GET['email']
+        if request.GET['category'] == 'Extraversion':
             request.session['category'] = 'Neuroticism'
-            test_.extraversion = get_personality(request.POST['score'], request.POST['category'])
+            test_.extraversion = get_personality(request.GET['score'], request.GET['category'])
 
-        if request.POST['category'] == 'Neuroticism':
+        if request.GET['category'] == 'Neuroticism':
             request.session['category'] = 'Agreeableness'
-            test_.neuroticism = get_personality(request.POST['score'], request.POST['category'])
+            test_.neuroticism = get_personality(request.GET['score'], request.GET['category'])
 
-        if request.POST['category'] == 'Agreeableness':
+        if request.GET['category'] == 'Agreeableness':
             request.session['category'] = 'Conscientiousness'
-            test_.agreeableness = get_personality(request.POST['score'], request.POST['category'])
+            test_.agreeableness = get_personality(request.GET['score'], request.GET['category'])
 
-        if request.POST['category'] == 'Conscientiousness':
+        if request.GET['category'] == 'Conscientiousness':
             request.session['category'] = 'Openness'
-            test_.conscientiousness = get_personality(request.POST['score'], request.POST['category'])
+            test_.conscientiousness = get_personality(request.GET['score'], request.GET['category'])
 
-        if request.POST['category'] == 'Openness':
+        if request.GET['category'] == 'Openness':
             request.session['category'] = 'End'
-            test_.openness = get_personality(request.POST['score'], request.POST['category'])
+            test_.openness = get_personality(request.GET['score'], request.GET['category'])
             test_.save()
             return HttpResponse('Finished')
 
