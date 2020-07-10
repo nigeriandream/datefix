@@ -1,8 +1,12 @@
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import auth
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import User, PersonalityTest
 import json
-from .algorithms import get_username, match_user, flash, display, send_verification
+from .algorithms import match_user, flash, display, send_verification, get_username, get_personality
 from Chat.algorithms import create_chat
 
 
@@ -43,17 +47,43 @@ def login(request):
         return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1], "icon": flash_[2]})
 
 
+@csrf_exempt
 def personality(request):
     if request.method == 'GET':
+        score = int(request.GET['score'])
+        if 'email' not in request.session:
+            request.session['email'] = request.GET['email']
         test_ = PersonalityTest()
         try:
             test_ = PersonalityTest.objects.get(email=request.GET['email'])
         except PersonalityTest.DoesNotExist:
             test_.email = request.GET['email']
-        test_.personalities = request.GET['personality']
-        test_.scores = request.GET['score']
+        if request.GET['category'] == 'Extraversion':
+            request.session['category'] = 'Neuroticism'
+            test_.extraversion = get_personality(score, request.GET['category'])
+
+        if request.GET['category'] == 'Neuroticism':
+            request.session['category'] = 'Agreeableness'
+            test_.neuroticism = get_personality(score, request.GET['category'])
+
+        if request.GET['category'] == 'Agreeableness':
+            request.session['category'] = 'Conscientiousness'
+            test_.agreeableness = get_personality(score, request.GET['category'])
+
+        if request.GET['category'] == 'Conscientiousness':
+            request.session['category'] = 'Openness'
+            test_.conscientiousness = get_personality(score, request.GET['category'])
+
+        if request.GET['category'] == 'Openness':
+            request.session['category'] = 'End'
+            test_.openness = get_personality(score, request.GET['category'])
+            test_.save()
+            if request.GET['email'] == request.user.email:
+                request.session['personality'] = []
+            return HttpResponse('Finished')
+
         test_.save()
-        return HttpResponse('Personality Test Taken')
+        return HttpResponse('Remaining')
 
 
 # verified
@@ -74,32 +104,32 @@ def results(request):
     if request.method == 'POST':
         selected = request.POST['matches']
         success = user.successful_list()
-        for i in selected:
-            if User.objects.get(id=int(i)).complete_match():
-                continue
-            success = [x for x in success if x[0][1] != i]
-            user.successful_matches = json.dumps(success)
-            user.matches = json.dumps(selected)
-            user.save()
-            # add user to match chatters
-            user_ = user.objects.get(id=int(i))
-            match_list = json.loads(user_.matches)
-            match_list.append(user.id)
-            user_.matches = json.dumps(match_list)
-            user_.save()
-            create_chat(user, user_)
-            # send notification to both partners
-            selected.remove(i)
-            return redirect('chatroom')
-        if len(selected) > 0:
-            match_comp = [x[1][1] for x in success if x[0][1] in selected]
-            verb = 'has'
-            if len(selected) > 1:
+        match_comp = [x for x in selected if User.objects.get(id=int(x)).complete_match()]
+        verb = ''
+        if len(match_comp) > 0:
+            if len(match_comp) == 2:
+                verb = 'has'
+            if len(match_comp) == 1:
                 verb = 'have'
             request.session['message'] = f'{"and ".join(match_comp)} {verb} complete matches, so choose another.'
             request.session['staus'] = 'info'
             return redirect('results')
-        return redirect('chatroom')
+        if len(match_comp) == 0:
+            for i in selected:
+                success = [x for x in success if x[0][1] != i]
+                user.successful_matches = json.dumps(success)
+                user.matches = json.dumps(selected)
+                user.save()
+                # add user to match chatters
+                user_ = user.objects.get(id=int(i))
+                match_list = json.loads(user_.matches)
+                match_list.append(user.id)
+                user_.matches = json.dumps(match_list)
+                user_.save()
+                create_chat(request, user.id, user_.id)
+                # send notification to both partners
+                selected.remove(i)
+                return redirect('chatroom')
 
 
 # signup verified
@@ -119,14 +149,17 @@ def signup(request):
             flash(request, 'This email already exists !', 'danger', 'remove-sign')
             return redirect('login')
         except User.DoesNotExist:
+            from Datefix.algorithms import get_key
+            username = get_username()
             user = User.objects.create_user(
-                username=get_username(),
+                username=username,
                 email=request.POST['email'],
                 password=request.POST['password1'],
                 first_name=request.POST['first-name'],
                 last_name=request.POST['last-name'],
                 sex=request.POST['sex'],
-                phone=request.POST['phone']
+                phone=request.POST['phone'],
+                secret=get_key(f"{request.POST['email']}{username}")
             )
             user.save()
             flash(request, f"{request.POST['first-name']}, your account has been "
@@ -276,5 +309,94 @@ def verification(request):
 
 
 # verified
-def test(request):
-    return render(request, 'Account/test.html')
+def personality_test(request):
+    from .algorithms import dict_to_zip
+    data = None
+    category = ''
+    email = ''
+    if 'category' not in request.session:
+        from .algorithms import category_1
+        data = dict_to_zip(category_1)
+        category = 'Extraversion'
+
+    else:
+        category = request.session['category']
+        if category == 'Neuroticism':
+            from .algorithms import category_2
+            data = dict_to_zip(category_2)
+        if category == 'Agreeableness':
+            from .algorithms import category_3
+            data = dict_to_zip(category_3)
+        if category == 'Conscientiousness':
+            from .algorithms import category_4
+            data = dict_to_zip(category_4)
+        if category == 'Openness':
+            from .algorithms import category_5
+            data = dict_to_zip(category_5)
+        email = request.session['email']
+
+    return render(request, 'Account/test.html', {'email': email, 'data': data, 'category': category})
+
+
+def test_result(request):
+    if request.method == 'GET':
+        from .algorithms import categories
+        try:
+            your_personality = PersonalityTest.objects.get(email=request.session['email'])
+            data = zip(
+                categories,
+                [
+                    json.loads(your_personality.extraversion)['title'],
+                    json.loads(your_personality.neuroticism)['title'],
+                    json.loads(your_personality.agreeableness)['title'],
+                    json.loads(your_personality.conscientiousness)['title'],
+                    json.loads(your_personality.openness)['title']
+                ],
+                [
+                    json.loads(your_personality.extraversion)['description'],
+                    json.loads(your_personality.neuroticism)['description'],
+                    json.loads(your_personality.agreeableness)['description'],
+                    json.loads(your_personality.conscientiousness)['description'],
+                    json.loads(your_personality.openness)['description'],
+                ]
+            )
+            return render(request, 'Account/personality.html', {'data': data,
+                                                                "email": request.session['email'].split('@')[0]})
+        except PersonalityTest.DoesNotExist:
+            return redirect('personality_test')
+
+    if request.method == 'POST':
+        del request.session['category'], request.session['email']
+        return redirect('personality_test')
+
+
+@csrf_exempt
+@login_required
+def decrypt(request):
+    if request.method == 'POST':
+        user = User.objects.get(id=request.user.id)
+        data = {"status": 200, "message": user.decrypt(request.POST['message'].encode())}
+        return JsonResponse(data)
+    return JsonResponse({"status": 400, "message": "Bad Request"})
+
+
+@csrf_exempt
+@login_required
+def encrypt(request):
+    if request.method == 'POST':
+        user = User.objects.get(id=request.user.id)
+        data = {"status": 200, "message": user.encrypt(request.POST['message']).decode()}
+        return JsonResponse(data)
+    return JsonResponse({"status": 400, "message": "Bad Request"})
+
+
+def encrypt_(message):
+    user = User.objects.get(id=3)
+    data = {"status": 200, "message": user.encrypt(message).decode()}
+    return JsonResponse(data)
+
+
+def decrypt_(message):
+    user = User.objects.get(id=3)
+    data = {"status": 200, "message": user.decrypt(message.encode())}
+    return JsonResponse(data)

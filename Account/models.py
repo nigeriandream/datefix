@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from Datefix import settings
@@ -6,6 +8,8 @@ from django.db.models import Q
 
 
 # Create your models here.
+from Datefix.algorithms import get_key
+
 
 class User(AbstractUser):
     sex = models.CharField(max_length=6, default=None, null=True)
@@ -22,8 +26,10 @@ class User(AbstractUser):
     profile_changed = models.BooleanField(default=False)
     dating = models.BooleanField(default=False)
     payed = models.BooleanField(default=False)
+    secret = models.BinaryField(default=get_key(os.urandom(16).__str__()))
     min_score = models.DecimalField(max_digits=5, decimal_places=2, default=None, null=True)
     verified = models.BooleanField(default=False)
+    status = models.CharField(max_length=32, default='Offline')
 
     def successful_list(self):
         if self.successful_matches is None or self.successful_matches == '':
@@ -34,6 +40,15 @@ class User(AbstractUser):
         if self.no_matches == '' or self.no_matches is None:
             return []
         return json.loads(self.no_matches)
+
+    def encrypt(self, data):
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).encrypt(data.encode())
+
+    def decrypt(self, cipher_text):
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).decrypt(cipher_text).decode()
+
 
     def jilted_list(self):
         if self.jilted_matches == '' or self.jilted_matches is None:
@@ -101,6 +116,15 @@ class User(AbstractUser):
     def has_children(self):
         return self.user_data_()['children']
 
+    def personality(self):
+        try:
+            test_ = PersonalityTest.objects.get(email=self.email)
+            return test_.titles()
+        except PersonalityTest.DoesNotExist:
+            return []
+
+
+
 
 class Couple(models.Model):
     first_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match1')
@@ -119,5 +143,13 @@ class Notification(models.Model):
 
 class PersonalityTest(models.Model):
     email = models.EmailField()
-    scores = models.CharField(max_length=20, default='[]')
-    personalities = models.TextField(default='[]')
+    extraversion = models.TextField(default='{}')
+    neuroticism = models.TextField(default='{}')
+    agreeableness = models.TextField(default='{}')
+    conscientiousness = models.TextField(default='{}')
+    openness = models.TextField(default='{}')
+
+    def titles(self):
+        return [json.loads(self.extraversion)['title'], json.loads(self.neuroticism)['title'],
+                json.loads(self.agreeableness)['title'], json.loads(self.conscientiousness)['title'],
+                json.loads(self.openness)['title']]
