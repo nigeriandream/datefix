@@ -50,6 +50,7 @@ def login(request):
 @csrf_exempt
 def personality(request):
     if request.method == 'GET':
+        score = int(request.GET['score'])
         if 'email' not in request.session:
             request.session['email'] = request.GET['email']
         test_ = PersonalityTest()
@@ -59,24 +60,26 @@ def personality(request):
             test_.email = request.GET['email']
         if request.GET['category'] == 'Extraversion':
             request.session['category'] = 'Neuroticism'
-            test_.extraversion = get_personality(request.GET['score'], request.GET['category'])
+            test_.extraversion = get_personality(score, request.GET['category'])
 
         if request.GET['category'] == 'Neuroticism':
             request.session['category'] = 'Agreeableness'
-            test_.neuroticism = get_personality(request.GET['score'], request.GET['category'])
+            test_.neuroticism = get_personality(score, request.GET['category'])
 
         if request.GET['category'] == 'Agreeableness':
             request.session['category'] = 'Conscientiousness'
-            test_.agreeableness = get_personality(request.GET['score'], request.GET['category'])
+            test_.agreeableness = get_personality(score, request.GET['category'])
 
         if request.GET['category'] == 'Conscientiousness':
             request.session['category'] = 'Openness'
-            test_.conscientiousness = get_personality(request.GET['score'], request.GET['category'])
+            test_.conscientiousness = get_personality(score, request.GET['category'])
 
         if request.GET['category'] == 'Openness':
             request.session['category'] = 'End'
-            test_.openness = get_personality(request.GET['score'], request.GET['category'])
+            test_.openness = get_personality(score, request.GET['category'])
             test_.save()
+            if request.GET['email'] == request.user.email:
+                request.session['personality'] = []
             return HttpResponse('Finished')
 
         test_.save()
@@ -357,7 +360,8 @@ def test_result(request):
                     json.loads(your_personality.openness)['description'],
                 ]
             )
-            return render(request, 'Account/personality.html', {'data': data, "email": request.session['email']})
+            return render(request, 'Account/personality.html', {'data': data,
+                                                                "email": request.session['email'].split('@')[0]})
         except PersonalityTest.DoesNotExist:
             return redirect('personality_test')
 

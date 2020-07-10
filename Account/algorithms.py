@@ -420,17 +420,17 @@ our_categories = (category_1, category_2, category_3, category_4, category_5)
 def get_personality(score, category):
     if category != 'Extraversion':
         if score > 0:
-            return personality[categories.index(category)][1]
+            return json.dumps(personality[categories.index(category)][1])
         else:
-            return personality[categories.index(category)][0]
+            return json.dumps(personality[categories.index(category)][0])
     else:
         if score < -1:
-            my_personality = personality[categories.index(category)][0]
+            my_personality = json.dumps(personality[categories.index(category)][0])
             return my_personality
         if score > 1:
-            my_personality = personality[categories.index(category)][2]
+            my_personality = json.dumps(personality[categories.index(category)][2])
             return my_personality
-        my_personality = personality[categories.index(category)][1]
+        my_personality = json.dumps(personality[categories.index(category)][1])
         return my_personality
 
 

@@ -78,34 +78,41 @@ function returnTotal(){
 
 
   $('#submit-btn').click(function () {
+    let response
     let email = document.getElementById('email').classList[2]
-    let input_email = document.getElementsByName('email')[0].value
+    let  input_email
+      try{
+        input_email = document.getElementsByName('email')[0].value
+
+      }catch (typeError) {
+        input_email = email
+      }
+    const category = document.getElementById('category').classList[1]
+
     if (selected.includes(null) ||
         (email === undefined && input_email === '')) {
       console.log('You have not finished filling your form')
-      return 0
-    } else {
-      email = document.getElementById('email').classList[2]
-
-
-      let category = document.getElementById('category').classList[1]
-
-      if (email === '') {
-        email = document.getElementsByName('email')[0].value
+      return
+    }
+    if (email === undefined) {
+        email = input_email
       }
-      $.ajax({
-        url: 'http://127.0.0.1:8000/personality_test/submit/',
-        type: 'GET',
-        data: {"score": total, "category": category, "email": email},
-        success: (data) => {
-          if (data === 'finished')
-            window.open(window.location.host + '/personality_test/result/', '_self')
+    console.log('Email: ', email)
+    $.ajax({
+    url: 'http://127.0.0.1:8000/personality_test/submit/',
+    type: 'GET',
+    data: {"score": total, "category": category, "email": email},
+    success: (data) => {
+        response = data
+        console.log('Response: ', response)
 
-          if (data === 'remaining')
+        if (response === 'Finished')
+            window.open('http://127.0.0.1:8000/personality_test/result/', '_self')
+
+        if (response === 'Remaining')
             window.open(window.location.href, '_self')
         }
 
-      })
-      return 1;
-    }
   })
+
+})
