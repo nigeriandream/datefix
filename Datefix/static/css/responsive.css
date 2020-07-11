@@ -1243,6 +1243,31 @@
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
+	option.btn-strongly-agree:after {
+		content: "SA" !important;
+		font-weight: 400;
+	}
+
+	option.btn-agree:after {
+		content: "A" !important;
+		font-weight: 400;
+	}
+
+	option.btn-neutral:after {
+		content: "N" !important;
+		font-weight: 400;
+	}
+
+	option.btn-disagree:after {
+		content: "D" !important;
+		font-weight: 400;
+	}
+
+	option.btn-strongly-disagree:after {
+		content: "SD" !important;
+		font-weight: 400;
+	}
+
 	#header.transparent-header.dark:not(.sticky-header) #header-wrap {
 		background-color: #fff !important;
 	}
@@ -1285,6 +1310,31 @@
 }
 
 @media (max-width: 767.98px) {
+	option.btn-strongly-agree:after {
+		content: "SA" !important;
+		font-weight: 400;
+	}
+
+	option.btn-agree:after {
+		content: "A" !important;
+		font-weight: 400;
+	}
+
+	option.btn-neutral:after {
+		content: "N" !important;
+		font-weight: 400;
+	}
+
+	option.btn-disagree:after {
+		content: "D" !important;
+		font-weight: 400;
+	}
+
+	option.btn-strongly-disagree:after {
+		content: "SD" !important;
+		font-weight: 400;
+	}
+
 	#header.transparent-header.dark:not(.sticky-header) #header-wrap {
 		background-color: #fff !important;
 	}
@@ -1797,6 +1847,31 @@
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
+	option.btn-strongly-agree:after {
+		content: "SA" !important;
+		font-weight: 400;
+	}
+
+	option.btn-agree:after {
+		content: "A" !important;
+		font-weight: 400;
+	}
+
+	option.btn-neutral:after {
+		content: "N" !important;
+		font-weight: 400;
+	}
+
+	option.btn-disagree:after {
+		content: "D" !important;
+		font-weight: 400;
+	}
+
+	option.btn-strongly-disagree:after {
+		content: "SD" !important;
+		font-weight: 400;
+	}
+
 	#header.transparent-header.dark:not(.sticky-header) #header-wrap {
 		background-color: #fff !important;
 	}
@@ -1952,6 +2027,31 @@
 }
 
 @media (max-width: 575.98px) {
+	option.btn-strongly-agree:after {
+		content: "SA" !important;
+		font-weight: 400;
+	}
+
+	option.btn-agree:after {
+		content: "A" !important;
+		font-weight: 400;
+	}
+
+	option.btn-neutral:after {
+		content: "N" !important;
+		font-weight: 400;
+	}
+
+	option.btn-disagree:after {
+		content: "D" !important;
+		font-weight: 400;
+	}
+
+	option.btn-strongly-disagree:after {
+		content: "SD" !important;
+		font-weight: 400;
+	}
+
 	#header.transparent-header.dark:not(.sticky-header) #header-wrap {
 		background-color: #fff !important;
 	}
