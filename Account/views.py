@@ -78,8 +78,7 @@ def personality(request):
             request.session['category'] = 'End'
             test_.openness = get_personality(score, request.GET['category'])
             test_.save()
-            if request.GET['email'] == request.user.email:
-                request.session['personality'] = []
+
             return HttpResponse('Finished')
 
         test_.save()
