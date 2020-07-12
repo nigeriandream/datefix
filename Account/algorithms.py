@@ -178,6 +178,262 @@ def flash(request, message, status, icon):
     return
 
 
+category_1 = [{
+    'Question': 'I often do not feel I have to justify myself to people',
+    'Weight': 1,
+    'Category': ''
+},
+    {
+        'Question': 'I prefer not to engage with people who seem angry or upset',
+        'Weight': -1
+    },
+    {
+        'Question': 'I do not usually initiate conversations',
+        'Weight': -1
+    },
+    {
+        'Question': 'I feel comfortable around people',
+        'Weight': 1
+    },
+    {
+        'Question': 'I keep in the background',
+        'Weight': -1
+    },
+    {
+        'Question': 'I would rather improvise than spend time coming up with a detailed plan',
+        'Weight': 1
+    },
+    {
+        'Question': 'I find it easy to walk up to a group of people and join in conversation',
+        'Weight': 1
+    },
+    {
+        'Question': 'I don\'t like to draw attention to myself',
+        'Weight': -1
+    },
+    {
+        'Question': 'I care more about making sure no one gets upset than winning a debate',
+        'Weight': 1
+    },
+    {
+        'Question': 'I get so lost in my thoughts I ignore or forget my surroundings',
+        'Weight': -1
+    },
+]
+category_2 = [{
+    'Question': 'I get stressed out easily',
+    'Weight': 1
+},
+    {
+        'Question': 'I am relaxed most of the time',
+        'Weight': -1
+    },
+    {
+        'Question': 'I worry about things',
+        'Weight': 1
+    },
+    {
+        'Question': 'I seldom feel blue',
+        'Weight': -1
+    },
+    {
+        'Question': 'I am easily disturbed',
+        'Weight': 1
+    },
+    {
+        'Question': 'I get upset easily',
+        'Weight': 1
+    },
+    {
+        'Question': 'I change my mood a lot',
+        'Weight': 1
+    },
+    {
+        'Question': 'I have frequent mood swings',
+        'Weight': 1
+    },
+    {
+        'Question': 'I get irritated easily',
+        'Weight': 1
+    },
+    {
+        'Question': 'I often feel blue',
+        'Weight': 1
+    },
+]
+category_3 = [{
+    'Question': 'I feel little concern for others',
+    'Weight': -1
+},
+    {
+        'Question': 'I am interested in people',
+        'Weight': 1
+    },
+    {
+        'Question': 'I insult people',
+        'Weight': -1
+    },
+    {
+        'Question': 'I sympathize with others\' feelings',
+        'Weight': 1
+    },
+    {
+        'Question': 'I am not interested in other people\'s problems',
+        'Weight': -1
+    },
+    {
+        'Question': 'I have a soft heart',
+        'Weight': 1
+    },
+    {
+        'Question': 'I am not really interested in others',
+        'Weight': -1
+    },
+    {
+        'Question': 'I take time out for others',
+        'Weight': 1
+    },
+    {
+        'Question': 'I feel others\' emotions',
+        'Weight': 1
+    },
+    {
+        'Question': 'I make people feel at ease',
+        'Weight': 1
+    },
+
+]
+category_4 = [{
+    'Question': 'I am always prepared',
+    'Weight': 1
+},
+    {
+        'Question': 'I leave my belongings around',
+        'Weight': -1
+    },
+    {
+        'Question': 'I pay attention to detail',
+        'Weight': 1
+    },
+    {
+        'Question': 'I make a mess of things',
+        'Weight': -1
+    },
+    {
+        'Question': 'I get chores done right away',
+        'Weight': 1
+    },
+    {
+        'Question': 'I like order',
+        'Weight': 1
+    },
+    {
+        'Question': 'I try to avoid my duties',
+        'Weight': -1
+    },
+    {
+        'Question': 'I follow a schedule',
+        'Weight': 1
+    },
+    {
+        'Question': 'I am thorough in my work',
+        'Weight': 1
+    },
+    {
+        'Question': 'I often forget to put things back in their proper place',
+        'Weight': -1
+    },
+]
+category_5 = [{
+    'Question': 'I have a rich vocabulary',
+    'Weight': 1
+},
+    {
+        'Question': 'I have difficulty understanding abstract ideas',
+        'Weight': -1
+    },
+    {
+        'Question': 'I have a vivid imagination',
+        'Weight': 1
+    },
+    {
+        'Question': 'I am not interested in abstract ideas',
+        'Weight': -1
+    },
+    {
+        'Question': 'I have excellent ideas',
+        'Weight': 1
+    },
+    {
+        'Question': 'I do not have a good imagination',
+        'Weight': -1
+    },
+    {
+        'Question': 'I am quick to understand things',
+        'Weight': 1
+    },
+    {
+        'Question': 'I spend time reflecting on things',
+        'Weight': 1
+    },
+    {
+        'Question': 'I am full of ideas',
+        'Weight': 1
+    },
+    {
+        'Question': 'I often use difficult words',
+        'Weight': 1
+    },
+
+]
+
+categories = ['Extraversion', 'Neuroticism', 'Agreeableness', 'Conscientiousness', 'Openness']
+
+personality = (
+    [
+        {"title": "", "description": ""},
+        {"title": "", "description": ""},
+        {"title": "", "description": ""}
+    ],
+    [
+        {"title": "", "description": ""},
+        {"title": "", "description": ""},
+    ],
+    [
+        {"title": "", "description": ""},
+        {"title": "", "description": ""},
+    ],
+    [
+        {"title": "", "description": ""},
+        {"title": "", "description": ""},
+    ],
+    [
+        {"title": "", "description": ""},
+        {"title": "", "description": ""},
+    ]
+
+)
+
+our_categories = (category_1, category_2, category_3, category_4, category_5)
+
+
+def get_personality(score, category):
+    if category != 'Extraversion':
+        if score > 0:
+            return json.dumps(personality[categories.index(category)][1])
+        else:
+            return json.dumps(personality[categories.index(category)][0])
+    else:
+        if score < -1:
+            my_personality = json.dumps(personality[categories.index(category)][0])
+            return my_personality
+        if score > 1:
+            my_personality = json.dumps(personality[categories.index(category)][2])
+            return my_personality
+        my_personality = json.dumps(personality[categories.index(category)][1])
+        return my_personality
+
+
 def display(request):
     if 'message' in request.session:
         message = request.session['message']
@@ -198,3 +454,10 @@ def send_verification(request):
         send_mail('Email Verification', message, 'admin@datefix.me', [request.POST['email']])
         request.session['verification_sent'] = True
     return
+
+
+def dict_to_zip(data):
+    questions = set([x['Question'] for x in data])
+    weights = ([x['Weight'] for x in data])
+    count = set([data.index(x) for x in data])
+    return zip(count, questions, weights)

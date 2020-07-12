@@ -87,8 +87,10 @@
                             {% endif %}
 								class="img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar"></a>
 					</div>
-					<h3> {{request.user.first_name}} {{request.user.last_name}}<span
-							class="subtitle">Personality test result summary here</span></h3>
+					<h3> {{request.user.first_name}} {{request.user.last_name}}
+                        {% for item in user.personality %}
+                            <span class="subtitle">{{ item }}</span>
+                        {% endfor %}
 				</div>
 
 

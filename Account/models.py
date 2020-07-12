@@ -116,6 +116,15 @@ class User(AbstractUser):
     def has_children(self):
         return self.user_data_()['children']
 
+    def personality(self):
+        try:
+            test_ = PersonalityTest.objects.get(email=self.email)
+            return test_.titles()
+        except PersonalityTest.DoesNotExist:
+            return []
+
+
+
 
 class Couple(models.Model):
     first_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match1')
@@ -134,5 +143,13 @@ class Notification(models.Model):
 
 class PersonalityTest(models.Model):
     email = models.EmailField()
-    scores = models.CharField(max_length=20, default='[]')
-    personalities = models.TextField(default='[]')
+    extraversion = models.TextField(default='{}')
+    neuroticism = models.TextField(default='{}')
+    agreeableness = models.TextField(default='{}')
+    conscientiousness = models.TextField(default='{}')
+    openness = models.TextField(default='{}')
+
+    def titles(self):
+        return [json.loads(self.extraversion)['title'], json.loads(self.neuroticism)['title'],
+                json.loads(self.agreeableness)['title'], json.loads(self.conscientiousness)['title'],
+                json.loads(self.openness)['title']]

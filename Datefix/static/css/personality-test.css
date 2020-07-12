@@ -96,6 +96,11 @@ button {
 	font-weight: bold;
 }
 
+.btn-neutral{
+	color: rgba(7, 7, 7, 0.73);
+	font-weight: normal;
+}
+
 .btn-strongly-disagree.active,
 .btn-strongly-disagree:active,
 .btn-strongly-disagree:focus,
@@ -105,6 +110,17 @@ button {
 	background-color: #e28181;
 	color: #fff;
 }
+
+.btn-neutral.active,
+.btn-neutral:active,
+.btn-neutral:focus,
+.btn-neutral:active:focus,
+.btn-neutral.active:focus,
+.btn-neutral:hover {
+	background-color: #a5a3a3;
+	color: #070707;
+}
+
 
 .bottom {
 	margin-bottom: 100px;
