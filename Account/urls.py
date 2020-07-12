@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import path
 from .views import *
 from django.contrib.auth import views as auth_views
@@ -27,5 +28,7 @@ urlpatterns = [
     path('get_data/<type_>/', get_data, name="get_data"),
     path('personality_test/', personality_test, name="personality_test"),
     path('personality_test/submit/', personality, name='submit_test'),
-    path('personality_test/result/', test_result, name="test_result")
+    path('personality_test/result/', test_result, name="test_result"),
+    path('logout/', logout, name='logout'),
+
 ]
