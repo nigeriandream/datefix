@@ -131,7 +131,7 @@
         <div id="azChatList" class="az-chat-list">
           <div v-for="(chat, index) in chat_threads" :key="index">
             <div class="media new" @click="connect(chat)">
-              <div :class="[status === 'Online' ? 'az-img-user online' : 'az-img-user']">
+              <div :class="[activeUser === chat.username ? 'az-img-user online' : 'az-img-user']">
                 <img :src="[[chat.profile_picture]]" alt="">
                 <!-- <span>2</span> -->
               </div>
@@ -142,6 +142,7 @@
                   <span v-else></span>
                 </div>
                 <p v-if="chat.last_message">[[chat.last_message.message]]</p>
+                <small v-if="typing == true"><i>[[chat.first_name]] is Typing...</i></small>
                 <p v-else></p>
               </div><!-- media-body -->
             </div><!-- media -->
@@ -151,16 +152,18 @@
         <div class="az-content-body az-content-body-chat">
           <template v-show="loading === false">
         <div class="az-chat-header" v-show="loading === false">
-          <div :class="[status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[chat_object.profile_picture]]" alt=""></div>
+          <div :class="[activeUser === chat_object.username ? 'az-img-user online' : 'az-img-user']"><img :src="[[chat_object.profile_picture]]" alt=""></div>
           <div class="az-chat-msg-name">
             <h6>[[chat_object.first_name]] [[chat_object.last_name]]</h6>
             <small v-if="status === 'Online'">Online</small>
             <small v-if="status === ''">Offline</small>
+            <small v-if="typing == true"><i>Typing...</i></small>
             <!-- <small v-else>Last seen: 2 minutes ago</small> -->
           </div>
           <nav class="nav">
             <a href="" class="nav-link"><i class="icon ion-md-more"></i></a>
-            <span class="nav-link" data-toggle="modal" title="Jilt" data-target="#jiltModal"><i class="icon ion-ios-heart-half" ></i></span>
+            <span class="nav-link" data-toggle="modal" title="Accept" data-target="#acceptModal"><i class="icon ion-ios-checkbox-outline" id="accept__icon" ></i></span>
+            <span class="nav-link" data-toggle="modal" title="Jilt" data-target="#jiltModal" id="jilt__icon"><i class="icon ion-ios-heart-dislike" ></i></span>
             <!-- <a href="" class="nav-link" data-toggle="tooltip" title="Archive"><i class="icon ion-ios-filing"></i></a> -->
             <!-- <a href="" class="nav-link" data-toggle="tooltip" title="Trash"><i class="icon ion-md-trash"></i></a> -->
             <!-- <a href="" class="nav-link" data-toggle="tooltip" title="View Info"><i class="icon ion-md-information-circle"></i></a> -->
@@ -176,6 +179,7 @@
                 <div class="az-msg-wrapper">
                   [[ message.message ]]
                   <span style="font-size: 7px; margin-left: 2em;">[[ message.time ]]</span> 
+                  <span style="font-size: 14px; margin-left: 0.5em;" v-if="message.sender == loggedInUser"><i class="icon ion-ios-checkmark" ></i></span> 
                 </div><!-- az-msg-wrapper -->
                 <a href=""><i class="icon ion-android-more-horizontal"></i></a>
               </div><!-- media-body -->
@@ -190,7 +194,7 @@
             <a href="" class="nav-link" data-toggle="tooltip" title="Add Emoticons"><i class="far fa-smile"></i></a>
             <a href="" class="nav-link"><i class="fas fa-ellipsis-v"></i></a>
           </nav>
-          <input @keyup.enter="sendMessage" type="text" class="form-control" v-model="message" placeholder="Type your message here...">
+          <input @keyup.enter="sendMessage" @input="isTyping" type="text" class="form-control" v-model="message" placeholder="Type your message here...">
           <span @click="sendMessage" class="az-msg-send"><i class="far fa-paper-plane"></i></span>
         </div><!-- az-chat-footer -->
       </template>
@@ -206,6 +210,7 @@
         </template>
       </div><!-- az-content-body -->
       </div>
+
       <!-- jilt modal -->
       <div
       class="modal fade"
@@ -256,6 +261,7 @@
         </div>
       </div>
     </div>
+
     <!-- accept modal -->
     <div
       class="modal fade"
@@ -294,7 +300,7 @@
 
           <!-- action button -->
           <div class="modal-footer border-0 justify-content-center">
-            <button class="btn btn-danger rounded-md px-4" @click="accept" :disabled="approving">
+            <button class="btn btn-success rounded-md px-4" @click="accept" :disabled="approving">
               <template v-if="approving === false">Accept</template>
               <template v-if="approving === true">
                 <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Accepting...

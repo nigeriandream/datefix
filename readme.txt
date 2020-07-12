@@ -44,3 +44,31 @@ Now youre ready for the proper setup
 
 =>      then you can now start working on the chat.
 
+
+Data constructs for communicating with the websocket.
+=> Connect Logged in User to a chat Thread = data = {}
+                                             data.username = logged in user's username
+                                             data.chat_id = chat thread id
+
+=> User is Typing =     data = {}
+                        data.sender = user's username
+                        data.function = 'isTyping'
+=> User stopped Typing =            data = {}
+                                    data.sender = user's username
+                                    data.function = 'notTyping'
+=> User deletes message for everyone =          data = {}
+                                                data.function = 'delete'
+                                                data.message_id = chat message id
+                                                data.sender = sender's username
+=> User delete message for himself only = GET request to /chat/<chat_id>/message/<message_id>/delete/
+
+=>User sends a message =            data = {}
+                                    data.function = 'message'
+                                    data.message = message text
+                                    data.sender = sender's username
+                                    data.sender_id = sender's user_id
+
+=> Message Delivered =          data = {}
+                                data.function = 'isDelivered'
+                                data.message_id = chat message id
+User Online or Offline upcoming....

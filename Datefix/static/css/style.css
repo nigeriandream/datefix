@@ -8808,6 +8808,14 @@ body:not(.device-touch) .button.button-full strong {
   line-height: 1.5;
 }
 
+.az-chat-header.nav-link#jilt__icon:hover {
+  color: #ff0000;
+}
+
+.az-chat-header.nav-link#accept__icon:hover {
+  color: #006848;
+}
+
 /* ----------------------------------------------------------------
 	Promo Boxes
 -----------------------------------------------------------------*/
