@@ -33,6 +33,8 @@ def login(request):
             if user is not None:
                 auth.login(request, user)
                 flash(request, f'{user.username} is logged in successfully !', 'success', 'thumbs-up')
+                user.status = 'Online'
+                user.save()
                 return redirect('dashboard')
         except User.DoesNotExist:
             flash(request, 'There is no Account with this email address !', 'info', 'info-sign')
@@ -45,6 +47,17 @@ def login(request):
         if flash_ is None:
             return render(request, 'Account/login.html')
         return render(request, 'Account/login.html', {'message': flash_[0], 'status': flash_[1], "icon": flash_[2]})
+
+
+@login_required
+def logout(request):
+    user = User.objects.get(id=request.user.id)
+    from datetime import datetime
+    user.status = f"Last seen at {datetime.now().time().strftime('%I:%M %p')} " \
+                  f"on {datetime.now().date().strftime('%e - %b - %Y')}."
+    user.save()
+    auth.logout(request)
+    return redirect('home')
 
 
 @csrf_exempt
