@@ -324,8 +324,10 @@ def verification(request):
 def personality_test(request):
     from .algorithms import dict_to_zip
     data = None
-    category = ''
     email = ''
+    if request.user.is_authenticated:
+        email = request.user.email
+
     if 'category' not in request.session:
         from .algorithms import category_1
         data = dict_to_zip(category_1)

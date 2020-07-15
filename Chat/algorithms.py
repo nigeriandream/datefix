@@ -150,3 +150,4 @@ def has_chat(user):
     if len(no_of_chats) == 2 or (len(no_of_chats) == 1 and len(expired_chats) == 1):
         return True
     return False
+

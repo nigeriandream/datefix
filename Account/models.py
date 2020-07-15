@@ -6,7 +6,6 @@ from Datefix import settings
 import json
 from django.db.models import Q
 
-
 # Create your models here.
 from Datefix.algorithms import get_key
 
@@ -48,7 +47,6 @@ class User(AbstractUser):
     def decrypt(self, cipher_text):
         from cryptography.fernet import Fernet
         return Fernet(self.secret).decrypt(cipher_text).decode()
-
 
     def jilted_list(self):
         if self.jilted_matches == '' or self.jilted_matches is None:
@@ -122,8 +120,6 @@ class User(AbstractUser):
             return test_.titles()
         except PersonalityTest.DoesNotExist:
             return []
-
-
 
 
 class Couple(models.Model):
