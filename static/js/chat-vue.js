@@ -12,9 +12,13 @@ var app = new Vue({
     user: "",
     id: "",
     loggedInUser: "",
+    activeUser: "",
     loading: true,
     status: "",
     messageStatus: "",
+    approving: false,
+    message_id: "",
+    typing: false,
   },
   async mounted() {
     this.id = this.$refs.userID.value;
@@ -25,10 +29,12 @@ var app = new Vue({
     this.socket = new WebSocket(url);
     this.websocket();
   },
+  // beforeDestroy() {
+  //   this.disconnect(this.chat_object);
+  // },
   methods: {
     async websocket() {
       this.socket.onclose = (e) => {
-        this.disconnect();
         console.log("WebSocket Disconnected", e);
       };
 
@@ -42,29 +48,38 @@ var app = new Vue({
 
       this.socket.onmessage = (e) => {
         this.chat_messages.push(JSON.parse(e.data));
-        console.log("WebSocket received message", e);
         this.getSingleChat(this.chat_object);
         console.log(JSON.parse(e.data));
         let data = JSON.parse(e.data);
+        if (data.username === this.activeUser && data.function === "connect") {
+          this.status = data.status;
+        }
         if (
           data.username !== this.loggedInUser &&
-          data.function === "connect"
+          data.function === "disconnect"
         ) {
           this.status = data.status;
-          console.log(this.status);
         }
         if (
           data.username !== this.loggedInUser &&
           data.function === "message"
         ) {
+          this.message_id = data.message_id;
           this.messageStatus = data.status;
           console.log(this.messageStatus);
+        }
+        if (
+          data.username !== this.loggedInUser &&
+          data.function === "isTyping"
+        ) {
+          this.isTyping = true;
+          console.log(this.isTyping);
         }
       };
     },
     async createThread() {
       try {
-        await fetch(`/chat/api/create/2`)
+        await fetch(`/chat/api/create/3`)
           .then((response) => response.json())
           .then((data) => {
             console.log("thread>>>", data);
@@ -116,23 +131,23 @@ var app = new Vue({
     },
     connect(chat) {
       this.chat_object = chat;
-      let chat_thread = {
+      this.activeUser = chat.username;
+      let connect_thread = {
         username: this.loggedInUser,
         chat_id: chat.chat_id,
         function: "connect",
       };
-      console.log("chat_thread>>>", chat_thread);
-      this.socket.send(JSON.stringify(chat_thread));
-      this.getSingleChat(chat);
+      console.log("connect_thread>>>", connect_thread);
+      this.socket.send(JSON.stringify(connect_thread));
     },
     disconnect() {
-      let chat_thread = {
+      let disconnect_thread = {
         username: this.loggedInUser,
         chat_id: this.chat_id,
         function: "disconnect",
       };
-      console.log("chat_thread>>>", chat_thread);
-      this.socket.send(JSON.stringify(chat_thread));
+      console.log("disconnect_thread>>>", disconnect_thread);
+      this.socket.send(JSON.stringify(disconnect_thread));
     },
     sendMessage() {
       let thread_obj = {
@@ -144,11 +159,63 @@ var app = new Vue({
       this.socket.send(JSON.stringify(thread_obj));
       console.log("thread_obj>>>", thread_obj);
       this.message = "";
-      this.getSingleChat(this.chat_object);
+    },
+    jilt() {
+      let jilt_thread = {
+        username: this.loggedInUser,
+        chat_id: this.chat_id,
+        function: "jilt",
+      };
+      console.log("jilt_thread>>>", jilt_thread);
+      this.socket.send(JSON.stringify(jilt_thread));
+      this.$refs.close.click();
+    },
+    accept() {
+      let accept_thread = {
+        username: this.loggedInUser,
+        chat_id: this.chat_id,
+        function: "accept",
+      };
+      console.log("accept_thread>>>", accept_thread);
+      this.socket.send(JSON.stringify(accept_thread));
+      this.$refs.close.click();
+    },
+    isDelivered() {
+      let isDelivered_thread = {
+        message_id: this.message_id,
+        function: "isDelivered",
+      };
+      console.log("isDelivered_thread>>>", isDelivered_thread);
+      this.socket.send(JSON.stringify(isDelivered_thread));
+    },
+    isTyping() {
+      let isTyping_thread = {
+        username: this.loggedInUser,
+        function: "isTyping",
+      };
+      console.log("isTyping_thread>>>", isTyping_thread);
+      this.socket.send(JSON.stringify(isTyping_thread));
+    },
+    notTyping() {
+      let notTyping_thread = {
+        username: this.loggedInUser,
+        function: "notTyping",
+      };
+      console.log("notTyping_thread>>>", notTyping_thread);
+      this.socket.send(JSON.stringify(notTyping_thread));
+    },
+    deleteForAll() {
+      let deleteForAll_thread = {
+        username: this.loggedInUser,
+        function: "deleteForAll",
+      };
+      console.log("deleteForAll_thread>>>", deleteForAll_thread);
+      this.socket.send(JSON.stringify(deleteForAll_thread));
     },
   },
   watch: {
     status(newValue, oldValue) {
+      this.connect(this.chat_object);
       console.log("value:", newValue, oldValue);
       this.status = newValue;
     },

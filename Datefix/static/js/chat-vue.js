@@ -29,9 +29,9 @@ var app = new Vue({
     this.socket = new WebSocket(url);
     this.websocket();
   },
-  beforeDestroy() {
-    this.disconnect(this.chat_object);
-  },
+  // beforeDestroy() {
+  //   this.disconnect(this.chat_object);
+  // },
   methods: {
     async websocket() {
       this.socket.onclose = (e) => {
@@ -79,7 +79,7 @@ var app = new Vue({
     },
     async createThread() {
       try {
-        await fetch(`/chat/api/create/2`)
+        await fetch(`/chat/api/create/3`)
           .then((response) => response.json())
           .then((data) => {
             console.log("thread>>>", data);
