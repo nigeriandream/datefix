@@ -376,14 +376,14 @@ def test_result(request):
                 categories,
                 [
                     json.loads(your_personality.extraversion)['title'],
-                    json.loads(your_personality.Neurotism)['title'],
+                    json.loads(your_personality.neurotism)['title'],
                     json.loads(your_personality.agreeableness)['title'],
                     json.loads(your_personality.conscientiousness)['title'],
                     json.loads(your_personality.openness)['title']
                 ],
                 [
                     json.loads(your_personality.extraversion)['description'],
-                    json.loads(your_personality.Neurotism)['description'],
+                    json.loads(your_personality.neurotism)['description'],
                     json.loads(your_personality.agreeableness)['description'],
                     json.loads(your_personality.conscientiousness)['description'],
                     json.loads(your_personality.openness)['description'],
