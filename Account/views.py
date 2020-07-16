@@ -85,9 +85,8 @@ def personality(request):
             user.save()
 
         if request.GET['category'] == 'Extraversion':
-            if request.user.is_authenticated:
-                request.session['category'] = 'Neurotism'
-                test_.extraversion = get_personality(score, request.GET['category'])
+            request.session['category'] = 'Neurotism'
+            test_.extraversion = get_personality(score, request.GET['category'])
 
         if request.GET['category'] == 'Neurotism':
             request.session['category'] = 'Agreeableness'
@@ -107,8 +106,6 @@ def personality(request):
             test_.save()
 
             return HttpResponse('Finished')
-
-
         test_.save()
         return HttpResponse('Remaining')
 
@@ -391,7 +388,7 @@ def test_result(request):
             )
             return render(request, 'Account/personality.html', {'data': data,
                                                                 "email": request.session['email'].split('@')[0]})
-        except PersonalityTest.DoesNotExist:
+        except (PersonalityTest.DoesNotExist, KeyError):
             return redirect('personality_test')
 
     if request.method == 'POST':
