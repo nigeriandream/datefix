@@ -387,7 +387,7 @@ category_5 = [{
 
 ]
 
-categories = ['Extraversion', 'Neuroticism', 'Agreeableness', 'Conscientiousness', 'Openness']
+categories = ['Extraversion', 'Neurotism', 'Agreeableness', 'Conscientiousness', 'Openness']
 
 personality = (
     [
@@ -421,20 +421,20 @@ On the other hand, you may have trouble spending long periods of time alone.\
          }
     ],
     [
-        {"title": "LOW NEUROTICISM",
+        {"title": "LOW NEUROTISM",
          "description": '''
-         Neuroticism describes a tendency to have unsettling thoughts and feelings.
+         Neurotism describes a tendency to have unsettling thoughts and feelings.
 
 You are likely to keep calm in stressful situations, are more optimistic, worry less, have a more stable mood.
-A low neuroticism score can mean you’re confident. You may have more resilience and find it easy to keep calm under stress. Relaxation might also come more easily to you. Try to keep in mind that this might not be as easy for those around you, so be patient.
+A low neurotism score can mean you’re confident. You may have more resilience and find it easy to keep calm under stress. Relaxation might also come more easily to you. Try to keep in mind that this might not be as easy for those around you, so be patient.
 
          '''},
-        {"title": "HIGH NEUROTICISM",
+        {"title": "HIGH NEUROTISM",
          "description": '''
-         Neuroticism describes a tendency to have unsettling thoughts and feelings.
+         Neurotism describes a tendency to have unsettling thoughts and feelings.
 
 You have a high tendency to feel vulnerable or insecure, get stressed easily, struggle with difficult situations, have mood swings.
-If you score high on neuroticism, you may blame yourself when things go wrong. You might also get frustrated with yourself easily, especially if you make a mistake. Chances are, you’re also prone to worrying.
+If you score high on neurotism, you may blame yourself when things go wrong. You might also get frustrated with yourself easily, especially if you make a mistake. Chances are, you’re also prone to worrying.
 
 But you’re likely also more introspective than others, which helps you to examine and understand your feelings.
 
@@ -484,6 +484,14 @@ your work-life balance."
 )
 
 our_categories = (category_1, category_2, category_3, category_4, category_5)
+
+
+def get_score(score):
+    if score < -1:
+        return 1
+    if score > 1:
+        return 3
+    return 2
 
 
 def get_personality(score, category):

@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import User, PersonalityTest
 import json
-from .algorithms import match_user, flash, display, send_verification, get_username, get_personality
+from .algorithms import match_user, flash, display, send_verification, get_username, get_personality, get_score
 from Chat.algorithms import create_chat
 
 
@@ -63,6 +63,7 @@ def logout(request):
 @csrf_exempt
 def personality(request):
     if request.method == 'GET':
+        user = None
         score = int(request.GET['score'])
         if 'email' not in request.session:
             request.session['email'] = request.GET['email']
@@ -71,13 +72,26 @@ def personality(request):
             test_ = PersonalityTest.objects.get(email=request.GET['email'])
         except PersonalityTest.DoesNotExist:
             test_.email = request.GET['email']
-        if request.GET['category'] == 'Extraversion':
-            request.session['category'] = 'Neuroticism'
-            test_.extraversion = get_personality(score, request.GET['category'])
 
-        if request.GET['category'] == 'Neuroticism':
+        if request.user.is_authenticated and 'is_user' not in request.session:
+            if request.user.email == request.GET['email']:
+                user = User.objects.get(id=request.user.id)
+                request.session['is_user'] = True
+
+        if user is not None:
+            data = user.user_data_()
+            data[str(request.GET['category']).lower()] = get_score(score)
+            user.user_data = json.dumps(data)
+            user.save()
+
+        if request.GET['category'] == 'Extraversion':
+            if request.user.is_authenticated:
+                request.session['category'] = 'Neurotism'
+                test_.extraversion = get_personality(score, request.GET['category'])
+
+        if request.GET['category'] == 'Neurotism':
             request.session['category'] = 'Agreeableness'
-            test_.neuroticism = get_personality(score, request.GET['category'])
+            test_.neurotism = get_personality(score, request.GET['category'])
 
         if request.GET['category'] == 'Agreeableness':
             request.session['category'] = 'Conscientiousness'
@@ -93,6 +107,7 @@ def personality(request):
             test_.save()
 
             return HttpResponse('Finished')
+
 
         test_.save()
         return HttpResponse('Remaining')
@@ -335,7 +350,7 @@ def personality_test(request):
 
     else:
         category = request.session['category']
-        if category == 'Neuroticism':
+        if category == 'Neurotism':
             from .algorithms import category_2
             data = dict_to_zip(category_2)
         if category == 'Agreeableness':
@@ -361,14 +376,14 @@ def test_result(request):
                 categories,
                 [
                     json.loads(your_personality.extraversion)['title'],
-                    json.loads(your_personality.neuroticism)['title'],
+                    json.loads(your_personality.Neurotism)['title'],
                     json.loads(your_personality.agreeableness)['title'],
                     json.loads(your_personality.conscientiousness)['title'],
                     json.loads(your_personality.openness)['title']
                 ],
                 [
                     json.loads(your_personality.extraversion)['description'],
-                    json.loads(your_personality.neuroticism)['description'],
+                    json.loads(your_personality.Neurotism)['description'],
                     json.loads(your_personality.agreeableness)['description'],
                     json.loads(your_personality.conscientiousness)['description'],
                     json.loads(your_personality.openness)['description'],

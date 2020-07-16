@@ -140,12 +140,12 @@ class Notification(models.Model):
 class PersonalityTest(models.Model):
     email = models.EmailField()
     extraversion = models.TextField(default='{}')
-    neuroticism = models.TextField(default='{}')
+    neurotism = models.TextField(default='{}')
     agreeableness = models.TextField(default='{}')
     conscientiousness = models.TextField(default='{}')
     openness = models.TextField(default='{}')
 
     def titles(self):
-        return [json.loads(self.extraversion)['title'], json.loads(self.neuroticism)['title'],
+        return [json.loads(self.extraversion)['title'], json.loads(self.neurotism)['title'],
                 json.loads(self.agreeableness)['title'], json.loads(self.conscientiousness)['title'],
                 json.loads(self.openness)['title']]
