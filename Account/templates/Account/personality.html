@@ -98,13 +98,19 @@ Personality Test
 			<div class="" style="padding: 0px!important;">
 				<div class="container text-center results">
                     <h1 class="text-white">Your Personality Test Result</h1>
-                    <p class="text-left text-dark p-3 bg-warning rounded-5">Dear {{ email }}, </p>
+                    <p class="text-left text-dark p-3 bg-warning rounded-5">
+                        {% if request.user.is_authenticated %}
+                            Dear {{ request.user.username }}
+                        {% else %}
+                        Dear {{ email }},
+                        {% endif %}
+                    </p>
                     {% for category, title, description in data %}
                     <div class="row list-group-item mb-3">
                         <p class="mx-5 rounded-circle
                         {% if category == 'Extraversion' %}
                             bg-primary text-white
-                        {% elif category == 'Neuroticism' %}
+                        {% elif category == 'Neurotism' %}
                             bg-warning  text-dark
 
                         {% elif category == 'Agreeableness'  %}

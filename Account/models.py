@@ -6,7 +6,6 @@ from Datefix import settings
 import json
 from django.db.models import Q
 
-
 # Create your models here.
 from Datefix.algorithms import get_key
 
@@ -27,7 +26,7 @@ class User(AbstractUser):
     dating = models.BooleanField(default=False)
     payed = models.BooleanField(default=False)
     secret = models.BinaryField(default=get_key(os.urandom(16).__str__()))
-    min_score = models.DecimalField(max_digits=5, decimal_places=2, default=None, null=True)
+    min_score = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     verified = models.BooleanField(default=False)
     status = models.CharField(max_length=32, default='Offline')
 
@@ -48,7 +47,6 @@ class User(AbstractUser):
     def decrypt(self, cipher_text):
         from cryptography.fernet import Fernet
         return Fernet(self.secret).decrypt(cipher_text).decode()
-
 
     def jilted_list(self):
         if self.jilted_matches == '' or self.jilted_matches is None:
@@ -124,8 +122,6 @@ class User(AbstractUser):
             return []
 
 
-
-
 class Couple(models.Model):
     first_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match1')
     second_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match2')
@@ -144,12 +140,12 @@ class Notification(models.Model):
 class PersonalityTest(models.Model):
     email = models.EmailField()
     extraversion = models.TextField(default='{}')
-    neuroticism = models.TextField(default='{}')
+    neurotism = models.TextField(default='{}')
     agreeableness = models.TextField(default='{}')
     conscientiousness = models.TextField(default='{}')
     openness = models.TextField(default='{}')
 
     def titles(self):
-        return [json.loads(self.extraversion)['title'], json.loads(self.neuroticism)['title'],
+        return [json.loads(self.extraversion)['title'], json.loads(self.neurotism)['title'],
                 json.loads(self.agreeableness)['title'], json.loads(self.conscientiousness)['title'],
                 json.loads(self.openness)['title']]
