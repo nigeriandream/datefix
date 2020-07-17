@@ -55,6 +55,25 @@ class ChatThread(models.Model):
         decrypted_messages = [self.decrypt(x.text) for x in chat_message_items]
         return zip(chat_message_items, decrypted_messages)
 
+    def get_chat_file(self, user):
+        user_position = self.position(user)
+        other_user = self.get_receiver(user)
+        list_ = {'first': self.first_deleted_(), 'second': self.second_deleted_()}
+        chat_message_items = [x for x in ChatMessage.objects.all().filter(chat_id=self.id).order_by('datetime') \
+                              if x.id not in list_[user_position]]
+        decrypted_messages = [self.decrypt(x.text) for x in chat_message_items]
+        text_file = open(f'Chat_with_{other_user.username}.txt', 'w+')
+        text_file.write(f'Chat Between {user.username} and {other_user.username}.\n\n')
+        for item, msg in zip(chat_message_items, decrypted_messages):
+            text_file.write(f"{item.sender.username} "
+                            f"({item.datetime.time().strftime('%I:%M %p')}): {msg}\n")
+
+        text_file.close()
+        return text_file
+
+
+
+
     def get_chat(self, user_position):
         list_ = {'first': self.first_deleted_(), 'second': self.second_deleted_()}
         self.self_delete()
@@ -68,8 +87,6 @@ class ChatThread(models.Model):
                          'time': i.datetime.time().strftime('%I:%M %p'),
                          'message': self.decrypt(i.text),
                          'sender_id': i.sender.id,
-                         'sender_first_name': i.sender.first_name,
-                         'sender_last_name': i.sender.last_name,
                          'sender': i.sender.username,
                          'sender_pic': profile_picture(i.sender.profile_picture),
                          'status': i.send_status})
@@ -84,9 +101,9 @@ class ChatThread(models.Model):
 
     def get_receiver(self, user):
         if self.first_user_id == user.id:
-            return self.second_user
+            return User.objects.get(id=self.second_user_id)
         else:
-            return self.first_user
+            return User.objects.get(id=self.first_user_id)
 
     def position(self, user):
         if self.first_user_id == user.id:
