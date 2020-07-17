@@ -71,9 +71,6 @@ class ChatThread(models.Model):
         text_file.close()
         return text_file
 
-
-
-
     def get_chat(self, user_position):
         list_ = {'first': self.first_deleted_(), 'second': self.second_deleted_()}
         self.self_delete()
@@ -96,7 +93,7 @@ class ChatThread(models.Model):
 
         if user_position == 'second':
             status = User.objects.get(id=self.first_user_id).status
-        data = {'chat_id': self.id, 'expired': self.expired(), 'status': status,  'chat_list': data}
+        data = {'chat_id': self.id, 'expired': self.expired(), 'status': status, 'chat_list': data}
         return data
 
     def get_receiver(self, user):

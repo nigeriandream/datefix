@@ -88,6 +88,7 @@ def get_chat_threads(request):
             "chat_id": x.id,
             "chat_link": ''.join(['/chat/api/chat/', str(x.id)]),
             "username": x.get_receiver(user).username,
+            "status": x.get_receiver(user).status,
             "first_name": x.get_receiver(user).first_name,
             "last_name": x.get_receiver(user).last_name,
             "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
