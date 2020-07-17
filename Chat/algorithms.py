@@ -35,8 +35,26 @@ def end_session(chat_thread, user, you):
     list_.remove(you.id)
     user.matches = json.dumps(list_)
     user.save()
+    email_chat(chat_thread, user)
+    email_chat(chat_thread, you)
     chat_thread.delete()
     return
+
+
+def email_chat(chat_thread, user):
+    other_user = chat_thread.get_receiver(user)
+    user_chat = chat_thread.get_chat_file(user)
+    from django.core.mail import EmailMessage
+    message = EmailMessage(f'Chat Text File Between You and {user.username} from Datefix.com',
+                           f'Hi {other_user.username},  This message indicates that the chat session between the two of you '
+                           f'is formally over. '
+                           'Attached to this email address is a .txt file of the chat between the two of you. '
+                           ''
+                           'Datefix Team.', 'admin@datefix.com', user.email)
+    message.attach_file(f'{user_chat.name}', 'text/plain')
+    message.send(True)
+    import os
+    os.remove(f'{user_chat.name}')
 
 
 def reject(you, user):
@@ -70,6 +88,7 @@ def get_chat_threads(request):
             "chat_id": x.id,
             "chat_link": ''.join(['/chat/api/chat/', str(x.id)]),
             "username": x.get_receiver(user).username,
+            "status": x.get_receiver(user).status,
             "first_name": x.get_receiver(user).first_name,
             "last_name": x.get_receiver(user).last_name,
             "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
@@ -150,4 +169,3 @@ def has_chat(user):
     if len(no_of_chats) == 2 or (len(no_of_chats) == 1 and len(expired_chats) == 1):
         return True
     return False
-
