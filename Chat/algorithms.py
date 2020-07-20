@@ -136,7 +136,8 @@ def get_profile(request, user_id):
         return json.dumps({'username': user.username,
                            'first_name': user.first_name, 'last_name': user.last_name,
                            'profile_pic': profile_picture(user.profile_picture),
-                           'status': user.status})
+                           'status': user.status,
+                           'threads': user.chatThreads()})
 
 
 def create_chat(request, your_id, user_id):

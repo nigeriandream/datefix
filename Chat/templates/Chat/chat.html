@@ -37,7 +37,7 @@
 
 <body class="az-body">
 
-  <div class="az-header">
+  <div id="user" class="az-header {{ request.user.username }} {% if logout %}{{ logout }}{% endif %}">
     <div class="container">
       <div class="az-header-left">
         <a href="index.php" class="standard-logo az-logo" data-dark-logo={% static 'images/logo-dark.png' %}""><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>

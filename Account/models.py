@@ -28,7 +28,7 @@ class User(AbstractUser):
     secret = models.BinaryField(default=get_key(os.urandom(16).__str__()))
     min_score = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     verified = models.BooleanField(default=False)
-    status = models.CharField(max_length=32, default='Offline')
+    status = models.CharField(max_length=64, default='Offline')
 
     def successful_list(self):
         if self.successful_matches is None or self.successful_matches == '':
@@ -120,6 +120,11 @@ class User(AbstractUser):
             return test_.titles()
         except PersonalityTest.DoesNotExist:
             return []
+
+    def chatThreads(self):
+        from Chat.models import ChatThread
+        threads = ChatThread.objects.filter(Q(first_user_id=self.id) | Q(second_user_id=self.id))
+        return list(set([x.id for x in threads]))
 
 
 class Couple(models.Model):
