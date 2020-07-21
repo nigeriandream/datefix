@@ -51,15 +51,12 @@ var app = new Vue({
         this.getSingleChat(this.chat_object);
         console.log(JSON.parse(e.data));
         let data = JSON.parse(e.data);
-        if (data.username === this.activeUser && data.function === "connect") {
-          this.status = data.status;
-        }
-        if (
-          data.username !== this.loggedInUser &&
-          data.function === "disconnect"
-        ) {
-          this.status = data.status;
-        }
+        // if (
+        //   data.username !== this.loggedInUser &&
+        //   data.function === "disconnect"
+        // ) {
+        //   this.status = data.status;
+        // }
         if (
           data.username !== this.loggedInUser &&
           data.function === "message"
@@ -79,7 +76,7 @@ var app = new Vue({
     },
     async createThread() {
       try {
-        await fetch(`/chat/api/create/3`)
+        await fetch(`/chat/api/create/1`)
           .then((response) => response.json())
           .then((data) => {
             console.log("thread>>>", data);
@@ -188,22 +185,22 @@ var app = new Vue({
       console.log("isDelivered_thread>>>", isDelivered_thread);
       this.socket.send(JSON.stringify(isDelivered_thread));
     },
-    isTyping() {
-      let isTyping_thread = {
-        username: this.loggedInUser,
-        function: "isTyping",
-      };
-      console.log("isTyping_thread>>>", isTyping_thread);
-      this.socket.send(JSON.stringify(isTyping_thread));
-    },
-    notTyping() {
-      let notTyping_thread = {
-        username: this.loggedInUser,
-        function: "notTyping",
-      };
-      console.log("notTyping_thread>>>", notTyping_thread);
-      this.socket.send(JSON.stringify(notTyping_thread));
-    },
+    // isTyping() {
+    //   let isTyping_thread = {
+    //     username: this.loggedInUser,
+    //     function: "isTyping",
+    //   };
+    //   console.log("isTyping_thread>>>", isTyping_thread);
+    //   this.socket.send(JSON.stringify(isTyping_thread));
+    // },
+    // notTyping() {
+    //   let notTyping_thread = {
+    //     username: this.loggedInUser,
+    //     function: "notTyping",
+    //   };
+    //   console.log("notTyping_thread>>>", notTyping_thread);
+    //   this.socket.send(JSON.stringify(notTyping_thread));
+    // },
     deleteForAll() {
       let deleteForAll_thread = {
         username: this.loggedInUser,
@@ -212,12 +209,18 @@ var app = new Vue({
       console.log("deleteForAll_thread>>>", deleteForAll_thread);
       this.socket.send(JSON.stringify(deleteForAll_thread));
     },
+    // isTyping() {
+    //   document.getElementById("typing_on").innerHTML = "User is typing...! ";
+    // },
+    // notTyping() {
+    //   document.getElementById("typing_on").innerHTML = "No one is typing ! ";
+    // },
   },
-  watch: {
-    status(newValue, oldValue) {
-      this.connect(this.chat_object);
-      console.log("value:", newValue, oldValue);
-      this.status = newValue;
-    },
-  },
+  // watch: {
+  //   status(newValue, oldValue) {
+  //     this.connect(this.chat_object);
+  //     console.log("value:", newValue, oldValue);
+  //     this.status = newValue;
+  //   },
+  // },
 });

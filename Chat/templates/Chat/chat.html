@@ -131,7 +131,7 @@
         <div id="azChatList" class="az-chat-list">
           <div v-for="(chat, index) in chat_threads" :key="index">
             <div class="media new" @click="connect(chat)">
-              <div :class="[activeUser === chat.username ? 'az-img-user online' : 'az-img-user']">
+              <div :class="[chat.status === 'Online' ? 'az-img-user online' : 'az-img-user']">
                 <img :src="[[chat.profile_picture]]" alt="">
                 <!-- <span>2</span> -->
               </div>
@@ -152,11 +152,11 @@
         <div class="az-content-body az-content-body-chat">
           <template v-show="loading === false">
         <div class="az-chat-header" v-show="loading === false">
-          <div :class="[activeUser === chat_object.username ? 'az-img-user online' : 'az-img-user']"><img :src="[[chat_object.profile_picture]]" alt=""></div>
+          <div :class="[chat_object.status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[chat_object.profile_picture]]" alt=""></div>
           <div class="az-chat-msg-name">
             <h6>[[chat_object.first_name]] [[chat_object.last_name]]</h6>
-            <small v-if="status === 'Online'">Online</small>
-            <small v-if="status === ''">Offline</small>
+            <small v-if="chat_object.status === 'Online'">Online</small>
+            <small v-if="chat_object.status === 'Offline'">Offline</small>
             <small v-if="typing == true"><i>Typing...</i></small>
             <!-- <small v-else>Last seen: 2 minutes ago</small> -->
           </div>
@@ -171,10 +171,10 @@
         </div><!-- az-chat-header -->
         <div id="azChatBody" class="az-chat-body" v-show="loading === false">
           <div class="content-inner" ref="container">
-            <label class="az-chat-time"><span>3 days ago</span></label>
+            <!-- <label class="az-chat-time"><span>3 days ago</span></label> -->
             <div v-for='(message, index) in chat_messages' :key='index'>
             <div :class="[message.sender == loggedInUser ? 'media flex-row-reverse' : 'media']">
-              <div :class="[status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[message.sender_pic]]" alt=""></div>
+              <div :class="[message.status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[message.sender_pic]]" alt=""></div>
               <div class="media-body">
                 <div class="az-msg-wrapper">
                   [[ message.message ]]
@@ -194,7 +194,7 @@
             <a href="" class="nav-link" data-toggle="tooltip" title="Add Emoticons"><i class="far fa-smile"></i></a>
             <a href="" class="nav-link"><i class="fas fa-ellipsis-v"></i></a>
           </nav>
-          <input @keyup.enter="sendMessage" @input="isTyping" type="text" class="form-control" v-model="message" placeholder="Type your message here...">
+          <input @keyup.enter="sendMessage" @keypress="setTimeout(isTyping(),4000); setInterval(notTyping,5000)" type="text" class="form-control" v-model="message" placeholder="Type your message here...">
           <span @click="sendMessage" class="az-msg-send"><i class="far fa-paper-plane"></i></span>
         </div><!-- az-chat-footer -->
       </template>
