@@ -7,6 +7,41 @@ from django.utils.datetime_safe import datetime
 from .models import ChatThread, ChatMessage
 
 
+async def login(self, chat_id):
+    self.thread_obj = await self.get_thread(chat_id)
+    self.me = await self.get_user(self.chat_data['username'])
+    self.other_user = await self.get_receiver(self.thread_obj, self.me)
+    chat_room = f"chat_{self.thread_obj.id}"
+    self.chat_room = chat_room
+    await self.channel_layer.group_add(
+        chat_room,
+        self.channel_name
+    )
+    self.chat_data['status'] = 'Online'
+    await self.channel_layer.group_send(
+        self.chat_room,
+        {"type": "send_message",
+         "data": self.chat_data})
+
+
+async def logout(self, chat_id):
+    self.thread_obj = await self.get_thread(chat_id)
+    self.me = await self.get_user(self.chat_data['username'])
+    self.other_user = await self.get_receiver(self.thread_obj, self.me)
+    chat_room = f"chat_{self.thread_obj.id}"
+    self.chat_room = chat_room
+    self.set_user_status('Offline')
+    self.chat_data['status'] = self.me.status
+    await self.channel_layer.group_add(
+        chat_room,
+        self.channel_name
+    )
+    await self.channel_layer.group_send(
+        self.chat_room,
+        {"type": "send_message",
+         "data": self.chat_data})
+
+
 class ChatConsumer(AsyncConsumer):
     def __init__(self, scope):
         super().__init__(scope)
@@ -22,6 +57,11 @@ class ChatConsumer(AsyncConsumer):
 
     async def websocket_receive(self, event):
         self.chat_data = json.loads(event['text'])
+
+        if self.chat_data['function'] == 'login':
+            for i in self.chat_data['threads']:
+                await login(self, i)
+
         if self.chat_data['function'] == 'connect':
             chat_id = self.chat_data['chat_id']
             self.thread_obj = await self.get_thread(chat_id)
@@ -56,6 +96,7 @@ class ChatConsumer(AsyncConsumer):
         if self.chat_data['function'] == 'message':
             self.chat_data['datetime'] = datetime.now()
             self.chat_data['time'] = datetime.now().time().strftime('%I:%M %p')
+            self.chat_data['date'] = datetime.now().time().strftime('%e - %b - %Y')
             self.chat_data['status'] = 'sent'
             await self.save_message(self.thread_obj, self.chat_data)
             del self.chat_data['datetime']
@@ -96,6 +137,12 @@ class ChatConsumer(AsyncConsumer):
                 self.chat_room,
                 {"type": "send_message",
                  "data": self.chat_data})
+
+        if self.chat_data['function'] == 'logout':
+            for i in self.chat_data['threads']:
+                await logout(self, i)
+            from django.shortcuts import redirect
+            return redirect('logout')
 
     async def send_message(self, event):
         await self.send({"type": "websocket.send", "text": json.dumps(event['data'])})

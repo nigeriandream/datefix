@@ -81,7 +81,8 @@ class ChatThread(models.Model):
         for i in chat_message_items:
             from Chat.algorithms import profile_picture
             data.append({'id': i.id,
-                         'time': i.datetime.time().strftime('%I:%M %p'),
+                         'time': i.datetime.strftime('%I:%M %p'),
+                         'date': i.datetime.strftime('%e - %b - %Y'),
                          'message': self.decrypt(i.text),
                          'sender_id': i.sender.id,
                          'sender': i.sender.username,

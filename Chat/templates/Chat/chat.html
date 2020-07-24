@@ -39,8 +39,7 @@
 
 <body class="az-body">
 
-  
-  <div class="az-header">
+  <div id="user" class="az-header {{ request.user.username }} {% if logout %}{{ logout }}{% endif %}">
     <div class="container">
       <div class="az-header-left">
         <a href="index.php" class="standard-logo az-logo" data-dark-logo={% static 'images/logo-dark.png' %}""><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
@@ -142,7 +141,7 @@
                   <span v-else></span>
                 </div>
                 <p v-if="chat.last_message">[[chat.last_message.message]]</p>
-                <small v-if="typing == true"><i>[[chat.first_name]] is Typing...</i></small>
+                <!-- <small v-if="typing == true"><i>[[chat.first_name]] is Typing...</i></small> -->
                 <p v-else></p>
               </div><!-- media-body -->
             </div><!-- media -->
@@ -157,12 +156,13 @@
             <h6>[[chat_object.first_name]] [[chat_object.last_name]]</h6>
             <small v-if="chat_object.status === 'Online'">Online</small>
             <small v-if="chat_object.status === 'Offline'">Offline</small>
-            <small v-if="typing == true"><i>Typing...</i></small>
+            <!-- <small v-if="typing == true"><i>Typing...</i></small> -->
             <!-- <small v-else>Last seen: 2 minutes ago</small> -->
           </div>
           <nav class="nav">
             <a href="" class="nav-link"><i class="icon ion-md-more"></i></a>
-            <span class="nav-link" data-toggle="modal" title="Accept" data-target="#acceptModal"><i class="icon ion-ios-checkbox-outline" id="accept__icon" ></i></span>
+            <span class="nav-link d-none" ref="accept" data-toggle="modal" title="Accept" data-target="#acceptModal"><i class="icon ion-ios-checkbox-outline" id="accept__icon" ></i></span>
+            <span class="nav-link d-none" ref="expired" data-toggle="modal" title="Expired" data-target="#expiredModal"><i class="icon ion-ios-checkbox-outline" id="expired__icon" ></i></span>
             <span class="nav-link" data-toggle="modal" title="Jilt" data-target="#jiltModal" id="jilt__icon"><i class="icon ion-ios-heart-dislike" id="jilt__icon" ></i></span>
             <!-- <a href="" class="nav-link" data-toggle="tooltip" title="Archive"><i class="icon ion-ios-filing"></i></a> -->
             <!-- <a href="" class="nav-link" data-toggle="tooltip" title="Trash"><i class="icon ion-md-trash"></i></a> -->
@@ -194,7 +194,8 @@
             <a href="" class="nav-link" data-toggle="tooltip" title="Add Emoticons"><i class="far fa-smile"></i></a>
             <a href="" class="nav-link"><i class="fas fa-ellipsis-v"></i></a>
           </nav>
-          <input @keyup.enter="sendMessage" @keypress="setTimeout(isTyping(),4000); setInterval(notTyping,5000)" type="text" class="form-control" v-model="message" placeholder="Type your message here...">
+          <!-- @keypress="setTimeout(isTyping(),4000); setInterval(notTyping,5000)" -->
+          <input @keyup.enter="sendMessage" type="text" class="form-control" v-model="message" placeholder="Type your message here...">
           <span @click="sendMessage" class="az-msg-send"><i class="far fa-paper-plane"></i></span>
         </div><!-- az-chat-footer -->
       </template>
@@ -211,10 +212,10 @@
       </div><!-- az-content-body -->
       </div>
 
-      <!-- jilt modal -->
+      <!-- expired modal -->
       <div
       class="modal fade"
-      id="jiltModal"
+      id="expiredModal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalCenterTitle"
@@ -227,36 +228,23 @@
               <h5
                 class="modal-title fs-17 font-weight-bold"
                 id="exampleModalCenterTitle"
-              >Jilt Contact?</h5>
+              >Match Period Over</h5>
             </div>
             <button type="button" class="close" data-dismiss="modal" ref="close" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <div class="row">
-              <div class="col-12 d-flex justify-content-center align-items-center flex-column">
-                <img
-                src="/static/images/warning.svg"
-                  height="100"
-                  width="100"
-                  alt
-                />
-                <h6 class="text-muted fs-16 mt-3 text-center">Datefix will permanently remove this contact from your possible matches. Are you sure you want to do this jilt contact?</h6>
-              </div>
+            <h6>You have been matched with the following contact(s) for over 7 days. Please accept or decline one.</h6>
+            <div v-for="(user, index) in expiredUsers" :key="index">
+              <div class="d-flex justify-content-between p-4">
+                <h5>[[user.first_name]] [[user.last_name]]</h5>
+                <div>
+                    <i class="fas fa-check-square text-success fa-2x ml-2" id="accept__icon" data-toggle="modal" data-target="#acceptModal" title="Accept" ></i>
+                    <i class="icon ion-ios-close-circle-outline text-danger fa-2x ml-2" id="decline__icon" ></i>
+                </div>
+              </div> 
             </div>
-          </div>
-
-          <!-- action button -->
-          <div class="modal-footer border-0 justify-content-center">
-            <button class="btn btn-danger rounded-md px-4" @click="jilt" :disabled="approving">
-              <template v-if="approving === false">Jilt</template>
-              <template v-if="approving === true">
-                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Jilting...
-              </template>
-            </button>
-
-            <button class="btn btn-dark rounded-md" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
@@ -301,8 +289,8 @@
           <!-- action button -->
           <div class="modal-footer border-0 justify-content-center">
             <button class="btn btn-success rounded-md px-4" @click="accept" :disabled="approving">
-              <template v-if="approving === false">Accept</template>
-              <template v-if="approving === true">
+              <template v-if="approving == false">Accept</template>
+              <template v-if="approving == true">
                 <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Accepting...
               </template>
             </button>
@@ -312,6 +300,57 @@
         </div>
       </div>
     </div>
+
+    <!-- jilt modal -->
+    <div
+    class="modal fade"
+    id="jiltModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center">
+          <div>
+            <h5
+              class="modal-title fs-17 font-weight-bold"
+              id="exampleModalCenterTitle"
+            >Jilt Contact?</h5>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" ref="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+              <img
+              src="/static/images/warning.svg"
+                height="100"
+                width="100"
+                alt
+              />
+              <h6 class="text-muted fs-16 mt-3 text-center">Datefix will permanently remove this contact from your possible matches. Are you sure you want to do this jilt contact?</h6>
+            </div>
+          </div>
+        </div>
+
+        <!-- action button -->
+        <div class="modal-footer border-0 justify-content-center">
+          <button class="btn btn-danger rounded-md px-4" @click="jilt" :disabled="approving">
+            <template v-if="approving === false">Jilt</template>
+            <template v-if="approving === true">
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Jilting...
+            </template>
+          </button>
+
+          <button class="btn btn-dark rounded-md" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
       </div><!-- az-content-left -->
     <!-- </div> -->
   </div><!-- az-content -->

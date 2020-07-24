@@ -57,6 +57,9 @@ def logout(request):
                   f"on {datetime.now().date().strftime('%e - %b - %Y')}."
     user.save()
     auth.logout(request)
+    if '_logout' in request.session:
+        del request.session['_logout']
+        return HttpResponse('ok')
     return redirect('home')
 
 

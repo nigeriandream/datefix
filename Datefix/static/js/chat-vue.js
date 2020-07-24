@@ -19,6 +19,7 @@ var app = new Vue({
     approving: false,
     message_id: "",
     typing: false,
+    expiredUsers: [],
   },
   async mounted() {
     this.id = this.$refs.userID.value;
@@ -28,6 +29,12 @@ var app = new Vue({
     const url = window.location.href.replace("http", "ws");
     this.socket = new WebSocket(url);
     this.websocket();
+    setTimeout(() => {
+      $("#expiredModal").modal({
+        show: true,
+        backdrop: "static",
+      });
+    }, 200);
   },
   // beforeDestroy() {
   //   this.disconnect(this.chat_object);
@@ -51,12 +58,9 @@ var app = new Vue({
         this.getSingleChat(this.chat_object);
         console.log(JSON.parse(e.data));
         let data = JSON.parse(e.data);
-        // if (
-        //   data.username !== this.loggedInUser &&
-        //   data.function === "disconnect"
-        // ) {
-        //   this.status = data.status;
-        // }
+        if (data.username !== this.loggedInUser && data.function === "login") {
+          this.getAllChats();
+        }
         if (
           data.username !== this.loggedInUser &&
           data.function === "message"
@@ -76,7 +80,7 @@ var app = new Vue({
     },
     async createThread() {
       try {
-        await fetch(`/chat/api/create/1`)
+        await fetch(`/chat/api/create/3`)
           .then((response) => response.json())
           .then((data) => {
             console.log("thread>>>", data);
@@ -106,7 +110,16 @@ var app = new Vue({
           .then((response) => response.json())
           .then((data) => {
             console.log("all chats>>>", data);
-            this.chat_threads = data.chat_threads;
+            this.chat_threads = data.chat_threads.filter(
+              (chat_thread) => chat_thread.expired == false
+            );
+            let expiredUsers = data.chat_threads.filter(
+              (expiredUser) => expiredUser.expired == true
+            );
+            this.expiredUsers = expiredUsers;
+            if (expiredUsers.length > 0) {
+              this.$refs.expired.click();
+            }
           });
       } catch (error) {
         console.log("error>>>", error);
