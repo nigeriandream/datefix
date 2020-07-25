@@ -1,0 +1,113 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %}
+	Account Verified
+{% endblock title %}
+
+{% block content %}
+
+
+<!-- Header
+		============================================= -->
+		<header id="header" class="full-header">
+
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href={% url 'home' %} class="standard-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img src={% static 'images/logo.png' %} alt="Canvas Logo"></a>
+						<a href={% url 'home' %} class="retina-logo" data-dark-logo={% static 'images/logo-dark@2x.png' %}><img src={% static 'images/logo@2x.png' %} alt="Canvas Logo"></a>
+					</div><!-- #logo end -->
+
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu">
+
+						<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+							<li><a href={% url 'home' %}>
+									<div>Home</div>
+								</a>
+							</li>
+							<li><a href={% url 'login' %}>
+									<div>Logout</div>
+								</a>
+							</li>
+						</ul>
+
+
+					</nav><!-- #primary-menu end -->
+
+				</div>
+
+			</div>
+
+		</header><!-- #header end --><!-- #header end -->
+
+
+		<!-- Page Title
+		============================================= -->
+		<section id="page-title" class="page-title-parallax dark" style="background-image: url({% static "images/page/bg1.jpg" %}); padding: 120px 0; background-size:cover;" data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
+
+			<div class="container clearfix dark">
+				<h1 data-animate="fadeInUp" style="color:#eee;">My Account</h1>
+				<span data-animate="fadeInUp" style="color:#eee;" data-delay="300">E-mail Verified</span>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
+					<li class="breadcrumb-item"><a href={% url 'login' %}>Login</a></li>
+					<li class="breadcrumb-item active" aria-current="page">E-mail Verified</li>
+
+					
+				</ol>
+			</div>
+
+		</section><!-- #page-title end -->
+
+		<!-- Content
+		============================================= -->
+		<section id="content" style="overflow: inherit!important;  background-image: url({% static "images/page/bg.jpg"%}); background-size: cover; background-attachment: fixed;">
+
+			<div class="content-wrap" style="background-image: url({% static "images/page/bgx.jpg"%});  background-size: cover; background-attachment: fixed;">
+
+				<div class="container clearfix">
+
+					<div class="accordion accordion-lg divcenter nobottommargin clearfix" style="max-width: 550px;">
+
+						<div class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-unlock"></i>Your email address has been successfully verified. Please proceed to set up your Datefix session.</div>
+						<div class="acc_content clearfix">
+							<form id="login-form" name="password-form" class="nobottommargin" action={% url 'login'  %} method="get">
+								<div class="col_full nobottommargin">
+									<button type="submit" class="button button-3d button-black nomargin" id="submit"  value="login">Proceed to Datefix</button>
+								</div>
+
+							</form>
+						</div>
+
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</section><!-- #content end -->
+
+		<!-- Footer
+		============================================= -->
+		{% include "footer.html" %}
+		<!-- #footer end -->
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+{% endblock content %}
+		
+
+	

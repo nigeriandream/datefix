@@ -89,16 +89,125 @@
 	- Youtube Video Backgrounds
 
 ---------------------------------------------------------------- */
+.login-trigger a {
+	display: block;
+	position: relative;
+	width: 14px;
+	height: 14px;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	color: #333;
+	-webkit-transition: color 0.3s ease-in-out;
+	-o-transition: color 0.3s ease-in-out;
+	transition: color 0.3s ease-in-out;
+}
+
+.login-trigger {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: block;
+	cursor: pointer;
+	z-index: 11;
+	margin-right: 5px;
+	float: right;
+	margin: 40px 0 40px 15px;
+}
+
+.user-sidebar-trigger a {
+	background: #740484;
+	padding: 0px 6px 0px 6px;
+	height: 21px !important;
+	border-radius: 7px;
+	color: #fff !important;
+	transition: 0.4s ease background;
+}
+
+.user-sidebar-trigger:hover a {
+	background: #2d0932;
+}
+
+.transheader {
+}
+
+.dark #primary-menu:not(.not-dark) ul li {
+	border-top-color: #444 !important;
+}
+
+.card-category {
+	padding: 15px;
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 15px;
+	transition: 0.4s ease all;
+	font-size: 15px;
+	transition: 0.4s ease all;
+}
+
+.card-category:hover {
+	background: rgba(255, 255, 255, 1);
+}
+
+.card-header:first-child {
+	border-radius: 15px;
+}
+
+.oc-card {
+	padding: 10px;
+	background: rgba(255, 255, 255, 0.85);
+	border-radius: 15px;
+	min-height: 460px;
+	transition: 0.4s ease all;
+}
+
+.oc-card:hover {
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+	background: #fff;
+}
+
+.oc-item .ipost .entry-title h3 a,
+.oc-item .ipost .entry-content p {
+	transition: 0.4s ease color;
+}
+
+.oc-item:hover .ipost .entry-title h3 a,
+.oc-item:hover .ipost .entry-content p {
+	color: #000;
+}
+
+.match-body-pills {
+	box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+	border-radius: 11px;
+	padding: 2px 9px;
+	width: 100%;
+	display: inline-block;
+	overflow: hidden;
+}
+
+.body-pill-attribute {
+	padding-right: 10px;
+	display: inline-block;
+	font-weight: 500;
+}
+
+.body-pill-value {
+	float: right;
+}
+
+.chosen-select {
+	width: 350px;
+}
 
 .cta-join {
 	color: #222 !important;
-	background: #f9f9f9 !important;
+	background: url(../images/page/gif1.gif) !important;
+	background-size: cover;
+	background-position: center;
 	border-color: #f9f9f9 !important;
 }
 
 .cta-join:hover {
 	background-color: rgba(255, 255, 255, 0.8) !important;
-	transform: scale(1.03);
+	transform: scale(1.02);
 	font-weight: 700 !important;
 }
 
@@ -136,15 +245,21 @@ input[type="radio"],
 }
 
 .form-category {
-	margin: 25px 15px;
+	margin: 25px auto;
 	padding: 30px;
-	background: #fff;
+	background: rgba(255, 255, 255, 0.85);
 	border-radius: 15px;
-	transition: 0.4s ease box-shadow;
+	transition: 0.4s ease all;
+	font-size: 15px;
+}
+
+.form-category p {
+	font-size: 15px;
 }
 
 .form-category:hover {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background: #fff;
 }
 
 form div h4 {
@@ -849,7 +964,7 @@ span.middot {
 	position: relative;
 	margin: 60px 0;
 	padding: 60px 0;
-	background-color: rgba(250, 250, 250, 0.1);
+	background-color: rgba(250, 250, 250, 0);
 	overflow: hidden;
 }
 
@@ -3311,7 +3426,7 @@ body.side-panel-left.side-push-panel.stretched #header.sticky-header .container 
 	width: 330px;
 	height: 100%;
 	overflow: auto;
-	padding: 50px 70px 50px 40px;
+	padding: 30px 50px 30px 20px;
 }
 
 body.device-touch #side-panel .side-panel-wrap {
@@ -4200,6 +4315,11 @@ body.stretched .container-fullwidth .breadcrumb {
 .content-wrap {
 	position: relative;
 	padding: 35px 0;
+	background: linear-gradient(
+		217deg,
+		rgba(255, 27, 86, 0.5522408792618609) 0%,
+		rgba(25, 79, 232, 0.5522408792618609) 100%
+	);
 }
 
 #content .container {
@@ -6273,7 +6393,7 @@ body:not(.device-touch) .entry-link {
 
 .ipost .entry-title h3 a:hover,
 .ipost .entry-title h4 a:hover {
-	color: #7e50f8;
+	color: #000;
 }
 
 .ipost .entry-meta {
@@ -7741,6 +7861,7 @@ body:not(.device-touch) .button {
 	letter-spacing: 2px;
 	height: 52px;
 	line-height: 52px;
+	font-family: inherit;
 }
 
 .button.button-desc {
@@ -8727,6 +8848,11 @@ body:not(.device-touch) .button.button-full strong {
 /* ----------------------------------------------------------------
 	Featured Boxes
 -----------------------------------------------------------------*/
+
+.x-padding-40 {
+	padding-left: 40px !important;
+	padding-right: 40px !important;
+}
 
 .feature-box {
 	position: relative;
@@ -10825,9 +10951,9 @@ body:not(.device-touch) .social-icon i {
 -----------------------------------------------------------------*/
 
 .faqs .toggle {
-	border-bottom: 1px solid #eee;
-	padding-bottom: 12px;
-	margin-bottom: 12px;
+	border-bottom: 0px solid #eee;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 .faqs .toggle .togglet,
@@ -10842,6 +10968,7 @@ body:not(.device-touch) .social-icon i {
 
 .faqs .toggle .togglec {
 	padding-bottom: 10px;
+	color: #333;
 }
 
 /* ----------------------------------------------------------------
@@ -12302,7 +12429,7 @@ body:not(.device-touch) .rounded-skill {
 	left: 0;
 	width: 0;
 	height: 100%;
-	background-color: #7e50f8;
+	background-color: #e64589;
 	overflow: visible !important;
 	border-radius: 2px;
 	-webkit-transition: width 1.2s ease-in-out;
@@ -12360,7 +12487,7 @@ body:not(.device-touch) .rounded-skill {
 	top: -23px;
 	left: 0;
 	line-height: 20px;
-	font-size: 12px;
+	font-size: 15px;
 	font-weight: bold;
 	text-transform: uppercase;
 	color: #222;
@@ -12824,6 +12951,10 @@ blockquote.float-right {
 	perspective: 1000px;
 }
 
+.card-body {
+	padding: 1rem;
+}
+
 .flip-card-front,
 .flip-card-back {
 	background-size: cover;
@@ -12891,7 +13022,7 @@ blockquote.float-right {
 	position: absolute;
 	left: 0;
 	width: 100%;
-	padding: 2rem;
+	padding: 1rem;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	outline: 1px solid transparent;
@@ -13457,7 +13588,7 @@ input[type="checkbox"]:not(:checked) + label.error {
 	display: block;
 	margin-top: 30px;
 	width: 40px;
-	border-top: 2px solid #444;
+	border-top: 2px solid #fff;
 }
 
 .center .heading-block:after,

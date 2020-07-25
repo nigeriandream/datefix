@@ -1,0 +1,269 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block css %}
+<link href={% static 'css/select2.css' %} rel="stylesheet" />
+<link rel="stylesheet" href={% static 'css/form-elements.css' %}>
+<link rel="stylesheet" href={% static 'css/stylex.css' %}>
+{% endblock css %}
+
+{% block title %}
+Match Results
+{% endblock title %}
+
+{% block content %}
+
+
+<!-- Header
+		============================================= -->
+<header id="header" class="full-header">
+
+	<div id="header-wrap">
+
+		<div class="container clearfix">
+
+			<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+			<!-- Logo
+					============================================= -->
+			<div id="logo">
+				<a href={% url 'home' %} class="standard-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img
+						src={% static 'images/logo.png' %} alt="Canvas Logo"></a>
+				<a href={% url 'home' %} class="retina-logo" data-dark-logo={% static 'images/logo-dark@2x.png' %}><img
+						src={% static 'images/logo@2x.png' %} alt="Canvas Logo"></a>
+			</div><!-- #logo end -->
+
+			<!-- Primary Navigation
+					============================================= -->
+			<nav id="primary-menu">
+
+				<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+					<li><a href={% url 'home' %}>
+							<div>Home</div>
+						</a>
+					</li>
+					<li><a href="#">
+							<div>About Datefix</div>
+						</a>
+					</li>
+				</ul>
+
+				<div id="side-panel-trigger" class="side-panel-trigger user-sidebar-trigger"
+					style="font-size: 12px;	font-weight: 400;	letter-spacing: 3px;    text-transform: uppercase; line-height: 22px;">
+					<a href="#" style="width: auto; font-size: inherit;"><i class="icon-line-heart"></i>
+						Menu</a>
+				</div>
+
+
+			</nav><!-- #primary-menu end -->
+
+		</div>
+
+	</div>
+
+</header><!-- #header end -->
+<!-- #header end -->
+
+
+<!-- Page Title
+		============================================= -->
+<section id="page-title" class="page-title-parallax dark"
+	style="background-image: url({% static "images/page/bg1.jpg" %}); padding: 120px 0; background-size:cover;"
+	data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
+
+	<div class="container clearfix dark">
+		<h1 data-animate="fadeInUp" style="color:#eee;">Potential Partners</h1>
+		<span data-animate="fadeInUp" style="color:#eee;" data-delay="300">Best matches from mutual preferences</span>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
+			<li class="breadcrumb-item"><a href="#">{{request.user.first_name}} {{ request.user.last_name }}</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Match Results</li>
+		</ol>
+	</div>
+
+</section><!-- #page-title end -->
+
+<style>
+	.select2-container--default .select2-selection--multiple .select2-selection__choice {
+		background-color: #fff;
+		-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+		padding: 0 15px 0 0px;
+		border-radius: 30px;
+		overflow: hidden;
+		letter-spacing: 2px;
+		font-weight: 300;
+	}
+</style>
+
+<!-- Content
+		============================================= -->
+<section id="content"
+	style="overflow: inherit!important;  background-image: url({% static "images/page/pfbgx.png"%}); background-size: cover; background-attachment: fixed;">
+
+	<div class="content-wrap" style="padding: 20px 0;">
+
+		<div class="container clearfix">
+
+			<div>
+
+				<div>
+
+					<div class="clear"></div>
+
+					<div class="row clearfix">
+
+						<div class="col_full">
+
+							<style>
+								.select2-search__field {
+									display: none !important;
+								}
+							</style>
+
+
+
+							<!-- Multi step form -->
+							<!-- One "tab" for each step in the form: -->
+							<form>
+								<h2 style="margin-bottom: 3px; color:#fff">Match Results</h2>
+								<p style="color: #fff;">Your potential partners</p>
+							</form>
+
+							<form class="row" id="matches-form" action={% url 'get_data' 'user' %} method="get">
+								{% for item in matches  %}
+								<div class="col_one_third card col_last card-category m-3">
+									<div class="p-2">
+										{% for key, value in item  %}
+										{% if value > 0 %}
+										<div class="card-header mb-2">
+											<ul class="skills">
+												<li data-percent={{value}}>
+													<span><i class="i-plain i-small color icon-bar-chart inline"
+															style="    margin: 0px 5px;"></i></span>
+													<div class="progress">
+														<div class="progress-percent">
+															<div class="counter counter-inherit counter-instant">
+																<span data-from="0" data-to={{value}}
+																	data-refresh-interval="30"
+																	data-speed="1100"></span>%</div>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+										{% endif %}
+
+										{% if key != 'id' and not value > 0  %}
+										<div class="card-text match-body-pills">
+											<div class="body-pill-attribute color">
+												{% if key == 'alpha' %}
+												Username
+												{% else %}
+												{{key}}
+												{% endif %}
+											</div>
+											<div class="body-pill-value">{{value}}</div>
+										</div>
+										{% endif %}
+
+										{% endfor %}
+									</div>
+								</div>
+								{% empty %}
+								<h3 class="text text-center text-white py-3">&#128577 Awww.....No Results</h3>
+
+								{% endfor %}
+
+							</form>
+						</div>
+					</div>
+
+					<form id="matches-form" {% if matches_length >= 2 %} action={% url 'results' %} method="post">
+						{% csrf_token %}
+						{% else %}
+						action={% url 'dashboard' %} method="get">
+						{% endif %}
+
+
+						{% if matches_length > 0 %}
+						<div class="form-category col_full" style="    background: rgba(255, 255, 255, 0.9)">
+
+							<div class="form-group">
+								<label for="matches">Select two potential partners to proceed</label>
+								<select name="matches" id="potential-matches" class="form-control" multiple="multiple"
+									data-width="100%" tabindex="-1" aria-hidden="true" style="width:100%;">
+									{% for key, value in select  %}
+									<option value={{key}}>{{value}}</option>
+									{% endfor %}
+								</select>
+							</div>
+
+						</div>
+
+						{% endif %}
+
+
+						<div class="center topmargin" data-easing="easeInOutExpo" data-speed="1500">
+							<button type="submit"
+								class="button button-rounded button-reveal button-xlarge button-yellow button-light tright">
+								{% if matches_length > 0 %}
+								<i class="icon-chat"></i><span> Confirm Matches
+									{% else %}
+									<span> Back to Dashboard
+										{% endif %} </span></button>
+						</div>
+
+					</form>
+
+
+
+
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="w-100 line d-block d-md-none"></div>
+
+	</div>
+
+	</div>
+
+	</div>
+
+</section><!-- #content end -->
+
+<!-- Footer
+		============================================= -->
+{% include "footer.html" %}
+<!-- #footer end -->
+
+{% endblock content %}
+
+{% block script %}
+
+<!-- <script>
+	$("#test").click(function () {
+		var $uk = $('#potential-matches option[value="uid2"]');
+
+		if ($uk.prop("selected"))
+			$uk.prop("selected", false);
+		else
+			$uk.prop("selected", true);
+
+		return false;
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+				$("#religion2").change(function () {
+							var religion2 = $(this).val();
+</script> -->
+
+
+
+{% endblock script %}

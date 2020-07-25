@@ -1,130 +1,155 @@
 from django.db import models
 from Account.models import User
 from django.conf import settings
-from datetime import timedelta,timezone
+from datetime import timedelta, timezone
 from django.utils.datetime_safe import datetime
-from Crypto.Cipher import PKCS1_OAEP 
-from Crypto.PublicKey import RSA 
 
 
 # Create your models here.
 
-class Chat_Thread(models.Model):
+
+class ChatThread(models.Model):
     first_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='chatter1')
-    second_user = models.ForeignKey(settings.AUTH_USER_MODEL,  on_delete=models.DO_NOTHING, related_name='chatter2')
+    second_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='chatter2')
     show_first = models.BooleanField(default=True)
     show_second = models.BooleanField(default=True)
     date_created = models.DateTimeField()
     date_first = models.NullBooleanField(default=None, blank=True, null=True)
     date_second = models.NullBooleanField(default=None, blank=True, null=True)
     show_details = models.BooleanField(default=False)
-    first_deleted = models.TextField()
-    second_deleted = models.TextField()
-    secret = models.CharField(max_length=64)
+    first_deleted = models.TextField(default='[]')
+    second_deleted = models.TextField(default='[]')
+    secret = models.BinaryField()
+    expiry_date = models.DateTimeField(default=None)
     last_message_date = models.DateTimeField(default=None, null=True)
-    
-    
-    
+
+    def chat_name(self):
+        return f'User_{self.first_user_id} and User_{self.second_user_id}'
+
     def self_delete(self):
-        if (not self.show_first and not self.show_second):
+        if not self.show_first and not self.show_second:
             self.delete()
-        
-        if (self.date_first is False or self.date_second is False):
+
+        if self.date_first is False or self.date_second is False:
             self.delete()
-        
-    
+
     def show_detail(self):
         if self.date_created == (self.date_created + (timedelta(days=7))):
             self.show_details = True
-    
+
     def first_deleted_(self):
         return str(self.first_deleted).split(',')
-    
+
+    def expired(self):
+        if self.expiry_date.__lt__(datetime.now().astimezone()):
+            return True
+        return False
+
     def second_deleted_(self):
         return str(self.second_deleted).split(',')
-    
+
     def chat_messages(self, user_position):
         list_ = {'first': self.first_deleted_(), 'second': self.second_deleted_()}
-        chat_message_items = [x for x in Chat_Message.objects.all().filter(chat_id=self.id).order_by('datetime') \
-                if x.id not in list_[user_position]]
+        chat_message_items = [x for x in ChatMessage.objects.all().filter(chat_id=self.id).order_by('datetime') \
+                              if x.id not in list_[user_position]]
         decrypted_messages = [self.decrypt(x.text) for x in chat_message_items]
         return zip(chat_message_items, decrypted_messages)
-    
+
+    def get_chat_file(self, user):
+        user_position = self.position(user)
+        other_user = self.get_receiver(user)
+        list_ = {'first': self.first_deleted_(), 'second': self.second_deleted_()}
+        chat_message_items = [x for x in ChatMessage.objects.all().filter(chat_id=self.id).order_by('datetime') \
+                              if x.id not in list_[user_position]]
+        decrypted_messages = [self.decrypt(x.text) for x in chat_message_items]
+        text_file = open(f'Chat_with_{other_user.username}.txt', 'w+')
+        text_file.write(f'Chat Between {user.username} and {other_user.username}.\n\n')
+        for item, msg in zip(chat_message_items, decrypted_messages):
+            text_file.write(f"{item.sender.username} "
+                            f"({item.datetime.time().strftime('%I:%M %p')}): {msg}\n")
+
+        text_file.close()
+        return text_file
+
     def get_chat(self, user_position):
         list_ = {'first': self.first_deleted_(), 'second': self.second_deleted_()}
-        chat_message_items = [x for x in Chat_Message.objects.all().filter(chat_id=self.id).order_by('datetime') \
-                if x.id not in list_[user_position]]
+        self.self_delete()
+        self.show_detail()
+        chat_message_items = [x for x in ChatMessage.objects.all().filter(chat_id=self.id).order_by('datetime') \
+                              if x.id not in list_[user_position]]
         data = []
         for i in chat_message_items:
-            data.append({'id': i.id, 
-                          'time': i.datetime.time().__str__(),
-                          'message': self.decrypt(i.text),
-                          'sender_id': i.sender.id,
-                          'sender_first_name':i.sender.first_name,
-                          'sender_last_name': i.sender.last_name,
-                           'sender': i.sender.username,
-                           'sender_pic': i.sender.profile_picture,
-                           'status': i.send_status})
-        data = {'chat_id' : self.id, 'chat_list': data}
+            from Chat.algorithms import profile_picture
+            data.append({'id': i.id,
+                         'time': i.datetime.strftime('%I:%M %p'),
+                         'date': i.datetime.strftime('%e - %b - %Y'),
+                         'message': self.decrypt(i.text),
+                         'sender_id': i.sender.id,
+                         'sender': i.sender.username,
+                         'sender_pic': profile_picture(i.sender.profile_picture),
+                         'status': i.send_status})
+        status = ''
+        if user_position == 'first':
+            status = User.objects.get(id=self.second_user_id).status
+
+        if user_position == 'second':
+            status = User.objects.get(id=self.first_user_id).status
+        data = {'chat_id': self.id, 'expired': self.expired(), 'status': status, 'chat_list': data}
         return data
-    
+
     def get_receiver(self, user):
-        if self.first_user.id == user.id:
-            return self.second_user
+        if self.first_user_id == user.id:
+            return User.objects.get(id=self.second_user_id)
         else:
-            return self.first_user
-    
+            return User.objects.get(id=self.first_user_id)
+
     def position(self, user):
-        if self.first_user.id == user.id:
+        if self.first_user_id == user.id:
             return 'first'
         return 'second'
-    
+
     def last_message(self):
-        msg = Chat_Message.objects.filter(chat=self).order_by('-datetime')
+        msg = ChatMessage.objects.filter(chat=self).order_by('-datetime')
         if msg.count() == 0:
             return None
         return msg[0]
-    
-
 
     def last_message_text(self):
-        return self.decrypt(self.last_message().text)
-    
-    def encrypt(self, data):
-        pr= RSA.import_key(open('.'.join([self.secret, 'pem']), 'r').read())
-        cipher_text = PKCS1_OAEP.new(key=pr.publickey()).encrypt(data.encode())
-        return cipher_text
+        try:
+            return self.decrypt(self.last_message().text)
+        except AttributeError:
+            return None
 
+    def encrypt(self, data):
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).encrypt(data.encode())
 
     def decrypt(self, cipher_text):
-        pr= RSA.import_key(open('.'.join([str(self.secret), 'pem']), 'r').read())
-        decrypt = PKCS1_OAEP.new(key=pr)
-        return decrypt.decrypt(cipher_text).decode()
-    
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).decrypt(cipher_text).decode()
 
     def no_unread_msg(self, user):
         receiver = self.get_receiver(user)
         position = self.position(user)
         list_ = {'first': self.first_deleted_(), 'second': self.second_deleted_()}
-        chat_message_items = [x for x in Chat_Message.objects.filter(chat=self)\
-                              .filter(sender=receiver).filter(send_status='sent').order_by('datetime') \
-                if x.id not in list_[position]]
+        chat_message_items = [x for x in ChatMessage.objects.filter(chat=self) \
+            .filter(sender=receiver).filter(send_status='sent').order_by('datetime') \
+                              if x.id not in list_[position]]
         return chat_message_items.__len__()
-        
+
     def first_msg_today(self):
-        chat_msg = Chat_Message.objects.filter(chat=self).filter(datetime=datetime.today()).order_by('id')
+        chat_msg = ChatMessage.objects.filter(chat=self).filter(datetime=datetime.today()).order_by('id')
         return chat_msg[0]
-    
-class Chat_Message(models.Model):
-    sender = models.ForeignKey(settings.AUTH_USER_MODEL,  on_delete=models.DO_NOTHING)
+
+
+class ChatMessage(models.Model):
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
     text = models.BinaryField()
     datetime = models.DateTimeField()
     send_status = models.CharField(max_length=20, choices=(('sent', 'sent'), ('delivered', 'delivered')))
-    chat = models.ForeignKey(Chat_Thread, on_delete=models.CASCADE)
-    
+    chat = models.ForeignKey(ChatThread, on_delete=models.CASCADE)
+
     def expired(self):
         if (datetime.now(timezone.utc) - self.datetime) > timedelta(seconds=180):
             return True
         return False
-    
-    

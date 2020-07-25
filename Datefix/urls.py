@@ -16,10 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
-# from django.conf.urls import handler404, handler500, handler403
-from django.contrib.auth.views import LogoutView
+from django.conf.urls import handler404, handler500, handler403
 from django.conf import settings
-from .views import home, about
+from .views import home, handler404_, handler403_, handler500_
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,14 +26,11 @@ urlpatterns = [
     path('chat/', include('Chat.urls')),
     path('payment/', include('Payment.urls')),
     path('', home, name='home'),
-    path('about/', about, name='about'),
-    path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-# handler404 = handler404
+handler404 = handler404_
 
-# handler500 = handler500
+handler500 = handler500_
 
-# handler403 = handler403
+handler403 = handler403_
