@@ -20,190 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Chat/templates/Chat/end_session.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Datefix/static/images/undraw_online_dating_yruf.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Datefix/static/images/warning-green.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Datefix/static/images/warning.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Datefix/static/js/vue-scrollTo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Account/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Account/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/algorithms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/algorithms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/consumers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/templates/Chat/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/templates/Chat/chat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/animate.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/animate.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/bootstrap-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/bootstrap-rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/calendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/calendar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/chat.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/colors-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/colors-rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/colors-rtl.php" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/colors-rtl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/colors.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/colors.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/colors.php" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/colors.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/bs-datatable.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/bs-datatable.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/bs-filestyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/bs-filestyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/bs-rating.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/bs-rating.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/bs-select.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/bs-select.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/bs-switches-vars.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/bs-switches-vars.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/bs-switches.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/bs-switches.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/dark-components.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/dark-components.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/datepicker.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/datepicker.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/daterangepicker.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/daterangepicker.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/ion.rangeslider-vars.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/ion.rangeslider-vars.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/ion.rangeslider.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/ion.rangeslider.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/pricing-table.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/pricing-table.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/radio-checkbox-vars.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/radio-checkbox-vars.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/radio-checkbox.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/radio-checkbox.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/select-boxes.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/select-boxes.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/components/timepicker.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/components/timepicker.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/dark-rtl-vars.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/dark-rtl-vars.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/dark-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/dark-rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/dark-vars.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/dark-vars.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/et-line.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/et-line.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/et-line/et-line.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/et-line/et-line.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/font-icons-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/font-icons-rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/font-icons-snapchat.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/font-icons-snapchat.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/font-icons-vars.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/font-icons-vars.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/font-icons.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/font-icons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/fonts.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/fonts.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/fonts/Simple-Line-Icons.dev.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/fonts/Simple-Line-Icons.dev.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/fonts/Simple-Line-Icons.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/fonts/Simple-Line-Icons.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/fonts/font-icons-snapchat.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/fonts/font-icons-snapchat.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/fonts/font-icons.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/fonts/font-icons.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/fonts/lined-icons.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/fonts/lined-icons.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/fontsx.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/fontsx.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/blog.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/blog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/content.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/content.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/events.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/events.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/extras.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/extras.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/helpers.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/helpers.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/layouts.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/layouts.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/pagetitle.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/pagetitle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/portfolio.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/portfolio.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shop.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/alerts.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/alerts.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/buttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/buttons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/carousel.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/carousel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/clients.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/clients.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/countdown.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/countdown.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/counter-skills.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/counter-skills.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/dividers.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/dividers.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/faqs.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/faqs.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/feature-box.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/feature-box.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/flipcard.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/flipcard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/headings.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/headings.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/misc.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/misc.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/overlay.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/overlay.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/pricing.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/pricing.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/process-steps.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/process-steps.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/promo.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/promo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/social-icons.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/social-icons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/styled-icons.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/styled-icons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/tabs.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/tabs.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/team.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/team.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/testimonials.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/testimonials.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/toggles-accordions.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/toggles-accordions.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/youtubebg.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/shortcodes/youtubebg.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/sliders.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/sliders.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/topbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/topbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/typography.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/typography.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/imports/widgets.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/imports/widgets.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/intro-fonts.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/intro-fonts.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/jquery.scrollbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/jquery.scrollbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/magnific-popup.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/magnific-popup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/onepage.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/onepage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/personality-test.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/personality-test.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/responsive-rtl-vars.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/responsive-rtl-vars.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/responsive-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/responsive-rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/responsive-vars.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/responsive-vars.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/responsive.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/select2.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/select2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/stylex.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/stylex.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/css/swiper.css" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/css/swiper.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/images/icons/iconalt.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/images/icons/iconalt.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/images/page/.picasa.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/images/page/.picasa.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/images/svg-icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/images/svg-icon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/axios.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/axios.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/cal-update.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/cal-update.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/chart-utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/chart-utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/chat-vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/chat-vue.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Datefix/static/js/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/bs-datatable.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/bs-datatable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/bs-filestyle.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/bs-filestyle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/bs-select.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/bs-select.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/bs-switches.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/bs-switches.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/datepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/datepicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/daterangepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/daterangepicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/moment.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/moment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/rangeslider.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/rangeslider.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/responsive-tabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/responsive-tabs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/select-boxes.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/select-boxes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/selectsplitter.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/selectsplitter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/star-rating.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/star-rating.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/timepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/timepicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/components/typehead.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/components/typehead.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/conditional-form.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/conditional-form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/events-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/events-data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/faq.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/faq.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/functions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/holder.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/holder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/jquery-migrate.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/jquery-migrate.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/jquery.calendario.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/jquery.calendario.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/jquery.gmap.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/jquery.gmap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/jquery.hotspot.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/jquery.hotspot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/jquery.nicescroll.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/jquery.nicescroll.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/jquery.nicescroll.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/jquery.nicescroll.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/jquery.scrollbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/jquery.scrollbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/jquery.scrollbar.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/jquery.scrollbar.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/msform.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/msform.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/personality-test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/personality-test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.bootstrap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.color.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.color.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.cookie.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.cookie.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.countdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.countdown.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.countto.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.countto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.dribbble.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.dribbble.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.fitvids.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.fitvids.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.flexslider.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.flexslider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.flickrfeed.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.flickrfeed.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.form.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.important.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.important.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.infinitescroll.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.infinitescroll.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.instagram.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.instagram.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.isotope.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.isotope.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.magnific.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.magnific.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.owlcarousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.owlcarousel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.pagetransition.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.pagetransition.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.paginate.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.paginate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.parallax.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.parallax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.piechart.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.piechart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.sticky-sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.sticky-sidebar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.superfish.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.superfish.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.swiper.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.swiper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.tabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.tabs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.textrotator.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.textrotator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.toastr.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.toastr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.twitterfeed.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.twitterfeed.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.validation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.youtube.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/plugins/jquery.youtube.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/prettify.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/prettify.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/select2.2.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/select2.2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/select2.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/select2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/vue.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -489,6 +310,8 @@
       <workItem from="1595798972619" duration="3688000" />
       <workItem from="1595851893660" duration="1250000" />
       <workItem from="1595870168988" duration="22443000" />
+      <workItem from="1595898594687" duration="1891000" />
+      <workItem from="1595964162759" duration="4073000" />
     </task>
     <servers />
   </component>

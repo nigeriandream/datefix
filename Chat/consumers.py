@@ -95,8 +95,8 @@ class ChatConsumer(AsyncConsumer):
                  "data": self.chat_data})
         if self.chat_data['function'] == 'message':
             self.chat_data['datetime'] = datetime.now()
-            self.chat_data['time'] = datetime.now().time().strftime('%I:%M %p')
-            self.chat_data['date'] = datetime.now().time().strftime('%e - %b - %Y')
+            self.chat_data['time'] = self.chat_data['datetime'].time().strftime('%I:%M %p')
+            self.chat_data['date'] = self.chat_data['datetime'].date().strftime('%e - %b - %Y')
             self.chat_data['status'] = 'sent'
             await self.save_message(self.thread_obj, self.chat_data)
             del self.chat_data['datetime']

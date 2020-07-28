@@ -110,7 +110,7 @@ def get_chat_threads(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
         chats = ChatThread.objects.filter(Q(first_user_id=request.user.id) | Q(
-            second_user_id=request.user.id)).order_by('last_message_date')
+            second_user_id=request.user.id)).order_by('-last_message_date')
         data = [{
             "chat_id": x.id,
             "chat_link": ''.join(['/chat/api/chat/', str(x.id)]),
@@ -205,11 +205,10 @@ def create_chat(request, your_id, user_id):
 
 def has_chat(user):
     no_of_chats = user.matches_()
-    chats = ChatThread.objects.filter(Q(first_user_id=user.id) | Q(
-        second_user_id=user.id)).order_by('last_message_date')
-    expired_chats = [x.id for x in chats if x.expired()]
-    if len(no_of_chats) == 2 or (len(no_of_chats) == 1 and len(expired_chats) == 1):
+    if len(no_of_chats) > 0:
+        print('has chat')
         return True
+    print('has no chat')
     return False
 
 
