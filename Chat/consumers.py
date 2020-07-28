@@ -185,8 +185,12 @@ class ChatConsumer(AsyncConsumer):
     @database_sync_to_async
     def choose(self):
         from Chat.algorithms import select_match
-        select_match(self.thread_obj, self.other_user, self.me)
-        self.chat_data['result'] = 'successful'
+        data = select_match(self.thread_obj, self.other_user, self.me)
+        try:
+            int(data)
+            self.chat_data['result'] = {'status': 'successful', 'couple_id': data}
+        except ValueError:
+            self.chat_data['result'] = {'status': 'successful', 'response': data}
 
     @database_sync_to_async
     def reject(self):
