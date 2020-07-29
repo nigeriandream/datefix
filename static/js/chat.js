@@ -80,6 +80,7 @@ $(function () {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 });
 
 const url = window.location.href.replace('http', 'ws')
@@ -103,3 +104,6 @@ socket.onmessage = (e) =>{
 =======
 });
 >>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
+=======
+});
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5

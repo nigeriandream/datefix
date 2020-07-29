@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    End Session
+{% endblock %}
+
+{% block content %}
+    {% if details %}
+        {% for item in details %}
+            <ul class="jumbotron bg-info mb-5">
+            {% for key, value in item %}
+                <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+            </ul>
+
+        {% endfor %}
+
+    {% else %}
+        <p>Your were jilted by both Chatters</p>
+    {% endif %}
+    <form method="post" action="{% url 'end_session' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-block btn-success">End Session</button>
+    </form>
+
+
+{% endblock %}

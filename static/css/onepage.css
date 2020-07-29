@@ -361,9 +361,13 @@ body.side-panel-left.side-push-panel.side-panel-open.stretched #header .containe
 	border-bottom-width: 1px;
 	font-family: 'Source Sans Pro', sans-serif;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	border-bottom-color: #000;
 =======
 >>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
+=======
+	border-bottom-color: #000;
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
 }
 
 .border-form-control::-moz-placeholder {

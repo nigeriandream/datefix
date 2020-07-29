@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Mark input boxes that gets an error on validation: */
 input.invalid {
 	background-color: #ffdddd;
@@ -13,11 +14,19 @@ input.invalid {
 input.invalid {
   background-color: #ffdddd;
 >>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
+=======
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+	background-color: #ffdddd;
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
 }
 
 /* Hide all steps by default: */
 .tab {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
 	display: none;
 }
 
@@ -37,6 +46,7 @@ button:hover {
 
 #prevBtn {
 	background-color: #bbbbbb;
+<<<<<<< HEAD
 =======
   display: none;
 }
@@ -63,6 +73,12 @@ button:hover {
 /* Make circles that indicate the steps of the form: */
 .step {
 <<<<<<< HEAD
+=======
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
 	height: 15px;
 	width: 15px;
 	margin: 0 2px;
@@ -77,6 +93,7 @@ button:hover {
 	opacity: 1;
 	width: 30px;
 	border-radius: 15px;
+<<<<<<< HEAD
 =======
   height: 15px;
   width: 15px;
@@ -91,10 +108,13 @@ button:hover {
 .step.active {
   opacity: 1;
 >>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
+=======
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
 }
 
 /* Mark the steps that are finished and valid: */
 .step.finish {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	background-color: #7e50f8;
 }
@@ -102,3 +122,7 @@ button:hover {
   background-color: #7e50f8;
 }
 >>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
+=======
+	background-color: #7e50f8;
+}
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/algorithms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/algorithms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/consumers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/templates/Chat/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/templates/Chat/chat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Datefix/static/js/chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/chat.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+        <option value="HTTP Request" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="development" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="zipChanges" value="false" />
+  </component>
+  <component name="ProjectId" id="1dKCXwJybzsU2lgqNDPzhzlrzVD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Datefix/static" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Secret" />
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Payment" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static" />
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Account\templates\Account" />
+    </key>
+  </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://127.0.0.1:8000/chat/api/encrypt/" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;message&quot;: &quot;i love my fucking country&quot;, &quot;sender&quot; : &quot;3&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://127.0.0.1:8000/chat/api/encrypt/" />
+          <option name="urlPath" value="" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;message&quot;: &quot;i love my fucking country&quot;, &quot;sender&quot; : &quot;3&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://127.0.0.1:8000/chat/api/encrypt/" />
+          <option name="urlPath" value="" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;message&quot;:  &quot;i love my fucking country&quot;, &quot;sender&quot;: &quot;3&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://127.0.0.1:8000/chat/api/encrypt/" />
+          <option name="urlPath" value="" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;message&quot;:  &quot;i love my fucking country&quot;, &quot;user_id&quot;: &quot;3&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://127.0.0.1:8000/chat/api/encrypt/" />
+          <option name="urlPath" value="" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;message&quot;:  &quot;i love my fucking country&quot;, &quot;user_id&quot;: 3}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://127.0.0.1:8000/chat/api/encrypt/" />
+          <option name="urlPath" value="" />
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;message&quot;:  &quot;i love my fucking country&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://127.0.0.1:8000/chat/api/chat/2" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://127.0.0.1:8000/chat/api/encrypt/" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="text/plain" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;message&quot;:  &quot;i love my fucking country&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://127.0.0.1:8000/chat/api/encrypt/" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;message&quot;:  &quot;i love my fucking country&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://127.0.0.1:8000/chat/api/encrypt" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&quot;message&quot;:  &quot;i love my fucking country&quot;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://127.0.0.1:8000/match/" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="application/json" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.consumers">
+    <configuration name="test#1 (1)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/Datefix/test.http" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="test#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/Payment/test.http" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="consumers" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="datefix-1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Chat" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chat/consumers.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.consumers" />
+        <item itemvalue="HTTP Request.test#1 (1)" />
+        <item itemvalue="HTTP Request.test#1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="" />
+      <created>1592164440117</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592164440117</updated>
+      <workItem from="1592164444058" duration="9355000" />
+      <workItem from="1592237267230" duration="934000" />
+      <workItem from="1592307405395" duration="2910000" />
+      <workItem from="1592319763951" duration="14308000" />
+      <workItem from="1592583301901" duration="1296000" />
+      <workItem from="1592681832745" duration="59000" />
+      <workItem from="1592681961037" duration="10000" />
+      <workItem from="1592911387108" duration="3154000" />
+      <workItem from="1593163808197" duration="7454000" />
+      <workItem from="1593241014698" duration="183000" />
+      <workItem from="1593249900767" duration="4662000" />
+      <workItem from="1593388739528" duration="17000" />
+      <workItem from="1593393099073" duration="4195000" />
+      <workItem from="1593457803079" duration="2480000" />
+      <workItem from="1593464930343" duration="12004000" />
+      <workItem from="1593481078254" duration="119000" />
+      <workItem from="1593518473717" duration="544000" />
+      <workItem from="1593535917556" duration="15179000" />
+      <workItem from="1593557884420" duration="3295000" />
+      <workItem from="1593568009002" duration="1798000" />
+      <workItem from="1593590129904" duration="6001000" />
+      <workItem from="1593620453452" duration="4751000" />
+      <workItem from="1593626119407" duration="1616000" />
+      <workItem from="1593643144670" duration="1801000" />
+      <workItem from="1593703895255" duration="381000" />
+      <workItem from="1593746731273" duration="2652000" />
+      <workItem from="1593807431926" duration="550000" />
+      <workItem from="1593959347509" duration="8923000" />
+      <workItem from="1593968326825" duration="216000" />
+      <workItem from="1593972084365" duration="627000" />
+      <workItem from="1594084879202" duration="358000" />
+      <workItem from="1594130364759" duration="16191000" />
+      <workItem from="1594219657796" duration="2843000" />
+      <workItem from="1594283711990" duration="3663000" />
+      <workItem from="1594296927001" duration="826000" />
+      <workItem from="1594301183105" duration="16671000" />
+      <workItem from="1594380221599" duration="12728000" />
+      <workItem from="1594418788805" duration="2717000" />
+      <workItem from="1594558183158" duration="3166000" />
+      <workItem from="1594798179099" duration="1741000" />
+      <workItem from="1594834307187" duration="3550000" />
+      <workItem from="1594900722144" duration="6112000" />
+      <workItem from="1595001530020" duration="3771000" />
+      <workItem from="1595024489245" duration="1505000" />
+      <workItem from="1595261886781" duration="17785000" />
+      <workItem from="1595664759518" duration="7269000" />
+      <workItem from="1595798972619" duration="3688000" />
+      <workItem from="1595851893660" duration="1250000" />
+      <workItem from="1595870168988" duration="22443000" />
+      <workItem from="1595898594687" duration="1891000" />
+      <workItem from="1595964162759" duration="4073000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595270620043">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1595270620043" />
+    <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog" timestamp="1595026013614">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1595026013614" />
+    <state x="462" y="119" key="FileChooserDialogImpl" timestamp="1593807971381">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="462" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1593807971381" />
+    <state width="1323" height="335" key="GridCell.Tab.0.bottom" timestamp="1593626037950">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="335" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593626037950" />
+    <state width="1323" height="335" key="GridCell.Tab.0.center" timestamp="1593626037949">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="335" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593626037949" />
+    <state width="1323" height="335" key="GridCell.Tab.0.left" timestamp="1593626037948">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="335" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593626037948" />
+    <state width="1323" height="335" key="GridCell.Tab.0.right" timestamp="1593626037949">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="335" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593626037949" />
+    <state x="21" y="29" width="1229" height="647" key="MultipleFileMergeDialog" timestamp="1595666856769">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="21" y="29" width="1229" height="647" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1595666856769" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1595665742997">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1595665742997" />
+    <state x="487" y="61" key="VCS.ChangeListViewerDialog" timestamp="1592326440981">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="487" y="61" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1592326440981" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1593559752535">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593559752535" />
+    <state x="480" y="152" key="git4idea.merge.GitMergeDialog" timestamp="1595666728590">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="480" y="152" key="git4idea.merge.GitMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1595666728590" />
+    <state x="415" y="152" key="git4idea.merge.GitPullDialog" timestamp="1592334026729">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="415" y="152" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1592334026729" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1593961691643">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1593961691643" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/datefix_1$consumers.coverage" NAME="consumers Coverage Results" MODIFIED="1595884584103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Chat" />
+  </component>
+</project>

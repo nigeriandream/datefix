@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import User, PersonalityTest
+from .models import User, PersonalityTest, Couple
 import json
 from .algorithms import match_user, flash, display, send_verification, get_username, get_personality, get_score
 from Chat.algorithms import create_chat
@@ -429,3 +429,13 @@ def decrypt_(message):
     user = User.objects.get(id=3)
     data = {"status": 200, "message": user.decrypt(message.encode())}
     return JsonResponse(data)
+
+
+def get_couple(request, couple_id):
+    try:
+        couple = Couple.objects.get(id=couple_id)
+        if couple.first_partner_id == request.user.id or couple.second_partner_id == request.user.id:
+            return HttpResponse(json.dumps(couple.true_details(request.user.id)))
+        return HttpResponse('You are not yet a couple')
+    except Couple.DoesNotExist:
+        return HttpResponse('No Couple exists with this ID.')
