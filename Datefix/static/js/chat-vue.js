@@ -40,6 +40,12 @@ var app = new Vue({
   //   this.disconnect(this.chat_object);
   // },
   methods: {
+    get_id(user) {
+      console.log(user);
+      this.chat_object = user;
+      this.chat_id = user.chat_id;
+      console.log(this.chat_id);
+    },
     async websocket() {
       this.socket.onclose = (e) => {
         console.log("WebSocket Disconnected", e);
@@ -69,12 +75,11 @@ var app = new Vue({
           this.messageStatus = data.status;
           console.log(this.messageStatus);
         }
-        if (
-          data.username !== this.loggedInUser &&
-          data.function === "isTyping"
-        ) {
-          this.isTyping = true;
-          console.log(this.isTyping);
+        if (data.username == this.loggedInUser && data.function === "accept") {
+          location.reload();
+        }
+        if (data.username == this.loggedInUser && data.function === "jilt") {
+          location.reload();
         }
       };
     },
@@ -144,7 +149,7 @@ var app = new Vue({
       this.activeUser = chat.username;
       let connect_thread = {
         username: this.loggedInUser,
-        chat_id: chat.chat_id,
+        chat_id: this.chat_id,
         function: "connect",
       };
       console.log("connect_thread>>>", connect_thread);
@@ -171,6 +176,7 @@ var app = new Vue({
       this.message = "";
     },
     jilt() {
+      this.connect(this.chat_object);
       let jilt_thread = {
         username: this.loggedInUser,
         chat_id: this.chat_id,
@@ -181,6 +187,7 @@ var app = new Vue({
       this.$refs.close.click();
     },
     accept() {
+      this.connect(this.chat_object);
       let accept_thread = {
         username: this.loggedInUser,
         chat_id: this.chat_id,

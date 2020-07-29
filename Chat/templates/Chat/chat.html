@@ -54,7 +54,7 @@
         <div class="az-header-message">
           <a href="app-chat.html"><i class="typcn typcn-messages"></i></a>
         </div><!-- az-header-message -->
-        <div class="dropdown az-header-notification">
+        <!-- <div class="dropdown az-header-notification">
           <a href="" class="new"><i class="typcn typcn-bell"></i></a>
           <div class="dropdown-menu">
             <div class="az-dropdown-header mg-b-20 d-sm-none">
@@ -67,35 +67,46 @@
                 <div class="az-img-user"><img src="https://via.placeholder.com/500x500" alt=""></div>
                 <div class="media-body">
                   <p>Congratulate <strong>Socrates Itumay</strong> for work anniversaries</p>
-                  <span>Mar 15 12:32pm</span>
-                </div><!-- media-body -->
-              </div><!-- media -->
-              <div class="media new">
+                  <span>Mar 15 12:32pm</span> -->
+                <!-- </div> -->
+                <!-- media-body -->
+              <!-- </div> -->
+              <!-- media -->
+              <!-- <div class="media new">
                 <div class="az-img-user online"><img src="https://via.placeholder.com/500x500" alt=""></div>
                 <div class="media-body">
                   <p><strong>Joyce Chua</strong> just created a new blog post</p>
                   <span>Mar 13 04:16am</span>
-                </div><!-- media-body -->
-              </div><!-- media -->
-              <div class="media">
+                </div> -->
+                <!-- media-body -->
+              <!-- </div> -->
+              <!-- media -->
+              <!-- <div class="media">
                 <div class="az-img-user"><img src="https://via.placeholder.com/500x500" alt=""></div>
                 <div class="media-body">
                   <p><strong>Althea Cabardo</strong> just created a new blog post</p>
                   <span>Mar 13 02:56am</span>
-                </div><!-- media-body -->
-              </div><!-- media -->
-              <div class="media">
+                </div> -->
+                <!-- media-body -->
+              <!-- </div> -->
+              <!-- media -->
+              <!-- <div class="media">
                 <div class="az-img-user"><img src="https://via.placeholder.com/500x500" alt=""></div>
                 <div class="media-body">
                   <p><strong>Adrian Monino</strong> added new comment on your photo</p>
-                  <span>Mar 12 10:40pm</span>
-                </div><!-- media-body -->
-              </div><!-- media -->
-            </div><!-- az-notification-list -->
-            <div class="dropdown-footer"><a href="">View All Notifications</a></div>
-          </div><!-- dropdown-menu -->
-        </div><!-- az-header-notification -->
-        <div class="dropdown az-profile-menu">
+                  <span>Mar 12 10:40pm</span> -->
+                <!-- </div> -->
+                <!-- media-body -->
+              <!-- </div> -->
+              <!-- media -->
+            <!-- </div> -->
+            <!-- az-notification-list -->
+            <!-- <div class="dropdown-footer"><a href="">View All Notifications</a></div> -->
+          <!-- </div> -->
+          <!-- dropdown-menu -->
+        <!-- </div> -->
+        <!-- az-header-notification -->
+        <!-- <div class="dropdown az-profile-menu">
           <a href="" class="az-img-user"><img src="https://via.placeholder.com/500x500" alt=""></a>
           <div class="dropdown-menu">
             <div class="az-dropdown-header d-sm-none">
@@ -103,22 +114,28 @@
             </div>
             <div class="az-header-profile">
               <div class="az-img-user">
-                <img src="https://via.placeholder.com/500x500" alt="">
-              </div><!-- az-img-user -->
-              <h6>Aziana Pechon</h6>
-              <span>Premium Member</span>
-            </div><!-- az-header-profile -->
+                <img src="https://via.placeholder.com/500x500" alt=""> -->
+              <!-- </div> -->
+              <!-- az-img-user -->
+              <!-- <h6>Aziana Pechon</h6>
+              <span>Premium Member</span> -->
+            <!-- </div> -->
+            <!-- az-header-profile -->
 
-            <a href="" class="dropdown-item"><i class="typcn typcn-user-outline"></i> My Profile</a>
+            <!-- <a href="" class="dropdown-item"><i class="typcn typcn-user-outline"></i> My Profile</a>
             <a href="" class="dropdown-item"><i class="typcn typcn-edit"></i> Edit Profile</a>
             <a href="" class="dropdown-item"><i class="typcn typcn-time"></i> Activity Logs</a>
             <a href="" class="dropdown-item"><i class="typcn typcn-cog-outline"></i> Account Settings</a>
-            <a href="page-signin.html" class="dropdown-item"><i class="typcn typcn-power-outline"></i> Sign Out</a>
-          </div><!-- dropdown-menu -->
-        </div>
-      </div><!-- az-header-right -->
-    </div><!-- container -->
-  </div><!-- az-header -->
+            <a href="page-signin.html" class="dropdown-item"><i class="typcn typcn-power-outline"></i> Sign Out</a> -->
+          <!-- </div> -->
+          <!-- dropdown-menu -->
+        <!-- </div> -->
+      </div>
+      <!-- az-header-right -->
+    </div>
+    <!-- container -->
+  </div>
+  <!-- az-header -->
   <div class="az-content az-content-app pd-b-0" id="app">
     <div class="container">
       <div class="az-content-left az-content-left-chat">
@@ -235,13 +252,13 @@
             </button>
           </div>
           <div class="modal-body">
-            <h6>You have been matched with the following contact(s) for over 7 days. Please accept or decline one.</h6>
+            <h6>You have been matched with the following contact(s) for over 7 days. Please accept or jilt.</h6>
             <div v-for="(user, index) in expiredUsers" :key="index">
               <div class="d-flex justify-content-between p-4">
                 <h5>[[user.first_name]] [[user.last_name]]</h5>
                 <div>
-                    <i class="fas fa-check-square text-success fa-2x ml-2" id="accept__icon" data-toggle="modal" data-target="#acceptModal" title="Accept" ></i>
-                    <i class="icon ion-ios-close-circle-outline text-danger fa-2x ml-2" id="decline__icon" ></i>
+                    <i class="fas fa-check-square text-success fa-2x ml-2" id="accept__icon" data-toggle="modal" data-target="#acceptModal" title="Accept" @click="get_id(user)" ></i>
+                    <i class="icon ion-ios-close-circle-outline text-danger fa-2x ml-2" id="jilt__icon" data-toggle="modal" data-target="#jiltModal" title="Jilt" @click="get_id(user)" ></i>
                 </div>
               </div> 
             </div>
