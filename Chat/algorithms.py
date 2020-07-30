@@ -24,44 +24,42 @@ def select_match(chat_thread, user, you):
             try:
                 Couple.objects.get(first_partner_id=user.id, second_partner_id=you.id)
             except Couple.DoesNotExist:
-                couple = Couple.objects.create(first_partner_id=chat_thread.first_user.id,
-                                               second_partner_id=chat_thread.second_user.id,
+                couple = Couple.objects.create(first_partner_id=chat_thread.first_user_id,
+                                               second_partner_id=chat_thread.second_user_id,
                                                datetime=datetime.now(), couple_name=chat_thread.chat_name())
                 for i in [you, user]:
                     couple_list = json.loads(i.couple_ids)
-                    couple_list.append(couple.id)
-                    i.couple_ids = json.dumps(couple_list)
-                    i.save()
+                    if couple.id not in couple_list:
+                        couple_list.append(couple.id)
+                        i.couple_ids = json.dumps(couple_list)
+                        i.save()
 
         end_session(chat_thread, user, you)
-        if position == 'first':
+        try:
             couple = Couple.objects.get(first_partner_id=you.id, second_partner_id=user.id)
             return couple.id
-
-        if position == 'second':
+        except Couple.DoesNotExist:
             couple = Couple.objects.get(first_partner_id=user.id, second_partner_id=you.id)
             return couple.id
     return f" You have accepted {user.username}. Awaiting Response from {user.username}"
 
 
 def end_session(chat_thread, user, you):
-    list_ = you.matches_()
-    try:
-        list_.remove(user.id)
-        you.matches = json.dumps(list_)
-        you.session = you.session - 1
-        you.save()
-    except ValueError:
-        pass
-
-    list_ = user.matches_()
-    try:
-        list_.remove(you.id)
-        user.matches = json.dumps(list_)
-        user.session = user.session - 1
-        user.save()
-    except ValueError:
-        pass
+    for i in [user, you]:
+        user_ = chat_thread.get_receiver(i)
+        print(user_, user_.matches, user_.session)
+        list_ = i.matches_()
+        try:
+            print("im here p")
+            list_.remove(int(user_.id))
+            i.matches = json.dumps(list_)
+            if i.session == 2:
+                i.session = 1
+            elif i.session == 1:
+                i.session = 0
+            i.save()
+        except ValueError:
+            pass
 
     email_chat(chat_thread, user)
     email_chat(chat_thread, you)
@@ -167,6 +165,17 @@ def get_profile(request, user_id):
                            'threads': user.chatThreads()})
 
 
+def notify_user(chat_thread, user):
+    other_user = chat_thread.get_receiver(user)
+    from django.core.mail import EmailMessage
+    message = EmailMessage(f'Chat Session Between You and {other_user.username} from Datefix.com',
+                           f'Hi {user.username},  This message indicates that the chat session between the two of you '
+                           f'has formally began.. '
+                           ''
+                           'Datefix Team.', 'admin@datefix.com', [user.email])
+    message.send(True)
+
+
 def create_chat(request, your_id, user_id):
     if int(request.user.id) == int(user_id):
         return 'You Cannot Chat With Yourself.'
@@ -179,18 +188,23 @@ def create_chat(request, your_id, user_id):
             return 'This Chat Thread Object Already Exists'
         except ChatThread.DoesNotExist:
             from Datefix.algorithms import get_key
-            user = User.objects.get(id=your_id)
-            if user.session == -1:
-                user.session = 1
-            else:
-                user.session = int(user.session) + 1
-            user.save()
-            user = User.objects.get(id=user_id)
-            if user.session == -1:
-                user.session = 1
-            else:
-                user.session = int(user.session) + 1
-            user.save()
+            for i in [user_id, your_id]:
+                user = User.objects.get(id=i)
+                other_id = 0
+                if i == user_id:
+                    other_id = your_id
+
+                if i == your_id:
+                    other_id = user_id
+                if user.session == -1:
+                    user.session = 1
+                elif user.session == 1:
+                    user.session = 2
+                if other_id not in user.matches_():
+                    list_ = user.matches_()
+                    list_.append(int(other_id))
+                    user.matches = json.dumps(list_)
+                user.save()
             chat = ChatThread()
             chat.first_user_id = your_id
             chat.second_user_id = user_id
@@ -198,6 +212,9 @@ def create_chat(request, your_id, user_id):
             chat.expiry_date = datetime.now() + timedelta(days=7)
             chat.date_created = datetime.now()
             chat.save()
+            for i in [your_id, user_id]:
+                user = User.objects.get(id=int(i))
+                notify_user(chat, user)
             return {"status": 200, "message": f'A Chat Thread Object has been created for you and the '
                                               f'user with ID {user_id}',
                     "data": get_chat(chat.id, user=request.user)}
@@ -210,8 +227,3 @@ def has_chat(user):
         return True
     print('has no chat')
     return False
-
-
-def session_ended(user):
-    users = User.objects.filter(Q(jilted_matches__contains=f"[{user.id},") |
-                                Q(jilted_matches__contains=f',{user.id}]'))
