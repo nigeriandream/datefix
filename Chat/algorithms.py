@@ -24,21 +24,21 @@ def select_match(chat_thread, user, you):
             try:
                 Couple.objects.get(first_partner_id=user.id, second_partner_id=you.id)
             except Couple.DoesNotExist:
-                couple = Couple.objects.create(first_partner_id=chat_thread.first_user.id,
-                                               second_partner_id=chat_thread.second_user.id,
+                couple = Couple.objects.create(first_partner_id=chat_thread.first_user_id,
+                                               second_partner_id=chat_thread.second_user_id,
                                                datetime=datetime.now(), couple_name=chat_thread.chat_name())
                 for i in [you, user]:
                     couple_list = json.loads(i.couple_ids)
-                    couple_list.append(couple.id)
-                    i.couple_ids = json.dumps(couple_list)
-                    i.save()
+                    if couple.id not in couple_list:
+                        couple_list.append(couple.id)
+                        i.couple_ids = json.dumps(couple_list)
+                        i.save()
 
         end_session(chat_thread, user, you)
-        if position == 'first':
+        try:
             couple = Couple.objects.get(first_partner_id=you.id, second_partner_id=user.id)
             return couple.id
-
-        if position == 'second':
+        except Couple.DoesNotExist:
             couple = Couple.objects.get(first_partner_id=user.id, second_partner_id=you.id)
             return couple.id
     return f" You have accepted {user.username}. Awaiting Response from {user.username}"
@@ -49,7 +49,10 @@ def end_session(chat_thread, user, you):
     try:
         list_.remove(user.id)
         you.matches = json.dumps(list_)
-        you.session = you.session - 1
+        if you.session == 2:
+            you.session = 1
+        elif you.session == 1:
+            you.session = 0
         you.save()
     except ValueError:
         pass
@@ -58,7 +61,10 @@ def end_session(chat_thread, user, you):
     try:
         list_.remove(you.id)
         user.matches = json.dumps(list_)
-        user.session = user.session - 1
+        if user.session == 2:
+            user.session = 1
+        elif user.session == 1:
+            user.session = 0
         user.save()
     except ValueError:
         pass
@@ -182,14 +188,22 @@ def create_chat(request, your_id, user_id):
             user = User.objects.get(id=your_id)
             if user.session == -1:
                 user.session = 1
-            else:
-                user.session = int(user.session) + 1
+            elif user.session == 1:
+                user.session = 2
+            if user_id not in user.matches_():
+                list_ = user.matches_()
+                list_.append(user_id)
+                user.matches = json.dumps(list_)
             user.save()
             user = User.objects.get(id=user_id)
             if user.session == -1:
                 user.session = 1
-            else:
-                user.session = int(user.session) + 1
+            elif user.session == 1:
+                user.session = 2
+            if your_id not in user.matches_():
+                list_ = user.matches_()
+                list_.append(your_id)
+                user.matches = json.dumps(list_)
             user.save()
             chat = ChatThread()
             chat.first_user_id = your_id
