@@ -41,7 +41,8 @@ def delete_msg(request, chat_id, id_):
 
 def create_chat_api(request, user_id):
     from Chat.algorithms import create_chat
-    return HttpResponse(create_chat(request, request.user.id, user_id))
+    import json
+    return HttpResponse(json.dumps(create_chat(request, request.user.id, user_id)).replace("\\", ""))
 
 
 def test_jilt(request, chat_id):
@@ -91,4 +92,3 @@ def session_end(request):
         user.couple_ids = '[]'
         user.save()
         return redirect('dashboard')
-
