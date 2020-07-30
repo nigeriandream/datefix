@@ -7,36 +7,80 @@ from .models import ChatThread
 
 
 def select_match(chat_thread, user, you):
-    if chat_thread.position(user) == 'first':
+    position = chat_thread.position(user)
+    if position == 'first':
         chat_thread.date_first = True
+        chat_thread.save()
 
-    if chat_thread.position(user) == 'second':
+    if position == 'second':
         chat_thread.date_second = True
+        chat_thread.save()
 
-    if (chat_thread.position(user) == 'first' and chat_thread.date_second) or (
-            chat_thread.position(user) == 'second' and chat_thread.date_first):
+    if (position == 'first' and chat_thread.date_second) or (
+            position == 'second' and chat_thread.date_first):
         try:
-            Couple.objects.get(couple_name=chat_thread.chat_name())
+            Couple.objects.get(first_partner_id=you.id, second_partner_id=user.id)
         except Couple.DoesNotExist:
-            Couple.objects.create(first_partner_id=chat_thread.first_user.id,
-                                  second_partner_id=chat_thread.second_user.id,
-                                  datetime=datetime.now(), couple_name=chat_thread.chat_name())
-        # send email to each other
+            try:
+                Couple.objects.get(first_partner_id=user.id, second_partner_id=you.id)
+            except Couple.DoesNotExist:
+                couple = Couple.objects.create(first_partner_id=chat_thread.first_user_id,
+                                               second_partner_id=chat_thread.second_user_id,
+                                               datetime=datetime.now(), couple_name=chat_thread.chat_name())
+                for i in [you, user]:
+                    couple_list = json.loads(i.couple_ids)
+                    if couple.id not in couple_list:
+                        couple_list.append(couple.id)
+                        i.couple_ids = json.dumps(couple_list)
+                        i.save()
+
         end_session(chat_thread, user, you)
-    return
+        try:
+            couple = Couple.objects.get(first_partner_id=you.id, second_partner_id=user.id)
+            return couple.id
+        except Couple.DoesNotExist:
+            couple = Couple.objects.get(first_partner_id=user.id, second_partner_id=you.id)
+            return couple.id
+    return f" You have accepted {user.username}. Awaiting Response from {user.username}"
 
 
 def end_session(chat_thread, user, you):
-    list_ = you.matches_()
-    list_.remove(user.id)
-    you.matches = json.dumps(list_)
-    you.save()
-    list_ = user.matches_()
-    list_.remove(you.id)
-    user.matches = json.dumps(list_)
-    user.save()
+    for i in [user, you]:
+        user_ = chat_thread.get_receiver(i)
+        print(user_, user_.matches, user_.session)
+        list_ = i.matches_()
+        try:
+            print("im here p")
+            list_.remove(int(user_.id))
+            i.matches = json.dumps(list_)
+            if i.session == 2:
+                i.session = 1
+            elif i.session == 1:
+                i.session = 0
+            i.save()
+        except ValueError:
+            pass
+
+    email_chat(chat_thread, user)
+    email_chat(chat_thread, you)
     chat_thread.delete()
     return
+
+
+def email_chat(chat_thread, user):
+    other_user = chat_thread.get_receiver(user)
+    user_chat = chat_thread.get_chat_file(user)
+    from django.core.mail import EmailMessage
+    message = EmailMessage(f'Chat Text File Between You and {user.username} from Datefix.com',
+                           f'Hi {other_user.username},  This message indicates that the chat session between the two of you '
+                           f'is formally over. '
+                           'Attached to this email address is a .txt file of the chat between the two of you. '
+                           ''
+                           'Datefix Team.', 'admin@datefix.com', [user.email])
+    message.attach_file(f'{user_chat.name}', 'text/plain')
+    message.send(True)
+    import os
+    os.remove(f'{user_chat.name}')
 
 
 def reject(you, user):
@@ -51,7 +95,6 @@ def reject(you, user):
 def jilt(chat, you, user):
     reject(you, user)
     reject(user, you)
-    # send email to each other
     end_session(chat, user, you)
     return
 
@@ -65,11 +108,12 @@ def get_chat_threads(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
         chats = ChatThread.objects.filter(Q(first_user_id=request.user.id) | Q(
-            second_user_id=request.user.id)).order_by('last_message_date')
+            second_user_id=request.user.id)).order_by('-last_message_date')
         data = [{
             "chat_id": x.id,
             "chat_link": ''.join(['/chat/api/chat/', str(x.id)]),
             "username": x.get_receiver(user).username,
+            "status": x.get_receiver(user).status,
             "first_name": x.get_receiver(user).first_name,
             "last_name": x.get_receiver(user).last_name,
             "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
@@ -117,10 +161,24 @@ def get_profile(request, user_id):
         return json.dumps({'username': user.username,
                            'first_name': user.first_name, 'last_name': user.last_name,
                            'profile_pic': profile_picture(user.profile_picture),
-                           'status': user.status})
+                           'status': user.status,
+                           'threads': user.chatThreads()})
+
+
+def notify_user(chat_thread, user):
+    other_user = chat_thread.get_receiver(user)
+    from django.core.mail import EmailMessage
+    message = EmailMessage(f'Chat Session Between You and {other_user.username} from Datefix.com',
+                           f'Hi {user.username},  This message indicates that the chat session between the two of you '
+                           f'has formally began.. '
+                           ''
+                           'Datefix Team.', 'admin@datefix.com', [user.email])
+    message.send(True)
 
 
 def create_chat(request, your_id, user_id):
+    if int(request.user.id) == int(user_id):
+        return 'You Cannot Chat With Yourself.'
     try:
         ChatThread.objects.get(first_user_id=your_id, second_user_id=user_id)
         return 'This Chat Thread Object Already Exists'
@@ -130,6 +188,23 @@ def create_chat(request, your_id, user_id):
             return 'This Chat Thread Object Already Exists'
         except ChatThread.DoesNotExist:
             from Datefix.algorithms import get_key
+            for i in [user_id, your_id]:
+                user = User.objects.get(id=i)
+                other_id = 0
+                if i == user_id:
+                    other_id = your_id
+
+                if i == your_id:
+                    other_id = user_id
+                if user.session == -1:
+                    user.session = 1
+                elif user.session == 1:
+                    user.session = 2
+                if other_id not in user.matches_():
+                    list_ = user.matches_()
+                    list_.append(int(other_id))
+                    user.matches = json.dumps(list_)
+                user.save()
             chat = ChatThread()
             chat.first_user_id = your_id
             chat.second_user_id = user_id
@@ -137,6 +212,9 @@ def create_chat(request, your_id, user_id):
             chat.expiry_date = datetime.now() + timedelta(days=7)
             chat.date_created = datetime.now()
             chat.save()
+            for i in [your_id, user_id]:
+                user = User.objects.get(id=int(i))
+                notify_user(chat, user)
             return {"status": 200, "message": f'A Chat Thread Object has been created for you and the '
                                               f'user with ID {user_id}',
                     "data": get_chat(chat.id, user=request.user)}
@@ -144,10 +222,8 @@ def create_chat(request, your_id, user_id):
 
 def has_chat(user):
     no_of_chats = user.matches_()
-    chats = ChatThread.objects.filter(Q(first_user_id=user.id) | Q(
-        second_user_id=user.id)).order_by('last_message_date')
-    expired_chats = [x.id for x in chats if x.expired()]
-    if len(no_of_chats) == 2 or (len(no_of_chats) == 1 and len(expired_chats) == 1):
+    if len(no_of_chats) > 0:
+        print('has chat')
         return True
+    print('has no chat')
     return False
-

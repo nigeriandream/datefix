@@ -80,22 +80,3 @@ $(function () {
 
 
 });
-
-const url = window.location.href.replace('http', 'ws')
-const socket = new WebSocket(url)
-socket.onclose = (e)=>{
-  console.log('WebSocket Disconnected', e)
-}
-
-socket.onopen = (e) =>{
-  console.log('WebSocket Connected', e)
-
-}
-
-socket.onerror = (e) =>{
-  console.log('WebSocket Error', e)
-}
-
-socket.onmessage = (e) =>{
-  console.log('WebSocket received message', e)
-}

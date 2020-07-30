@@ -1,3 +1,4 @@
+
 $(function () {
   'use strict'
 
@@ -81,26 +82,28 @@ $(function () {
 
 });
 
-const url = window.location.href.replace('http', 'ws')
-const socket = new WebSocket(url)
-socket.onclose = (e)=>{
-  let data = {}
-  data.username = 'Louisane'
-  data.status = 'Offline'
-  data.function = 'disconnect'
-  socket.send(JSON.stringify(data))
-  console.log('WebSocket Disconnected', e)
-}
-
-socket.onopen = (e) =>{
-  console.log('WebSocket Connected', e)
-
-}
-
-socket.onerror = (e) =>{
-  console.log('WebSocket Error', e)
-}
-
-socket.onmessage = (e) =>{
-  console.log('WebSocket received message', e)
-}
+// const url = window.location.href.replace('http', 'ws')
+// const socket = new WebSocket(url)
+// socket.onclose = (e)=>{
+//   console.log('WebSocket Disconnected', e)
+// }
+//
+// socket.onopen = (e) =>{
+//   console.log('WebSocket Connected', e)
+//   const user = document.getElementById('user').classList[1]
+//   let data = {}
+//   data.username = user
+//   data.function = 'login'
+//   data.threads = [2]
+//   socket.send(JSON.stringify(data))
+//
+// }
+//
+// socket.onerror = (e) =>{
+//   console.log('WebSocket Error', e)
+// }
+//
+// socket.onmessage = (e) =>{
+//   console.log('WebSocket received message', e)
+//
+// }

@@ -30,5 +30,6 @@ urlpatterns = [
     path('personality_test/submit/', personality, name='submit_test'),
     path('personality_test/result/', test_result, name="test_result"),
     path('logout/', logout, name='logout'),
+    path('api/get_couple/<int:couple_id>/', get_couple, name="get_couple"),
 
 ]

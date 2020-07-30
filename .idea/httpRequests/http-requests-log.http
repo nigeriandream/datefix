@@ -1,0 +1,188 @@
+POST http://127.0.0.1:8000/chat/api/encrypt/
+Content-Type: application/json
+
+{"message": "i love my fucking country", "sender" : "3"}
+
+<> 2020-07-01T065057.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+Content-Type: application/json
+
+{"message": "i love my fucking country", "sender" : "3"}
+
+<> 2020-07-01T065040.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+Content-Type: application/json
+
+{"message": "i love my fucking country", "sender" : "3"}
+
+<> 2020-07-01T064923.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message": "i love my fucking country", "sender" : "3"}
+
+<> 2020-07-01T064823.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message": "i love my fucking country", "sender" : "3"}
+
+<> 2020-07-01T064814.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message": "i love my fucking country", "sender" : "3"}
+
+<> 2020-07-01T064811.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message":  "i love my fucking country", "sender": "3"}
+
+<> 2020-07-01T064738.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message":  "i love my fucking country", "sender": "3"}
+
+<> 2020-07-01T064642.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message":  "i love my fucking country", "user_id": "3"}
+
+<> 2020-07-01T064515.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message":  "i love my fucking country", "user_id": 3}
+
+<> 2020-07-01T064424.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message":  "i love my fucking country", "user_id": 3}
+
+<> 2020-07-01T064313.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message":  "i love my fucking country", "user_id": 3}
+
+<> 2020-07-01T064257.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message":  "i love my fucking country"}
+
+<> 2020-07-01T064029.500.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message":  "i love my fucking country"}
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message":  "i love my fucking country"}
+
+###
+
+GET http://127.0.0.1:8000/chat/api/chat/2
+
+<> 2020-07-01T063937.200.html
+
+###
+
+GET http://127.0.0.1:8000/chat/api/chat/2
+
+<> 2020-07-01T063740.200.html
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+
+{"message":  "i love my fucking country"}
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+Content-Type: text/plain
+
+{"message":  "i love my fucking country"}
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+Content-Type: application/json
+
+{"message":  "i love my fucking country"}
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+Content-Type: application/json
+
+{"message":  "i love my fucking country"}
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+Content-Type: application/json
+
+{"message":  "i love my fucking country"}
+
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt
+Content-Type: application/json
+
+{"message":  "i love my fucking country"}
+
+<> 2020-07-01T063401.500.html
+
+###
+
+GET http://127.0.0.1:8000/match/
+Accept: application/json
+
+<> 2020-06-30T010836.500.html
+
+###
+
+GET http://127.0.0.1:8000/match/
+Accept: application/json
+
+<> 2020-06-30T010739.500.html
+
+###
+

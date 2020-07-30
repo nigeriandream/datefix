@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import User, PersonalityTest
+from .models import User, PersonalityTest, Couple
 import json
 from .algorithms import match_user, flash, display, send_verification, get_username, get_personality, get_score
 from Chat.algorithms import create_chat
@@ -57,6 +57,9 @@ def logout(request):
                   f"on {datetime.now().date().strftime('%e - %b - %Y')}."
     user.save()
     auth.logout(request)
+    if '_logout' in request.session:
+        del request.session['_logout']
+        return HttpResponse('ok')
     return redirect('home')
 
 
@@ -136,7 +139,7 @@ def results(request):
             if len(match_comp) == 1:
                 verb = 'have'
             request.session['message'] = f'{"and ".join(match_comp)} {verb} complete matches, so choose another.'
-            request.session['staus'] = 'info'
+            request.session['status'] = 'info'
             return redirect('results')
         if len(match_comp) == 0:
             for i in selected:
@@ -144,16 +147,11 @@ def results(request):
                 user.successful_matches = json.dumps(success)
                 user.matches = json.dumps(selected)
                 user.save()
-                # add user to match chatters
-                user_ = user.objects.get(id=int(i))
-                match_list = json.loads(user_.matches)
-                match_list.append(user.id)
-                user_.matches = json.dumps(match_list)
-                user_.save()
-                create_chat(request, user.id, user_.id)
-                # send notification to both partners
+                create_chat(request, user.id, int(i))
                 selected.remove(i)
                 return redirect('chatroom')
+
+
 
 
 # signup verified
@@ -426,3 +424,13 @@ def decrypt_(message):
     user = User.objects.get(id=3)
     data = {"status": 200, "message": user.decrypt(message.encode())}
     return JsonResponse(data)
+
+
+def get_couple(request, couple_id):
+    try:
+        couple = Couple.objects.get(id=couple_id)
+        if couple.first_partner_id == request.user.id or couple.second_partner_id == request.user.id:
+            return HttpResponse(json.dumps(couple.true_details(request.user.id)))
+        return HttpResponse('You are not yet a couple')
+    except Couple.DoesNotExist:
+        return HttpResponse('No Couple exists with this ID.')

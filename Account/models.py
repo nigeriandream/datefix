@@ -23,12 +23,12 @@ class User(AbstractUser):
     jilted_matches = models.TextField(default='[]')
     notification = models.TextField(default='[]')
     profile_changed = models.BooleanField(default=False)
-    dating = models.BooleanField(default=False)
+    couple_ids = models.CharField(max_length=16, default='[]')
     payed = models.BooleanField(default=False)
     secret = models.BinaryField(default=get_key(os.urandom(16).__str__()))
-    min_score = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    session = models.IntegerField(default=-1)
     verified = models.BooleanField(default=False)
-    status = models.CharField(max_length=32, default='Offline')
+    status = models.CharField(max_length=64, default='Offline')
 
     def successful_list(self):
         if self.successful_matches is None or self.successful_matches == '':
@@ -121,12 +121,38 @@ class User(AbstractUser):
         except PersonalityTest.DoesNotExist:
             return []
 
+    def chatThreads(self):
+        from Chat.models import ChatThread
+        threads = ChatThread.objects.filter(Q(first_user_id=self.id) | Q(second_user_id=self.id))
+        return list(set([x.id for x in threads]))
+
 
 class Couple(models.Model):
     first_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match1')
     second_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match2')
     couple_name = models.CharField(max_length=30, default='')
     datetime = models.DateTimeField()
+
+    def true_details(self, user_id):
+        user = None
+        if self.first_partner_id == user_id:
+            user = User.objects.get(id=self.second_partner_id)
+        if self.second_partner_id == user_id:
+            user = User.objects.get(id=self.first_partner_id)
+        if user is None:
+            return None
+        else:
+            user_data = json.loads(user.user_data)
+            try:
+                data = {"firstName": user.first_name,
+                        "lastName": user.last_name, "phone": user.phone, "email": user.email,
+                        "residential_address": f"{user_data['residence-lga']}, {user_data['residence-state']}",
+                        "origin_address": f"{user_data['origin-lga']}, {user_data['origin-state']}"}
+            except KeyError:
+                data = {"firstName": user.first_name,
+                        "lastName": user.last_name, "phone": user.phone, "email": user.email}
+
+            return data
 
 
 class Notification(models.Model):
