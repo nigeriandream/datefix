@@ -75,11 +75,12 @@ class ChatConsumer(AsyncConsumer):
                 self.channel_name
             )
             await self.set_user_status('Online')
-
+            self.chat_data['chat_room'] = chat_room
             await self.channel_layer.group_send(
                 self.chat_room,
                 {"type": "send_message",
                  "data": self.chat_data})
+
         if self.chat_data['function'] == 'disconnect':
             await self.set_user_status('Offline')
             await self.channel_layer.group_send(
@@ -128,13 +129,13 @@ class ChatConsumer(AsyncConsumer):
         if self.chat_data['function'] == 'jilt':
             await self.reject()
             await self.channel_layer.group_send(
-                self.chat_room,
+                self.chat_data['chat_room'],
                 {"type": "send_message",
                  "data": self.chat_data})
         if self.chat_data['function'] == 'accept':
             await self.choose()
             await self.channel_layer.group_send(
-                self.chat_room,
+                self.chat_data['chat_room'],
                 {"type": "send_message",
                  "data": self.chat_data})
 
