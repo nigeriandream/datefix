@@ -92,4 +92,3 @@ def session_end(request):
         user.couple_ids = '[]'
         user.save()
         return redirect('dashboard')
-

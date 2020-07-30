@@ -139,7 +139,7 @@ def results(request):
             if len(match_comp) == 1:
                 verb = 'have'
             request.session['message'] = f'{"and ".join(match_comp)} {verb} complete matches, so choose another.'
-            request.session['staus'] = 'info'
+            request.session['status'] = 'info'
             return redirect('results')
         if len(match_comp) == 0:
             for i in selected:
@@ -147,16 +147,11 @@ def results(request):
                 user.successful_matches = json.dumps(success)
                 user.matches = json.dumps(selected)
                 user.save()
-                # add user to match chatters
-                user_ = user.objects.get(id=int(i))
-                match_list = json.loads(user_.matches)
-                match_list.append(user.id)
-                user_.matches = json.dumps(match_list)
-                user_.save()
-                create_chat(request, user.id, user_.id)
-                # send notification to both partners
+                create_chat(request, user.id, int(i))
                 selected.remove(i)
                 return redirect('chatroom')
+
+
 
 
 # signup verified

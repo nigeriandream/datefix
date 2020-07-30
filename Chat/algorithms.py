@@ -165,6 +165,17 @@ def get_profile(request, user_id):
                            'threads': user.chatThreads()})
 
 
+def notify_user(chat_thread, user):
+    other_user = chat_thread.get_receiver(user)
+    from django.core.mail import EmailMessage
+    message = EmailMessage(f'Chat Session Between You and {other_user.username} from Datefix.com',
+                           f'Hi {user.username},  This message indicates that the chat session between the two of you '
+                           f'has formally began.. '
+                           ''
+                           'Datefix Team.', 'admin@datefix.com', [user.email])
+    message.send(True)
+
+
 def create_chat(request, your_id, user_id):
     if int(request.user.id) == int(user_id):
         return 'You Cannot Chat With Yourself.'
@@ -201,6 +212,9 @@ def create_chat(request, your_id, user_id):
             chat.expiry_date = datetime.now() + timedelta(days=7)
             chat.date_created = datetime.now()
             chat.save()
+            for i in [your_id, user_id]:
+                user = User.objects.get(id=int(i))
+                notify_user(chat, user)
             return {"status": 200, "message": f'A Chat Thread Object has been created for you and the '
                                               f'user with ID {user_id}',
                     "data": get_chat(chat.id, user=request.user)}
@@ -213,8 +227,3 @@ def has_chat(user):
         return True
     print('has no chat')
     return False
-
-
-def session_ended(user):
-    users = User.objects.filter(Q(jilted_matches__contains=f"[{user.id},") |
-                                Q(jilted_matches__contains=f',{user.id}]'))
