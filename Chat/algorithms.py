@@ -45,29 +45,21 @@ def select_match(chat_thread, user, you):
 
 
 def end_session(chat_thread, user, you):
-    list_ = you.matches_()
-    try:
-        list_.remove(user.id)
-        you.matches = json.dumps(list_)
-        if you.session == 2:
-            you.session = 1
-        elif you.session == 1:
-            you.session = 0
-        you.save()
-    except ValueError:
-        pass
-
-    list_ = user.matches_()
-    try:
-        list_.remove(you.id)
-        user.matches = json.dumps(list_)
-        if user.session == 2:
-            user.session = 1
-        elif user.session == 1:
-            user.session = 0
-        user.save()
-    except ValueError:
-        pass
+    for i in [user, you]:
+        user_ = chat_thread.get_receiver(i)
+        print(user_, user_.matches, user_.session)
+        list_ = i.matches_()
+        try:
+            print("im here p")
+            list_.remove(int(user_.id))
+            i.matches = json.dumps(list_)
+            if i.session == 2:
+                i.session = 1
+            elif i.session == 1:
+                i.session = 0
+            i.save()
+        except ValueError:
+            pass
 
     email_chat(chat_thread, user)
     email_chat(chat_thread, you)
@@ -185,26 +177,23 @@ def create_chat(request, your_id, user_id):
             return 'This Chat Thread Object Already Exists'
         except ChatThread.DoesNotExist:
             from Datefix.algorithms import get_key
-            user = User.objects.get(id=your_id)
-            if user.session == -1:
-                user.session = 1
-            elif user.session == 1:
-                user.session = 2
-            if user_id not in user.matches_():
-                list_ = user.matches_()
-                list_.append(user_id)
-                user.matches = json.dumps(list_)
-            user.save()
-            user = User.objects.get(id=user_id)
-            if user.session == -1:
-                user.session = 1
-            elif user.session == 1:
-                user.session = 2
-            if your_id not in user.matches_():
-                list_ = user.matches_()
-                list_.append(your_id)
-                user.matches = json.dumps(list_)
-            user.save()
+            for i in [user_id, your_id]:
+                user = User.objects.get(id=i)
+                other_id = 0
+                if i == user_id:
+                    other_id = your_id
+
+                if i == your_id:
+                    other_id = user_id
+                if user.session == -1:
+                    user.session = 1
+                elif user.session == 1:
+                    user.session = 2
+                if other_id not in user.matches_():
+                    list_ = user.matches_()
+                    list_.append(int(other_id))
+                    user.matches = json.dumps(list_)
+                user.save()
             chat = ChatThread()
             chat.first_user_id = your_id
             chat.second_user_id = user_id
