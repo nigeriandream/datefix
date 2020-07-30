@@ -126,7 +126,6 @@
             <a href="" class="dropdown-item"><i class="typcn typcn-edit"></i> Edit Profile</a>
             <a href="" class="dropdown-item"><i class="typcn typcn-time"></i> Activity Logs</a>
             <a href="" class="dropdown-item"><i class="typcn typcn-cog-outline"></i> Account Settings</a>
-<<<<<<< HEAD
             <a href="page-signin.html" class="dropdown-item"><i class="typcn typcn-power-outline"></i> Sign Out</a> -->
           <!-- </div> -->
           <!-- dropdown-menu -->
@@ -137,15 +136,10 @@
     <!-- container -->
   </div>
   <!-- az-header -->
-=======
-            <a href="page-signin.html" class="dropdown-item"><i class="typcn typcn-power-outline"></i> Sign Out</a>
-          </div><!-- dropdown-menu -->
-        </div>
-      </div><!-- az-header-right -->
-    </div><!-- container -->
-  </div><!-- az-header -->
->>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
   <div class="az-content az-content-app pd-b-0" id="app">
+    <div class="alert alert-success text-center" role="alert" v-if="showResponse">
+      {{response}}
+    </div>
     <div class="container">
       <div class="az-content-left az-content-left-chat">
         <div class="az-chat-contacts-wrapper">
@@ -200,7 +194,7 @@
             <!-- <label class="az-chat-time"><span>3 days ago</span></label> -->
             <div v-for='(message, index) in chat_messages' :key='index'>
             <div :class="[message.sender == loggedInUser ? 'media flex-row-reverse' : 'media']">
-              <div :class="[message.status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[message.sender_pic]]" alt=""></div>
+              <div :class="[status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[message.sender_pic]]" alt=""></div>
               <div class="media-body">
                 <div class="az-msg-wrapper">
                   [[ message.message ]]
@@ -256,7 +250,7 @@
                 id="exampleModalCenterTitle"
               >Match Period Over</h5>
             </div>
-            <button type="button" class="close" data-dismiss="modal" ref="close" aria-label="Close">
+            <button type="button" class="close d-none" data-dismiss="modal" ref="close" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -294,7 +288,7 @@
                 id="exampleModalCenterTitle"
               >Accept Contact?</h5>
             </div>
-            <button type="button" class="close" data-dismiss="modal" ref="close" aria-label="Close">
+            <button type="button" class="close d-none" data-dismiss="modal" ref="close" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -447,6 +441,7 @@
   </script>
   <script src={% static 'js/vue.js' %}></script>
   <script src={% static 'js/vue-ScrollTo.js' %}></script>
+  <script src={% static 'js/sweetalert2.min.js' %></script>
   <script src={% static 'js/axios.min.js' %}></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
   <script src={% static 'js/chat-vue.js' %}></script>

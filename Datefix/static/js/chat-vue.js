@@ -1,3 +1,4 @@
+// import Swal from "/sweetalert2.min.js";
 var app = new Vue({
   delimiters: ["[[", "]]"],
   el: "#app",
@@ -20,26 +21,34 @@ var app = new Vue({
     message_id: "",
     typing: false,
     expiredUsers: [],
+    response: "",
+    usernames: {},
+    showResponse: false,
   },
   async mounted() {
     this.id = this.$refs.userID.value;
-    // await this.createThread();
+    await this.createThread();
     await this.getUser();
     await this.getAllChats();
     const url = window.location.href.replace("http", "ws");
     this.socket = new WebSocket(url);
     this.websocket();
-    setTimeout(() => {
-      $("#expiredModal").modal({
-        show: true,
-        backdrop: "static",
-      });
-    }, 200);
+    this.modalStatic();
   },
   // beforeDestroy() {
   //   this.disconnect(this.chat_object);
   // },
   methods: {
+    modalStatic() {
+      if (this.expiredUsers.length > 0) {
+        setTimeout(() => {
+          $("#expiredModal").modal({
+            show: true,
+            backdrop: "static",
+          });
+        }, 200);
+      }
+    },
     get_id(user) {
       console.log(user);
       this.chat_object = user;
@@ -76,7 +85,23 @@ var app = new Vue({
           console.log(this.messageStatus);
         }
         if (data.username == this.loggedInUser && data.function === "accept") {
+          $("#expiredModal").modal("hide");
+          this.showResponse = true;
+          this.response = data.result.response;
+          setTimeout(() => {
+            this.showResponse = false;
+          }, 3000);
           location.reload();
+        }
+        if (
+          this.chat_threads.some((val) => val.username == data.username) &&
+          data.function === "accept"
+        ) {
+          $("#acceptModal").modal("show");
+        }
+        if (data.username == this.loggedInUser && data.function === "accept") {
+          this.response = data.result.response;
+          this.$refs.close.click();
         }
         if (data.username == this.loggedInUser && data.function === "jilt") {
           location.reload();
@@ -85,7 +110,7 @@ var app = new Vue({
     },
     async createThread() {
       try {
-        await fetch(`/chat/api/create/3`)
+        await fetch(`/chat/api/create/2`)
           .then((response) => response.json())
           .then((data) => {
             console.log("thread>>>", data);
@@ -137,6 +162,7 @@ var app = new Vue({
           .then((data) => {
             console.log("single chat>>>", data);
             this.chat_id = data.chat_id;
+            this.status = data.status;
             this.chat_messages = data.chat_list;
           });
         this.loading = false;
@@ -149,7 +175,7 @@ var app = new Vue({
       this.activeUser = chat.username;
       let connect_thread = {
         username: this.loggedInUser,
-        chat_id: this.chat_id,
+        chat_id: chat.chat_id,
         function: "connect",
       };
       console.log("connect_thread>>>", connect_thread);

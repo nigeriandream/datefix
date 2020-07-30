@@ -24,15 +24,11 @@ SECRET_KEY = 'vkg&nnb_%1b&ojkbm6c37m1zh0z$&v^=!lb8uj=023+__@$eg!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
 ]
 
-=======
-ALLOWED_HOSTS = ['*']
->>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
 
 # Application definition
 
