@@ -9,6 +9,7 @@ var app = new Vue({
     chat_messages: [],
     chat_object: {},
     chat_id: "",
+    chat_room: "",
     message: "",
     user: "",
     id: "",
@@ -73,6 +74,21 @@ var app = new Vue({
         this.getSingleChat(this.chat_object);
         console.log(JSON.parse(e.data));
         let data = JSON.parse(e.data);
+
+
+        if (data.function === 'connect' && data.action === 'accept'){
+          this.sendAccept(data.chat_room)
+        }
+
+        if (data.function === 'connect' && data.action === 'jilt'){
+          this.sendJilt(data.chat_room)
+        }
+
+
+
+        if (data.function === 'connect'){
+          this.chat_room = data.chat_room
+        }
         if (data.username !== this.loggedInUser && data.function === "login") {
           this.getAllChats();
         }
@@ -84,26 +100,52 @@ var app = new Vue({
           this.messageStatus = data.status;
           console.log(this.messageStatus);
         }
-        if (data.username == this.loggedInUser && data.function === "accept") {
-          $("#expiredModal").modal("hide");
-          this.showResponse = true;
-          this.response = data.result.response;
-          setTimeout(() => {
-            this.showResponse = false;
-          }, 3000);
-          location.reload();
+        if (data.username === this.loggedInUser && data.function === "accept") {
+          if (data.result.response !== undefined){
+            $("#expiredModal").modal("hide");
+          // this.showResponse = true;
+          // this.response = data.result.response;
+           alert(data.result.response)
+          //   setTimeout(() => {
+          //     this.showResponse = false;
+          //   }, 3000);
+          //   location.reload();
+          // }
+          }
+          if (data.result.couple_id !== undefined){
+            location.reload()
+          }
+
         }
-        if (
-          this.chat_threads.some((val) => val.username == data.username) &&
-          data.function === "accept"
-        ) {
-          $("#acceptModal").modal("show");
+
+        if (data.username !== this.loggedInUser && data.function === "accept"){
+
+          if (data.result.couple_id !== undefined){
+            location.reload()
+          }
+          if (data.result.response !== undefined){
+            const result = confirm(data.username+" has accepted to keep chatting with you. Accept or Jilt")
+          if (result){
+            this.sendAccept2(data.chat_room, data.chat_id)
+
+          }else{
+            this.jilt()
+          }
+          }
+
+
         }
-        if (data.username == this.loggedInUser && data.function === "accept") {
-          this.response = data.result.response;
-          this.$refs.close.click();
-        }
-        if (data.username == this.loggedInUser && data.function === "jilt") {
+        // if (
+        //   this.chat_threads.some((val) => val.username == data.username) &&
+        //   data.function === "accept"
+        // ) {
+        //   $("#acceptModal").modal("show");
+        // }
+        // // if (data.username == this.loggedInUser && data.function === "accept") {
+        //   this.response = data.result.response;
+        //   this.$refs.close.click();
+        // }
+        if (data.result === 'succeed' && data.function === "jilt") {
           location.reload();
         }
       };
@@ -181,6 +223,18 @@ var app = new Vue({
       console.log("connect_thread>>>", connect_thread);
       this.socket.send(JSON.stringify(connect_thread));
     },
+    connect_final(chat, action) {
+      this.chat_object = chat;
+      this.activeUser = chat.username;
+      let connect_thread = {
+        username: this.loggedInUser,
+        chat_id: chat.chat_id,
+        action : action,
+        function: "connect",
+      };
+      console.log("connect_thread>>>", connect_thread);
+      this.socket.send(JSON.stringify(connect_thread));
+    },
     disconnect() {
       let disconnect_thread = {
         username: this.loggedInUser,
@@ -202,27 +256,45 @@ var app = new Vue({
       this.message = "";
     },
     jilt() {
-      this.connect(this.chat_object);
+      this.connect_final(this.chat_object, "jilt");
+    },
+    accept() {
+      this.connect_final(this.chat_object, "accept");
+    },
+
+    sendJilt(chat_room){
       let jilt_thread = {
         username: this.loggedInUser,
-        chat_id: this.chat_id,
+        chat_room: this.chat_room,
         function: "jilt",
       };
       console.log("jilt_thread>>>", jilt_thread);
       this.socket.send(JSON.stringify(jilt_thread));
       this.$refs.close.click();
-    },
-    accept() {
-      this.connect(this.chat_object);
+    }
+,
+    sendAccept(chat_room){
       let accept_thread = {
         username: this.loggedInUser,
-        chat_id: this.chat_id,
+        chat_room: chat_room,
         function: "accept",
       };
       console.log("accept_thread>>>", accept_thread);
       this.socket.send(JSON.stringify(accept_thread));
       this.$refs.close.click();
     },
+    sendAccept2(chat_room, chat_id){
+      let accept_thread = {
+        username: this.loggedInUser,
+        chat_room: chat_room,
+        function: "accept",
+        chat_id: chat_id
+      };
+      console.log("accept_thread>>>", accept_thread);
+      this.socket.send(JSON.stringify(accept_thread));
+      this.$refs.close.click();
+    }
+    ,
     isDelivered() {
       let isDelivered_thread = {
         message_id: this.message_id,
