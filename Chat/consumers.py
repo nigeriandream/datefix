@@ -7,37 +7,19 @@ from django.utils.datetime_safe import datetime
 from .models import ChatThread, ChatMessage
 
 
-async def login(self, chat_id):
-    self.thread_obj = await self.get_thread(chat_id)
-    self.me = await self.get_user(self.chat_data['username'])
-    self.other_user = await self.get_receiver(self.thread_obj, self.me)
-    chat_room = f"chat_{self.thread_obj.id}"
-    self.chat_room = chat_room
-    await self.channel_layer.group_add(
-        chat_room,
-        self.channel_name
-    )
+async def login(self):
     self.chat_data['status'] = 'Online'
     await self.channel_layer.group_send(
-        self.chat_room,
+        self.general,
         {"type": "send_message",
          "data": self.chat_data})
 
 
-async def logout(self, chat_id):
-    self.thread_obj = await self.get_thread(chat_id)
-    self.me = await self.get_user(self.chat_data['username'])
-    self.other_user = await self.get_receiver(self.thread_obj, self.me)
-    chat_room = f"chat_{self.thread_obj.id}"
-    self.chat_room = chat_room
+async def logout(self):
     self.set_user_status('Offline')
     self.chat_data['status'] = self.me.status
-    await self.channel_layer.group_add(
-        chat_room,
-        self.channel_name
-    )
     await self.channel_layer.group_send(
-        self.chat_room,
+        self.general,
         {"type": "send_message",
          "data": self.chat_data})
 
@@ -48,43 +30,56 @@ class ChatConsumer(AsyncConsumer):
         self.chat_data = {}
         self.thread_obj = None
         self.me = None
+        self.general = 'DateFix'
         self.other_user = None
         self.chat_room = ''
 
     async def websocket_connect(self, event):
         print("connected", event)
         await self.send({"type": "websocket.accept"})
+        await self.channel_layer.group_add(
+            self.general,
+            self.channel_name
+        )
 
     async def websocket_receive(self, event):
         self.chat_data = json.loads(event['text'])
 
         if self.chat_data['function'] == 'login':
-            for i in self.chat_data['threads']:
-                await login(self, i)
+            await login(self)
 
         if self.chat_data['function'] == 'connect':
-            chat_id = self.chat_data['chat_id']
-            self.thread_obj = await self.get_thread(chat_id)
-            self.me = await self.get_user(self.chat_data['username'])
-            self.other_user = await self.get_receiver(self.thread_obj, self.me)
-            chat_room = f"chat_{self.thread_obj.id}"
-            print("Connected to " + chat_room)
-            self.chat_room = chat_room
-            await self.channel_layer.group_add(
-                chat_room,
-                self.channel_name
-            )
-            await self.set_user_status('Online')
-            self.chat_data['chat_room'] = chat_room
+            try:
+                chat_id = self.chat_data['chat_id']
+                self.thread_obj = await self.get_thread(chat_id)
+                self.me = await self.get_user(self.chat_data['username'])
+                self.other_user = await self.get_receiver(self.thread_obj, self.me)
+                chat_room = f"chat_{self.thread_obj.id}"
+                print("Connected to " + chat_room)
+                self.chat_room = chat_room
+                await self.channel_layer.group_add(
+                    chat_room,
+                    self.channel_name
+                )
+
+                await self.set_user_status('Online')
+            except (ChatThread.DoesNotExist, AttributeError):
+                pass
+
+            self.chat_data['chat_room'] = self.chat_room
             await self.channel_layer.group_send(
                 self.chat_room,
                 {"type": "send_message",
                  "data": self.chat_data})
+            await self.channel_layer.group_send(
+                self.general,
+                {"type": "send_message",
+                 "data": {"username": self.chat_data['username'], "status": "Online"}})
 
         if self.chat_data['function'] == 'disconnect':
             await self.set_user_status('Offline')
             await self.channel_layer.group_send(
-                self.chat_room,
+                self.general,
                 {"type": "send_message",
                  "data": self.chat_data})
         if self.chat_data['function'] == 'status':
@@ -129,19 +124,24 @@ class ChatConsumer(AsyncConsumer):
         if self.chat_data['function'] == 'jilt':
             await self.reject()
             await self.channel_layer.group_send(
-                self.chat_data['chat_room'],
+                self.general,
                 {"type": "send_message",
                  "data": self.chat_data})
         if self.chat_data['function'] == 'accept':
+            if 'username' in self.chat_data and 'chat_id' in self.chat_data:
+                await self.get_thread(self.chat_data['chat_id'])
+                await self.get_user(self.chat_data['username'])
+                await self.get_receiver(self.thread_obj, self.me)
+
             await self.choose()
+            self.chat_data['chat_id'] = self.thread_obj.id
             await self.channel_layer.group_send(
-                self.chat_data['chat_room'],
+                self.general,
                 {"type": "send_message",
                  "data": self.chat_data})
 
         if self.chat_data['function'] == 'logout':
-            for i in self.chat_data['threads']:
-                await logout(self, i)
+            await logout(self)
             from django.shortcuts import redirect
             return redirect('logout')
 
@@ -154,11 +154,13 @@ class ChatConsumer(AsyncConsumer):
 
     @database_sync_to_async
     def get_thread(self, id_):
-        return ChatThread.objects.get(id=id_)
+        self.thread_obj = ChatThread.objects.get(id=id_)
+        return self.thread_obj
 
     @database_sync_to_async
     def get_receiver(self, chat, user):
-        return chat.get_receiver(user)
+        self.other_user = chat.get_receiver(user)
+        return self.other_user
 
     @database_sync_to_async
     def save_message(self, chat, data):
@@ -173,7 +175,8 @@ class ChatConsumer(AsyncConsumer):
 
     @database_sync_to_async
     def get_user(self, username):
-        return User.objects.get(username=username)
+        self.me = User.objects.get(username=username)
+        return self.me
 
     @database_sync_to_async
     def update_status(self, id_):
@@ -186,12 +189,15 @@ class ChatConsumer(AsyncConsumer):
     @database_sync_to_async
     def choose(self):
         from Chat.algorithms import select_match
-        data = select_match(self.thread_obj, self.other_user, self.me)
         try:
-            int(data)
-            self.chat_data['result'] = {'status': 'successful', 'couple_id': data}
-        except ValueError:
-            self.chat_data['result'] = {'status': 'successful', 'response': data}
+            data = select_match(self.thread_obj, self.other_user, self.me)
+            try:
+                int(data)
+                self.chat_data['result'] = {'status': 'successful', 'couple_id': data}
+            except ValueError:
+                self.chat_data['result'] = {'status': 'successful', 'response': data}
+        except ChatThread.DoesNotExist:
+            pass
 
     @database_sync_to_async
     def reject(self):
