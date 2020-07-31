@@ -28,12 +28,11 @@ var app = new Vue({
   },
   async mounted() {
     this.id = this.$refs.userID.value;
-    await this.createThread();
     await this.getUser();
     await this.getAllChats();
     const url = window.location.href.replace("http", "ws");
     this.socket = new WebSocket(url);
-    this.websocket();
+    await this.websocket();
     this.modalStatic();
   },
   // beforeDestroy() {
@@ -149,17 +148,6 @@ var app = new Vue({
           location.reload();
         }
       };
-    },
-    async createThread() {
-      try {
-        await fetch(`/chat/api/create/2`)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("thread>>>", data);
-          });
-      } catch (error) {
-        console.log("error>>>", error);
-      }
     },
     async getUser() {
       try {
