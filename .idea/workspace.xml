@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Account/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/algorithms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/algorithms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -311,7 +309,8 @@
       <workItem from="1595870168988" duration="22443000" />
       <workItem from="1595898594687" duration="1891000" />
       <workItem from="1595964162759" duration="5195000" />
-      <workItem from="1596124961220" duration="7977000" />
+      <workItem from="1596124961220" duration="8586000" />
+      <workItem from="1596148480498" duration="2781000" />
     </task>
     <servers />
   </component>
@@ -385,10 +384,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593559752535" />
-    <state x="480" y="152" key="git4idea.merge.GitMergeDialog" timestamp="1595666728590">
+    <state x="480" y="152" key="git4idea.merge.GitMergeDialog" timestamp="1596151686666">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="480" y="152" key="git4idea.merge.GitMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1595666728590" />
+    <state x="480" y="152" key="git4idea.merge.GitMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1596151686666" />
     <state x="415" y="152" key="git4idea.merge.GitPullDialog" timestamp="1592334026729">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
