@@ -1453,9 +1453,19 @@ body.top-search-open .dark #header-wrap:not(.not-dark) #top-search a,
 
 #footer.dark,
 .dark #footer {
+<<<<<<< HEAD
+<<<<<<< HEAD
 	background: url(../images/page/footer-bg.jpg);
 	background-attachment: fixed;
 	background-size: cover;
+=======
+	background-color: #333;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
+=======
+	background: url(../images/page/footer-bg.jpg);
+	background-attachment: fixed;
+	background-size: cover;
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
 	color: #ccc;
 	border-top-color: rgba(0, 0, 0, 0.2);
 }

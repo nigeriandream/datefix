@@ -12,15 +12,31 @@ function showTab(n) {
     document.getElementById("prevBtn").style.display = "inline";
   }
   if (n == (x.length - 1)) {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
     document.getElementById("submitBtn").style.display = "inline";
     document.getElementById("nextBtn").style.display = "none";
   } else {
     document.getElementById("nextBtn").style.display = "inline";
     document.getElementById("submitBtn").style.display = "none";
+<<<<<<< HEAD
+=======
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
+=======
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
   }
   //... and run a function that will display the correct step indicator:
   fixStepIndicator(n)
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
 function objectifyForm(formArray){
   var returnArray = {};
   for (var i = 0; i < formArray.length; i++){
@@ -28,6 +44,12 @@ function objectifyForm(formArray){
   }
   return returnArray
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
+=======
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
 function nextPrev(n) {
   // This function will figure out which tab to display
   var x = document.getElementsByClassName("tab");
@@ -40,6 +62,10 @@ function nextPrev(n) {
   // if you have reached the end of the form...
   if (currentTab >= x.length) {
     // ... the form gets submitted:
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
     $.ajax({
       url: "/get_data/user",
       data : objectifyForm($("#user-form").serializeArray()),
@@ -62,6 +88,13 @@ function nextPrev(n) {
       }
     })
     ;
+<<<<<<< HEAD
+=======
+    document.getElementById("regForm").submit();
+    return false;
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
+=======
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
   }
   // Otherwise, display the correct tab:
   showTab(currentTab);
@@ -109,5 +142,14 @@ function topFunction() {
   } else clearTimeout(scrollAnimation);
   // document.body.scrollTop = 0; // For Safari
   // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+<<<<<<< HEAD
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> ffa6751151a593c82c7ba120b61798852884cf48
+=======
+}
+
+>>>>>>> 31104b6b63c47e3422b348ff3c63ecc01fd26be5
