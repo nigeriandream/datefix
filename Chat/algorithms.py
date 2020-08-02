@@ -84,8 +84,8 @@ def email_chat(chat_thread, user):
 
 
 def reject(you, user):
-    if user.id not in json.loads(you.jilted_matches):
-        list_ = json.loads(you.jilted_matches)
+    list_ = json.loads(you.jilted_matches)
+    if int(user.id) not in list_:
         list_.append(user.id)
         you.jilted_matches = json.dumps(list_)
         you.save()
