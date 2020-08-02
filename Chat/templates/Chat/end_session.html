@@ -1,27 +1,204 @@
 {% extends 'index.html' %}
+{% load static %}
+
+{% block css %}
+<link href={% static 'css/select2.css' %} rel="stylesheet" />
+<link rel="stylesheet" href={% static 'css/form-elements.css' %}>
+<link rel="stylesheet" href={% static 'css/stylex.css' %}>
+{% endblock css %}
 
 {% block title %}
-    End Session
+Session Summary
 {% endblock %}
 
 {% block content %}
-    {% if details %}
-        {% for item in details %}
-            <ul class="jumbotron bg-info mb-5">
-            {% for key, value in item %}
-                <li>{{ key }}: {{ value }}</li>
-            {% endfor %}
-            </ul>
-
-        {% endfor %}
-
-    {% else %}
-        <p>Your were jilted by both Chatters</p>
-    {% endif %}
-    <form method="post" action="{% url 'end_session' %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-block btn-success">End Session</button>
-    </form>
 
 
-{% endblock %}
+<!-- Header
+		============================================= -->
+<header id="header" class="full-header">
+
+    <div id="header-wrap">
+
+        <div class="container clearfix">
+
+            <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+            <!-- Logo
+					============================================= -->
+            <div id="logo">
+                <a href={% url 'home' %} class="standard-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img
+                        src={% static 'images/logo.png' %} alt="Canvas Logo"></a>
+                <a href={% url 'home' %} class="retina-logo" data-dark-logo={% static 'images/logo-dark@2x.png' %}><img
+                        src={% static 'images/logo@2x.png' %} alt="Canvas Logo"></a>
+            </div><!-- #logo end -->
+
+            <!-- Primary Navigation
+					============================================= -->
+            <nav id="primary-menu">
+
+                <ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+                    <li><a href={% url 'home' %}>
+                            <div>Home</div>
+                        </a>
+                    </li>
+                    <li><a href="#">
+                            <div>About Datefix</div>
+                        </a>
+                    </li>
+                </ul>
+
+                <div id="side-panel-trigger" class="side-panel-trigger user-sidebar-trigger"
+                    style="font-size: 12px;	font-weight: 400;	letter-spacing: 3px;    text-transform: uppercase; line-height: 22px;">
+                    <a href="#" style="width: auto; font-size: inherit;"><i class="icon-line-heart"></i>
+                        Menu</a>
+                </div>
+
+
+            </nav><!-- #primary-menu end -->
+
+        </div>
+
+    </div>
+
+</header><!-- #header end -->
+<!-- #header end -->
+
+
+<!-- Page Title
+		============================================= -->
+<section id="page-title" class="page-title-parallax dark"
+    style="background-image: url({% static "images/page/bg1.jpg" %}); padding: 120px 0; background-size:cover;"
+    data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
+
+    <div class="container clearfix dark">
+        <h1 data-animate="fadeInUp" style="color:#eee;">Session Summary</h1>
+        <span data-animate="fadeInUp" style="color:#eee;" data-delay="300">Your datefix session has ended</span>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href={% url 'home' %}>Datefix</a></li>
+            <li class="breadcrumb-item"><a href="#">{{request.user.first_name}} {{ request.user.last_name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">End Session</li>
+        </ol>
+    </div>
+
+</section><!-- #page-title end -->
+
+<style>
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #fff;
+        -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+        padding: 0 15px 0 0px;
+        border-radius: 30px;
+        overflow: hidden;
+        letter-spacing: 2px;
+        font-weight: 300;
+    }
+</style>
+
+<!-- Content
+		============================================= -->
+<section id="content"
+    style="overflow: inherit!important;  background-image: url({% static "images/page/pfbgx.png"%}); background-size: cover; background-attachment: fixed;">
+
+    <div class="content-wrap" style="padding: 20px 0;">
+
+        <div class="container clearfix">
+
+            <div>
+
+                <div>
+
+                    <div class="clear"></div>
+
+                    <div class="row clearfix">
+
+                        <div class="col_full">
+
+                            <style>
+                                .select2-search__field {
+                                    display: none !important;
+                                }
+                                .body-pill-attribute,.card-category{
+                                    font-size: x-large;
+                                }
+                            </style>
+
+                           {% if details %}
+
+                            <form>
+                                <h2 style="margin-bottom: 3px; color:#fff">Session Summary</h2>
+                                <p style="color: #fff;">Your Datefix session has ended</p>
+                            </form>
+
+                            <div class="col_full card col_last card-category m-3">
+                                <div class="p-2">
+                                    <p class="center">CONGRATULATIONS!!</p> 
+                                    <p>You chose each other, now you can see your partner's personal/contact details and keep in touch off-datefix.</p>
+                                    Your chat history has been sent to your email.<br>
+                                    Contact any of our fixers through the official social media channels to learn about Datefix-sponsored dates.</p>
+                                </div>
+                            </div>
+
+                            {% for item in details %}
+                            <div class="col_full card col_last card-category m-3">
+                                <div class="p-2">
+
+                                    {% for key, value in item %}
+
+                                    <div class="card-text match-body-pills">
+                                        <div class="body-pill-attribute color">
+                                            {{ key }}
+                                        </div>
+                                        <div class="body-pill-value">{{value}}</div>
+                                    </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                            
+
+                            {% endfor %}
+
+                            {% else %}
+
+                            <form>
+                                <h2 style="margin-bottom: 3px; color:#fff">Session Ended</h2>
+                                <p style="color: #fff;">You were jilted by both matches</p>
+                            </form>
+
+                            <div class="col_full card col_last card-category m-3">
+                                <div class="p-2">
+                                    <p>Please read our community guidelines to learn how to avoid getting jilted.<br> Your chat history has been sent to your email so you can review it and know what went wrong. <br>
+                                    Contact any of our fixers through the official social media channels if you would like some guidance on getting a date.</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <form method="post" action="{% url 'end_session' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="button button-rounded button-reveal button-xlarge button-yellow button-light" style="display:block;margin:0 auto;"><i class="icon-arrow-left"></i><span>Exit Session</span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="w-100 line d-block d-md-none"></div>
+
+    </div>
+
+    </div>
+
+    </div>
+
+</section><!-- #content end -->
+
+<!-- Footer
+		============================================= -->
+{% include "footer.html" %}
+<!-- #footer end -->
+
+{% endblock content %}
