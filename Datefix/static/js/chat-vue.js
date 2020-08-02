@@ -25,6 +25,7 @@ var app = new Vue({
     response: "",
     usernames: {},
     showResponse: false,
+    acceptRequestName: "",
   },
   async mounted() {
     this.id = this.$refs.userID.value;
@@ -74,19 +75,16 @@ var app = new Vue({
         console.log(JSON.parse(e.data));
         let data = JSON.parse(e.data);
 
-
-        if (data.function === 'connect' && data.action === 'accept'){
-          this.sendAccept(data.chat_room)
+        if (data.function === "connect" && data.action === "accept") {
+          this.sendAccept(data.chat_room);
         }
 
-        if (data.function === 'connect' && data.action === 'jilt'){
-          this.sendJilt(data.chat_room)
+        if (data.function === "connect" && data.action === "jilt") {
+          this.sendJilt(data.chat_room);
         }
 
-
-
-        if (data.function === 'connect'){
-          this.chat_room = data.chat_room
+        if (data.function === "connect") {
+          this.chat_room = data.chat_room;
         }
         if (data.username !== this.loggedInUser && data.function === "login") {
           this.getAllChats();
@@ -100,39 +98,42 @@ var app = new Vue({
           console.log(this.messageStatus);
         }
         if (data.username === this.loggedInUser && data.function === "accept") {
-          if (data.result.response !== undefined){
+          if (data.result.response !== undefined) {
+            $("#acceptModal").modal("hide");
             $("#expiredModal").modal("hide");
-          // this.showResponse = true;
-          // this.response = data.result.response;
-           alert(data.result.response)
-          //   setTimeout(() => {
-          //     this.showResponse = false;
-          //   }, 3000);
-          //   location.reload();
-          // }
+            // this.showResponse = true;
+            // this.response = data.result.response;
+            // alert(data.result.response);
+            //   setTimeout(() => {
+            //     this.showResponse = false;
+            //   }, 3000);
+            //   location.reload();
+            // }
           }
-          if (data.result.couple_id !== undefined){
-            location.reload()
+          if (data.result.couple_id !== undefined) {
+            location.reload();
           }
-
         }
 
-        if (data.username !== this.loggedInUser && data.function === "accept"){
-
-          if (data.result.couple_id !== undefined){
-            location.reload()
+        if (data.username !== this.loggedInUser && data.function === "accept") {
+          if (data.result.couple_id !== undefined) {
+            location.reload();
           }
-          if (data.result.response !== undefined){
-            const result = confirm(data.username+" has accepted to keep chatting with you. Accept or Jilt")
-          if (result){
-            this.sendAccept2(data.chat_room, data.chat_id)
-
-          }else{
-            this.jilt()
+          if (data.result.response !== undefined) {
+            // const result = confirm(
+            //   data.username +
+            //     " has accepted to keep chatting with you. Accept or Jilt"
+            // );
+            this.acceptRequestName = data.username;
+            this.chat_room = data.chat_room;
+            this.chat_id = data.chat_id;
+            this.$refs.finalAccept.click();
+            // if (result) {
+            //   this.sendAccept2(data.chat_room, data.chat_id);
+            // } else {
+            //   this.jilt();
+            // }
           }
-          }
-
-
         }
         // if (
         //   this.chat_threads.some((val) => val.username == data.username) &&
@@ -144,7 +145,7 @@ var app = new Vue({
         //   this.response = data.result.response;
         //   this.$refs.close.click();
         // }
-        if (data.result === 'succeed' && data.function === "jilt") {
+        if (data.result === "succeed" && data.function === "jilt") {
           location.reload();
         }
       };
@@ -217,7 +218,7 @@ var app = new Vue({
       let connect_thread = {
         username: this.loggedInUser,
         chat_id: chat.chat_id,
-        action : action,
+        action: action,
         function: "connect",
       };
       console.log("connect_thread>>>", connect_thread);
@@ -250,7 +251,7 @@ var app = new Vue({
       this.connect_final(this.chat_object, "accept");
     },
 
-    sendJilt(chat_room){
+    sendJilt(chat_room) {
       let jilt_thread = {
         username: this.loggedInUser,
         chat_room: this.chat_room,
@@ -259,9 +260,8 @@ var app = new Vue({
       console.log("jilt_thread>>>", jilt_thread);
       this.socket.send(JSON.stringify(jilt_thread));
       this.$refs.close.click();
-    }
-,
-    sendAccept(chat_room){
+    },
+    sendAccept(chat_room) {
       let accept_thread = {
         username: this.loggedInUser,
         chat_room: chat_room,
@@ -271,18 +271,17 @@ var app = new Vue({
       this.socket.send(JSON.stringify(accept_thread));
       this.$refs.close.click();
     },
-    sendAccept2(chat_room, chat_id){
+    sendAccept2() {
       let accept_thread = {
         username: this.loggedInUser,
-        chat_room: chat_room,
+        chat_room: this.chat_room,
         function: "accept",
-        chat_id: chat_id
+        chat_id: this.chat_id,
       };
       console.log("accept_thread>>>", accept_thread);
       this.socket.send(JSON.stringify(accept_thread));
       this.$refs.close.click();
-    }
-    ,
+    },
     isDelivered() {
       let isDelivered_thread = {
         message_id: this.message_id,
