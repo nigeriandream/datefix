@@ -109,7 +109,7 @@ EMAIL_PORT = 587
 
 EMAIL_HOST_USER = 'louis.paul9095'
 
-EMAIL_HOST_PASSWORD = 'MONKEYSex'
+EMAIL_HOST_PASSWORD = 'MONKEYSex9095'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
