@@ -522,7 +522,7 @@ def display(request):
 
 
 def send_verification(request):
-    if not request.session['verification_sent']:
+    if 'verification_sent' not in request.session:
         request.session['code'] = request.POST['csrfmiddlewaretoken']
         link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}?email={request.POST["email"]}'
         message = f''' Dear {request.user.first_name}, \n We are excited to have you on Datefix. Below is the link to 
