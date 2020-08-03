@@ -109,6 +109,8 @@ EMAIL_HOST_USER = 'mail.geldbaum@gmail.com'
 
 EMAIL_HOST_PASSWORD = 'MONKEYSex'
 
+DEFAULT_FROM_EMAIL = 'admin@datefix.com'
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
