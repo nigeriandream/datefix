@@ -46,6 +46,7 @@ button {
 
 .btn {
 	margin: 0 20px 0 20px;
+	border-radius: 0.25rem !important;
 }
 
 .btn-strongly-agree {
@@ -103,6 +104,21 @@ button {
 .btn-strongly-disagree.active:focus,
 .btn-strongly-disagree:hover {
 	background-color: #e28181;
+	color: #fff;
+}
+
+.btn-neutral {
+	color: #7c7c7c;
+	font-weight: bold;
+}
+
+.btn-neutral.active,
+.btn-neutral:active,
+.btn-neutral:focus,
+.btn-neutral:active:focus,
+.btn-neutral.active:focus,
+.btn-neutral:hover {
+	background-color: #7c7c7c;
 	color: #fff;
 }
 

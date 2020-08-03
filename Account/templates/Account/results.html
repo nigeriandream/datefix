@@ -179,7 +179,7 @@ Match Results
 						</div>
 					</div>
 
-					<form id="matches-form" {% if matches_length > 0 %} action={% url 'results' %} method="post">
+					<form id="matches-form" {% if matches_length >= 2 %} action={% url 'results' %} method="post">
 						{% csrf_token %}
 						{% else %}
 						action={% url 'dashboard' %} method="get">

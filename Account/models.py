@@ -1,29 +1,34 @@
+import os
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from Datefix import settings
 import json
 from django.db.models import Q
 
-
 # Create your models here.
+from Datefix.algorithms import get_key
+
 
 class User(AbstractUser):
     sex = models.CharField(max_length=6, default=None, null=True)
     phone = models.CharField(max_length=16, default=None, null=True)
-    user_data = models.TextField(default=None, null=True, blank=True)
-    choice_data = models.TextField(default=None, null=True, blank=True)
-    deal_breaker = models.CharField(max_length=64, blank=True)
+    user_data = models.TextField(default='{}')
+    choice_data = models.TextField(default='{}')
+    deal_breaker = models.CharField(max_length=64, default='[]')
     profile_picture = models.ImageField(upload_to='profile_pics', blank=True)
-    matches = models.CharField(max_length=10, default='', blank=True)
-    successful_matches = models.TextField(default=None, null=True, blank=True)
-    no_matches = models.TextField(default=None, null=True, blank=True)
-    jilted_matches = models.TextField(default=None, null=True, blank=True)
-    notification = models.TextField(default=None, null=True, blank=True)
+    matches = models.CharField(max_length=10, default='[]')
+    successful_matches = models.TextField(default='{}')
+    no_matches = models.TextField(default='[]')
+    jilted_matches = models.TextField(default='[]')
+    notification = models.TextField(default='[]')
     profile_changed = models.BooleanField(default=False)
-    dating = models.BooleanField(default=False)
+    couple_ids = models.CharField(max_length=16, default='[]')
     payed = models.BooleanField(default=False)
-    min_score = models.DecimalField(max_digits=5, decimal_places=2, default=None, null=True)
+    secret = models.BinaryField(default=get_key(os.urandom(16).__str__()))
+    session = models.IntegerField(default=-1)
     verified = models.BooleanField(default=False)
+    status = models.CharField(max_length=64, default='Offline')
 
     def successful_list(self):
         if self.successful_matches is None or self.successful_matches == '':
@@ -34,6 +39,14 @@ class User(AbstractUser):
         if self.no_matches == '' or self.no_matches is None:
             return []
         return json.loads(self.no_matches)
+
+    def encrypt(self, data):
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).encrypt(data.encode())
+
+    def decrypt(self, cipher_text):
+        from cryptography.fernet import Fernet
+        return Fernet(self.secret).decrypt(cipher_text).decode()
 
     def jilted_list(self):
         if self.jilted_matches == '' or self.jilted_matches is None:
@@ -86,11 +99,60 @@ class User(AbstractUser):
         return [x for x in notifications if
                 (str(x.id) not in notify['read']) and (str(x.id) not in notify['deleted'])].__len__()
 
+    def origin(self):
+        return self.user_data_()['origin-state']
+
+    def residence(self):
+        return self.user_data_()['residence-state']
+
+    def religion(self):
+        return self.user_data_()['religion']
+
+    def denomination(self):
+        return self.user_data_()['denomination']
+
+    def has_children(self):
+        return self.user_data_()['children']
+
+    def personality(self):
+        try:
+            test_ = PersonalityTest.objects.get(email=self.email)
+            return test_.titles()
+        except PersonalityTest.DoesNotExist:
+            return []
+
+    def chatThreads(self):
+        from Chat.models import ChatThread
+        threads = ChatThread.objects.filter(Q(first_user_id=self.id) | Q(second_user_id=self.id))
+        return list(set([x.id for x in threads]))
+
 
 class Couple(models.Model):
     first_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match1')
     second_partner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='match2')
+    couple_name = models.CharField(max_length=30, default='')
     datetime = models.DateTimeField()
+
+    def true_details(self, user_id):
+        user = None
+        if self.first_partner_id == user_id:
+            user = User.objects.get(id=self.second_partner_id)
+        if self.second_partner_id == user_id:
+            user = User.objects.get(id=self.first_partner_id)
+        if user is None:
+            return None
+        else:
+            user_data = json.loads(user.user_data)
+            try:
+                data = {"firstName": user.first_name,
+                        "lastName": user.last_name, "phone": user.phone, "email": user.email,
+                        "residential_address": f"{user_data['residence-lga']}, {user_data['residence-state']}",
+                        "origin_address": f"{user_data['origin-lga']}, {user_data['origin-state']}"}
+            except KeyError:
+                data = {"firstName": user.first_name,
+                        "lastName": user.last_name, "phone": user.phone, "email": user.email}
+
+            return data
 
 
 class Notification(models.Model):
@@ -99,3 +161,17 @@ class Notification(models.Model):
     datetime = models.DateTimeField()
     general = models.BooleanField(default=True)
     receiver = models.IntegerField(default=None, null=True)
+
+
+class PersonalityTest(models.Model):
+    email = models.EmailField()
+    extraversion = models.TextField(default='{}')
+    neurotism = models.TextField(default='{}')
+    agreeableness = models.TextField(default='{}')
+    conscientiousness = models.TextField(default='{}')
+    openness = models.TextField(default='{}')
+
+    def titles(self):
+        return [json.loads(self.extraversion)['title'], json.loads(self.neurotism)['title'],
+                json.loads(self.agreeableness)['title'], json.loads(self.conscientiousness)['title'],
+                json.loads(self.openness)['title']]
