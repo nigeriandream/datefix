@@ -107,7 +107,7 @@ EMAIL_USE_SSL = False
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = 'ohaegbulouis'
+EMAIL_HOST_USER = 'mail.geldbaum'
 
 EMAIL_HOST_PASSWORD = 'MONKEYSex'
 
