@@ -22,7 +22,7 @@ def login(request):
             user = User.objects.get(email=request.POST['email'])
 
             if not user.verified:
-                send_verification(request)
+                send_verification(request, user)
                 return redirect('verification')
 
             user = auth.authenticate(
