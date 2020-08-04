@@ -311,6 +311,7 @@ def verify(request):
         return redirect('login')
 
     if 'code' not in request.session:
+        del request.session['verification_sent']
         flash(request, 'Code has expired !', 'danger', 'remove-sign')
         return redirect('login')
 
