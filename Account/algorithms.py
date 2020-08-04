@@ -10,6 +10,9 @@ def get_path(request):
 
 
 def _3_point(your_choice, choice):
+    if your_choice == 'Does Not Matter':
+        return 1
+
     if (your_choice == 0) or abs(your_choice - choice) == 0:
         return 1
 
@@ -32,6 +35,9 @@ def age_range(me, you):
 
 
 def _2_point(minimum, maximum, choice):
+    minimum = int(minimum)
+    maximum = int(maximum)
+    choice = int(choice)
     if choice < minimum:
         return 0
     if minimum == 0:
@@ -65,63 +71,68 @@ def compare_users(me, you):
             return 0
 
     for i in absolute_match:
-        if you.user_data_()[i] in me.choice_data_()[i].split(',') or 'Does Not Matter' in me.choice_data()[i].split(
-                ','):
-            mark = mark + 1
+        try:
+            if you.user_data_()[i] in me.choice_data_()[i].split(',') or 'Does Not Matter' in me.choice_data()[i].split(
+                    ','):
+                mark = mark + 1
+        except KeyError:
+            pass
 
     for i in _2_spectrum:
-        if me.choice_data()[i] == 'Does Not Matter':
-            mark = mark + 1
-        mark = mark + _2_point(me.choice_data_()[i], 5, you.user_data_()[i])
+        try:
+            if me.choice_data_()[i] == 'Does Not Matter':
+                mark = mark + 1
+            mark = mark + _2_point(me.choice_data_()[i], 5, you.user_data_()[i])
+        except KeyError:
+            pass
 
     for i in _3_spectrum:
-        if me.choice_data()[i] == 'Does Not Matter':
-            mark = mark + 1
-        mark = mark + _3_point(me.choice_data_()[i], you.user_data_()[i])
-
-    mark = mark + age_range(me, you)
+        try:
+            mark = mark + _3_point(me.choice_data_()[i], you.user_data_()[i])
+        except KeyError:
+            pass
+    try:
+        mark = mark + age_range(me, you)
+    except KeyError:
+        pass
 
     return (mark / total) * 100
 
 
 def match_user(user):
-    try:
-        success_list = []
-        no_list = []
-        # filter users
-        all_users = [x for x in User.objects.all()
-                     if (x.complete_match() is False)
-                     and (str(x.id) not in user.jilted_list()) and (x.is_couple() is False)
-                     and (str(x.id) not in user.no_list()) and x.sex == 'male' and
-                     (x.user_data is not None or x.user_data == '')]
-        # compare filtered users with user and return matches
+    success_list = []
+    no_list = []
+    # filter users
+    all_users = [x for x in User.objects.all()
+                 if (x.complete_match() is False)
+                 and (str(x.id) not in user.jilted_list()) and (x.is_couple() is False)
+                 and (str(x.id) not in user.no_list()) and x.sex == 'male' and
+                 (x.user_data is not None or x.user_data == '')]
+    # compare filtered users with user and return matches
 
-        for peep in all_users:
-            data = {}
-            peep_score = compare_users(user, peep)
-            my_score = compare_users(peep, user)
-            if peep_score >= 50 and my_score >= 50:
-                data = {
-                    "alpha": peep.username,
-                    str(peep.id): peep_score,
-                    "Residence": peep.user_data_['residence-state'],
-                    "Origin": peep.user_data_['origin-state'],
-                    "Religion": peep.user_data_['religion'],
-                    "denomination": peep.user_data_['denomination'],
-                    "Has Children": peep.user_data_['children']
-                }
+    for peep in all_users:
+        data = {}
+        peep_score = compare_users(user, peep)
+        my_score = compare_users(peep, user)
+        if peep_score >= 50 and my_score >= 50:
+            data = {
+                "alpha": peep.username,
+                str(peep.id): peep_score,
+                "Residence": peep.user_data_['residence-state'],
+                "Origin": peep.user_data_['origin-state'],
+                "Religion": peep.user_data_['religion'],
+                "denomination": peep.user_data_['denomination'],
+                "Has Children": peep.user_data_['children']
+            }
 
-                success_list.append(sorted(data.items()))
+            success_list.append(sorted(data.items()))
 
-            else:
-                no_list.append(str(peep.id))
-        success_list = merge_sort(success_list)
-        user.successful_matches = json.dumps(success_list)
-        user.no_matches = json.dumps(no_list)
-        user.save()
-        return True
-    except:
-        return False
+        else:
+            no_list.append(str(peep.id))
+    success_list = merge_sort(success_list)
+    user.successful_matches = json.dumps(success_list)
+    user.no_matches = json.dumps(no_list)
+    user.save()
 
 
 def lucky_draw(num):
