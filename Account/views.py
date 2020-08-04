@@ -317,7 +317,7 @@ def verify(request):
     del request.session['code']
     request.session['verified'] = True
     request.session['email'] = request.GET['email']
-    return redirect('verification')
+    return redirect('verified')
 
 
 # verified

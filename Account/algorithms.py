@@ -524,9 +524,9 @@ def display(request):
 def send_verification(request, user):
     if 'verification_sent' not in request.session:
         request.session['code'] = request.POST['csrfmiddlewaretoken']
-        link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}?email={request.POST["email"]}'
+        link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}&email={request.POST["email"]}'
         message = f''' Dear {user.first_name}, \n We are excited to have you on Datefix. Below is the link to 
-    verify your email address, click on this link to continue.\n \n {link} \nIf you have no account with Datefix, 
+    verify your email address, click on this link to continue.\n \n{link}\nIf you have no account with Datefix, 
     please ignore.\n\nCheers,\nDatefix Team. '''
         send_mail('Email Verification', message, 'admin@datefix.me', [request.POST['email']])
         request.session['verification_sent'] = True
