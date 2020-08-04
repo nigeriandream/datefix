@@ -75,7 +75,7 @@ def compare_users(me, you):
 
     for i in absolute_match:
         try:
-            if you.user_data_()[i] in me.choice_data_()[i].split(',') or 'Does Not Matter' in me.choice_data()[i].split(
+            if you.user_data_()[i] in me.choice_data_()[i].split(',') or 'Does Not Matter' in me.choice_data_()[i].split(
                     ','):
                 mark = mark + 1
         except KeyError:
