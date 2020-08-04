@@ -211,10 +211,7 @@ def dashboard(request):
             user = User.objects.get(id=request.user.id)
             user_details = user.user_data_()
             user_details['registered'] = True
-            if had_session(user):
-                return render(request, 'Account/profile.html', user_details)
-            else:
-                return redirect('payment')
+            return render(request, 'Account/profile.html', user_details)
         if user.complete_match():
             return redirect('chatroom')
 
