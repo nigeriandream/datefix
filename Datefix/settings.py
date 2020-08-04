@@ -107,9 +107,9 @@ EMAIL_USE_SSL = False
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = 'mail.geldbaum@gmail.com'
+EMAIL_HOST_USER = 'ohaegbulouis@gmail.com'
 
-EMAIL_HOST_PASSWORD = 'MONKEYSex'
+EMAIL_HOST_PASSWORD = '1BILLION'
 
 DEFAULT_FROM_EMAIL = 'admin@datefix.com'
 
