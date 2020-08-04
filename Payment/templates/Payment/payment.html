@@ -11,7 +11,7 @@
     <script>
     const url = window.location.host
     const protocol = window.location.protocol
-    window.onload = ()=>
+    window.onload = ()=> {
         $.ajax(
         {url : protocol+'://'+url+'/match/',
         type: 'GET',
