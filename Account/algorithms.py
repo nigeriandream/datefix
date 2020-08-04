@@ -540,6 +540,6 @@ def dict_to_zip(data):
 
 
 def had_session(user):
-    if len(user.jilted_list()) > 0 or len(user.couple_list()) > 0:
-        return True
-    return False
+    if user.jilted_matches == '[]' and user.couple_ids == '[]':
+        return False
+    return True
