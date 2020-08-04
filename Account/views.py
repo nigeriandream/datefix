@@ -6,7 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import User, PersonalityTest, Couple
 import json
-from .algorithms import match_user, flash, display, send_verification, get_username, get_personality, get_score
+from .algorithms import match_user, flash, display, send_verification, get_username, get_personality, get_score, \
+    had_session
 from Chat.algorithms import create_chat
 
 
@@ -22,7 +23,7 @@ def login(request):
             user = User.objects.get(email=request.POST['email'])
 
             if not user.verified:
-                send_verification(request)
+                send_verification(request, user)
                 return redirect('verification')
 
             user = auth.authenticate(
@@ -152,8 +153,6 @@ def results(request):
                 return redirect('chatroom')
 
 
-
-
 # signup verified
 def signup(request):
     if request.method == 'POST':
@@ -212,7 +211,10 @@ def dashboard(request):
             user = User.objects.get(id=request.user.id)
             user_details = user.user_data_()
             user_details['registered'] = True
-            return render(request, 'Account/profile.html', user_details)
+            if had_session(user):
+                return render(request, 'Account/profile.html', user_details)
+            else:
+                return redirect('payment')
         if user.complete_match():
             return redirect('chatroom')
 
@@ -301,6 +303,13 @@ def get_data(request, type_):
 
 # verified
 def verified(request):
+    if 'email' in request.session and request.session['verified'] is True:
+        user = User.objects.get(email=request.session['email'])
+        user.verified = True
+        user.save()
+        auth.login(request, user)
+        flash(request, f'{user.username} is logged in successfully !', 'success', 'thumbs-up')
+        user.status = 'Online'
     return render(request, 'Account/account-verified.html')
 
 
@@ -311,13 +320,15 @@ def verify(request):
         return redirect('login')
 
     if 'code' not in request.session:
+        if 'verification_sent' in request.session:
+            del request.session['verification_sent']
         flash(request, 'Code has expired !', 'danger', 'remove-sign')
         return redirect('login')
 
     del request.session['code']
     request.session['verified'] = True
     request.session['email'] = request.GET['email']
-    return redirect('verification')
+    return redirect('verified')
 
 
 # verified
