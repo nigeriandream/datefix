@@ -99,6 +99,9 @@ class User(AbstractUser):
         return [x for x in notifications if
                 (str(x.id) not in notify['read']) and (str(x.id) not in notify['deleted'])].__len__()
 
+    def couple_list(self):
+        return json.loads(self.couple_ids)
+
     def origin(self):
         return self.user_data_()['origin-state']
 

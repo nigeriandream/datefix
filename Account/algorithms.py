@@ -537,3 +537,9 @@ def dict_to_zip(data):
     weights = ([x['Weight'] for x in data])
     count = set([data.index(x) for x in data])
     return zip(count, questions, weights)
+
+
+def had_session(user):
+    if len(user.jilted_list()) > 0 or len(user.couple_list()) > 0:
+        return True
+    return False
