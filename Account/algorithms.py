@@ -10,9 +10,12 @@ def get_path(request):
 
 
 def _3_point(your_choice, choice):
-    if your_choice == 'Does Not Matter':
+    if your_choice == 'Does Not Matter' or your_choice.isalpha():
         return 1
-
+    if your_choice.isdigit():
+        your_choice = int(your_choice)
+    if choice.isdigit():
+        choice = int(choice)
     if (your_choice == 0) or abs(your_choice - choice) == 0:
         return 1
 
