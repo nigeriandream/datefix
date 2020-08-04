@@ -9,23 +9,7 @@
 {% endblock %}
 {% block script %}
     <script>
-    window.onload = ()=>{
-        $.ajax(
-        {url : 'http://127.0.0.1:8000/match/',
-        type: 'GET',
-            success: (data)=>{
-            console.log(data)
-            if (data === 'success'){
-                window.open('http://127.0.0.1:8000/results/', "_self")
-            }
-            if (data === 'fail'){
-                window.open('http://127.0.0.1:8000/dashboard/', "_self")
-            }
-
-            }
-        }
-    )
-    }
+    window.onload = ()=>console.log('we are fucked');
 
     </script>
 
