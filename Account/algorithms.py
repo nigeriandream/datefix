@@ -65,10 +65,13 @@ def compare_users(me, you):
     for i in deal_breakers:
         if i == 'No Dealbreaker':
             continue
-        if me.choice_data_()[i] == you.user_data_()[i]:
-            mark = mark + 1
-        else:
-            return 0
+        try:
+            if me.choice_data_()[i] == you.user_data_()[i]:
+                mark = mark + 1
+            else:
+                return 0
+        except KeyError:
+            pass
 
     for i in absolute_match:
         try:
