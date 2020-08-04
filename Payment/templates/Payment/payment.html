@@ -9,7 +9,7 @@
 {% endblock %}
 {% block script %}
     <script>
-    const url = window.location.host
+    const url = window.location.hostname
     const protocol = window.location.protocol
     window.onload = ()=> {
         $.ajax(
