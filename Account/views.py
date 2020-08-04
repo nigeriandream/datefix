@@ -335,7 +335,7 @@ def not_found(request):
 
 # verified
 def verification(request):
-    return render(request, 'Account/verification-link-sent.html')
+    return render(request, 'Account/verification-link-sent.html', {"email": request.session['email']})
 
 
 # verified

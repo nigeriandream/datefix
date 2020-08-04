@@ -169,12 +169,12 @@ Setup Session
 												<div class="form-group">
 													<label class="control-label">State</label>
 													<select name="residence_state" id="state1"  class="form-control"
-														{% if residence_state %} disabled>
+														{% if residence_state %} >
 														<option value={{residence_state}} selected>
                                                             {{ residence_state }}</option>
 															{% else %}
 															>
-														<option value="" selected="selected" disabled></option>
+														<option value="" selected="selected" ></option>
 														{% endif %}
 														<option value='Non-Nigerian Resident'>Non-Nigerian Resident
 														</option>
@@ -223,7 +223,7 @@ Setup Session
 												<div class="form-group">
 													<label class="control-label">LGA</label>
 													<select name="residence_lga" id="lga1" class="form-control" required
-														{% if residence_lga %} disabled>
+														{% if residence_lga %} >
 														<option value={{residence_lga}} selected>{{residence_lga}}
 														</option>
 														{% else %}
@@ -244,12 +244,12 @@ Setup Session
 												<div class="form-group">
 													<label class="control-label">State</label>
 													<select name="origin_state" id="state2" class="form-control"
-														{% if origin_state %} disabled>
+														{% if origin_state %} >
 														<option value={{ origin_state}} selected="selected">
 															{{ origin_state }}</option>
 														{% else %}
 														>
-														<option value="" selected="selected" disabled></option>
+														<option value="" selected="selected" ></option>
 														{% endif %}
 														<option value='Non-Nigerian'>Non-Nigerian</option>
 														<option value='Abia'>Abia</option>
@@ -297,7 +297,7 @@ Setup Session
 												<div class="form-group">
 													<label class="control-label">LGA</label>
 													<select name="origin_lga" id="lga2" class="form-control" required
-														{% if origin_lga %} disabled>
+														{% if origin_lga %} >
 														<option value={{ origin_lga }} selected>{{origin_lga}}</option>
 														{% else %}
 														>
@@ -318,12 +318,12 @@ Setup Session
 														<label class="control-label">Marital Status?</label>
 														<select name="marital_status" id="marital-status1"
 															class="form-control" required {% if marital_status %}
-															disabled>
+															>
 															<option value={{marital_status}} selected="selected">
 																{{marital_status}}</option>
 															{% else %}
 															>
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 															<option value="Single">Single</option>
 															<option value="Seperated">Separated</option>
@@ -337,7 +337,7 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Do you have children?</label>
 														<select name="children" id="children1" class="form-control"
-															required {% if children  %} disabled>
+															required {% if children  %} >
 															<option value={{children}} selected>{{children}}</option>
 															{% else %}
 															>
@@ -353,7 +353,7 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Your Age</label>
 														{% if age %}
-														<input type="number" min="21" disabled name="age" id="age1"
+														<input type="number" min="21"  name="age" id="age1"
 															class="range_01" value={{age}}>
 														{% else %}
 														<input type="number" min="21" name="age" id="age1"
@@ -376,12 +376,11 @@ Setup Session
 														<label class="control-label">Your highest level of
 															education</label>
 														<select name="education" id="education1" class="form-control"
-															required {% if education %} disabled {% else %} {% endif %}>
+															required {% if education %}  {% else %} {% endif %}>
 															{% if not education %}
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 
-															{% if education == 1 %} selected{% endif %}
 															<option value="1" {% if education == 1 %}
 																selected{% endif %}>SSCE</option>
 															<option value="2" {% if education == 2 %}
@@ -404,9 +403,9 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Your average net worth</label>
 														<select name="net_worth" id="net-worth1" class="form-control"
-															required {% if net_worth %} disabled{% endif %}>
+															required {% if net_worth %} {% endif %}>
 															{% if not net_worth %}
-															<option value="" selected disabled></option>
+															<option value="" selected ></option>
 															{% endif %}
 
 															<option value="1" {% if net_worth == 1 %}
@@ -439,9 +438,9 @@ Setup Session
 														<label class="control-label">Your Blood Group</label>
 														<select name="blood_group" id="blood-group1"
 															class="form-control" {% if blood_group %}
-															disabled{% endif %}>
+															{% endif %}>
 															{% if not blood_group %}
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 
 															<option value="1" {% if blood_group == 1 %}
@@ -461,9 +460,9 @@ Setup Session
 														<label class="control-label"> Your Rhesus Factor</label>
 														<select name="rhesus_factor" id="rhesus-factor1"
 															class="form-control" {% if rhesus_factor %}
-															disabled{% endif %}>
+															{% endif %}>
 															{% if not rhesus_factor %}
-															<option value="" selected="selected" disabled></option
+															<option value="" selected="selected" ></option
 																{% endif %}>
 															<option value="1" {% if rhesus_factor == 1 %} selected
 																{% endif %}>Positive (+)</option>
@@ -477,9 +476,9 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Your Genotype</label>
 														<select name="genotype" id="genotype1" class="form-control"
-															required {% if genotype %} disabled{% endif %}>
+															required {% if genotype %} {% endif %}>
 															{% if not genotype %}
-															<option value="" selected disabled></option>
+															<option value="" selected ></option>
 															{% endif %}
 															<option value="AA" {% if genotype == 'AA' %}
 																selected{% endif %}>AA</option>
@@ -500,12 +499,12 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Your Religion</label>
 														<select name="religion" id="religion1" class="form-control"
-															{% if religion %} disabled>
+															{% if religion %} >
 															<option value={{religion}} selected="selected">{{religion}}
 															</option>
 															{% else %}
 															>
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 															<option value='Christian'>Christian</option>
 															<option value='Muslim'>Muslim</option>
@@ -520,7 +519,7 @@ Setup Session
 														<label class="control-label">Your Denomination</label>
 														<select name="denomination" id="denomination1"
 															class="form-control" required {% if denomination %}
-															disabled>
+															>
 															<option value={{denomination}} selected>{{denomination}}
 															</option>
 															{% else %}
@@ -541,9 +540,9 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Your Complexion</label>
 														<select name="complexion" id="complexion1" class="form-control"
-															required {% if complexion %}disabled{% endif %}>
+															required {% if complexion %}{% endif %}>
 															{% if not complexion  %}
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 															{% if complexion == 1 %}selected{% endif %}
 															<option value="1"
@@ -569,9 +568,9 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Your Height</label>
 														<select name="height" id="height1" class="form-control" required
-															{% if height %} disabled{% endif %}>
+															{% if height %} {% endif %}>
 															{% if not height %}
-															<option value="" selected disabled></option>
+															<option value="" selected ></option>
 															{% endif %}
 
 															<option value="1" {% if height == 1 %} selected{% endif %}>
@@ -593,9 +592,9 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Your Body Shape</label>
 														<select name="body_shape" id="body-shape1" class="form-control"
-															required {% if body_shape %} disabled{% endif %}>
+															required {% if body_shape %} {% endif %}>
 															{% if not body_shape %}
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 
 															<option value="1" {% if body_shape == 1 %}
@@ -614,9 +613,9 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Your Body Type</label>
 														<select name="body_type" id="body-type1" class="form-control"
-															required {% if body_type %} disabled{% endif %}>
+															required {% if body_type %} {% endif %}>
 															{% if not body_type %}
-															<option value="" selected disabled></option>
+															<option value="" selected ></option>
 															{% endif %}
 
 															<option value="1" {% if body_type == 1 %}
@@ -633,9 +632,9 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Your Body Size</label>
 														<select name="body_size" id="body-size1" class="form-control"
-															required {% if body_size %} disabled{% endif %}>
+															required {% if body_size %} {% endif %}>
 															{% if not body_size %}
-															<option value="" selected disabled></option>
+															<option value="" selected ></option>
 															{% endif %}
 
 															<option value="1" {% if body_size == 1 %}
@@ -664,9 +663,9 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Do you drink?</label>
 														<select name="drink" id="drink1" class="form-control" required
-															{% if drink %} disabled{% endif %}>
+															{% if drink %} {% endif %}>
 															{% if not drink %}
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 
 															<option value="1" {% if drink == 1 %} selected{% endif %}>
@@ -683,9 +682,9 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">Do you smoke?</label>
 														<select name="smoke" id="smoke1" class="form-control" required
-															{% if smoke %} disabled{% endif %}>
+															{% if smoke %} {% endif %}>
 															{% if not smoke %}
-															<option value="" selected disabled></option>
+															<option value="" selected ></option>
 															{% endif %}
 
 															<option value="1" {% if smoke == 1 %} selected{% endif %}>
@@ -715,9 +714,9 @@ Setup Session
 													</div>
 													<div class="col-md-4">
 														<select name="openness" id="openness1" class="form-control"
-															required {% if openness %} disabled{% endif %}>
+															required {% if openness %} {% endif %}>
 															{% if not openness %}
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 
 															<option value="1" {% if openness == 1 %}
@@ -741,10 +740,10 @@ Setup Session
 													<div class="col-md-4">
 														<select name="conscientiousness" id="conscientiousness1"
 															class="form-control" required {% if conscientiousness %}
-															disabled{% endif %}>
+															{% endif %}>
 
 															{% if not conscientiousness %}
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 															<option value="1" {% if conscientiousness == 1 %}
 																selected{% endif %}>Careless</option>
@@ -767,9 +766,9 @@ Setup Session
 													<div class="col-md-4">
 														<select name="extraversion" id="extraversion1"
 															class="form-control" required {% if height %}
-															disabled{% endif %}>
+															{% endif %}>
 															{% if not extraversion %}
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 
 															<option value="1" {% if extraversion == 1 %}
@@ -793,9 +792,9 @@ Setup Session
 													<div class="col-md-4">
 														<select name="agreeableness" id="agreeableness1"
 															class="form-control" required {% if agreeableness %}
-															disabled{% endif %}>
+															{% endif %}>
 															{% if not agreeableness %}
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 
 															<option value="1" {% if agreeableness == 1 %}
@@ -820,9 +819,9 @@ Setup Session
 													</div>
 													<div class="col-md-4">
 														<select name="neurotism" id="neurotism1" class="form-control"
-															required {% if neurotism %} disabled{% endif %}>
+															required {% if neurotism %} {% endif %}>
 															{% if not neurotism %}
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															{% endif %}
 
 															<option value="1" {% if neurotism == 1 %}
@@ -859,7 +858,7 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">State</label>
 														<select name="residence_state" id="state3" class="form-control">
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 															<option value='Does Not Matter'>Does Not Matter</option>
 															<option value='Non-Nigerian Resident'>Non-Nigerian Resident
 															</option>
@@ -924,7 +923,7 @@ Setup Session
 													<div class="form-group">
 														<label class="control-label">State</label>
 														<select name="origin_state" id="state4" class="form-control">
-															<option value="" selected="selected" disabled></option>
+															<option value="" selected="selected" ></option>
 
 															<option value='Does Not Matter'>Does Not Matter</option>
 															<option value='Non-Nigerian'>Non-Nigerian</option>
@@ -1111,7 +1110,7 @@ Setup Session
 														<label class="control-label">Rhesus Factor</label>
 														<select name="rhesus_factor" id="rhesus-factor2"
 															class="form-control">
-															<option value="Does Not Matter" disabled
+															<option value="Does Not Matter"
 																selected="selected">Does Not Matter
 															</option>
 															<option value="1">Positive (+)</option>
