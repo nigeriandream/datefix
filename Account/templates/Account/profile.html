@@ -168,9 +168,10 @@ Setup Session
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class="control-label">State</label>
-													<select name="residence_state" id="state1" if class="form-control"
-														{% if residence_state %}>
-														<option value={{residence_state}} selected="selected" disabled>
+													<select name="residence_state" id="state1"  class="form-control"
+														{% if residence_state %} disabled>
+														<option value={{residence_state}} selected>
+                                                            {{ residence_state }}</option>
 															{% else %}
 															>
 														<option value="" selected="selected" disabled></option>
