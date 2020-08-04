@@ -224,10 +224,7 @@ def matching(request):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
         if user.sex == 'female':
-            matched = match_user(user)
-            if not matched:
-                return HttpResponse('fail')
-
+            match_user(user)
         return HttpResponse('success')
 
 
