@@ -521,15 +521,14 @@ def display(request):
     return None
 
 
-def send_verification(request):
-    if not request.session['verification_sent']:
-        request.session['code'] = request.POST['csrfmiddlewaretoken']
-        link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}?email={request.POST["email"]}'
-        message = f''' Dear {request.user.first_name}, \n We are excited to have you on Datefix. Below is the link to 
-    verify your email address, click on this link to continue.\n \n {link} \nIf you have no account with Datefix, 
-    please ignore.\n\nCheers,\nDatefix Team. '''
-        send_mail('Email Verification', message, 'admin@datefix.me', [request.POST['email']])
-        request.session['verification_sent'] = True
+def send_verification(request, user):
+    request.session['code'] = request.POST['csrfmiddlewaretoken']
+    link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}&email={request.POST["email"]}'
+    message = f''' Dear {user.first_name}, \n We are excited to have you on Datefix. Below is the link to 
+verify your email address, click on this link to continue.\n \n{link}\nIf you have no account with Datefix, 
+please ignore.\n\nCheers,\nDatefix Team. '''
+    send_mail('Email Verification', message, 'admin@datefix.me', [request.POST['email']])
+    request.session['verification_sent'] = True
     return
 
 

@@ -25,8 +25,7 @@ SECRET_KEY = 'vkg&nnb_%1b&ojkbm6c37m1zh0z$&v^=!lb8uj=023+__@$eg!'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
+    'datefixe.herokuapp.com'
 ]
 
 
@@ -108,9 +107,11 @@ EMAIL_USE_SSL = False
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = 'louis.paul9095'
+EMAIL_HOST_USER = 'ohaegbulouis@gmail.com'
 
-EMAIL_HOST_PASSWORD = 'monkeysEX'
+EMAIL_HOST_PASSWORD = '1BILLION'
+
+DEFAULT_FROM_EMAIL = 'admin@datefix.me'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

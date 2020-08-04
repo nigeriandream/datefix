@@ -22,7 +22,7 @@ def login(request):
             user = User.objects.get(email=request.POST['email'])
 
             if not user.verified:
-                send_verification(request)
+                send_verification(request, user)
                 return redirect('verification')
 
             user = auth.authenticate(
@@ -301,6 +301,10 @@ def get_data(request, type_):
 
 # verified
 def verified(request):
+    if 'email' in request.session and request.session['verified'] is True:
+        user = User.objects.get(email=request.session['email'])
+        user.verified = True
+        user.save()
     return render(request, 'Account/account-verified.html')
 
 
@@ -311,13 +315,14 @@ def verify(request):
         return redirect('login')
 
     if 'code' not in request.session:
+        del request.session['verification_sent']
         flash(request, 'Code has expired !', 'danger', 'remove-sign')
         return redirect('login')
 
     del request.session['code']
     request.session['verified'] = True
     request.session['email'] = request.GET['email']
-    return redirect('verification')
+    return redirect('verified')
 
 
 # verified
