@@ -301,6 +301,10 @@ def get_data(request, type_):
 
 # verified
 def verified(request):
+    if 'email' in request.session and request.session['verified'] is True:
+        user = User.objects.get(email=request.session['email'])
+        user.verified = True
+        user.save()
     return render(request, 'Account/account-verified.html')
 
 
