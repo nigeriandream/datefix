@@ -38,9 +38,9 @@ def age_range(me, you):
 
 
 def _2_point(minimum, maximum, choice):
-    if choice.isdigit():
+    if str(choice).isdigit():
         choice = int(choice)
-    if minimum.isdigit():
+    if str(minimum).isdigit():
         minimum = int(minimum)
     if choice < minimum:
         return 0
