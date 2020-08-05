@@ -126,7 +126,7 @@ class ChatThread(models.Model):
 
     def decrypt(self, cipher_text):
         from cryptography.fernet import Fernet
-        return Fernet(self.secret).decrypt(cipher_text).decode()
+        return Fernet(self.secret).decrypt(cipher_text.encode()).decode()
 
     def no_unread_msg(self, user):
         receiver = self.get_receiver(user)
