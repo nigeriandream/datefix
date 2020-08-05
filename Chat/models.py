@@ -144,7 +144,7 @@ class ChatThread(models.Model):
 
 class ChatMessage(models.Model):
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
-    text = models.BinaryField()
+    text = models.TextField()
     datetime = models.DateTimeField()
     send_status = models.CharField(max_length=20, choices=(('sent', 'sent'), ('delivered', 'delivered')))
     chat = models.ForeignKey(ChatThread, on_delete=models.CASCADE)
