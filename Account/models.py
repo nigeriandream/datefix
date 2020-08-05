@@ -25,7 +25,6 @@ class User(AbstractUser):
     profile_changed = models.BooleanField(default=False)
     couple_ids = models.CharField(max_length=16, default='[]')
     payed = models.BooleanField(default=False)
-    secret = models.BinaryField(default=get_key(os.urandom(16).__str__()))
     session = models.IntegerField(default=-1)
     verified = models.BooleanField(default=False)
     status = models.CharField(max_length=64, default='Offline')
@@ -40,13 +39,6 @@ class User(AbstractUser):
             return []
         return json.loads(self.no_matches)
 
-    def encrypt(self, data):
-        from cryptography.fernet import Fernet
-        return Fernet(self.secret).encrypt(data.encode())
-
-    def decrypt(self, cipher_text):
-        from cryptography.fernet import Fernet
-        return Fernet(self.secret).decrypt(cipher_text).decode()
 
     def jilted_list(self):
         if self.jilted_matches == '' or self.jilted_matches is None:
