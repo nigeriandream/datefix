@@ -156,7 +156,7 @@
               </div>
               <div class="media-body">
                 <div class="media-contact-name">
-                  <span>[[chat.first_name]] [[chat.last_name]]</span>
+                  <span>[[chat.username]]</span>
                   <span v-if="chat.last_message">[[chat.last_message.time]]</span>
                   <span v-else></span>
                 </div>
@@ -173,7 +173,7 @@
         <div class="az-chat-header" v-show="loading === false">
           <div :class="[chat_object.status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[chat_object.profile_picture]]" alt=""></div>
           <div class="az-chat-msg-name">
-            <h6>[[chat_object.first_name]] [[chat_object.last_name]]</h6>
+            <h6>[[chat_object.username]]</h6>
             <small v-if="chat_object.status === 'Online'">Online</small>
             <small v-if="chat_object.status === 'Offline'">Offline</small>
             <!-- <small v-if="typing == true"><i>Typing...</i></small> -->
