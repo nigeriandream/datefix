@@ -15,10 +15,10 @@
 
   {% block css %}
   <!-- vendor css -->
-  <link href={% static 'lib/fontawesome-free/css/all.min.css' %} rel="stylesheet">
-  <link href={% static 'lib/ionicons/css/ionicons.min.css' %} rel="stylesheet">
-  <link href={% static 'lib/typicons.font/typicons.css' %} rel="stylesheet">
-  <link href={% static 'lib/lightslider/css/lightslider.min.css' %} rel="stylesheet">
+  <link href={% static 'library/fontawesome-free/css/all.min.css' %} rel="stylesheet">
+  <link href={% static 'library/ionicons/css/ionicons.min.css' %} rel="stylesheet">
+  <link href={% static 'library/typicons.font/typicons.css' %} rel="stylesheet">
+  <link href={% static 'library/lightslider/css/lightslider.min.css' %} rel="stylesheet">
 
   <!-- chat CSS -->
   <link rel="stylesheet" href={% static 'css/chat.css' %}>
@@ -42,8 +42,8 @@
   <div id="user" class="az-header {{ request.user.username }} {% if logout %}{{ logout }}{% endif %}">
     <div class="container">
       <div class="az-header-left">
-        <a href="{% url 'home' %}" class="standard-logo az-logo" data-dark-logo={% static 'images/logo-dark.png' %}""><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
-        <a href="{% url 'home' %}" id="azNavShow" class="standard-logo az-header-menu-icon d-lg-none" data-dark-logo={% static 'images/logo-dark.png' %}><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
+        <a href="index.php" class="standard-logo az-logo" data-dark-logo={% static 'images/logo-dark.png' %}""><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
+        <a href="index.php" id="azNavShow" class="standard-logo az-header-menu-icon d-lg-none" data-dark-logo={% static 'images/logo-dark.png' %}><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
         <a href="" id="azChatBodyHide" class="az-header-arrow"><i class="icon ion-md-arrow-back"></i></a>
       </div><!-- az-header-left -->
       <div class="az-header-center">
@@ -199,8 +199,8 @@
               <div class="media-body">
                 <div class="az-msg-wrapper">
                   [[ message.message ]]
-                  <span style="font-size: 7px; margin-left: 2em;">[[ message.time ]]</span>
-                  <span style="font-size: 14px; margin-left: 0.5em;" v-if="message.sender == loggedInUser"><i class="icon ion-ios-checkmark" ></i></span>
+                  <span style="font-size: 7px; margin-left: 2em;">[[ message.time ]]</span> 
+                  <span style="font-size: 14px; margin-left: 0.5em;" v-if="message.sender == loggedInUser"><i class="icon ion-ios-checkmark" ></i></span> 
                 </div><!-- az-msg-wrapper -->
                 <a href=""><i class="icon ion-android-more-horizontal"></i></a>
               </div><!-- media-body -->
@@ -264,7 +264,7 @@
                     <i class="fas fa-check-square text-success fa-2x ml-2" id="accept__icon" data-toggle="modal" data-target="#acceptModal" title="Accept" @click="get_id(user)" ></i>
                     <i class="icon ion-ios-close-circle-outline text-danger fa-2x ml-2" id="jilt__icon" data-toggle="modal" data-target="#jiltModal" title="Jilt" @click="get_id(user)" ></i>
                 </div>
-              </div>
+              </div> 
             </div>
           </div>
         </div>
@@ -431,15 +431,14 @@
   </div><!-- az-footer -->
 {% block script %}
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src={% static 'js/plugins.js' %}></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
-  <script src={% static 'lib/ionicons/ionicons.js' %}></script>
-  <script src={% static 'lib/perfect-scrollbar/perfect-scrollbar.min.js' %}></script>
-  <script src={% static 'lib/lightslider/js/lightslider.min.js' %}></script>
+  <script src={% static 'js/jquery.js' %}></script>
+  <script src={% static 'js/plugins.js' %}></script>
+  <script src={% static 'library/bootstrap/js/bootstrap.bundle.min.js' %}></script>
+  <script src={% static 'library/ionicons/ionicons.js' %}></script>
+  <script src={% static 'library/perfect-scrollbar/perfect-scrollbar.min.js' %}></script>
+  <script src={% static 'library/lightslider/js/lightslider.min.js' %}></script>
 
-{<script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"> -->#}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"> -->
   </script>
   <script src={% static 'js/chat.js' %}></script>
   <script>
