@@ -122,7 +122,7 @@ class ChatThread(models.Model):
 
     def encrypt(self, data):
         from cryptography.fernet import Fernet
-        return Fernet(self.secret).encrypt(data.encode())
+        return Fernet(self.secret).encrypt(data.encode()).decode()
 
     def decrypt(self, cipher_text):
         from cryptography.fernet import Fernet
