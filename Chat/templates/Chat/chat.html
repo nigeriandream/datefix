@@ -42,8 +42,8 @@
   <div id="user" class="az-header {{ request.user.username }} {% if logout %}{{ logout }}{% endif %}">
     <div class="container">
       <div class="az-header-left">
-        <a href="index.php" class="standard-logo az-logo" data-dark-logo={% static 'images/logo-dark.png' %}""><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
-        <a href="index.php" id="azNavShow" class="standard-logo az-header-menu-icon d-lg-none" data-dark-logo={% static 'images/logo-dark.png' %}><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
+        <a href="{% url 'home' %}" class="standard-logo az-logo" data-dark-logo={% static 'images/logo-dark.png' %}""><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
+        <a href="{% url 'home' %}" id="azNavShow" class="standard-logo az-header-menu-icon d-lg-none" data-dark-logo={% static 'images/logo-dark.png' %}><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
         <a href="" id="azChatBodyHide" class="az-header-arrow"><i class="icon ion-md-arrow-back"></i></a>
       </div><!-- az-header-left -->
       <div class="az-header-center">
