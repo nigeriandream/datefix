@@ -38,9 +38,6 @@ def age_range(me, you):
 
 
 def _2_point(minimum, maximum, choice):
-    minimum = int(minimum)
-    maximum = int(maximum)
-    choice = int(choice)
     if choice < minimum:
         return 0
     if minimum == 0:
@@ -88,7 +85,8 @@ def compare_users(me, you):
         try:
             if me.choice_data_()[i] == 'Does Not Matter':
                 mark = mark + 1
-            mark = mark + _2_point(me.choice_data_()[i], 5, you.user_data_()[i])
+            else:
+                mark = mark + _2_point(me.choice_data_()[i], 5, you.user_data_()[i])
         except KeyError:
             pass
 
