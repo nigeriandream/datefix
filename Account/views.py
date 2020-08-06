@@ -23,6 +23,7 @@ def login(request):
             user = User.objects.get(email=request.POST['email'])
 
             if not user.verified:
+                request.session['email'] = user.email
                 send_verification(request, user)
                 return redirect('verification')
 
