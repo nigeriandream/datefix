@@ -181,8 +181,7 @@ def signup(request):
                 first_name=request.POST['first-name'],
                 last_name=request.POST['last-name'],
                 sex=request.POST['sex'],
-                phone=request.POST['phone'],
-                secret=get_key(f"{request.POST['email']}{username}")
+                phone=request.POST['phone']
             )
             user.save()
             flash(request, f"{request.POST['first-name']}, your account has been "
