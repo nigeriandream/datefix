@@ -123,22 +123,16 @@ def match_user(user):
         my_score = compare_users(peep, user)
         try:
             if peep_score >= 50 and my_score >= 50:
-                data = {
-                    "alpha": peep.username,
-                    str(peep.id): peep_score,
-                    "Residence": peep.user_data_()['residence_state'],
-                    "Origin": peep.user_data_()['origin_state'],
-                    "Religion": peep.user_data_()['religion'],
-                    "denomination": peep.user_data_()['denomination'],
-                    "Has Children": peep.user_data_()['children']
-                }
-                list_ = sorted(data.items())
-                temp = list_[5]
-                list_[5] = list_[1]
-                list_[1] = temp
-                success_list.append(list_)
-                del list_, temp
-
+                data = [
+                    [str(peep.id), peep_score],
+                    ["alpha", peep.username],
+                    ["Origin", peep.user_data_()['origin_state']],
+                    ["Residence", peep.user_data_()['residence_state']],
+                    ["Religion", peep.user_data_()['religion']],
+                    ["denomination", peep.user_data_()['denomination']],
+                    ["Has Children", peep.user_data_()['children']]
+                ]
+                success_list.append(data)
             else:
                 no_list.append(str(peep.id))
         except KeyError:
