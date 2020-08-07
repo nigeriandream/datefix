@@ -126,11 +126,11 @@ def match_user(user):
             data = {
                 "alpha": peep.username,
                 str(peep.id): peep_score,
-                "Residence": peep.user_data_()['residence-state'],
-                "Origin": peep.user_data_()['origin-state'],
-                "Religion": peep.user_data_()['religion'],
-                "denomination": peep.user_data_()['denomination'],
-                "Has Children": peep.user_data_()['children']
+                "Residence": peep.user_data_().get('residence-state', None),
+                "Origin": peep.user_data_().get('origin-state', None),
+                "Religion": peep.user_data_().get('religion', None),
+                "denomination": peep.user_data_().get('denomination', None),
+                "Has Children": peep.user_data_().get('children', None)
             }
 
             success_list.append(sorted(data.items()))
