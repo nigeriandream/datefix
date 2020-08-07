@@ -54,13 +54,13 @@ def _2_point(minimum, maximum, choice):
 
 def compare_users(me, you):
     mark = 0
-    absolute_match = ['residence-lga', 'residence-state', 'origin-lga',
-                      'origin-state', 'denomination', 'religion', 'marital-status', 'children',
-                      'blood-group', 'genotype']
+    absolute_match = ['residence_lga', 'residence_state', 'origin_lga',
+                      'origin_state', 'denomination', 'religion', 'marital_status', 'children',
+                      'blood_group', 'genotype']
 
-    _2_spectrum = ['net-worth', 'education', 'body-shape']
+    _2_spectrum = ['net_worth', 'education', 'body_shape']
 
-    _3_spectrum = ['complexion', 'height', 'body-type', 'drink', 'smoke', 'conscientiousness', 'openess',
+    _3_spectrum = ['complexion', 'height', 'body_type', 'drink', 'smoke', 'conscientiousness', 'openess',
                    'extraversion', 'agreeableness', 'neurotism']
     deal_breakers = json.loads(me.deal_breaker)
     print(deal_breakers)
@@ -126,8 +126,8 @@ def match_user(user):
             data = {
                 "alpha": peep.username,
                 str(peep.id): peep_score,
-                "Residence": peep.user_data_().get('residence-state', None),
-                "Origin": peep.user_data_().get('origin-state', None),
+                "Residence": peep.user_data_().get('residence_state', None),
+                "Origin": peep.user_data_().get('origin_state', None),
                 "Religion": peep.user_data_().get('religion', None),
                 "denomination": peep.user_data_().get('denomination', None),
                 "Has Children": peep.user_data_().get('children', None)
