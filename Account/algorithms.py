@@ -143,7 +143,6 @@ def match_user(user):
                 no_list.append(str(peep.id))
         except KeyError:
             no_list.append(str(peep.id))
-    success_list = merge_sort(success_list)
     user.successful_matches = json.dumps(success_list)
     user.no_matches = json.dumps(no_list)
     user.save()
