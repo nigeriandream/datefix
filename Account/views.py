@@ -148,10 +148,6 @@ def results(request):
             for i in selected:
                 success = [x for x in success if x[0][1] != i]
                 user.successful_matches = json.dumps(success)
-                list_ = user.matches_()
-                list_.append(i)
-                list_ = list(set(list_))
-                user.matches = json.dumps(list_)
                 user.save()
                 create_chat(request, user.id, int(i))
                 selected.remove(i)
