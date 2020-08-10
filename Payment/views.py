@@ -13,14 +13,3 @@ def payment(request):
         pass
     return render(request, 'Payment/payment.html')
 
-
-def test(request):
-    if request.method == 'GET':
-        if 'girls' in request.GET:
-            print(request.GET['girls'])
-            from django.http import HttpResponse
-            import json
-            return HttpResponse(json.dumps(str(request.GET['girls']).split(',')))
-        else:
-            return render(request, 'Payment/test.html')
-

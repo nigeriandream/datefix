@@ -4,7 +4,7 @@ function select(self){
     if (! match_list.includes(self.value) && match_list.length < 2){
         match_list.push(self.value)
         self.setAttribute('selected', 'selected')
-    }else{
+    }else if (match_list.includes(self.value) && match_list.length <= 2){
         match_list = match_list.filter((item)=>{return item !== self.value})
         self.removeAttribute('selected')
     }
