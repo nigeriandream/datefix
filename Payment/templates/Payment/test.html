@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,15 +15,15 @@
     <label for="cars">
         Select any Girl of your choice
         <select id="girl" name="girl" multiple aria-multiselectable="true">
-            <option onclick=hehe(this) value="Ngozi">Ngozi</option>
-            <option onclick=hehe(this) value="Chinaza">Chinaza</option>
-            <option onclick=hehe(this) value="Raluchi">Raluchi</option>
-            <option onclick=hehe(this) value="Chioma">Chioma</option>
+            <option onclick=select(this) value="Ngozi">Ngozi</option>
+            <option onclick=select(this) value="Chinaza">Chinaza</option>
+            <option onclick=select(this) value="Raluchi">Raluchi</option>
+            <option onclick=select(this) value="Chioma">Chioma</option>
         </select>
     </label>
     <button type="submit">Submit</button>
 </form>
-<script lang="JavaScript" type="text/javascript">
+<script lang="JavaScript" type="text/javascript" src="{%  static 'js/matches.js'%}">
 
 </script>
 </body>
