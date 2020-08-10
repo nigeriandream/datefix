@@ -132,7 +132,7 @@ def results(request):
                           {'matches': matches, "matches_length": len(matches)})
 
     if request.method == 'POST':
-        selected = request.POST['matches']
+        selected = request.POST['matches'].split(',')
         success = user.successful_list()
         match_comp = [x for x in selected if User.objects.get(id=int(x)).complete_match()]
         verb = ''
