@@ -151,7 +151,7 @@ def results(request):
                 user.save()
                 create_chat(request, user.id, int(i))
                 selected.remove(i)
-                return redirect('chatroom')
+            return redirect('chatroom')
 
 
 # signup verified
