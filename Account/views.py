@@ -133,6 +133,9 @@ def results(request):
 
     if request.method == 'POST':
         selected = request.POST['matches'].split(',')
+        user.matches = json.dumps([int(x) for x in selected])
+        user.session = len(selected)
+        user.save()
         match_comp = [x for x in selected if User.objects.get(id=int(x)).complete_match()]
         verb = ''
         if len(match_comp) > 0:
