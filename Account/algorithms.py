@@ -10,9 +10,12 @@ def get_path(request):
 
 
 def _3_point(your_choice, choice):
-    if your_choice == 'Does Not Matter':
+    if str(your_choice) == 'Does Not Matter' or str(your_choice).isalpha():
         return 1
-
+    if str(your_choice).isdigit():
+        your_choice = int(your_choice)
+    if str(choice).isdigit():
+        choice = int(choice)
     if (your_choice == 0) or abs(your_choice - choice) == 0:
         return 1
 
@@ -35,9 +38,10 @@ def age_range(me, you):
 
 
 def _2_point(minimum, maximum, choice):
-    minimum = int(minimum)
-    maximum = int(maximum)
-    choice = int(choice)
+    if str(choice).isdigit():
+        choice = int(choice)
+    if str(minimum).isdigit():
+        minimum = int(minimum)
     if choice < minimum:
         return 0
     if minimum == 0:
@@ -50,13 +54,13 @@ def _2_point(minimum, maximum, choice):
 
 def compare_users(me, you):
     mark = 0
-    absolute_match = ['residence-lga', 'residence-state', 'origin-lga',
-                      'origin-state', 'denomination', 'religion', 'marital-status', 'children',
-                      'blood-group', 'genotype']
+    absolute_match = ['residence_lga', 'residence_state', 'origin_lga',
+                      'origin_state', 'denomination', 'religion', 'marital_status', 'children',
+                      'blood_group', 'genotype']
 
-    _2_spectrum = ['net-worth', 'education', 'body-shape']
+    _2_spectrum = ['net_worth', 'education', 'body_shape']
 
-    _3_spectrum = ['complexion', 'height', 'body-type', 'drink', 'smoke', 'conscientiousness', 'openess',
+    _3_spectrum = ['complexion', 'height', 'body_type', 'drink', 'smoke', 'conscientiousness', 'openess',
                    'extraversion', 'agreeableness', 'neurotism']
     deal_breakers = json.loads(me.deal_breaker)
     print(deal_breakers)
@@ -65,24 +69,28 @@ def compare_users(me, you):
     for i in deal_breakers:
         if i == 'No Dealbreaker':
             continue
-        if me.choice_data_()[i] == you.user_data_()[i]:
-            mark = mark + 1
-        else:
-            return 0
+        try:
+            if str(me.choice_data_()[i]) == str(you.user_data_()[i]):
+                mark = mark + 1
+            else:
+                return 0
+        except KeyError:
+            pass
 
     for i in absolute_match:
         try:
-            if you.user_data_()[i] in me.choice_data_()[i].split(',') or 'Does Not Matter' in me.choice_data()[i].split(
-                    ','):
+            if str(you.user_data_()[i]) in str(me.choice_data_()[i]).split(',')\
+                    or 'Does Not Matter' in str(me.choice_data_()[i]).split(','):
                 mark = mark + 1
         except KeyError:
             pass
 
     for i in _2_spectrum:
         try:
-            if me.choice_data_()[i] == 'Does Not Matter':
+            if str(me.choice_data_()[i]) == 'Does Not Matter':
                 mark = mark + 1
-            mark = mark + _2_point(me.choice_data_()[i], 5, you.user_data_()[i])
+            else:
+                mark = mark + _2_point(me.choice_data_()[i], 5, you.user_data_()[i])
         except KeyError:
             pass
 
@@ -111,25 +119,24 @@ def match_user(user):
     # compare filtered users with user and return matches
 
     for peep in all_users:
-        data = {}
         peep_score = compare_users(user, peep)
         my_score = compare_users(peep, user)
-        if peep_score >= 50 and my_score >= 50:
-            data = {
-                "alpha": peep.username,
-                str(peep.id): peep_score,
-                "Residence": peep.user_data_['residence-state'],
-                "Origin": peep.user_data_['origin-state'],
-                "Religion": peep.user_data_['religion'],
-                "denomination": peep.user_data_['denomination'],
-                "Has Children": peep.user_data_['children']
-            }
-
-            success_list.append(sorted(data.items()))
-
-        else:
+        try:
+            if peep_score >= 50 and my_score >= 50:
+                data = [
+                    [str(peep.id), peep_score],
+                    ["alpha", peep.username],
+                    ["Origin", peep.user_data_()['origin_state']],
+                    ["Residence", peep.user_data_()['residence_state']],
+                    ["Religion", peep.user_data_()['religion']],
+                    ["denomination", peep.user_data_()['denomination']],
+                    ["Has Children", peep.user_data_()['children']]
+                ]
+                success_list.append(data)
+            else:
+                no_list.append(str(peep.id))
+        except KeyError:
             no_list.append(str(peep.id))
-    success_list = merge_sort(success_list)
     user.successful_matches = json.dumps(success_list)
     user.no_matches = json.dumps(no_list)
     user.save()

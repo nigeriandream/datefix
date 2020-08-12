@@ -122,11 +122,11 @@ class ChatThread(models.Model):
 
     def encrypt(self, data):
         from cryptography.fernet import Fernet
-        return Fernet(self.secret).encrypt(data.encode())
+        return Fernet(self.secret).encrypt(data.encode()).decode()
 
     def decrypt(self, cipher_text):
         from cryptography.fernet import Fernet
-        return Fernet(self.secret).decrypt(cipher_text).decode()
+        return Fernet(self.secret).decrypt(cipher_text.encode()).decode()
 
     def no_unread_msg(self, user):
         receiver = self.get_receiver(user)
@@ -144,7 +144,7 @@ class ChatThread(models.Model):
 
 class ChatMessage(models.Model):
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
-    text = models.BinaryField()
+    text = models.TextField()
     datetime = models.DateTimeField()
     send_status = models.CharField(max_length=20, choices=(('sent', 'sent'), ('delivered', 'delivered')))
     chat = models.ForeignKey(ChatThread, on_delete=models.CASCADE)

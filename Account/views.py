@@ -23,6 +23,7 @@ def login(request):
             user = User.objects.get(email=request.POST['email'])
 
             if not user.verified:
+                request.session['email'] = user.email
                 send_verification(request, user)
                 return redirect('verification')
 
@@ -43,6 +44,7 @@ def login(request):
 
     if request.method == 'GET':
         if request.user.is_authenticated:
+            del request.session['email']
             return redirect('dashboard')
         flash_ = display(request)
         if flash_ is None:
@@ -130,8 +132,10 @@ def results(request):
                           {'matches': matches, "matches_length": len(matches)})
 
     if request.method == 'POST':
-        selected = request.POST['matches']
-        success = user.successful_list()
+        selected = request.POST['matches'].split(',')
+        user.matches = json.dumps([int(x) for x in selected])
+        user.session = len(selected)
+        user.save()
         match_comp = [x for x in selected if User.objects.get(id=int(x)).complete_match()]
         verb = ''
         if len(match_comp) > 0:
@@ -144,13 +148,16 @@ def results(request):
             return redirect('results')
         if len(match_comp) == 0:
             for i in selected:
-                success = [x for x in success if x[0][1] != i]
-                user.successful_matches = json.dumps(success)
-                user.matches = json.dumps(selected)
-                user.save()
-                create_chat(request, user.id, int(i))
-                selected.remove(i)
-                return redirect('chatroom')
+                add_new(request, user, i)
+            return redirect('chatroom')
+
+
+def add_new(request, user, id_):
+    success = user.successful_list()
+    success = [x for x in success if x[0][0] != str(id_)]
+    user.successful_matches = json.dumps(success)
+    user.save()
+    create_chat(request, user.id, int(id_))
 
 
 # signup verified
@@ -179,8 +186,7 @@ def signup(request):
                 first_name=request.POST['first-name'],
                 last_name=request.POST['last-name'],
                 sex=request.POST['sex'],
-                phone=request.POST['phone'],
-                secret=get_key(f"{request.POST['email']}{username}")
+                phone=request.POST['phone']
             )
             user.save()
             flash(request, f"{request.POST['first-name']}, your account has been "
@@ -211,10 +217,7 @@ def dashboard(request):
             user = User.objects.get(id=request.user.id)
             user_details = user.user_data_()
             user_details['registered'] = True
-            if had_session(user):
-                return render(request, 'Account/profile.html', user_details)
-            else:
-                return redirect('payment')
+            return render(request, 'Account/profile.html', user_details)
         if user.complete_match():
             return redirect('chatroom')
 

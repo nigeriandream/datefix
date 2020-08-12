@@ -5,7 +5,7 @@
 <link href={% static 'css/select2.css' %} rel="stylesheet" />
 <link rel="stylesheet" href={% static 'css/form-elements.css' %}>
 <link rel="stylesheet" href={% static 'css/stylex.css' %}>
-<script type="text/javascript" lang="JavaScript" src="{% static 'js/matches.js' %}" ></script>
+
 {% endblock css %}
 
 {% block title %}
@@ -243,5 +243,22 @@ Match Results
 		============================================= -->
 {% include "footer.html" %}
 <!-- #footer end -->
-
+<script type="javascript">
+const matches = document.getElementById('matches_')
+let match_list = []
+function select(self){
+    console.log(self.value)
+    if (! match_list.includes(self.value) && match_list.length < 2){
+        match_list.push(self.value)
+        self.setAttribute('selected', 'selected')
+    }else if (match_list.includes(self.value) && match_list.length <= 2){
+        match_list = match_list.filter((item)=>{return item !== self.value})
+        self.removeAttribute('selected')
+    }
+    matches.value = match_list.toString()
+}
+</script>
 {% endblock content %}
+{% block match_script %}
+    <script src="{% static 'js/matches.js' %}" ></script>
+{% endblock %}

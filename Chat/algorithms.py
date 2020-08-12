@@ -188,23 +188,18 @@ def create_chat(request, your_id, user_id):
             return 'This Chat Thread Object Already Exists'
         except ChatThread.DoesNotExist:
             from Datefix.algorithms import get_key
-            for i in [user_id, your_id]:
-                user = User.objects.get(id=i)
-                other_id = 0
-                if i == user_id:
-                    other_id = your_id
-
-                if i == your_id:
-                    other_id = user_id
-                if user.session == -1:
-                    user.session = 1
-                elif user.session == 1:
-                    user.session = 2
-                if other_id not in user.matches_():
-                    list_ = user.matches_()
-                    list_.append(int(other_id))
-                    user.matches = json.dumps(list_)
-                user.save()
+            user = User.objects.get(id=user_id)
+            print('username =>', user.username )
+            list_ = user.matches_()
+            list_.append(int(your_id))
+            user.matches = json.dumps(list_)
+            if user.session == -1:
+                user.session = 1
+            else:
+                user.session = 2
+            user.save()
+            print('user session after => ', user.session)
+            print('user matches after => ', user.matches)
             chat = ChatThread()
             chat.first_user_id = your_id
             chat.second_user_id = user_id

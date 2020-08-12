@@ -25,7 +25,7 @@ SECRET_KEY = 'vkg&nnb_%1b&ojkbm6c37m1zh0z$&v^=!lb8uj=023+__@$eg!'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '*'
+    'datefixe.herokuapp.com', '127.0.0.1:8000'
 ]
 
 
@@ -76,8 +76,8 @@ TEMPLATES = [
 CHANNEL_LAYERS = {"default": {
     "BACKEND": "channels_redis.core.RedisChannelLayer",
     "CONFIG": {
-        # "hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
-        "hosts": [("localhost", 6379)],
+        "hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
+
     }
 
 }
