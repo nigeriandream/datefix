@@ -94,10 +94,10 @@ class User(AbstractUser):
         return json.loads(self.couple_ids)
 
     def origin(self):
-        return self.user_data_()['origin-state']
+        return self.user_data_()['origin_state']
 
     def residence(self):
-        return self.user_data_()['residence-state']
+        return self.user_data_()['residence_state']
 
     def religion(self):
         return self.user_data_()['religion']
@@ -140,8 +140,8 @@ class Couple(models.Model):
             try:
                 data = {"firstName": user.first_name,
                         "lastName": user.last_name, "phone": user.phone, "email": user.email,
-                        "residential_address": f"{user_data['residence-lga']}, {user_data['residence-state']}",
-                        "origin_address": f"{user_data['origin-lga']}, {user_data['origin-state']}"}
+                        "residential_address": f"{user_data['residence_lga']}, {user_data['residence_state']}",
+                        "origin_address": f"{user_data['origin_lga']}, {user_data['origin_state']}"}
             except KeyError:
                 data = {"firstName": user.first_name,
                         "lastName": user.last_name, "phone": user.phone, "email": user.email}
