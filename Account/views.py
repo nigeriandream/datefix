@@ -133,7 +133,6 @@ def results(request):
 
     if request.method == 'POST':
         selected = request.POST['matches'].split(',')
-        success = user.successful_list()
         match_comp = [x for x in selected if User.objects.get(id=int(x)).complete_match()]
         verb = ''
         if len(match_comp) > 0:
@@ -146,12 +145,16 @@ def results(request):
             return redirect('results')
         if len(match_comp) == 0:
             for i in selected:
-                success = [x for x in success if x[0][0] != i]
-                user.successful_matches = json.dumps(success)
-                user.save()
-                create_chat(request, user.id, int(i))
-                selected.remove(i)
+                add_new(request, user, i)
             return redirect('chatroom')
+
+
+def add_new(request, user, id_):
+    success = user.successful_list()
+    success = [x for x in success if x[0][0] != str(id_)]
+    user.successful_matches = json.dumps(success)
+    user.save()
+    create_chat(request, user.id, int(id_))
 
 
 # signup verified
