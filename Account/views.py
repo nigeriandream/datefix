@@ -146,7 +146,7 @@ def results(request):
             return redirect('results')
         if len(match_comp) == 0:
             for i in selected:
-                success = [x for x in success if x[0][1] != i]
+                success = [x for x in success if x[0][0] != i]
                 user.successful_matches = json.dumps(success)
                 user.save()
                 create_chat(request, user.id, int(i))
