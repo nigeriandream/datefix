@@ -7,6 +7,13 @@ from .models import ChatThread, ChatMessage
 
 
 def select_match(chat_thread, user, you):
+    """
+    This function enables a user to select another user to become a couple.
+    :param chat_thread: The chat thread instance
+    :param user: the user instance
+    :param you: the other user instance
+    :return: returns a response
+    """
     position = chat_thread.position(user)
     if position == 'first':
         chat_thread.date_first = True
@@ -39,6 +46,13 @@ def select_match(chat_thread, user, you):
 
 
 def end_session(chat_thread, user, you):
+    """
+    This session ends a chat session between two users.
+    :param chat_thread: the chat thread instance
+    :param user: the user instance
+    :param you: the other user instance
+    :return:
+    """
     for i in [user, you]:
         user_ = chat_thread.get_receiver(i)
         list_ = i.matches_()
@@ -60,6 +74,12 @@ def end_session(chat_thread, user, you):
 
 
 def email_chat(chat_thread, user):
+    """
+    This function sends a message to a  user in a chat.
+    :param chat_thread:  the chat instance
+    :param user: the user instance
+    :return:
+    """
     other_user = chat_thread.get_receiver(user)
     user_chat = chat_thread.get_chat_file(user)
     from django.core.mail import EmailMessage
@@ -85,6 +105,13 @@ def reject(you, user):
 
 
 def jilt(chat, you, user):
+    """
+    This function ends a chat session between two users
+    :param chat: the user instance
+    :param you: a user instance
+    :param user: the other user instance
+    :return:
+    """
     reject(you, user)
     reject(user, you)
     end_session(chat, user, you)
@@ -92,11 +119,22 @@ def jilt(chat, you, user):
 
 
 def get_chat(chat_id, user):
+    """
+    This function returns the chat message for a particular user in a chat.
+    :param chat_id: chat instance id
+    :param user: user instance
+    :return: a JSON object containing the chat message
+    """
     chat_thread = ChatThread.objects.get(id=chat_id)
     return json.dumps(chat_thread.get_chat(chat_thread.position(user)))
 
 
 def get_chat_threads(request):
+    """
+    This function returns all the chat instances that a logged in  user has.
+    :param request: HTTP request
+    :return: returns a JSON object containing the user's chats
+    """
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
         chats = ChatThread.objects.filter(Q(first_user_id=request.user.id) | Q(
@@ -116,6 +154,13 @@ def get_chat_threads(request):
 
 
 def delete_message(request, chat_id, id_):
+    """
+    This function deletes a message for only a particular user in a chat.
+    :param request: HTTP request
+    :param chat_id: chat instance id
+    :param id_: chat message id
+    :return:
+    """
     chat = ChatThread.objects.get(id=chat_id)
     position = chat.position(request.user)
     list_ = {'first': chat.first_deleted_(), 'second': chat.second_deleted_()}
@@ -129,6 +174,11 @@ def delete_message(request, chat_id, id_):
 
 
 def profile_picture(image):
+    """
+    This function checks if an image exists and returns None or the image.
+    :param image: The image url
+    :return:
+    """
     try:
         return image.url
     except ValueError:
@@ -136,6 +186,11 @@ def profile_picture(image):
 
 
 def last_message(chat_thread):
+    """
+    This function returns the instance of the last message in a chat.
+    :param chat_thread: the chat thread instance
+    :return:
+    """
     if chat_thread.last_message() is not None:
         return {'id': chat_thread.last_message().id,
                 'time': chat_thread.last_message().datetime.time().strftime('%I:%M %p'),
@@ -148,6 +203,12 @@ def last_message(chat_thread):
 
 
 def get_profile(request, user_id):
+    """
+    This function returns the user details of a user and all the chat threads that belong to that user.
+    :param request: HTTP request
+    :param user_id: user id
+    :return:
+    """
     if request.method == 'GET':
         user = User.objects.get(id=user_id)
         return json.dumps({'username': user.username,
@@ -158,6 +219,12 @@ def get_profile(request, user_id):
 
 
 def notify_user(chat_thread, user):
+    """
+    This function sends an email to the two users in a chat at the beginning of a chat session.
+    :param chat_thread: the chat thread instance
+    :param user: the user instance
+    :return:
+    """
     other_user = chat_thread.get_receiver(user)
     from django.core.mail import EmailMessage
     message = EmailMessage(f'Chat Session Between You and {other_user.username} from Datefix.com',
@@ -169,6 +236,13 @@ def notify_user(chat_thread, user):
 
 
 def create_chat(request, your_id, user_id):
+    """
+    This function creates a chat session between two users.
+    :param request: HTTP request
+    :param your_id: The first user instance
+    :param user_id: The  second user instance
+    :return:
+    """
     if int(request.user.id) == int(user_id):
         return 'You Cannot Chat With Yourself.'
     chats = ChatThread.objects.filter(Q(first_user_id=your_id, second_user_id=user_id) |
@@ -202,6 +276,11 @@ def create_chat(request, your_id, user_id):
 
 
 def has_chat(user):
+    """
+    This checks if a user currently has a chat session
+    :param user: the user instance
+    :return:
+    """
     no_of_chats = user.matches_()
     if len(no_of_chats) > 0:
         print('has chat')
@@ -210,7 +289,13 @@ def has_chat(user):
     return False
 
 
-def activate_expiration(chat=ChatThread(), user=User()):
+def activate_expiration(chat, user):
+    """
+    This function sets an expiration date for a chat session the moment.
+    :param chat: the chat thread instance
+    :param user: the user instance
+    :return:
+    """
     ur_msg = ChatMessage.objects.filter(chat_id=chat.id, sender_id=user.id)
     receiver = chat.get_receiver(user)
     their_msg = ChatMessage.objects.filter(chat_id=chat.id, sender_id=receiver.id)

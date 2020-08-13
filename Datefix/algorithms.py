@@ -1,5 +1,10 @@
 
 def get_key(name):
+    """
+    This function returns a secret key to be used for encryption based on the name
+    :param name: The name comprises of the names of the two users in a chat session
+    :return:
+    """
     import os
     salt = os.urandom(16)
     name = name.encode()

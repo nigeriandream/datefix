@@ -5,10 +5,21 @@ import json
 
 
 def get_path(request):
+    """
+    This function gets the current url
+    :param request: HTTP request
+    :return: it returns a string
+    """
     return f'http://{str(request.get_host())}{str(request.get_full_path(True))}'
 
 
 def _3_point(your_choice, choice):
+    """
+    This function assigns a point to a variable that is equal to close to the desired variable.
+    :param your_choice: the desired variable.
+    :param choice: the variable to be tested.
+    :return: it returns an integer point.
+    """
     if str(your_choice) == 'Does Not Matter' or str(your_choice).isalpha():
         return 1
     if str(your_choice).isdigit():
@@ -25,6 +36,12 @@ def _3_point(your_choice, choice):
 
 
 def age_range(me, you):
+    """
+    This function checks if a particular age falls into a specified range or close to the range.
+    :param me: the person who specified the range.
+    :param you: the person who has the age.
+    :return: returns a point assigned to the age.
+    """
     min_ = me.choice_data_()['min-age']
     max_ = me.choice_data_()['max-age']
     age = you.user_data_()['age']
@@ -37,6 +54,13 @@ def age_range(me, you):
 
 
 def _2_point(minimum, maximum, choice):
+    """
+    This function assigns a point to a choice based on how close it is to the minimum and the maximum.
+    :param minimum:  maximum value.
+    :param maximum:  minimum value or value specified by the other person.
+    :param choice:  choice value.
+    :return: it returns an integer point.
+    """
     if str(choice).isdigit():
         choice = int(choice)
     if str(minimum).isdigit():
@@ -52,6 +76,12 @@ def _2_point(minimum, maximum, choice):
 
 
 def compare_users(me, you):
+    """
+    This function compares two users against each other to determine their compatibility.
+    :param me: first user.
+    :param you: second user.
+    :return: it returns the percentage of their compatibility.
+    """
     mark = 0
     absolute_match = ('residence_lga', 'residence_state', 'origin_lga',
                       'origin_state', 'denomination', 'religion', 'marital_status', 'children',
@@ -107,6 +137,11 @@ def compare_users(me, you):
 
 
 def match_user(user):
+    """
+    This function matches a particular user to other users based on the compatibility scores.
+    :param user:  The user instance.
+    :return:  it is a void.
+    """
     success_list = {}
     no_list = []
     # filter users
@@ -134,6 +169,11 @@ def match_user(user):
 
 
 def lucky_draw(num):
+    """
+    This function randomly selects the specified number of couples from the database tables.
+    :param num: The number of couples to be selected.
+    :return:  returns a list of selected couples.
+    """
     lucky_ones = []
     lists = Couple.objects.all()
     for i in range(num):
@@ -143,6 +183,10 @@ def lucky_draw(num):
 
 
 def get_username():
+    """
+    This function generates a random username for a particular user.
+    :return: a string => the username
+    """
     username = f'User_{str(random.randint(1, 123456789))}'
     try:
         User.objects.get(username=username)
@@ -152,6 +196,14 @@ def get_username():
 
 
 def flash(request, message, status, icon):
+    """
+    This function sets the variables for the alert on a page.
+    :param request: The HTTP request
+    :param message: The message to be displayed on the alert bar.
+    :param status: The status e.g warning, success or danger
+    :param icon: The icon to be displayed
+    :return: it returns nothing
+    """
     request.session['message'] = message
     request.session['status'] = status
     request.session['icon'] = icon
@@ -467,6 +519,11 @@ our_categories = (category_1, category_2, category_3, category_4, category_5)
 
 
 def get_score(score):
+    """
+    This function returns a point based on the score range (-1,0,1).
+    :param score: the score.
+    :return: the point.
+    """
     if score < -1:
         return 1
     if score > 1:
@@ -475,6 +532,12 @@ def get_score(score):
 
 
 def get_personality(score, category):
+    """
+    This function gets the category and returns the personality description based on the score
+    :param score:  The score
+    :param category: The personality category
+    :return: a string of the description
+    """
     if category != 'Extraversion':
         if score > 0:
             return json.dumps(personality[categories.index(category)][1])
@@ -492,6 +555,11 @@ def get_personality(score, category):
 
 
 def display(request):
+    """
+    This function returns the message for an alert.
+    :param request: HTTP request
+    :return: This returns a list containing the message, the status and the icon.
+    """
     if 'message' in request.session:
         message = request.session['message']
         status = request.session['status']
@@ -502,6 +570,12 @@ def display(request):
 
 
 def send_verification(request, user):
+    """
+    This function sends a verification email to the target user
+    :param request: HTTP request
+    :param user: The user instance
+    :return:
+    """
     request.session['code'] = request.POST['csrfmiddlewaretoken']
     link = f'http://{request.get_host()}/account/verify/?code={request.POST["csrfmiddlewaretoken"]}&email={request.POST["email"]}'
     message = f''' Dear {user.first_name}, \n We are excited to have you on Datefix. Below is the link to 
@@ -513,6 +587,11 @@ please ignore.\n\nCheers,\nDatefix Team. '''
 
 
 def dict_to_zip(data):
+    """
+    This function takes a set of dictionary and partitions the items into lists and pack them into one list.
+    :param data:  a dictionary object.
+    :return: a zip iterable.
+    """
     questions = set([x['Question'] for x in data])
     weights = (x['Weight'] for x in data)
     count = set([data.index(x) for x in data])
@@ -520,6 +599,11 @@ def dict_to_zip(data):
 
 
 def had_session(user):
+    """
+    This function checks if a user still has an existing chat session
+    :param user: User instance
+    :return: a boolean result.
+    """
     if user.jilted_matches == '[]' and user.couple_ids == '[]':
         return False
     return True

@@ -141,6 +141,7 @@ class PersonalityTest(models.Model):
     openness = models.TextField(default='{}')
 
     def titles(self):
-        return (json.loads(self.extraversion)['title'], json.loads(self.neurotism)['title'],
-                json.loads(self.agreeableness)['title'], json.loads(self.conscientiousness)['title'],
-                json.loads(self.openness)['title'])
+        real = lambda x: json.loads(x)['title'] if 'title' in json.loads(x) else ''
+        return tuple([real(self.extraversion), real(self.neurotism),
+                      real(self.agreeableness), real(self.conscientiousness),
+                      real(self.openness)])

@@ -163,7 +163,7 @@ def results(request):
 
 def add_new(request, user, id_):
     success = user.successful_list()
-    success = tuple([x for x in success if x[0][0] != str(id_)])
+    success = tuple([x for x in success if x[0] != int(id_)])
     user.successful_matches = json.dumps(success)
     user.save()
     create_chat(request, user.id, int(id_))
@@ -222,12 +222,15 @@ def dashboard(request):
         if user.user_data is None or user.user_data == '':
             return render(request, 'Account/profile.html')
 
-        if not user.complete_match() and not (user.user_data is None or user.user_data == ''):
-            user = User.objects.get(id=request.user.id)
+        elif user.sex == 'male' and not user.complete_match():
+            return redirect('results')
+
+        elif user.sex == 'female' and not user.complete_match():
             user_details = user.user_data_()
             user_details['registered'] = True
             return render(request, 'Account/profile.html', user_details)
-        if user.complete_match():
+
+        elif user.complete_match():
             return redirect('chatroom')
 
 
