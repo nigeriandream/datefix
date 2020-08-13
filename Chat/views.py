@@ -6,17 +6,17 @@ from Chat.models import ChatThread
 
 
 def chat(request):
-#     if request.user.is_authenticated:
-#         from Account.models import User
-#         user = User.objects.get(id=request.user.id)
-#         from Chat.algorithms import has_chat
-#         if has_chat(user):
-      return render(request, 'Chat/chat.html')
-#         elif user.session == 0:
-#             return redirect('end_session')
-#         return redirect('dashboard')
-#     return redirect('home')
-
+    # if request.user.is_authenticated:
+    #     from Account.models import User
+    #     user = User.objects.get(id=request.user.id)
+    #     from Chat.algorithms import has_chat
+    #     if has_chat(user):
+    #         return render(request, 'Chat/chat.html')
+    #     elif user.session == 0:
+    #         return redirect('end_session')
+    #     return redirect('dashboard')
+    # return redirect('home')
+    return render(request, 'Chat/chat.html')
 
 def get_chat_(request, id_):
     if request.method == 'GET':
@@ -77,18 +77,19 @@ def test_accept(request, chat_id):
 
 
 def session_end(request):
-#     from Account.models import User
-#     user = User.objects.get(id=request.user.id)
-#     import json
-#     if request.method == 'GET':
-#         couple_list = json.loads(user.couple_ids)
-#         if len(couple_list) > 0:
-#             from Account.models import Couple
-#             lists = [Couple.objects.get(id=x).true_details(user.id).items() for x in couple_list]
-#             return render(request, 'Chat/end_session.html', {"details": lists})
-      return render(request, 'Chat/end_session.html')
-#     if request.method == 'POST':
-#         user.session = -1
-#         user.couple_ids = '[]'
-#         user.save()
-#         return redirect('dashboard')
+    # from Account.models import User
+    # user = User.objects.get(id=request.user.id)
+    # import json
+    # if request.method == 'GET':
+    #     couple_list = json.loads(user.couple_ids)
+    #     if len(couple_list) > 0:
+    #         from Account.models import Couple
+    #         lists = (Couple.objects.get(id=x).true_details(user.id).items() for x in couple_list)
+    #         return render(request, 'Chat/end_session.html', {"details": lists})
+    #     return render(request, 'Chat/end_session.html')
+    # if request.method == 'POST':
+    #     user.session = -1
+    #     user.couple_ids = '[]'
+    #     user.save()
+    #     return redirect('dashboard')
+    return render(request, 'Chat/end_session.html')
