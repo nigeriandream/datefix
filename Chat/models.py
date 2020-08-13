@@ -77,17 +77,16 @@ class ChatThread(models.Model):
         self.show_detail()
         chat_message_items = [x for x in ChatMessage.objects.all().filter(chat_id=self.id).order_by('datetime') \
                               if x.id not in list_[user_position]]
-        data = []
-        for i in chat_message_items:
-            from Chat.algorithms import profile_picture
-            data.append({'id': i.id,
+
+        from Chat.algorithms import profile_picture
+        data = tuple([{'id': i.id,
                          'time': i.datetime.strftime('%I:%M %p'),
                          'date': i.datetime.strftime('%e - %b - %Y'),
                          'message': self.decrypt(i.text),
                          'sender_id': i.sender.id,
                          'sender': i.sender.username,
                          'sender_pic': profile_picture(i.sender.profile_picture),
-                         'status': i.send_status})
+                         'status': i.send_status} for i in chat_message_items])
         status = ''
         if user_position == 'first':
             status = User.objects.get(id=self.second_user_id).status
@@ -132,10 +131,10 @@ class ChatThread(models.Model):
         receiver = self.get_receiver(user)
         position = self.position(user)
         list_ = {'first': self.first_deleted_(), 'second': self.second_deleted_()}
-        chat_message_items = [x for x in ChatMessage.objects.filter(chat=self) \
+        chat_message_items = tuple([x for x in ChatMessage.objects.filter(chat=self) \
             .filter(sender=receiver).filter(send_status='sent').order_by('datetime') \
-                              if x.id not in list_[position]]
-        return chat_message_items.__len__()
+                              if x.id not in list_[position]])
+        return len(chat_message_items)
 
     def first_msg_today(self):
         chat_msg = ChatMessage.objects.filter(chat=self).filter(datetime=datetime.today()).order_by('id')

@@ -3,11 +3,9 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
-
 from .models import User, PersonalityTest, Couple
 import json
-from .algorithms import match_user, flash, display, send_verification, get_username, get_personality, get_score, \
-    had_session
+from .algorithms import match_user, flash, display, send_verification, get_username, get_personality, get_score
 from Chat.algorithms import create_chat
 
 
@@ -120,23 +118,34 @@ def personality(request):
 def results(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
-        matches = None
         if user.sex == 'female':
-            matches = user.successful_list()
-            select = [[x[0][0], x[1][1]] for x in matches]
+            matches = user.successful_list()[:6]
+            size = len(matches)
+            select = ((x[0], User.objects.get(id=x[0]).username) for x in matches)
+            matches = ((User.objects.get(id=x[0]), x[1]) for x in matches)
+            matches = ((
+                (str(x[0].id), x[1]),
+                ("alpha", x[0].username),
+                ("Origin", x[0].user_data_()['origin_state']),
+                ["Residence", x[0].user_data_()['residence_state']],
+                ("Religion", x[0].user_data_()['religion']),
+                ("denomination", x[0].user_data_()['denomination']),
+                ("Has Children", x[0].user_data_()['children']))
+                for x in matches)
+
             return render(request, 'Account/results.html',
-                          {'matches': matches, "select": select, "matches_length": len(matches)})
+                          {'matches': matches, "select": select, "matches_length": size})
         if user.sex == 'male':
-            matches = [User.objects.get(id=x) for x in user.matches_()]
+            matches = (User.objects.get(id=x) for x in user.matches_())
             return render(request, 'Account/results_m.html',
-                          {'matches': matches, "matches_length": len(matches)})
+                          {'matches': matches, "matches_length": len(user.matches_())})
 
     if request.method == 'POST':
         selected = request.POST['matches'].split(',')
         user.matches = json.dumps([int(x) for x in selected])
         user.session = len(selected)
         user.save()
-        match_comp = [x for x in selected if User.objects.get(id=int(x)).complete_match()]
+        match_comp = tuple([x for x in selected if User.objects.get(id=int(x)).complete_match()])
         verb = ''
         if len(match_comp) > 0:
             if len(match_comp) == 2:
@@ -154,7 +163,7 @@ def results(request):
 
 def add_new(request, user, id_):
     success = user.successful_list()
-    success = [x for x in success if x[0][0] != str(id_)]
+    success = tuple([x for x in success if x[0] != int(id_)])
     user.successful_matches = json.dumps(success)
     user.save()
     create_chat(request, user.id, int(id_))
@@ -213,12 +222,15 @@ def dashboard(request):
         if user.user_data is None or user.user_data == '':
             return render(request, 'Account/profile.html')
 
-        if not user.complete_match() and not (user.user_data is None or user.user_data == ''):
-            user = User.objects.get(id=request.user.id)
+        elif user.sex == 'male' and not user.complete_match():
+            return redirect('results')
+
+        elif user.sex == 'female' and not user.complete_match():
             user_details = user.user_data_()
             user_details['registered'] = True
             return render(request, 'Account/profile.html', user_details)
-        if user.complete_match():
+
+        elif user.complete_match():
             return redirect('chatroom')
 
 
@@ -229,43 +241,6 @@ def matching(request):
         if user.sex == 'female':
             match_user(user)
         return HttpResponse('success')
-
-
-def delete_notifications(request, id_):
-    if request.method == 'GET':
-        user = User.objects.get(id=request.user.id)
-        notification = {}
-        if user.notification == '' or user.notification is None:
-            notification['deleted'] = [str(id_)]
-            notification['read'] = []
-            user.notification = json.dumps(notification)
-            user.save()
-        else:
-            notification = json.loads(user.notification)
-            notification['deleted'].append(str(id_))
-            user.notification = json.dumps(notification)
-            user.save()
-        return HttpResponse('done')
-    else:
-        return HttpResponse('not done')
-
-
-def read_notifications(request):
-    if request.method == 'GET':
-        user = User.objects.get(id=request.user.id)
-        notifications = {'read': [], 'deleted': []}
-        if user.notification is None or user.notification == '':
-            pass
-        else:
-            notifications = json.loads(user.notification)
-        new_notifications = [str(x.id) for x in user.notifications() if str(
-            x.id) not in notifications['read']]
-        notifications['read'] = new_notifications + notifications['read']
-        user.notification = json.dumps(notifications)
-        user.save()
-        return HttpResponse('done')
-    else:
-        return HttpResponse('not done')
 
 
 # verified
@@ -290,8 +265,7 @@ def get_data(request, type_):
         if type_ == 'partner':
             user_data = json.loads(user.choice_data)
             user_data.update(request.GET)
-            user.deal_breaker = "[" + json.dumps(
-                [user_data['dealbreaker1'], user_data['dealbreaker2']]).replace(']', '').replace('[', '') + "]"
+            user.deal_breaker = f"[{json.dumps([user_data['dealbreaker1'], user_data['dealbreaker2']]).replace(']', '').replace('[', '')}]"
             del (user_data['dealbreaker1'], user_data['dealbreaker2'])
             user.choice_data = json.dumps(
                 user_data).replace(']', '').replace('[', '')
@@ -380,20 +354,20 @@ def test_result(request):
             your_personality = PersonalityTest.objects.get(email=request.session['email'])
             data = zip(
                 categories,
-                [
+                (
                     json.loads(your_personality.extraversion)['title'],
                     json.loads(your_personality.neurotism)['title'],
                     json.loads(your_personality.agreeableness)['title'],
                     json.loads(your_personality.conscientiousness)['title'],
                     json.loads(your_personality.openness)['title']
-                ],
-                [
+                ),
+                (
                     json.loads(your_personality.extraversion)['description'],
                     json.loads(your_personality.neurotism)['description'],
                     json.loads(your_personality.agreeableness)['description'],
                     json.loads(your_personality.conscientiousness)['description'],
                     json.loads(your_personality.openness)['description'],
-                ]
+                )
             )
             return render(request, 'Account/personality.html', {'data': data,
                                                                 "email": request.session['email'].split('@')[0]})

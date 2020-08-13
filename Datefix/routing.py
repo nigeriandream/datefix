@@ -11,7 +11,6 @@ application = ProtocolTypeRouter({
     'websocket': AllowedHostsOriginValidator(AuthMiddlewareStack(URLRouter([
         
             path('chat/', ChatConsumer),
-            # path('chat/<int:thread_id>', ChatConsumer)
         
     ])))
 })

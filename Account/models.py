@@ -21,8 +21,6 @@ class User(AbstractUser):
     successful_matches = models.TextField(default='{}')
     no_matches = models.TextField(default='[]')
     jilted_matches = models.TextField(default='[]')
-    notification = models.TextField(default='[]')
-    profile_changed = models.BooleanField(default=False)
     couple_ids = models.CharField(max_length=16, default='[]')
     payed = models.BooleanField(default=False)
     session = models.IntegerField(default=-1)
@@ -75,29 +73,14 @@ class User(AbstractUser):
             return {}
         return json.loads(self.choice_data)
 
-    def notifications(self):
-        notifications = Notification.objects.filter(Q(receiver=self.id) | Q(general=True)).order_by('-datetime')
-        if self.notification is None or self.notification == '':
-            return notifications
-        notify = json.loads(self.notification)
-        return [x for x in notifications if str(x.id) not in notify['deleted']]
-
-    def new_notifications(self):
-        notifications = Notification.objects.filter(Q(receiver=self.id) | Q(general=True)).order_by('-datetime')
-        if self.notification is None or self.notification == '':
-            return notifications.count()
-        notify = json.loads(self.notification)
-        return [x for x in notifications if
-                (str(x.id) not in notify['read']) and (str(x.id) not in notify['deleted'])].__len__()
-
     def couple_list(self):
         return json.loads(self.couple_ids)
 
     def origin(self):
-        return self.user_data_()['origin-state']
+        return self.user_data_()['origin_state']
 
     def residence(self):
-        return self.user_data_()['residence-state']
+        return self.user_data_()['residence_state']
 
     def religion(self):
         return self.user_data_()['religion']
@@ -118,7 +101,7 @@ class User(AbstractUser):
     def chatThreads(self):
         from Chat.models import ChatThread
         threads = ChatThread.objects.filter(Q(first_user_id=self.id) | Q(second_user_id=self.id))
-        return list(set([x.id for x in threads]))
+        return tuple(set([x.id for x in threads]))
 
 
 class Couple(models.Model):
@@ -140,21 +123,13 @@ class Couple(models.Model):
             try:
                 data = {"firstName": user.first_name,
                         "lastName": user.last_name, "phone": user.phone, "email": user.email,
-                        "residential_address": f"{user_data['residence-lga']}, {user_data['residence-state']}",
-                        "origin_address": f"{user_data['origin-lga']}, {user_data['origin-state']}"}
+                        "residential_address": f"{user_data['residence_lga']}, {user_data['residence_state']}",
+                        "origin_address": f"{user_data['origin_lga']}, {user_data['origin_state']}"}
             except KeyError:
                 data = {"firstName": user.first_name,
                         "lastName": user.last_name, "phone": user.phone, "email": user.email}
 
             return data
-
-
-class Notification(models.Model):
-    title = models.CharField(max_length=256)
-    message = models.TextField()
-    datetime = models.DateTimeField()
-    general = models.BooleanField(default=True)
-    receiver = models.IntegerField(default=None, null=True)
 
 
 class PersonalityTest(models.Model):
@@ -166,6 +141,7 @@ class PersonalityTest(models.Model):
     openness = models.TextField(default='{}')
 
     def titles(self):
-        return [json.loads(self.extraversion)['title'], json.loads(self.neurotism)['title'],
-                json.loads(self.agreeableness)['title'], json.loads(self.conscientiousness)['title'],
-                json.loads(self.openness)['title']]
+        real = lambda x: json.loads(x)['title'] if 'title' in json.loads(x) else ''
+        return tuple([real(self.extraversion), real(self.neurotism),
+                      real(self.agreeableness), real(self.conscientiousness),
+                      real(self.openness)])
