@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,13 +69,13 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Secret" />
-      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Payment" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static" />
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Account\templates\Account" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Secret" />
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Payment" />
     </key>
   </component>
   <component name="RestClientSettings">
@@ -319,7 +318,7 @@
       <workItem from="1597189872475" duration="3861000" />
       <workItem from="1597275302190" duration="3649000" />
       <workItem from="1597280093620" duration="8708000" />
-      <workItem from="1597321087716" duration="12144000" />
+      <workItem from="1597321087716" duration="13006000" />
     </task>
     <servers />
   </component>
@@ -397,10 +396,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593559752535" />
-    <state x="480" y="152" key="git4idea.merge.GitMergeDialog" timestamp="1596577602094">
+    <state x="480" y="152" key="git4idea.merge.GitMergeDialog" timestamp="1597358385987">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="480" y="152" key="git4idea.merge.GitMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1596577602094" />
+    <state x="480" y="152" key="git4idea.merge.GitMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1597358385987" />
     <state x="415" y="152" key="git4idea.merge.GitPullDialog" timestamp="1597355681914">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
