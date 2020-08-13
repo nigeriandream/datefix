@@ -3,7 +3,7 @@ from django.db.models import Q
 
 from Account.models import User, Couple
 from datetime import datetime, timedelta
-from .models import ChatThread
+from .models import ChatThread, ChatMessage
 
 
 def select_match(chat_thread, user, you):
@@ -18,39 +18,31 @@ def select_match(chat_thread, user, you):
 
     if (position == 'first' and chat_thread.date_second) or (
             position == 'second' and chat_thread.date_first):
-        try:
-            Couple.objects.get(first_partner_id=you.id, second_partner_id=user.id)
-        except Couple.DoesNotExist:
-            try:
-                Couple.objects.get(first_partner_id=user.id, second_partner_id=you.id)
-            except Couple.DoesNotExist:
-                couple = Couple.objects.create(first_partner_id=chat_thread.first_user_id,
-                                               second_partner_id=chat_thread.second_user_id,
-                                               datetime=datetime.now(), couple_name=chat_thread.chat_name())
-                for i in [you, user]:
-                    couple_list = json.loads(i.couple_ids)
-                    if couple.id not in couple_list:
-                        couple_list.append(couple.id)
-                        i.couple_ids = json.dumps(couple_list)
-                        i.save()
+        couples = Couple.objects.filter(Q(first_partner_id=you.id, second_partner_id=user.id) |
+                                        Q(first_partner_id=user.id, second_partner_id=you.id))
+        if couples.count() == 0:
+            couple = Couple.objects.create(first_partner_id=chat_thread.first_user_id,
+                                           second_partner_id=chat_thread.second_user_id,
+                                           datetime=datetime.now(), couple_name=chat_thread.chat_name())
+            for i in [you, user]:
+                couple_list = json.loads(i.couple_ids)
+                if couple.id not in couple_list:
+                    couple_list.append(couple.id)
+                    i.couple_ids = json.dumps(couple_list)
+                    i.save()
 
         end_session(chat_thread, user, you)
-        try:
-            couple = Couple.objects.get(first_partner_id=you.id, second_partner_id=user.id)
-            return couple.id
-        except Couple.DoesNotExist:
-            couple = Couple.objects.get(first_partner_id=user.id, second_partner_id=you.id)
-            return couple.id
+        couple = Couple.objects.filter(Q(first_partner_id=you.id, second_partner_id=user.id) |
+                                       Q(first_partner_id=user.id, second_partner_id=you.id))[0]
+        return couple.id
     return f" You have accepted {user.username}. Awaiting Response from {user.username}"
 
 
 def end_session(chat_thread, user, you):
     for i in [user, you]:
         user_ = chat_thread.get_receiver(i)
-        print(user_, user_.matches, user_.session)
         list_ = i.matches_()
         try:
-            print("im here p")
             list_.remove(int(user_.id))
             i.matches = json.dumps(list_)
             if i.session == 2:
@@ -109,7 +101,7 @@ def get_chat_threads(request):
     if request.method == 'GET':
         chats = ChatThread.objects.filter(Q(first_user_id=request.user.id) | Q(
             second_user_id=request.user.id)).order_by('-last_message_date')
-        data = [{
+        data = tuple([{
             "chat_id": x.id,
             "chat_link": ''.join(['/chat/api/chat/', str(x.id)]),
             "username": x.get_receiver(user).username,
@@ -119,7 +111,7 @@ def get_chat_threads(request):
             "profile_picture": profile_picture(x.get_receiver(user).profile_picture),
             "last_message": last_message(x),
             "expired": x.expired()
-        } for x in chats]
+        } for x in chats])
         return json.dumps({'user_id': request.user.id, "chat_threads": data})
 
 
@@ -179,40 +171,34 @@ def notify_user(chat_thread, user):
 def create_chat(request, your_id, user_id):
     if int(request.user.id) == int(user_id):
         return 'You Cannot Chat With Yourself.'
-    try:
-        ChatThread.objects.get(first_user_id=your_id, second_user_id=user_id)
+    chats = ChatThread.objects.filter(Q(first_user_id=your_id, second_user_id=user_id) |
+                                      Q(first_user_id=user_id, second_user_id=your_id))
+    if chats.count() > 0:
         return 'This Chat Thread Object Already Exists'
-    except ChatThread.DoesNotExist:
-        try:
-            ChatThread.objects.get(first_user_id=user_id, second_user_id=your_id)
-            return 'This Chat Thread Object Already Exists'
-        except ChatThread.DoesNotExist:
-            from Datefix.algorithms import get_key
-            user = User.objects.get(id=user_id)
-            print('username =>', user.username )
-            list_ = user.matches_()
-            list_.append(int(your_id))
-            user.matches = json.dumps(list_)
-            if user.session == -1:
-                user.session = 1
-            else:
-                user.session = 2
-            user.save()
-            print('user session after => ', user.session)
-            print('user matches after => ', user.matches)
-            chat = ChatThread()
-            chat.first_user_id = your_id
-            chat.second_user_id = user_id
-            chat.secret = get_key(f'{request.user.id}{datetime.now().__str__()}{user_id}')
-            chat.expiry_date = datetime.now() + timedelta(days=7)
-            chat.date_created = datetime.now()
-            chat.save()
-            for i in [your_id, user_id]:
-                user = User.objects.get(id=int(i))
-                notify_user(chat, user)
-            return {"status": 200, "message": f'A Chat Thread Object has been created for you and the '
-                                              f'user with ID {user_id}',
-                    "data": get_chat(chat.id, user=request.user)}
+    else:
+        from Datefix.algorithms import get_key
+        user = User.objects.get(id=user_id)
+        list_ = user.matches_()
+        list_.append(int(your_id))
+        user.matches = json.dumps(list_)
+        if user.session == -1:
+            user.session = 1
+        else:
+            user.session = 2
+        user.save()
+        chat = ChatThread()
+        chat.first_user_id = your_id
+        chat.second_user_id = user_id
+        chat.secret = get_key(f'{request.user.id}{datetime.now().__str__()}{user_id}')
+        chat.date_created = datetime.now()
+        chat.expiry_date = datetime.now() + timedelta(days=30)
+        chat.save()
+        for i in [your_id, user_id]:
+            user = User.objects.get(id=int(i))
+            notify_user(chat, user)
+        return {"status": 200, "message": f'A Chat Thread Object has been created for you and the '
+                                          f'user with ID {user_id}',
+                "data": get_chat(chat.id, user=request.user)}
 
 
 def has_chat(user):
@@ -222,3 +208,12 @@ def has_chat(user):
         return True
     print('has no chat')
     return False
+
+
+def activate_expiration(chat=ChatThread(), user=User()):
+    ur_msg = ChatMessage.objects.filter(chat_id=chat.id, sender_id=user.id)
+    receiver = chat.get_receiver(user)
+    their_msg = ChatMessage.objects.filter(chat_id=chat.id, sender_id=receiver.id)
+    if their_msg.count() > 0 and ur_msg == 0:
+        chat.expiry_date = datetime.now() + timedelta(days=7)
+        chat.save()

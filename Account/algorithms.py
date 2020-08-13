@@ -1,5 +1,4 @@
 from django.core.mail import send_mail
-
 from .models import User, Couple
 import random
 import json
@@ -54,14 +53,14 @@ def _2_point(minimum, maximum, choice):
 
 def compare_users(me, you):
     mark = 0
-    absolute_match = ['residence_lga', 'residence_state', 'origin_lga',
+    absolute_match = ('residence_lga', 'residence_state', 'origin_lga',
                       'origin_state', 'denomination', 'religion', 'marital_status', 'children',
-                      'blood_group', 'genotype']
+                      'blood_group', 'genotype')
 
-    _2_spectrum = ['net_worth', 'education', 'body_shape']
+    _2_spectrum = ('net_worth', 'education', 'body_shape')
 
-    _3_spectrum = ['complexion', 'height', 'body_type', 'drink', 'smoke', 'conscientiousness', 'openess',
-                   'extraversion', 'agreeableness', 'neurotism']
+    _3_spectrum = ('complexion', 'height', 'body_type', 'drink', 'smoke', 'conscientiousness', 'openess',
+                   'extraversion', 'agreeableness', 'neurotism')
     deal_breakers = json.loads(me.deal_breaker)
     print(deal_breakers)
     total = len(absolute_match) + len(_3_spectrum) + len(_2_spectrum) + 1
@@ -79,7 +78,7 @@ def compare_users(me, you):
 
     for i in absolute_match:
         try:
-            if str(you.user_data_()[i]) in str(me.choice_data_()[i]).split(',')\
+            if str(you.user_data_()[i]) in str(me.choice_data_()[i]).split(',') \
                     or 'Does Not Matter' in str(me.choice_data_()[i]).split(','):
                 mark = mark + 1
         except KeyError:
@@ -108,14 +107,14 @@ def compare_users(me, you):
 
 
 def match_user(user):
-    success_list = []
+    success_list = {}
     no_list = []
     # filter users
-    all_users = [x for x in User.objects.all()
+    all_users = (x for x in User.objects.all()
                  if (x.complete_match() is False)
                  and (str(x.id) not in user.jilted_list()) and (x.is_couple() is False)
                  and (str(x.id) not in user.no_list()) and x.sex == 'male' and
-                 (x.user_data is not None or x.user_data == '')]
+                 (x.user_data is not None or x.user_data == ''))
     # compare filtered users with user and return matches
 
     for peep in all_users:
@@ -123,20 +122,12 @@ def match_user(user):
         my_score = compare_users(peep, user)
         try:
             if peep_score >= 50 and my_score >= 50:
-                data = [
-                    [str(peep.id), peep_score],
-                    ["alpha", peep.username],
-                    ["Origin", peep.user_data_()['origin_state']],
-                    ["Residence", peep.user_data_()['residence_state']],
-                    ["Religion", peep.user_data_()['religion']],
-                    ["denomination", peep.user_data_()['denomination']],
-                    ["Has Children", peep.user_data_()['children']]
-                ]
-                success_list.append(data)
+                success_list[peep.id] = peep_score
             else:
                 no_list.append(str(peep.id))
         except KeyError:
             no_list.append(str(peep.id))
+    success_list = sorted(success_list.items(), key=lambda x: x[1], reverse=True)
     user.successful_matches = json.dumps(success_list)
     user.no_matches = json.dumps(no_list)
     user.save()
@@ -148,45 +139,16 @@ def lucky_draw(num):
     for i in range(num):
         random.shuffle(lists)
         lucky_ones.append(lists[0])
-    return lucky_ones
+    return tuple(lucky_ones)
 
 
 def get_username():
-    username = 'User_' + str(random.randint(1, 123456789))
+    username = f'User_{str(random.randint(1, 123456789))}'
     try:
         User.objects.get(username=username)
         get_username()
     except User.DoesNotExist:
         return username
-
-
-def merge_sort(n_list):
-    if len(n_list) > 1:
-        mid = len(n_list) // 2
-        left_half = n_list[:mid]
-        right_half = n_list[mid:]
-
-        merge_sort(left_half)
-        merge_sort(right_half)
-        i = j = k = 0
-        while i < len(left_half) and j < len(right_half):
-
-            if left_half[i][0][1] < right_half[j][0][1]:
-                n_list[k] = left_half[i]
-                i = i + 1
-            else:
-                n_list[k] = right_half[j]
-                j = j + 1
-            k = k + 1
-        while i < len(left_half):
-            n_list[k] = left_half[i]
-            i = i + 1
-            k = k + 1
-        while j < len(right_half):
-            n_list[k] = left_half[i]
-            j = j + 1
-            k = k + 1
-    return n_list[:9]
 
 
 def flash(request, message, status, icon):
@@ -196,7 +158,7 @@ def flash(request, message, status, icon):
     return
 
 
-category_1 = [{
+category_1 = ({
     'Question': 'I often do not feel I have to justify myself to people',
     'Weight': 1,
     'Category': ''
@@ -237,8 +199,8 @@ category_1 = [{
         'Question': 'I get so lost in my thoughts I ignore or forget my surroundings',
         'Weight': -1
     },
-]
-category_2 = [{
+)
+category_2 = ({
     'Question': 'I get stressed out easily',
     'Weight': 1
 },
@@ -278,8 +240,8 @@ category_2 = [{
         'Question': 'I often feel blue',
         'Weight': 1
     },
-]
-category_3 = [{
+)
+category_3 = ({
     'Question': 'I feel little concern for others',
     'Weight': -1
 },
@@ -320,8 +282,8 @@ category_3 = [{
         'Weight': 1
     },
 
-]
-category_4 = [{
+)
+category_4 = ({
     'Question': 'I am always prepared',
     'Weight': 1
 },
@@ -361,8 +323,8 @@ category_4 = [{
         'Question': 'I often forget to put things back in their proper place',
         'Weight': -1
     },
-]
-category_5 = [{
+)
+category_5 = ({
     'Question': 'I have a rich vocabulary',
     'Weight': 1
 },
@@ -403,12 +365,12 @@ category_5 = [{
         'Weight': 1
     },
 
-]
+)
 
-categories = ['Extraversion', 'Neurotism', 'Agreeableness', 'Conscientiousness', 'Openness']
+categories = ('Extraversion', 'Neurotism', 'Agreeableness', 'Conscientiousness', 'Openness')
 
 personality = (
-    [
+    (
         {"title": "YOU ARE AN INTROVERT",
          "description": "Extraversion refers to the energy you draw from social interactions.\
 You have a hard time making small talk or introducing yourself, feel worn out after socializing, avoid large groups, \
@@ -437,8 +399,8 @@ feel recharged after spending time with friends. You likely feel your best when 
 On the other hand, you may have trouble spending long periods of time alone.\
 "
          }
-    ],
-    [
+    ),
+    (
         {"title": "LOW NEUROTISM",
          "description": '''
          Neurotism describes a tendency to have unsettling thoughts and feelings.
@@ -457,8 +419,8 @@ If you score high on neurotism, you may blame yourself when things go wrong. You
 But you’re likely also more introspective than others, which helps you to examine and understand your feelings.
 
          '''},
-    ],
-    [
+    ),
+    (
         {"title": "LOW AGREEABLENESS", "description": "Agreeableness refers to a desire to keep things running smoothly.\
 You have likely to be stubborn, find it difficult to forgive mistakes, are self-centered, have less compassion for others.\
 A low agreeableness score may mean you tend hold grudges. You might also be less sympathetic with others. \
@@ -470,8 +432,8 @@ People might see you as trustworthy. You may be the person others seek when they
 In some situations, you might a little too trusting or willing to compromise. \
 Try to balance your knack for pleasing others with self-advocacy."
          },
-    ],
-    [
+    ),
+    (
         {"title": "LOW CONSCIENTIOUSNESS", "description": "Conscientiousness describes a careful, detail-oriented nature.\
 A low score on conscientiousness might mean you are less organized, complete tasks in a less structured way, \
 take things as they come, finish things at the last minute are impulsive.\
@@ -483,8 +445,8 @@ You likely keep things in order, come prepared to school or work, are goal-drive
 If you are a conscientious person, you might follow a regular schedule and have a knack for keeping track of details. \
 You likely deliberate over options and work hard to achieve your goals. Coworkers and friends might see you as a reliable,\
 fair person. You may tend to micromanage situations or tasks. You might also be cautious or difficult to please."},
-    ],
-    [
+    ),
+    (
         {"title": "LOW OPENNESS", "description": "Openness, or openness to experience, refers to a sense of curiosity \
 about others and the world. A low openness score might mean you prefer to do things in a familiar way, avoid change,\
 are more traditional in your thinking. A low openness score can mean you consider concepts in straightforward ways. \
@@ -497,7 +459,7 @@ Being open to new ideas may help you adjust easily to change. Just make sure to 
 any situations where you might need to establish boundaries, whether that be with family members or \
 your work-life balance."
          },
-    ]
+    )
 
 )
 
@@ -552,7 +514,7 @@ please ignore.\n\nCheers,\nDatefix Team. '''
 
 def dict_to_zip(data):
     questions = set([x['Question'] for x in data])
-    weights = ([x['Weight'] for x in data])
+    weights = (x['Weight'] for x in data)
     count = set([data.index(x) for x in data])
     return zip(count, questions, weights)
 

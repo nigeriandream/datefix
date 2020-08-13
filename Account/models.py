@@ -21,8 +21,6 @@ class User(AbstractUser):
     successful_matches = models.TextField(default='{}')
     no_matches = models.TextField(default='[]')
     jilted_matches = models.TextField(default='[]')
-    notification = models.TextField(default='[]')
-    profile_changed = models.BooleanField(default=False)
     couple_ids = models.CharField(max_length=16, default='[]')
     payed = models.BooleanField(default=False)
     session = models.IntegerField(default=-1)
@@ -75,21 +73,6 @@ class User(AbstractUser):
             return {}
         return json.loads(self.choice_data)
 
-    def notifications(self):
-        notifications = Notification.objects.filter(Q(receiver=self.id) | Q(general=True)).order_by('-datetime')
-        if self.notification is None or self.notification == '':
-            return notifications
-        notify = json.loads(self.notification)
-        return [x for x in notifications if str(x.id) not in notify['deleted']]
-
-    def new_notifications(self):
-        notifications = Notification.objects.filter(Q(receiver=self.id) | Q(general=True)).order_by('-datetime')
-        if self.notification is None or self.notification == '':
-            return notifications.count()
-        notify = json.loads(self.notification)
-        return [x for x in notifications if
-                (str(x.id) not in notify['read']) and (str(x.id) not in notify['deleted'])].__len__()
-
     def couple_list(self):
         return json.loads(self.couple_ids)
 
@@ -118,7 +101,7 @@ class User(AbstractUser):
     def chatThreads(self):
         from Chat.models import ChatThread
         threads = ChatThread.objects.filter(Q(first_user_id=self.id) | Q(second_user_id=self.id))
-        return list(set([x.id for x in threads]))
+        return tuple(set([x.id for x in threads]))
 
 
 class Couple(models.Model):
@@ -149,14 +132,6 @@ class Couple(models.Model):
             return data
 
 
-class Notification(models.Model):
-    title = models.CharField(max_length=256)
-    message = models.TextField()
-    datetime = models.DateTimeField()
-    general = models.BooleanField(default=True)
-    receiver = models.IntegerField(default=None, null=True)
-
-
 class PersonalityTest(models.Model):
     email = models.EmailField()
     extraversion = models.TextField(default='{}')
@@ -166,6 +141,6 @@ class PersonalityTest(models.Model):
     openness = models.TextField(default='{}')
 
     def titles(self):
-        return [json.loads(self.extraversion)['title'], json.loads(self.neurotism)['title'],
+        return (json.loads(self.extraversion)['title'], json.loads(self.neurotism)['title'],
                 json.loads(self.agreeableness)['title'], json.loads(self.conscientiousness)['title'],
-                json.loads(self.openness)['title']]
+                json.loads(self.openness)['title'])
