@@ -5,8 +5,10 @@ from Account.models import User
 
 
 def home(request):
-    if 'email' in request.session or 'category' in request.session:
-        del request.session['email'], request.session['category']
+    if 'email' in request.session:
+        del request.session['email']
+    if 'category' in request.session:
+        del request.session['category']
     if request.user.is_authenticated:
         user = User.objects.get(id=request.user.id)
         return render(request, 'home.html', {'user': user})

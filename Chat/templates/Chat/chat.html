@@ -15,10 +15,10 @@
 
   {% block css %}
   <!-- vendor css -->
-  <link href={% static 'lib/fontawesome-free/css/all.min.css' %} rel="stylesheet">
-  <link href={% static 'lib/ionicons/css/ionicons.min.css' %} rel="stylesheet">
-  <link href={% static 'lib/typicons.font/typicons.css' %} rel="stylesheet">
-  <link href={% static 'lib/lightslider/css/lightslider.min.css' %} rel="stylesheet">
+  <link href={% static 'library/fontawesome-free/css/all.min.css' %} rel="stylesheet">
+  <link href={% static 'library/ionicons/css/ionicons.min.css' %} rel="stylesheet">
+  <link href={% static 'library/typicons.font/typicons.css' %} rel="stylesheet">
+  <link href={% static 'library/lightslider/css/lightslider.min.css' %} rel="stylesheet">
 
   <!-- chat CSS -->
   <link rel="stylesheet" href={% static 'css/chat.css' %}>
@@ -42,8 +42,8 @@
   <div id="user" class="az-header {{ request.user.username }} {% if logout %}{{ logout }}{% endif %}">
     <div class="container">
       <div class="az-header-left">
-        <a href="index.php" class="standard-logo az-logo" data-dark-logo={% static 'images/logo-dark.png' %}""><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
-        <a href="index.php" id="azNavShow" class="standard-logo az-header-menu-icon d-lg-none" data-dark-logo={% static 'images/logo-dark.png' %}><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
+        <a href="{% url 'home' %}" class="standard-logo az-logo" data-dark-logo={% static 'images/logo-dark.png' %}""><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
+        <a href="{% url 'home' %}" id="azNavShow" class="standard-logo az-header-menu-icon d-lg-none" data-dark-logo={% static 'images/logo-dark.png' %}><img src={% static 'images/logo.png' %} alt="Datefix Logo"></a>
         <a href="" id="azChatBodyHide" class="az-header-arrow"><i class="icon ion-md-arrow-back"></i></a>
       </div><!-- az-header-left -->
       <div class="az-header-center">
@@ -156,7 +156,7 @@
               </div>
               <div class="media-body">
                 <div class="media-contact-name">
-                  <span>[[chat.first_name]] [[chat.last_name]]</span>
+                  <span>[[chat.username]]</span>
                   <span v-if="chat.last_message">[[chat.last_message.time]]</span>
                   <span v-else></span>
                 </div>
@@ -173,7 +173,7 @@
         <div class="az-chat-header" v-show="loading === false">
           <div :class="[chat_object.status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[chat_object.profile_picture]]" alt=""></div>
           <div class="az-chat-msg-name">
-            <h6>[[chat_object.first_name]] [[chat_object.last_name]]</h6>
+            <h6>[[chat_object.username]]</h6>
             <small v-if="chat_object.status === 'Online'">Online</small>
             <small v-if="chat_object.status === 'Offline'">Offline</small>
             <!-- <small v-if="typing == true"><i>Typing...</i></small> -->
@@ -433,10 +433,10 @@
 
   <script src={% static 'js/jquery.js' %}></script>
   <script src={% static 'js/plugins.js' %}></script>
-  <!-- <script src={% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}></script> -->
-  <script src={% static 'lib/ionicons/ionicons.js' %}></script>
-  <script src={% static 'lib/perfect-scrollbar/perfect-scrollbar.min.js' %}></script>
-  <script src={% static 'lib/lightslider/js/lightslider.min.js' %}></script>
+  <script src={% static 'library/bootstrap/js/bootstrap.bundle.min.js' %}></script>
+  <script src={% static 'library/ionicons/ionicons.js' %}></script>
+  <script src={% static 'library/perfect-scrollbar/perfect-scrollbar.min.js' %}></script>
+  <script src={% static 'library/lightslider/js/lightslider.min.js' %}></script>
 
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"> -->
   </script>
@@ -490,7 +490,7 @@
   </script>
   <script src={% static 'js/vue.js' %}></script>
   <script src={% static 'js/vue-ScrollTo.js' %}></script>
-  <script src={% static 'js/sweetalert2.min.js' %></script>
+  <script src={% static 'js/sweetalert2.min.js' %}></script>
   <script src={% static 'js/axios.min.js' %}></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
   <script src={% static 'js/chat-vue.js' %}></script>

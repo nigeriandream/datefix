@@ -164,6 +164,8 @@ class ChatConsumer(AsyncConsumer):
 
     @database_sync_to_async
     def save_message(self, chat, data):
+        from Chat.algorithms import activate_expiration
+        activate_expiration(chat=chat, user=self.me)
         encrypted_data = chat.encrypt(data['message'])
         chat_msg = ChatMessage.objects.create(sender_id=int(data['sender_id']), chat=chat,
                                               text=encrypted_data, datetime=data['datetime'],
