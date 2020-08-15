@@ -419,3 +419,7 @@ def get_couple(request, couple_id):
         return HttpResponse('You are not yet a couple')
     except Couple.DoesNotExist:
         return HttpResponse('No Couple exists with this ID.')
+
+
+
+
