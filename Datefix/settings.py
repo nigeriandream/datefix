@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from Datefix.secret import SECRET_KEY
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,14 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vkg&nnb_%1b&ojkbm6c37m1zh0z$&v^=!lb8uj=023+__@$eg!'
+SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
+    'datefixe.herokuapp.com', '127.0.0.1'
 ]
 
 
@@ -77,8 +77,8 @@ TEMPLATES = [
 CHANNEL_LAYERS = {"default": {
     "BACKEND": "channels_redis.core.RedisChannelLayer",
     "CONFIG": {
-        # "hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
-        "hosts": [("localhost", 6379)],
+        "hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
+
     }
 
 }
@@ -97,8 +97,11 @@ DATABASES = {
     }
 }
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 EMAIL_HOST = 'smtp.gmail.com'
 
@@ -108,9 +111,11 @@ EMAIL_USE_SSL = False
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = 'louis.paul9095'
+EMAIL_HOST_USER = 'ohaegbulouis@gmail.com'
 
-EMAIL_HOST_PASSWORD = 'monkeysEX'
+EMAIL_HOST_PASSWORD = '1BILLION'
+
+DEFAULT_FROM_EMAIL = 'admin@datefix.me'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

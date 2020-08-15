@@ -78,6 +78,7 @@ function returnTotal(){
 
 
   $('#submit-btn').click(function () {
+      let url = window.location.origin
     let response
     let email = document.getElementById('email').classList[2]
     let  input_email
@@ -99,7 +100,7 @@ function returnTotal(){
       }
     console.log('Email: ', email)
     $.ajax({
-    url: 'http://127.0.0.1:8000/personality_test/submit/',
+    url: url+'/personality_test/submit/',
     type: 'GET',
     data: {"score": total, "category": category, "email": email},
     success: (data) => {
@@ -107,7 +108,7 @@ function returnTotal(){
         console.log('Response: ', response)
 
         if (response === 'Finished')
-            window.open('http://127.0.0.1:8000/personality_test/result/', '_self')
+            window.open(url+'/personality_test/result/', '_self')
 
         if (response === 'Remaining')
             window.open(window.location.href, '_self')

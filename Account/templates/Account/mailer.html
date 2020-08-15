@@ -1,0 +1,72 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %}
+{{ subject}}
+{% endblock title %}
+
+{% block content %}
+
+
+<!-- Header
+		============================================= -->
+		<header id="header" class="full-header">
+
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="logo">
+						<a href={% url 'home' %} class="standard-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img src={% static 'images/logo.png' %} alt="Canvas Logo"></a>
+						<a href={% url 'home' %} class="retina-logo" data-dark-logo={% static 'images/logo-dark@2x.png' %}><img src={% static 'images/logo@2x.png' %} alt="Canvas Logo"></a>
+					</div><!-- #logo end -->
+
+				</div>
+
+			</div>
+
+		</header><!-- #header end --><!-- #header end -->
+
+
+		<!-- Page Title
+		============================================= -->
+		<section id="content p-0" style="overflow: inherit!important;  background-image: url({% static "images/page/bg.jpg"%}); background-size: cover; background-attachment: fixed;">
+
+			<div class="content-wrap" style="background-image: url({% static "images/page/bgx.jpg"%});  background-size: cover; background-attachment: fixed;">
+
+				<div class="container clearfix">
+
+					<div class="accordion accordion-lg divcenter nobottommargin clearfix" style="max-width: 550px;">
+
+						<div>
+                            <p>Dear {{ user }}, </p>
+                            <p>
+                                {{ message}}
+                            </p>
+                            {% if link %}
+                            <p class="text-center"><a href="{{ link }}" class="btn btn-info nomargin">
+                                Click here to Proceed
+                            </a></p>
+                            <p class="text-center">or You can click this link below</p>
+                            <p class="text-center"><a href="{{ link}}">{{ link }}</a></p>
+                            {% endif %}
+                            <p>Cheers</p>
+                            <p>From DateFix Team</p>
+                        </div>
+                        <div class="bg-secondary mx-0 p-2 mt-2">
+                            <small class="text-white">If you dont have an account with us, please ignore. Thank you</small>
+                        </div>
+
+
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</section><!-- #content end -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+{% endblock content %}
+
+

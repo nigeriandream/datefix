@@ -9,21 +9,25 @@
 {% endblock %}
 {% block script %}
     <script>
-    $.ajax(
-        {url : 'http://127.0.0.1:8000/match/',
+    const url = window.location.origin
+    window.onload = ()=> {
+        $.ajax(
+        {url : url+'/match/',
         type: 'GET',
             success: (data)=>{
             console.log(data)
             if (data === 'success'){
-                window.open('http://127.0.0.1:8000/results/', "_self")
+                window.open(url+'/results/', "_self")
             }
             if (data === 'fail'){
-                window.open('http://127.0.0.1:8000/dashboard/', "_self")
+                window.open(url+'/dashboard/', "_self")
             }
 
             }
         }
     )
+    }
+
     </script>
 
 {% endblock %}
