@@ -82,15 +82,12 @@ def email_chat(chat_thread, user):
     """
     other_user = chat_thread.get_receiver(user)
     user_chat = chat_thread.get_chat_file(user)
-    from django.core.mail import EmailMessage
-    message = EmailMessage(f'Chat Text File Between You and {user.username} from Datefix.com',
-                           f'Hi {other_user.username},  This message indicates that the chat session between the two of you '
-                           f'is formally over. '
-                           'Attached to this email address is a .txt file of the chat between the two of you. '
-                           ''
-                           'Datefix Team.', 'admin@datefix.com', [user.email])
-    message.attach_file(f'{user_chat.name}', 'text/plain')
-    message.send(True)
+    message = f'This message indicates that the chat session between you and {other_user.username} ' \
+              f'is formally over. Attached to this email address' \
+              f'is a text file of the chat between you and {other_user.username}.'
+    from Account.algorithms import send_email
+    send_email(user.username, f'Chat Text File Between You and {user.username} from Datefix.com', message, user.email,
+               None, [f'{user_chat.name}.txt'])
     import os
     os.remove(f'{user_chat.name}')
 
@@ -226,13 +223,10 @@ def notify_user(chat_thread, user):
     :return:
     """
     other_user = chat_thread.get_receiver(user)
-    from django.core.mail import EmailMessage
-    message = EmailMessage(f'Chat Session Between You and {other_user.username} from Datefix.com',
-                           f'Hi {user.username},  This message indicates that the chat session between the two of you '
-                           f'has formally began.. '
-                           ''
-                           'Datefix Team.', 'admin@datefix.com', [user.email])
-    message.send(True)
+    message = 'This message indicates that the chat session between the two of you has formally began.'
+    from Account.algorithms import send_email
+    send_email(user.username, f'Chat Session Between You and {other_user.username} from Datefix.com', message,
+               user.email, None, None)
 
 
 def create_chat(request, your_id, user_id):

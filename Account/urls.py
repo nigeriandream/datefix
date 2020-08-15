@@ -3,7 +3,7 @@ from django.urls import path
 from .views import *
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
-
+from Datefix.views import password_reset_done, password_reset, password_confirm, reset_confirm
 urlpatterns = [
     path('login/', login, name='login'),
     path('signup/', signup, name='signup'),
@@ -14,12 +14,10 @@ urlpatterns = [
     path('account/verify/', verify, name="verify"),
     path('account/verified/', verified, name='verified'),
     path('account/send_verify/', verification, name='verification'),
-    url(r'^password_reset/$', auth_views.PasswordResetView.as_view(),
+    url(r'^password_reset/$', password_reset,
         name='password_reset'),
     url(r'^password_reset/done/$',
-        auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+        password_reset_done, name='password_reset_done'),
     url(r'^reset/done/$', auth_views.PasswordResetCompleteView.as_view(),
         name='password_reset_complete'),
     path('get_data/<type_>/', get_data, name="get_data"),
@@ -28,5 +26,7 @@ urlpatterns = [
     path('personality_test/result/', test_result, name="test_result"),
     path('logout/', logout, name='logout'),
     path('api/get_couple/<int:couple_id>/', get_couple, name="get_couple"),
+    path('confirm/', password_confirm, name="confirm"),
+    path('password/set/', reset_confirm, name="reset_confirm")
 
 ]
