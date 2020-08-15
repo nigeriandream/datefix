@@ -116,50 +116,49 @@ def personality(request):
 
 # verified
 def results(request):
-    # user = User.objects.get(id=request.user.id)
-    # if request.method == 'GET':
-    #     if user.sex == 'female':
-    #         matches = user.successful_list()[:6]
-    #         size = len(matches)
-    #         select = ((x[0], User.objects.get(id=x[0]).username) for x in matches)
-    #         matches = ((User.objects.get(id=x[0]), x[1]) for x in matches)
-    #         matches = ((
-    #             (str(x[0].id), x[1]),
-    #             ("alpha", x[0].username),
-    #             ("Origin", x[0].user_data_()['origin_state']),
-    #             ["Residence", x[0].user_data_()['residence_state']],
-    #             ("Religion", x[0].user_data_()['religion']),
-    #             ("denomination", x[0].user_data_()['denomination']),
-    #             ("Has Children", x[0].user_data_()['children']))
-    #             for x in matches)
-    #
-    #         return render(request, 'Account/results.html',
-    #                       {'matches': matches, "select": select, "matches_length": size})
-    #     if user.sex == 'male':
-    #         matches = (User.objects.get(id=x) for x in user.matches_())
-    #         return render(request, 'Account/results_m.html',
-    #                       {'matches': matches, "matches_length": len(user.matches_())})
-    #
-    # if request.method == 'POST':
-    #     selected = request.POST['matches'].split(',')
-    #     user.matches = json.dumps([int(x) for x in selected])
-    #     user.session = len(selected)
-    #     user.save()
-    #     match_comp = tuple([x for x in selected if User.objects.get(id=int(x)).complete_match()])
-    #     verb = ''
-    #     if len(match_comp) > 0:
-    #         if len(match_comp) == 2:
-    #             verb = 'has'
-    #         if len(match_comp) == 1:
-    #             verb = 'have'
-    #         request.session['message'] = f'{"and ".join(match_comp)} {verb} complete matches, so choose another.'
-    #         request.session['status'] = 'info'
-    #         return redirect('results')
-    #     if len(match_comp) == 0:
-    #         for i in selected:
-    #             add_new(request, user, i)
-    #         return redirect('chatroom')
-    return render(request, 'Account/results.html')
+    user = User.objects.get(id=request.user.id)
+    if request.method == 'GET':
+        if user.sex == 'female':
+            matches = user.successful_list()[:6]
+            size = len(matches)
+            select = ((x[0], User.objects.get(id=x[0]).username) for x in matches)
+            matches = ((User.objects.get(id=x[0]), x[1]) for x in matches)
+            matches = ((
+                (str(x[0].id), x[1]),
+                ("alpha", x[0].username),
+                ("Origin", x[0].user_data_()['origin_state']),
+                ["Residence", x[0].user_data_()['residence_state']],
+                ("Religion", x[0].user_data_()['religion']),
+                ("denomination", x[0].user_data_()['denomination']),
+                ("Has Children", x[0].user_data_()['children']))
+                for x in matches)
+
+            return render(request, 'Account/results.html',
+                          {'matches': matches, "select": select, "matches_length": size})
+        if user.sex == 'male':
+            matches = (User.objects.get(id=x) for x in user.matches_())
+            return render(request, 'Account/results_m.html',
+                          {'matches': matches, "matches_length": len(user.matches_())})
+
+    if request.method == 'POST':
+        selected = request.POST['matches'].split(',')
+        user.matches = json.dumps([int(x) for x in selected])
+        user.session = len(selected)
+        user.save()
+        match_comp = tuple([x for x in selected if User.objects.get(id=int(x)).complete_match()])
+        verb = ''
+        if len(match_comp) > 0:
+            if len(match_comp) == 2:
+                verb = 'has'
+            if len(match_comp) == 1:
+                verb = 'have'
+            request.session['message'] = f'{"and ".join(match_comp)} {verb} complete matches, so choose another.'
+            request.session['status'] = 'info'
+            return redirect('results')
+        if len(match_comp) == 0:
+            for i in selected:
+                add_new(request, user, i)
+            return redirect('chatroom')
 
 
 def add_new(request, user, id_):
@@ -349,35 +348,36 @@ def personality_test(request):
 
 
 def test_result(request):
-    if request.method == 'GET':
-        from .algorithms import categories
-        try:
-            your_personality = PersonalityTest.objects.get(email=request.session['email'])
-            data = zip(
-                categories,
-                (
-                    json.loads(your_personality.extraversion)['title'],
-                    json.loads(your_personality.neurotism)['title'],
-                    json.loads(your_personality.agreeableness)['title'],
-                    json.loads(your_personality.conscientiousness)['title'],
-                    json.loads(your_personality.openness)['title']
-                ),
-                (
-                    json.loads(your_personality.extraversion)['description'],
-                    json.loads(your_personality.neurotism)['description'],
-                    json.loads(your_personality.agreeableness)['description'],
-                    json.loads(your_personality.conscientiousness)['description'],
-                    json.loads(your_personality.openness)['description'],
-                )
-            )
-            return render(request, 'Account/personality.html', {'data': data,
-                                                                "email": request.session['email'].split('@')[0]})
-        except (PersonalityTest.DoesNotExist, KeyError):
-            return redirect('personality_test')
-
-    if request.method == 'POST':
-        del request.session['category'], request.session['email']
-        return redirect('personality_test')
+    # if request.method == 'GET':
+    #     from .algorithms import categories
+    #     try:
+    #         your_personality = PersonalityTest.objects.get(email=request.session['email'])
+    #         data = zip(
+    #             categories,
+    #             (
+    #                 json.loads(your_personality.extraversion)['title'],
+    #                 json.loads(your_personality.neurotism)['title'],
+    #                 json.loads(your_personality.agreeableness)['title'],
+    #                 json.loads(your_personality.conscientiousness)['title'],
+    #                 json.loads(your_personality.openness)['title']
+    #             ),
+    #             (
+    #                 json.loads(your_personality.extraversion)['description'],
+    #                 json.loads(your_personality.neurotism)['description'],
+    #                 json.loads(your_personality.agreeableness)['description'],
+    #                 json.loads(your_personality.conscientiousness)['description'],
+    #                 json.loads(your_personality.openness)['description'],
+    #             )
+    #         )
+    #         return render(request, 'Account/personality.html', {'data': data,
+    #                                                             "email": request.session['email'].split('@')[0]})
+    #     except (PersonalityTest.DoesNotExist, KeyError):
+    #         return redirect('personality_test')
+    #
+    # if request.method == 'POST':
+    #     del request.session['category'], request.session['email']
+    #     return redirect('personality_test')
+    return render(request, 'Account/personality.html')
 
 
 @csrf_exempt
