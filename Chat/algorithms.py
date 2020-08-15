@@ -86,7 +86,7 @@ def email_chat(chat_thread, user):
               f'is formally over. Attached to this email address' \
               f'is a text file of the chat between you and {other_user.username}.'
     from Account.algorithms import send_email
-    send_email(user.username, f'Chat Text File Between You and {user.username} from Datefix.com', message, user.email,
+    send_email(user.username, f'Chat Text File Between You and {user.username}.', message, user.email,
                None, [f'{user_chat.name}.txt'])
     import os
     os.remove(f'{user_chat.name}')
@@ -225,7 +225,7 @@ def notify_user(chat_thread, user):
     other_user = chat_thread.get_receiver(user)
     message = 'This message indicates that the chat session between the two of you has formally began.'
     from Account.algorithms import send_email
-    send_email(user.username, f'Chat Session Between You and {other_user.username} from Datefix.com', message,
+    send_email(user.username, f'Chat Session Between You and {other_user.username}.', message,
                user.email, None, None)
 
 
