@@ -45,6 +45,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="zipChanges" value="false" />
@@ -318,6 +319,7 @@
       <workItem from="1597280093620" duration="8708000" />
       <workItem from="1597321087716" duration="9394000" />
       <workItem from="1597411611353" duration="13170000" />
+      <workItem from="1597501018342" duration="801000" />
     </task>
     <servers />
   </component>
