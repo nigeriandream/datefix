@@ -5,7 +5,6 @@
 <link href={% static 'css/select2.css' %} rel="stylesheet" />
 <link rel="stylesheet" href={% static 'css/form-elements.css' %}>
 <link rel="stylesheet" href={% static 'css/stylex.css' %}>
-
 {% endblock css %}
 
 {% block title %}
@@ -73,6 +72,7 @@ Match Results
 	data-bottom-top="background-position:0px 300px;" data-top-bottom="background-position:0px -300px;">
 
 	<div class="container clearfix dark">
+
 		<h1 data-animate="fadeInUp" style="color:#eee;">Potential Partners</h1>
 		<span data-animate="fadeInUp" style="color:#eee;" data-delay="300">Best matches from mutual preferences</span>
 		<ol class="breadcrumb">
@@ -184,23 +184,37 @@ Match Results
 						</div>
 					</div>
 
-					<form id="matches-form" {% if matches_length >= 2 %} action={% url 'results' %} method="post">
+					<form id="matches-form" {% if matches_length > 2 %} action={% url 'results' %} method="post">
 						{% csrf_token %}
 						{% else %}
 						action={% url 'dashboard' %} method="get">
 						{% endif %}
-
+                        {% if message %}
+			<div class="alert alert-{{status}} text-center">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<i class="icon-{{icon}}"></i>
+				{{message}}.
+			</div>
+			{% endif %}
 
 						{% if matches_length > 0 %}
 						<div class="form-category col_full" style="    background: rgba(255, 255, 255, 0.9)">
 
                             <div class="form-group">
                             <input type="hidden" id="matches_" name="matches"/>
-                            <label for="matches">Select two potential partners to proceed
-                            <select name="matches_" id="potential-matches" class="form-control" multiple="multiple"
+                            <label for="matches">Select first choice
+                            <select name="match1"  class="form-control"
+                                data-width="100%" tabindex="-1" aria-hidden="true" style="width:100%;">
+                                {% for key, value in select%}
+                                <option  value={{key}}>{{value}}</option>
+                                {% endfor %}
+                            </select>
+                            </label>
+                             <label for="matches">Select second choice
+                            <select name="match2"  class="form-control"
                                 data-width="100%" tabindex="-1" aria-hidden="true" style="width:100%;">
                                 {% for key, value in select  %}
-                                <option onclick="select(this)"  value={{key}}>{{value}}</option>
+                                <option  value={{key}}>{{value}}</option>
                                 {% endfor %}
                             </select>
                             </label>
@@ -214,7 +228,7 @@ Match Results
 						<div class="center topmargin" data-easing="easeInOutExpo" data-speed="1500">
 							<button type="submit"
 								class="button button-rounded button-reveal button-xlarge button-yellow button-light tright">
-								{% if matches_length > 0 %}
+								{% if matches_length > 2 %}
 								<i class="icon-chat"></i><span> Confirm Matches
 									{% else %}
 									<span> Back to Dashboard
@@ -247,22 +261,6 @@ Match Results
 		============================================= -->
 {% include "footer.html" %}
 <!-- #footer end -->
-<script type="javascript">
-const matches = document.getElementById('matches_')
-let match_list = []
-function select(self){
-    console.log(self.value)
-    if (! match_list.includes(self.value) && match_list.length < 2){
-        match_list.push(self.value)
-        self.setAttribute('selected', 'selected')
-    }else if (match_list.includes(self.value) && match_list.length <= 2){
-        match_list = match_list.filter((item)=>{return item !== self.value})
-        self.removeAttribute('selected')
-    }
-    matches.value = match_list.toString()
-}
-</script>
 {% endblock content %}
-{% block match_script %}
-    <script src="{% static 'js/matches.js' %}" ></script>
+{% block script %}
 {% endblock %}

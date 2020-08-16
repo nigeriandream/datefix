@@ -10,6 +10,9 @@
   <!-- Meta -->
   <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
   <meta name="author" content="ThemePixels">
+    <script>
+        window.scrollTo(0, document.getElementById('screen').scrollHeight);
+    </script>
 
   <title>Datefix | Chat</title>
 
@@ -52,7 +55,7 @@
       </div><!-- az-header-center -->
       <div class="az-header-right">
         <div class="az-header-message">
-          <a href="app-chat.html"><i class="typcn typcn-messages"></i></a>
+          <a href="{% url 'chatroom' %}"><i class="typcn typcn-messages"></i></a>
         </div><!-- az-header-message -->
         <!-- <div class="dropdown az-header-notification">
           <a href="" class="new"><i class="typcn typcn-bell"></i></a>
@@ -191,12 +194,12 @@
           </nav>
         </div><!-- az-chat-header -->
         <div id="azChatBody" class="az-chat-body" v-show="loading === false">
-          <div class="content-inner" ref="container">
+          <div class="row container-fluid content-inner" ref="container">
             <!-- <label class="az-chat-time"><span>3 days ago</span></label> -->
-            <div v-for='(message, index) in chat_messages' :key='index'>
+            <div class="col-12" v-for='(message, index) in chat_messages' :key='index'>
             <div :class="[message.sender == loggedInUser ? 'media flex-row-reverse' : 'media']">
               <div :class="[status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[message.sender_pic]]" alt=""></div>
-              <div class="media-body">
+              <div class="media-body screen">
                 <div class="az-msg-wrapper">
                   [[ message.message ]]
                   <span style="font-size: 7px; margin-left: 2em;">[[ message.time ]]</span> 
@@ -439,7 +442,6 @@
   <script src={% static 'library/lightslider/js/lightslider.min.js' %}></script>
 
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"> -->
-  </script>
   <script src={% static 'js/chat.js' %}></script>
   <script>
     $(function() {

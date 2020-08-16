@@ -1,4 +1,3 @@
-from django.core.mail import send_mail
 from .models import User, Couple
 import random
 import json
