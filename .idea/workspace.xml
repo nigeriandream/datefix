@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,6 +45,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="zipChanges" value="false" />
@@ -320,7 +319,9 @@
       <workItem from="1597280093620" duration="8708000" />
       <workItem from="1597321087716" duration="9394000" />
       <workItem from="1597411611353" duration="13170000" />
-      <workItem from="1597583518173" duration="484000" />
+      <workItem from="1597501018342" duration="801000" />
+      <workItem from="1597586748914" duration="1501000" />
+      <workItem from="1597591072250" duration="11912000" />
     </task>
     <servers />
   </component>
@@ -350,6 +351,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="275" y="22" key="#Deployment" timestamp="1597493178954">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="22" key="#Deployment/0.0.1366.728@0.0.1366.728" timestamp="1597493178954" />
+    <state x="360" y="58" key="#Options" timestamp="1597493231445">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="360" y="58" key="#Options/0.0.1366.728@0.0.1366.728" timestamp="1597493231445" />
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595270620043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

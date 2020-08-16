@@ -96,6 +96,7 @@ var app = new Vue({
           this.message_id = data.message_id;
           this.messageStatus = data.status;
           console.log(this.messageStatus);
+          scroll()
         }
         if (data.username === this.loggedInUser && data.function === "accept") {
           if (data.result.response !== undefined) {
@@ -195,6 +196,7 @@ var app = new Vue({
             this.chat_id = data.chat_id;
             this.status = data.status;
             this.chat_messages = data.chat_list;
+            scroll()
           });
         this.loading = false;
       } catch (error) {
@@ -329,3 +331,8 @@ var app = new Vue({
   //   },
   // },
 });
+
+function scroll(){
+  const k = document.getElementsByClassName('screen')
+  k[k.length - 1].scrollIntoView()
+}
