@@ -42,7 +42,8 @@ def login(request):
 
     if request.method == 'GET':
         if request.user.is_authenticated:
-            del request.session['email']
+            if 'email' in request.session:
+                del request.session['email']
             return redirect('dashboard')
         flash_ = display(request)
         if flash_ is None:
@@ -264,6 +265,9 @@ def get_data(request, type_):
 
         if type_ == 'partner':
             user_data = json.loads(user.choice_data)
+            if request.GET['residence_state'] == '' and request.GET['origin_state'] == '':
+                return HttpResponse('success')
+
             user_data.update(request.GET)
             user.deal_breaker = f"[{json.dumps([user_data['dealbreaker1'], user_data['dealbreaker2']]).replace(']', '').replace('[', '')}]"
             del (user_data['dealbreaker1'], user_data['dealbreaker2'])
