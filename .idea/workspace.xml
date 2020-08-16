@@ -19,15 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chat/templates/Chat/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/templates/Chat/chat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/static/js/chat-vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/chat-vue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/chat-vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/chat-vue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/select2.2.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/select2.2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/select2.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/select2.js" afterDir="false" />
-    </list>
+    <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -329,7 +321,7 @@
       <workItem from="1597411611353" duration="13170000" />
       <workItem from="1597501018342" duration="801000" />
       <workItem from="1597586748914" duration="1501000" />
-      <workItem from="1597591072250" duration="11583000" />
+      <workItem from="1597591072250" duration="11912000" />
     </task>
     <servers />
   </component>
