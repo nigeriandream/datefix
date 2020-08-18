@@ -6,9 +6,6 @@ from Datefix import settings
 import json
 from django.db.models import Q
 
-# Create your models here.
-from Datefix.algorithms import get_key
-
 
 class User(AbstractUser):
     sex = models.CharField(max_length=6, default=None, null=True)
@@ -18,7 +15,7 @@ class User(AbstractUser):
     deal_breaker = models.CharField(max_length=64, default='[]')
     profile_picture = models.ImageField(upload_to='profile_pics', blank=True)
     matches = models.CharField(max_length=10, default='[]')
-    successful_matches = models.TextField(default='{}')
+    successful_matches = models.TextField(default='[]')
     no_matches = models.TextField(default='[]')
     jilted_matches = models.TextField(default='[]')
     couple_ids = models.CharField(max_length=16, default='[]')
@@ -28,22 +25,22 @@ class User(AbstractUser):
     status = models.CharField(max_length=64, default='Offline')
 
     def successful_list(self):
-        if self.successful_matches is None or self.successful_matches == '':
+        if self.successful_matches == '[]':
             return []
         return json.loads(self.successful_matches)
 
     def no_list(self):
-        if self.no_matches == '' or self.no_matches is None:
+        if self.no_matches == '[]':
             return []
         return json.loads(self.no_matches)
 
     def jilted_list(self):
-        if self.jilted_matches == '' or self.jilted_matches is None:
+        if self.jilted_matches == '[]':
             return []
         return self.jilted_matches.split(',')
 
     def matches_(self):
-        if self.matches is None or self.matches == '':
+        if self.matches == '[]':
             return []
         return json.loads(self.matches)
 
@@ -64,12 +61,12 @@ class User(AbstractUser):
                 return False
 
     def user_data_(self):
-        if self.user_data is None or self.user_data == '':
+        if self.user_data == '{}':
             return {}
         return json.loads(self.user_data)
 
     def choice_data_(self):
-        if self.choice_data is None or self.choice_data == '':
+        if self.choice_data == '{}':
             return {}
         return json.loads(self.choice_data)
 
