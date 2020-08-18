@@ -231,7 +231,7 @@ def dashboard(request):
 
         user = User.objects.get(id=request.user.id)
 
-        if user.user_data is None or user.user_data == '':
+        if user.user_data == '{}':
             return render(request, 'Account/profile.html')
 
         elif user.sex == 'male' and not user.complete_match():
@@ -259,13 +259,6 @@ def matching(request):
 def get_data(request, type_):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
-        if user.user_data is None or user.user_data == '':
-            user.user_data = "{}"
-            user.save()
-        if user.choice_data is None or user.choice_data == '':
-            user.choice_data = "{}"
-            user.save()
-
         if type_ == 'user':
             user_data = json.loads(user.user_data)
             user_data.update(request.GET)
