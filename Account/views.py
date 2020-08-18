@@ -42,7 +42,8 @@ def login(request):
 
     if request.method == 'GET':
         if request.user.is_authenticated:
-            del request.session['email']
+            if 'email' in request.session:
+                del request.session['email']
             return redirect('dashboard')
         flash_ = display(request)
         if flash_ is None:
@@ -119,9 +120,10 @@ def results(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
         if user.sex == 'female':
+            show = display(request)
             matches = user.successful_list()[:6]
             size = len(matches)
-            select = ((x[0], User.objects.get(id=x[0]).username) for x in matches)
+            select = [(x[0], User.objects.get(id=x[0]).username) for x in matches]
             matches = ((User.objects.get(id=x[0]), x[1]) for x in matches)
             matches = ((
                 (str(x[0].id), x[1]),
@@ -132,20 +134,29 @@ def results(request):
                 ("denomination", x[0].user_data_()['denomination']),
                 ("Has Children", x[0].user_data_()['children']))
                 for x in matches)
-
-            return render(request, 'Account/results.html',
+            if show is None:
+                return render(request, 'Account/results.html',
                           {'matches': matches, "select": select, "matches_length": size})
+            else:
+                return render(request, 'Account/results.html',
+                              {'matches': matches, "select": select, "matches_length": size, "message": show[0],
+                               "status": show[1], "icon": show[2]})
+
         if user.sex == 'male':
             matches = (User.objects.get(id=x) for x in user.matches_())
             return render(request, 'Account/results_m.html',
                           {'matches': matches, "matches_length": len(user.matches_())})
 
     if request.method == 'POST':
-        selected = request.POST['matches'].split(',')
-        user.matches = json.dumps([int(x) for x in selected])
-        user.session = len(selected)
+        match_1 = int(request.POST['match1'])
+        match_2 = int(request.POST['match2'])
+        if match_1 == match_2:
+            flash(request, 'The selected users are the same. please select different users.', 'danger', 'remove-icon')
+            return redirect('results')
+        user.matches = json.dumps([int(x) for x in (match_1, match_2)])
+        user.session = 2
         user.save()
-        match_comp = tuple([x for x in selected if User.objects.get(id=int(x)).complete_match()])
+        match_comp = tuple([str(x) for x in (match_1, match_2) if User.objects.get(id=int(x)).complete_match()])
         verb = ''
         if len(match_comp) > 0:
             if len(match_comp) == 2:
@@ -153,11 +164,12 @@ def results(request):
             if len(match_comp) == 1:
                 verb = 'have'
             request.session['message'] = f'{"and ".join(match_comp)} {verb} complete matches, so choose another.'
-            request.session['status'] = 'info'
+            request.session['status'] = 'danger'
+            request.session['icon'] = 'remove-icon'
             return redirect('results')
         if len(match_comp) == 0:
-            for i in selected:
-                add_new(request, user, i)
+            add_new(request, user, match_1)
+            add_new(request, user, match_2)
             return redirect('chatroom')
 
 
@@ -219,7 +231,7 @@ def dashboard(request):
 
         user = User.objects.get(id=request.user.id)
 
-        if user.user_data is None or user.user_data == '':
+        if user.user_data == '{}':
             return render(request, 'Account/profile.html')
 
         elif user.sex == 'male' and not user.complete_match():
@@ -247,13 +259,6 @@ def matching(request):
 def get_data(request, type_):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
-        if user.user_data is None or user.user_data == '':
-            user.user_data = "{}"
-            user.save()
-        if user.choice_data is None or user.choice_data == '':
-            user.choice_data = "{}"
-            user.save()
-
         if type_ == 'user':
             user_data = json.loads(user.user_data)
             user_data.update(request.GET)
@@ -264,6 +269,9 @@ def get_data(request, type_):
 
         if type_ == 'partner':
             user_data = json.loads(user.choice_data)
+            if request.GET['residence_state'] == '' and request.GET['origin_state'] == '':
+                return HttpResponse('success')
+
             user_data.update(request.GET)
             user.deal_breaker = f"[{json.dumps([user_data['dealbreaker1'], user_data['dealbreaker2']]).replace(']', '').replace('[', '')}]"
             del (user_data['dealbreaker1'], user_data['dealbreaker2'])
