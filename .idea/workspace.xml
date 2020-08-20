@@ -16,7 +16,13 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
@@ -43,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="chat-branch" />
+        <entry key="$PROJECT_DIR$" value="nigerian_dream" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -211,7 +217,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.consumers">
     <configuration name="test#1 (1)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/Datefix/test.http" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -245,6 +251,8 @@
         <item itemvalue="Python.consumers" />
         <item itemvalue="HTTP Request.test#1 (1)" />
         <item itemvalue="HTTP Request.test#1" />
+        <item itemvalue="Python.consumers" />
+        <item itemvalue="HTTP Request.test#1 (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -326,7 +334,16 @@
       <workItem from="1597591072250" duration="11912000" />
       <workItem from="1597672560887" duration="594000" />
       <workItem from="1597747838329" duration="287000" />
+      <workItem from="1597937705287" duration="3166000" />
     </task>
+    <task id="LOCAL-00001" summary="Revert &quot;merge with louieee&quot;&#10;&#10;This reverts commit d2184739">
+      <created>1597921264350</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1597921264351</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,12 +364,28 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Revert &quot;merge with louieee&quot;&#10;&#10;This reverts commit d2184739" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;merge with louieee&quot;&#10;&#10;This reverts commit d2184739" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="22" key="#Deployment" timestamp="1597493178954">
@@ -367,10 +400,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1595270620043" />
-    <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog" timestamp="1597746364182">
+    <state x="278" y="0" key="CommitChangelistDialog2" timestamp="1597921262849">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1597746364182" />
+    <state x="278" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1597921262849" />
+    <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog" timestamp="1597922670082">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1597922670082" />
     <state x="462" y="119" key="FileChooserDialogImpl" timestamp="1593807971381">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -391,14 +428,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="335" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593626037949" />
-    <state x="81" y="43" key="MergeDialog" timestamp="1596374064270">
+    <state x="81" y="43" key="MergeDialog" timestamp="1597920863407">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="81" y="43" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1596374064270" />
-    <state x="21" y="29" width="1229" height="647" key="MultipleFileMergeDialog" timestamp="1596374064282">
+    <state x="81" y="43" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1597920863407" />
+    <state x="21" y="29" width="1229" height="647" key="MultipleFileMergeDialog" timestamp="1597921245689">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="21" y="29" width="1229" height="647" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1596374064282" />
+    <state x="21" y="29" width="1229" height="647" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1597921245689" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1595665742997">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -411,10 +448,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593559752535" />
-    <state x="480" y="152" key="git4idea.merge.GitMergeDialog" timestamp="1597746457794">
+    <state x="463" y="77" key="git4idea.branch.GitSmartOperationDialog" timestamp="1597920503699">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="480" y="152" key="git4idea.merge.GitMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1597746457794" />
+    <state x="463" y="77" key="git4idea.branch.GitSmartOperationDialog/0.0.1366.728@0.0.1366.728" timestamp="1597920503699" />
+    <state x="480" y="152" key="git4idea.merge.GitMergeDialog" timestamp="1597921708549">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="480" y="152" key="git4idea.merge.GitMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1597921708549" />
     <state x="415" y="152" key="git4idea.merge.GitPullDialog" timestamp="1592334026729">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

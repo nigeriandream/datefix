@@ -144,7 +144,7 @@
       [[response]]
     </div>
     <div class="container">
-      <div class="az-content-left az-content-left-chat">
+      <div class="az-content-left az-content-left-chat" id="contact_list">
         <div class="az-chat-contacts-wrapper">
           <h6 style="font-weight: bold; font-size: 20px;">MATCHED CONTACTS</h6>
           <input type="text" value="{{request.user.id}}" class="d-none" ref="userID">
@@ -171,9 +171,10 @@
           </div>
           </div><!-- media -->
         </div><!-- az-chat-list -->
-        <div class="az-content-body az-content-body-chat">
+        <div class="az-content-body az-content-body-chat" id="chat_list">
           <template v-show="loading === false">
         <div class="az-chat-header" v-show="loading === false">
+             <button id="arrow" class="btn btn-none float-left d-none" onclick="back_()"><i class="fa fa-arrow-left"></i></button>
           <div :class="[chat_object.status === 'Online' ? 'az-img-user online' : 'az-img-user']"><img :src="[[chat_object.profile_picture]]" alt=""></div>
           <div class="az-chat-msg-name">
             <h6>[[chat_object.username]]</h6>

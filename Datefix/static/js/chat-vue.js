@@ -1,4 +1,7 @@
 // import Swal from "/sweetalert2.min.js";
+
+
+
 var app = new Vue({
   delimiters: ["[[", "]]"],
   el: "#app",
@@ -213,6 +216,7 @@ var app = new Vue({
       };
       console.log("connect_thread>>>", connect_thread);
       this.socket.send(JSON.stringify(connect_thread));
+      show_chat()
     },
     connect_final(chat, action) {
       this.chat_object = chat;
@@ -335,4 +339,31 @@ var app = new Vue({
 function scroll(){
   const k = document.getElementsByClassName('screen')
   k[k.length - 1].scrollIntoView()
+}
+
+
+
+function back_ (){
+  let device = window.devicePixelRatio
+  let arrow_ = document.getElementById('arrow')
+  let contacts_ = document.getElementById('contact_list')
+  let chats_ = document.getElementById('chat_list')
+  if (device === 3){
+    chats_.classList.remove('d-block')
+    contacts_.classList.remove('d-none')
+    arrow_.classList.add('d-none')
+  }
+}
+
+function show_chat() {
+  let arrow_ = document.getElementById('arrow')
+  let contacts_ = document.getElementById('contact_list')
+  let chats_ = document.getElementById('chat_list')
+  let device = window.devicePixelRatio
+  if (device === 3) {
+    contacts_.classList.add('d-none')
+    chats_.classList.add('d-block')
+    arrow_.classList.remove('d-none')
+  }
+
 }
