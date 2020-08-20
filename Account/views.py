@@ -356,35 +356,36 @@ def personality_test(request):
 
 
 def test_result(request):
-    if request.method == 'GET':
-        from .algorithms import categories
-        try:
-            your_personality = PersonalityTest.objects.get(email=request.session['email'])
-            data = zip(
-                categories,
-                (
-                    json.loads(your_personality.extraversion)['title'],
-                    json.loads(your_personality.neurotism)['title'],
-                    json.loads(your_personality.agreeableness)['title'],
-                    json.loads(your_personality.conscientiousness)['title'],
-                    json.loads(your_personality.openness)['title']
-                ),
-                (
-                    json.loads(your_personality.extraversion)['description'],
-                    json.loads(your_personality.neurotism)['description'],
-                    json.loads(your_personality.agreeableness)['description'],
-                    json.loads(your_personality.conscientiousness)['description'],
-                    json.loads(your_personality.openness)['description'],
-                )
-            )
-            return render(request, 'Account/personality.html', {'data': data,
-                                                                "email": request.session['email'].split('@')[0]})
-        except (PersonalityTest.DoesNotExist, KeyError):
-            return redirect('personality_test')
-
-    if request.method == 'POST':
-        del request.session['category'], request.session['email']
-        return redirect('personality_test')
+    # if request.method == 'GET':
+    #     from .algorithms import categories
+    #     try:
+    #         your_personality = PersonalityTest.objects.get(email=request.session['email'])
+    #         data = zip(
+    #             categories,
+    #             (
+    #                 json.loads(your_personality.extraversion)['title'],
+    #                 json.loads(your_personality.neurotism)['title'],
+    #                 json.loads(your_personality.agreeableness)['title'],
+    #                 json.loads(your_personality.conscientiousness)['title'],
+    #                 json.loads(your_personality.openness)['title']
+    #             ),
+    #             (
+    #                 json.loads(your_personality.extraversion)['description'],
+    #                 json.loads(your_personality.neurotism)['description'],
+    #                 json.loads(your_personality.agreeableness)['description'],
+    #                 json.loads(your_personality.conscientiousness)['description'],
+    #                 json.loads(your_personality.openness)['description'],
+    #             )
+    #         )
+    #         return render(request, 'Account/personality.html', {'data': data,
+    #                                                             "email": request.session['email'].split('@')[0]})
+    #     except (PersonalityTest.DoesNotExist, KeyError):
+    #         return redirect('personality_test')
+    #
+    # if request.method == 'POST':
+    #     del request.session['category'], request.session['email']
+    #     return redirect('personality_test')
+    return render(request, 'Account/personality.html')
 
 
 @csrf_exempt
@@ -427,7 +428,3 @@ def get_couple(request, couple_id):
         return HttpResponse('You are not yet a couple')
     except Couple.DoesNotExist:
         return HttpResponse('No Couple exists with this ID.')
-
-
-
-
