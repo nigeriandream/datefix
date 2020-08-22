@@ -168,13 +168,13 @@ Setup Session
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class="control-label">State</label>
-													<select name="residence_state" id="state1"  class="form-control"
-														{% if residence_state %} >
+													<select name="residence_state" id="state1" class="form-control"
+														{% if residence_state %}>
 														<option value={{residence_state}} selected>
-                                                            {{ residence_state }}</option>
-															{% else %}
-															>
-														<option value="" selected="selected" ></option>
+															{{ residence_state }}</option>
+														{% else %}
+														>
+														<option value="" selected="selected"></option>
 														{% endif %}
 														<option value='Non-Nigerian Resident'>Non-Nigerian Resident
 														</option>
@@ -223,7 +223,7 @@ Setup Session
 												<div class="form-group">
 													<label class="control-label">LGA</label>
 													<select name="residence_lga" id="lga1" class="form-control" required
-														{% if residence_lga %} >
+														{% if residence_lga %}>
 														<option value={{residence_lga}} selected>{{residence_lga}}
 														</option>
 														{% else %}
@@ -244,12 +244,12 @@ Setup Session
 												<div class="form-group">
 													<label class="control-label">State</label>
 													<select name="origin_state" id="state2" class="form-control"
-														{% if origin_state %} >
+														{% if origin_state %}>
 														<option value={{ origin_state}} selected="selected">
 															{{ origin_state }}</option>
 														{% else %}
 														>
-														<option value="" selected="selected" ></option>
+														<option value="" selected="selected"></option>
 														{% endif %}
 														<option value='Non-Nigerian'>Non-Nigerian</option>
 														<option value='Abia'>Abia</option>
@@ -297,7 +297,7 @@ Setup Session
 												<div class="form-group">
 													<label class="control-label">LGA</label>
 													<select name="origin_lga" id="lga2" class="form-control" required
-														{% if origin_lga %} >
+														{% if origin_lga %}>
 														<option value={{ origin_lga }} selected>{{origin_lga}}</option>
 														{% else %}
 														>
@@ -310,527 +310,522 @@ Setup Session
 
 									<div class="form-category">
 										<h4>Your Sexuality & Status</h4>
-											<hr>
+										<hr>
 
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Marital Status?</label>
-														<select name="marital_status" id="marital-status1"
-															class="form-control" required {% if marital_status %}
-															>
-															<option value={{marital_status}} selected="selected">
-																{{marital_status}}</option>
-															{% else %}
-															>
-															<option value="" selected="selected" ></option>
-															{% endif %}
-															<option value="Single">Single</option>
-															<option value="Seperated">Separated</option>
-															<option value="Divorced">Divorced</option>
-															<option value="Widowed">Widowed</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Do you have children?</label>
-														<select name="children" id="children1" class="form-control"
-															required {% if children  %} >
-															<option value={{children}} selected>{{children}}</option>
-															{% else %}
-															>
-															{% endif %}
-															<option value="No">No</option>
-															<option value="Yes">Yes</option>
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="form-group">
-														<label class="control-label">Your Age</label>
-														{% if age %}
-														<input type="number" min="21"  name="age" id="age1"
-															class="range_01" value={{age}}>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Marital Status?</label>
+													<select name="marital_status" id="marital-status1"
+														class="form-control" required {% if marital_status %}>
+														<option value={{marital_status}} selected="selected">
+															{{marital_status}}</option>
 														{% else %}
-														<input type="number" min="21" name="age" id="age1"
-															class="range_01" value="21">
+														>
+														<option value="" selected="selected"></option>
 														{% endif %}
-
-													</div>
+														<option value="Single">Single</option>
+														<option value="Seperated">Separated</option>
+														<option value="Divorced">Divorced</option>
+														<option value="Widowed">Widowed</option>
+													</select>
 												</div>
-
 											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Do you have children?</label>
+													<select name="children" id="children1" class="form-control" required
+														{% if children  %}>
+														<option value={{children}} selected>{{children}}</option>
+														{% else %}
+														>
+														{% endif %}
+														<option value="No">No</option>
+														<option value="Yes">Yes</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="control-label">Your Age</label>
+													{% if age %}
+													<input type="number" min="21" name="age" id="age1" class="range_01"
+														value={{age}}>
+													{% else %}
+													<input type="number" min="21" name="age" id="age1" class="range_01"
+														value="21">
+													{% endif %}
+
+												</div>
+											</div>
+
+										</div>
 									</div>
-                                    {#work#}
+									{#work#}
 									<div class="form-category">
 										<h4>Your Education & Work</h4>
-											<hr>
+										<hr>
 
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your highest level of
-															education</label>
-														<select name="education" id="education1" class="form-control"
-															required>
-															{% if not education %}
-															<option value="" selected="selected" ></option>
-															{% endif %}
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your highest level of
+														education</label>
+													<select name="education" id="education1" class="form-control"
+														required>
+														{% if not education %}
+														<option value="" selected="selected"></option>
+														{% endif %}
 
-															<option value=1 {% if education == 1 %}
-																selected{% endif %}>SSCE</option>
-															<option value=2 {% if education == 2 %}
-																selected{% endif %}>OND</option>
-															<option value=3 {% if education == 3 %}
-																selected{% endif %}>HND</option>
-															<option value=4 {% if education == 4 %}
-																selected{% endif %}>Bachelors</option>
-															<option value=5 {% if education == 5 %}
-																selected{% endif %}>PGD/PCE</option>
-															<option value=6 {% if education == 6 %}
-																selected{% endif %}>Masters</option>
-															<option value=7 {% if education == 7 %}
-																selected{% endif %}>Doctorate</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your average net worth</label>
-														<select name="net_worth" id="net-worth1" class="form-control"
-															required>
-															{% if not net_worth %}
-															<option value="" selected ></option>
-															{% endif %}
-
-															<option value=1 {% if net_worth == 1 %}
-																selected{% endif %}>Less than N100,000</option>
-															<option value=2 {% if net_worth == 2 %}
-																selected{% endif %}>N100,000 - N500,000</option>
-															<option value=3 {% if net_worth == 3 %}
-																selected{% endif %}>N500,000 - N1,000,000</option>
-															<option value=4 {% if net_worth == 4 %}
-																selected{% endif %}>N1,000,000 - N10,000,000</option>
-															<option value=5 {% if net_worth == 5 %}
-																selected{% endif %}>N10,000,000 - N100,000,000</option>
-															<option value=6 {% if net_worth == 6 %}
-																selected{% endif %}>N100,000,000 - 1 Billion</option>
-															<option value=7 {% if net_worth == 7 %}
-																selected{% endif %}>Above 1 Billion</option>
-														</select>
-													</div>
+														<option value=1 {% if education == 1 %} selected{% endif %}>SSCE
+														</option>
+														<option value=2 {% if education == 2 %} selected{% endif %}>OND
+														</option>
+														<option value=3 {% if education == 3 %} selected{% endif %}>HND
+														</option>
+														<option value=4 {% if education == 4 %} selected{% endif %}>
+															Bachelors</option>
+														<option value=5 {% if education == 5 %} selected{% endif %}>
+															PGD/PCE</option>
+														<option value=6 {% if education == 6 %} selected{% endif %}>
+															Masters</option>
+														<option value=7 {% if education == 7 %} selected{% endif %}>
+															Doctorate</option>
+													</select>
 												</div>
 											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your average net worth</label>
+													<select name="net_worth" id="net-worth1" class="form-control"
+														required>
+														{% if not net_worth %}
+														<option value="" selected></option>
+														{% endif %}
+
+														<option value=1 {% if net_worth == 1 %} selected{% endif %}>Less
+															than N100,000</option>
+														<option value=2 {% if net_worth == 2 %} selected{% endif %}>
+															N100,000 - N500,000</option>
+														<option value=3 {% if net_worth == 3 %} selected{% endif %}>
+															N500,000 - N1,000,000</option>
+														<option value=4 {% if net_worth == 4 %} selected{% endif %}>
+															N1,000,000 - N10,000,000</option>
+														<option value=5 {% if net_worth == 5 %} selected{% endif %}>
+															N10,000,000 - N100,000,000</option>
+														<option value=6 {% if net_worth == 6 %} selected{% endif %}>
+															N100,000,000 - 1 Billion</option>
+														<option value=7 {% if net_worth == 7 %} selected{% endif %}>
+															Above 1 Billion</option>
+													</select>
+												</div>
+											</div>
+										</div>
 
 									</div>
 
 									<div class="form-category">
 										<h4>Your Body & Soul</h4>
-											<hr>
-											<div class="row">
-												<div class="col-md-3">
-													<div class="form-group">
-														<label class="control-label">Your Blood Group</label>
-														<select name="blood_group" id="blood-group1"
-															class="form-control">
-															{% if not blood_group %}
-															<option value="" selected="selected" ></option>
-															{% endif %}
+										<hr>
+										<div class="row">
+											<div class="col-md-3">
+												<div class="form-group">
+													<label class="control-label">Your Blood Group</label>
+													<select name="blood_group" id="blood-group1" class="form-control">
+														{% if not blood_group %}
+														<option value="" selected="selected"></option>
+														{% endif %}
 
-															<option value=1 {% if blood_group == 1 %}
-																selected{% endif %}>A</option>
-															<option value=2 {% if blood_group == 2 %}
-																selected{% endif %}>B</option>
-															<option value=3 {% if blood_group == 3 %}
-																selected{% endif %}>AB</option>
-															<option value=4 {% if blood_group == 4 %}
-																selected{% endif %}>O</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-3">
-													<div class="form-group">
-														<label class="control-label"> Your Rhesus Factor</label>
-														<select name="rhesus_factor" id="rhesus-factor1"
-															class="form-control">
-															{% if not rhesus_factor %}
-															<option value="" selected="selected" ></option
-																{% endif %}>
-															<option value=1 {% if rhesus_factor == 1 %} selected
-																{% endif %}>Positive (+)</option>
-															<option value=2 {% if rhesus_factor == 2 %} selected
-																{% endif %}>Negative (-)</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Genotype</label>
-														<select name="genotype" id="genotype1" class="form-control"
-															required {% if genotype %} {% endif %}>
-															{% if not genotype %}
-															<option value="" selected ></option>
-															{% endif %}
-															<option value="AA" {% if genotype == 'AA' %}
-																selected{% endif %}>AA</option>
-															<option value="AS" {% if genotype == 'AS' %}
-																selected{% endif %}>AS</option>
-															<option value="SS" {% if genotype == 'SS' %}
-																selected{% endif %}>SS</option>
-															<option value="SC" {% if genotype == 'SC' %}
-																selected{% endif %}>SC</option>
-															<option value="CC" {% if genotype == 'CC' %}
-																selected{% endif %}>CC</option>
-														</select>
-													</div>
+														<option value=1 {% if blood_group == 1 %} selected{% endif %}>A
+														</option>
+														<option value=2 {% if blood_group == 2 %} selected{% endif %}>B
+														</option>
+														<option value=3 {% if blood_group == 3 %} selected{% endif %}>AB
+														</option>
+														<option value=4 {% if blood_group == 4 %} selected{% endif %}>O
+														</option>
+													</select>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Religion</label>
-														<select name="religion" id="religion1" class="form-control"
-															{% if religion %} >
-															<option value={{religion}} selected="selected">{{religion}}
-															</option>
-															{% else %}
-															>
-															<option value="" selected="selected" ></option>
-															{% endif %}
-															<option value='Christian'>Christian</option>
-															<option value='Muslim'>Muslim</option>
-															<option value='Unaffiliated'>Unaffiliated</option>
-															<option value='Other'>Other</option>
-														</select>
-													</div>
-												</div>
 
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Denomination</label>
-														<select name="denomination" id="denomination1"
-															class="form-control" required {% if denomination %}
-															>
-															<option value={{denomination}} selected>{{denomination}}
-															</option>
-															{% else %}
-															>
-															{% endif %}
-														</select>
-													</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<label class="control-label"> Your Rhesus Factor</label>
+													<select name="rhesus_factor" id="rhesus-factor1"
+														class="form-control">
+														{% if not rhesus_factor %}
+														<option value="" selected="selected"></option {% endif %}>
+														<option value=1 {% if rhesus_factor == 1 %} selected
+															{% endif %}>Positive (+)</option>
+														<option value=2 {% if rhesus_factor == 2 %} selected
+															{% endif %}>Negative (-)</option>
+													</select>
 												</div>
 											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your Genotype</label>
+													<select name="genotype" id="genotype1" class="form-control" required
+														{% if genotype %} {% endif %}>
+														{% if not genotype %}
+														<option value="" selected></option>
+														{% endif %}
+														<option value="AA" {% if genotype == 'AA' %}
+															selected{% endif %}>AA</option>
+														<option value="AS" {% if genotype == 'AS' %}
+															selected{% endif %}>AS</option>
+														<option value="SS" {% if genotype == 'SS' %}
+															selected{% endif %}>SS</option>
+														<option value="SC" {% if genotype == 'SC' %}
+															selected{% endif %}>SC</option>
+														<option value="CC" {% if genotype == 'CC' %}
+															selected{% endif %}>CC</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your Religion</label>
+													<select name="religion" id="religion1" class="form-control"
+														{% if religion %}>
+														<option value={{religion}} selected="selected">{{religion}}
+														</option>
+														{% else %}
+														>
+														<option value="" selected="selected"></option>
+														{% endif %}
+														<option value='Christian'>Christian</option>
+														<option value='Muslim'>Muslim</option>
+														<option value='Unaffiliated'>Unaffiliated</option>
+														<option value='Other'>Other</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your Denomination</label>
+													<select name="denomination" id="denomination1" class="form-control"
+														required {% if denomination %}>
+														<option value={{denomination}} selected>{{denomination}}
+														</option>
+														{% else %}
+														>
+														{% endif %}
+													</select>
+												</div>
+											</div>
+										</div>
 									</div>
 
 									<div class="form-category">
 										<h4>Your Physique</h4>
-											<hr>
+										<hr>
 
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Complexion</label>
-														<select name="complexion" id="complexion1" class="form-control"
-															required {% if complexion %}{% endif %}>
-															{% if not complexion  %}
-															<option value="" selected="selected" ></option>
-															{% endif %}
-															<option value=1
-																{% if complexion == 1 %}selected{% endif %}>Very Light
-															</option>
-															<option value=2
-																{% if complexion == 2 %}selected{% endif %}>Light
-																Skinned</option>
-															<option value=3
-																{% if complexion == 3 %}selected{% endif %}>Normal Brown
-															</option>
-															<option value=4
-																{% if complexion == 4 %}selected{% endif %}>Dark Brown
-															</option>
-															<option value=5
-																{% if complexion == 5 %}selected{% endif %}>Deep Brown
-															</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Height</label>
-														<select name="height" id="height1" class="form-control" required
-															>
-															{% if not height %}
-															<option value="" selected ></option>
-															{% endif %}
-
-															<option value=1 {% if height == 1 %} selected{% endif %}>
-																Really Short</option>
-															<option value=2 {% if height == 2 %} selected{% endif %}>
-																Short</option>
-															<option value=3 {% if height == 3 %} selected{% endif %}>
-																Average</option>
-															<option value=4 {% if height == 4 %} selected{% endif %}>
-																Tall</option>
-															<option value=5 {% if height == 5 %} selected{% endif %}>
-																Really Tall</option>
-														</select>
-													</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your Complexion</label>
+													<select name="complexion" id="complexion1" class="form-control"
+														required {% if complexion %}{% endif %}>
+														{% if not complexion  %}
+														<option value="" selected="selected"></option>
+														{% endif %}
+														<option value=1 {% if complexion == 1 %}selected{% endif %}>Very
+															Light
+														</option>
+														<option value=2 {% if complexion == 2 %}selected{% endif %}>
+															Light
+															Skinned</option>
+														<option value=3 {% if complexion == 3 %}selected{% endif %}>
+															Normal Brown
+														</option>
+														<option value=4 {% if complexion == 4 %}selected{% endif %}>Dark
+															Brown
+														</option>
+														<option value=5 {% if complexion == 5 %}selected{% endif %}>Deep
+															Brown
+														</option>
+													</select>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Body Shape</label>
-														<select name="body_shape" id="body-shape1" class="form-control"
-															required {% if body_shape %} {% endif %}>
-															{% if not body_shape %}
-															<option value="" selected="selected" ></option>
-															{% endif %}
 
-															<option value=1 {% if body_shape == 1 %}
-																selected{% endif %}>Straight</option>
-															<option value=2 {% if body_shape == 2 %}
-																selected{% endif %}>Pear</option>
-															<option value=3 {% if body_shape == 3 %}
-																selected{% endif %}>Apple</option>
-															<option value=4 {% if body_shape == 4 %}
-																selected{% endif %}>Hourglass</option>
-														</select>
-													</div>
-												</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your Height</label>
+													<select name="height" id="height1" class="form-control" required>
+														{% if not height %}
+														<option value="" selected></option>
+														{% endif %}
 
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Body Type</label>
-														<select name="body_type" id="body-type1" class="form-control"
-															required {% if body_type %} {% endif %}>
-															{% if not body_type %}
-															<option value="" selected ></option>
-															{% endif %}
-
-															<option value=1 {% if body_type == 1 %}
-																selected{% endif %}>Ectomorphic</option>
-															<option value=2 {% if body_type == 2 %}
-																selected{% endif %}>Mesomorphic</option>
-															<option value=3 {% if body_type == 3 %}
-																selected{% endif %}>Endomorphic</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Body Size</label>
-														<select name="body_size" id="body-size1" class="form-control"
-															required {% if body_size %} {% endif %}>
-															{% if not body_size %}
-															<option value="" selected ></option>
-															{% endif %}
-
-															<option value=1 {% if body_size == 1 %}
-																selected{% endif %}>Skinny</option>
-															<option value=2 {% if body_size == 2 %}
-																selected{% endif %}>Slim</option>
-															<option value=3 {% if body_size == 3 %}
-																selected{% endif %}>Average</option>
-															<option value=4 {% if body_size == 4 %}
-																selected{% endif %}>Large</option>
-															<option value=5 {% if body_size == 5 %}
-																selected{% endif %}>Extra Large</option>
-														</select>
-													</div>
+														<option value=1 {% if height == 1 %} selected{% endif %}>
+															Really Short</option>
+														<option value=2 {% if height == 2 %} selected{% endif %}>
+															Short</option>
+														<option value=3 {% if height == 3 %} selected{% endif %}>
+															Average</option>
+														<option value=4 {% if height == 4 %} selected{% endif %}>
+															Tall</option>
+														<option value=5 {% if height == 5 %} selected{% endif %}>
+															Really Tall</option>
+													</select>
 												</div>
 											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your Body Shape</label>
+													<select name="body_shape" id="body-shape1" class="form-control"
+														required {% if body_shape %} {% endif %}>
+														{% if not body_shape %}
+														<option value="" selected="selected"></option>
+														{% endif %}
+
+														<option value=1 {% if body_shape == 1 %} selected{% endif %}>
+															Straight</option>
+														<option value=2 {% if body_shape == 2 %} selected{% endif %}>
+															Pear</option>
+														<option value=3 {% if body_shape == 3 %} selected{% endif %}>
+															Apple</option>
+														<option value=4 {% if body_shape == 4 %} selected{% endif %}>
+															Hourglass</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your Body Type</label>
+													<select name="body_type" id="body-type1" class="form-control"
+														required {% if body_type %} {% endif %}>
+														{% if not body_type %}
+														<option value="" selected></option>
+														{% endif %}
+
+														<option value=1 {% if body_type == 1 %} selected{% endif %}>
+															Ectomorphic (Lean & long, with difficulty building muscle)
+														</option>
+														<option value=2 {% if body_type == 2 %} selected{% endif %}>
+															Mesomorphic (Muscular and well-built)</option>
+														<option value=3 {% if body_type == 3 %} selected{% endif %}>
+															Endomorphic (High tendency to store body fat)</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your Body Size</label>
+													<select name="body_size" id="body-size1" class="form-control"
+														required {% if body_size %} {% endif %}>
+														{% if not body_size %}
+														<option value="" selected></option>
+														{% endif %}
+
+														<option value=1 {% if body_size == 1 %} selected{% endif %}>
+															Skinny</option>
+														<option value=2 {% if body_size == 2 %} selected{% endif %}>Slim
+														</option>
+														<option value=3 {% if body_size == 3 %} selected{% endif %}>
+															Average</option>
+														<option value=4 {% if body_size == 4 %} selected{% endif %}>
+															Large</option>
+														<option value=5 {% if body_size == 5 %} selected{% endif %}>
+															Extra Large</option>
+													</select>
+												</div>
+											</div>
+										</div>
 
 									</div>
 
 									<div class="form-category">
 										<h4>Your Social Habits</h4>
-											<hr>
+										<hr>
 
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Do you drink?</label>
-														<select name="drink" id="drink1" class="form-control" required
-															{% if drink %} {% endif %}>
-															{% if not drink %}
-															<option value="" selected="selected" ></option>
-															{% endif %}
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Do you drink?</label>
+													<select name="drink" id="drink1" class="form-control" required
+														{% if drink %} {% endif %}>
+														{% if not drink %}
+														<option value="" selected="selected"></option>
+														{% endif %}
 
-															<option value=1 {% if drink == 1 %} selected{% endif %}>
-																Yes</option>
-															<option value=2 {% if drink == 2 %} selected{% endif %}>
-																Socially</option>
-															<option value=3 {% if drink == 3 %} selected{% endif %}>No
-															</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Do you smoke?</label>
-														<select name="smoke" id="smoke1" class="form-control" required
-															{% if smoke %} {% endif %}>
-															{% if not smoke %}
-															<option value="" selected ></option>
-															{% endif %}
-
-															<option value=1 {% if smoke == 1 %} selected{% endif %}>
-																Yes</option>
-															<option value=2 {% if smoke == 2 %} selected{% endif %}>
-																Socially</option>
-															<option value=3 {% if smoke == 3 %} selected{% endif %}>No
-															</option>
-														</select>
-													</div>
+														<option value=1 {% if drink == 1 %} selected{% endif %}>
+															Yes</option>
+														<option value=2 {% if drink == 2 %} selected{% endif %}>
+															Socially</option>
+														<option value=3 {% if drink == 3 %} selected{% endif %}>No
+														</option>
+													</select>
 												</div>
 											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Do you smoke?</label>
+													<select name="smoke" id="smoke1" class="form-control" required
+														{% if smoke %} {% endif %}>
+														{% if not smoke %}
+														<option value="" selected></option>
+														{% endif %}
+
+														<option value=1 {% if smoke == 1 %} selected{% endif %}>
+															Yes</option>
+														<option value=2 {% if smoke == 2 %} selected{% endif %}>
+															Socially</option>
+														<option value=3 {% if smoke == 3 %} selected{% endif %}>No
+														</option>
+													</select>
+												</div>
+											</div>
+										</div>
 
 									</div>
 
 									<div class="form-category">
 										<h4>Your Personality</h4>
-											<hr>
+										<hr>
 
 
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-8">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8">
 
-														<label class="control-label"><strong>Openness *</strong> - How
-															open minded are you?</label>
-													</div>
-													<div class="col-md-4">
-														<select name="openness" id="openness1" class="form-control"
-															required {% if openness %} {% endif %}>
-															{% if not openness %}
-															<option value="" selected="selected" ></option>
-															{% endif %}
+													<label class="control-label"><strong>Openness *</strong> - How
+														open minded are you?</label>
+												</div>
+												<div class="col-md-4">
+													<select name="openness" id="openness1" class="form-control" required
+														{% if openness %} {% endif %}>
+														{% if not openness %}
+														<option value="" selected="selected"></option>
+														{% endif %}
 
-															<option value=1 {% if openness == 1 %}
-																selected{% endif %}>Not really</option>
-															<option value=2 {% if openness == 2 %}
-																selected{% endif %}>Moderately</option>
-															<option value=3 {% if openness == 3  %}
-																selected{% endif %}>Very Open</option>
-														</select>
-													</div>
+														<option value=1 {% if openness == 1 %} selected{% endif %}>Not
+															really</option>
+														<option value=2 {% if openness == 2 %} selected{% endif %}>
+															Moderately</option>
+														<option value=3 {% if openness == 3  %} selected{% endif %}>Very
+															Open</option>
+													</select>
 												</div>
 											</div>
+										</div>
 
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-8">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8">
 
-														<label class="control-label"><strong>Conscientiousness
-																*</strong> - How diligent and careful are you?</label>
-													</div>
-													<div class="col-md-4">
-														<select name="conscientiousness" id="conscientiousness1"
-															class="form-control" required {% if conscientiousness %}
-															{% endif %}>
+													<label class="control-label"><strong>Conscientiousness
+															*</strong> - How diligent and careful are you?</label>
+												</div>
+												<div class="col-md-4">
+													<select name="conscientiousness" id="conscientiousness1"
+														class="form-control" required {% if conscientiousness %}
+														{% endif %}>
 
-															{% if not conscientiousness %}
-															<option value="" selected="selected" ></option>
-															{% endif %}
-															<option value=1 {% if conscientiousness == 1 %}
-																selected{% endif %}>Careless</option>
-															<option value=2 {% if conscientiousness == 2 %}
-																selected{% endif %}>Moderately Diligent</option>
-															<option value=3 {% if conscientiousness == 3 %}
-																selected{% endif %}>Very Careful/Diligent</option>
-														</select>
-													</div>
+														{% if not conscientiousness %}
+														<option value="" selected="selected"></option>
+														{% endif %}
+														<option value=1 {% if conscientiousness == 1 %}
+															selected{% endif %}>Careless</option>
+														<option value=2 {% if conscientiousness == 2 %}
+															selected{% endif %}>Moderately Diligent</option>
+														<option value=3 {% if conscientiousness == 3 %}
+															selected{% endif %}>Very Careful/Diligent</option>
+													</select>
 												</div>
 											</div>
+										</div>
 
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-8">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8">
 
-														<label class="control-label"><strong>Extraversion *</strong> -
-															How socially outgoing are you?</label>
-													</div>
-													<div class="col-md-4">
-														<select name="extraversion" id="extraversion1"
-															class="form-control" required {% if height %}
-															{% endif %}>
-															{% if not extraversion %}
-															<option value="" selected="selected" ></option>
-															{% endif %}
+													<label class="control-label"><strong>Extraversion *</strong> -
+														How socially outgoing are you?</label>
+												</div>
+												<div class="col-md-4">
+													<select name="extraversion" id="extraversion1" class="form-control"
+														required {% if height %} {% endif %}>
+														{% if not extraversion %}
+														<option value="" selected="selected"></option>
+														{% endif %}
 
-															<option value=1 {% if extraversion == 1 %}
-																selected{% endif %}>Reserved</option>
-															<option value=2 {% if extraversion == 2 %}
-																selected{% endif %}>Moderately Outgoing</option>
-															<option value=3 {% if extraversion == 3 %}
-																selected{% endif %}>Very Outgoing</option>
-														</select>
-													</div>
+														<option value=1 {% if extraversion == 1 %} selected{% endif %}>
+															Reserved</option>
+														<option value=2 {% if extraversion == 2 %} selected{% endif %}>
+															Moderately Outgoing</option>
+														<option value=3 {% if extraversion == 3 %} selected{% endif %}>
+															Very Outgoing</option>
+													</select>
 												</div>
 											</div>
+										</div>
 
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-8">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8">
 
-														<label class="control-label"><strong>Agreeableness *</strong> -
-															How friendly or tactful are you?</label>
-													</div>
-													<div class="col-md-4">
-														<select name="agreeableness" id="agreeableness1"
-															class="form-control" required {% if agreeableness %}
-															{% endif %}>
-															{% if not agreeableness %}
-															<option value="" selected="selected" ></option>
-															{% endif %}
+													<label class="control-label"><strong>Agreeableness *</strong> -
+														How friendly or tactful are you?</label>
+												</div>
+												<div class="col-md-4">
+													<select name="agreeableness" id="agreeableness1"
+														class="form-control" required {% if agreeableness %}
+														{% endif %}>
+														{% if not agreeableness %}
+														<option value="" selected="selected"></option>
+														{% endif %}
 
-															<option value=1 {% if agreeableness == 1 %}
-																selected{% endif %}>Detatched</option>
-															<option value=2 {% if agreeableness == 2 %}
-																selected{% endif %}>Challenging</option>
-															<option value=3 {% if agreeableness == 3 %}
-																selected{% endif %}>Friendly</option>
-															<option value=4 {% if agreeableness == 4 %}
-																selected{% endif %}>Compassionate</option>
-														</select>
-													</div>
+														<option value=1 {% if agreeableness == 1 %} selected{% endif %}>
+															Detatched</option>
+														<option value=2 {% if agreeableness == 2 %} selected{% endif %}>
+															Challenging</option>
+														<option value=3 {% if agreeableness == 3 %} selected{% endif %}>
+															Friendly</option>
+														<option value=4 {% if agreeableness == 4 %} selected{% endif %}>
+															Compassionate</option>
+													</select>
 												</div>
 											</div>
+										</div>
 
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-8">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8">
 
-														<label class="control-label"><strong>Neurotism *</strong>
-															<span>- How emotionally sensitive are you?</span></label>
-													</div>
-													<div class="col-md-4">
-														<select name="neurotism" id="neurotism1" class="form-control"
-															required {% if neurotism %} {% endif %}>
-															{% if not neurotism %}
-															<option value="" selected="selected" ></option>
-															{% endif %}
+													<label class="control-label"><strong>Neurotism *</strong>
+														<span>- How emotionally sensitive are you?</span></label>
+												</div>
+												<div class="col-md-4">
+													<select name="neurotism" id="neurotism1" class="form-control"
+														required {% if neurotism %} {% endif %}>
+														{% if not neurotism %}
+														<option value="" selected="selected"></option>
+														{% endif %}
 
-															<option value=1 {% if neurotism == 1 %}
-																selected{% endif %}>Cold and Distant</option>
-															<option value=2 {% if neurotism == 2 %}
-																selected{% endif %}>Moderately Sensitive</option>
-															<option value=3 {% if neurotism == 3 %}
-																selected{% endif %}>Very Sensitive</option>
-														</select>
-													</div>
+														<option value=1 {% if neurotism == 1 %} selected{% endif %}>Cold
+															and Distant</option>
+														<option value=2 {% if neurotism == 2 %} selected{% endif %}>
+															Moderately Sensitive</option>
+														<option value=3 {% if neurotism == 3 %} selected{% endif %}>Very
+															Sensitive</option>
+													</select>
 												</div>
 											</div>
+										</div>
 
 
 									</div>
@@ -848,594 +843,589 @@ Setup Session
 									<p style="color:#fff;">Tell us what you want in a partner</p>
 									<div class="form-category">
 										<h4>Where would you like your partner to reside?</h4>
-											<hr>
+										<hr>
 
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">State</label>
-														<select name="residence_state" id="state3" class="form-control">
-															<option value="" selected="selected" ></option>
-															<option value='Does Not Matter'>Does Not Matter</option>
-															<option value='Non-Nigerian Resident'>Non-Nigerian Resident
-															</option>
-															<option value='Abia'>Abia</option>
-															<option value='Adamawa'>Adamawa</option>
-															<option value='AkwaIbom'>AkwaIbom</option>
-															<option value='Anambra'>Anambra</option>
-															<option value='Bauchi'>Bauchi</option>
-															<option value='Bayelsa'>Bayelsa</option>
-															<option value='Benue'>Benue</option>
-															<option value='Borno'>Borno</option>
-															<option value='Cross River'>Cross River</option>
-															<option value='Delta'>Delta</option>
-															<option value='Ebonyi'>Ebonyi</option>
-															<option value='Edo'>Edo</option>
-															<option value='Ekiti'>Ekiti</option>
-															<option value='Enugu'>Enugu</option>
-															<option value='FCT'>FCT</option>
-															<option value='Gombe'>Gombe</option>
-															<option value='Imo'>Imo</option>
-															<option value='Jigawa'>Jigawa</option>
-															<option value='Kaduna'>Kaduna</option>
-															<option value='Kano'>Kano</option>
-															<option value='Katsina'>Katsina</option>
-															<option value='Kebbi'>Kebbi</option>
-															<option value='Kogi'>Kogi</option>
-															<option value='Kwara'>Kwara</option>
-															<option value='Lagos'>Lagos</option>
-															<option value='Nasarawa'>Nasarawa</option>
-															<option value='Niger'>Niger</option>
-															<option value='Ogun'>Ogun</option>
-															<option value='Ondo'>Ondo</option>
-															<option value='Osun'>Osun</option>
-															<option value='Oyo'>Oyo</option>
-															<option value='Plateau'>Plateau</option>
-															<option value='Rivers'>Rivers</option>
-															<option value='Sokoto'>Sokoto</option>
-															<option value='Taraba'>Taraba</option>
-															<option value='Yobe'>Yobe</option>
-															<option value='Zamfara'>Zamafara</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">LGA</label>
-														<select name="residence_lga" id="lga3" class="form-control"
-															required>
-														</select>
-													</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">State</label>
+													<select name="residence_state" id="state3" class="form-control">
+														<option value="" selected="selected"></option>
+														<option value='Does Not Matter'>Does Not Matter</option>
+														<option value='Non-Nigerian Resident'>Non-Nigerian Resident
+														</option>
+														<option value='Abia'>Abia</option>
+														<option value='Adamawa'>Adamawa</option>
+														<option value='AkwaIbom'>AkwaIbom</option>
+														<option value='Anambra'>Anambra</option>
+														<option value='Bauchi'>Bauchi</option>
+														<option value='Bayelsa'>Bayelsa</option>
+														<option value='Benue'>Benue</option>
+														<option value='Borno'>Borno</option>
+														<option value='Cross River'>Cross River</option>
+														<option value='Delta'>Delta</option>
+														<option value='Ebonyi'>Ebonyi</option>
+														<option value='Edo'>Edo</option>
+														<option value='Ekiti'>Ekiti</option>
+														<option value='Enugu'>Enugu</option>
+														<option value='FCT'>FCT</option>
+														<option value='Gombe'>Gombe</option>
+														<option value='Imo'>Imo</option>
+														<option value='Jigawa'>Jigawa</option>
+														<option value='Kaduna'>Kaduna</option>
+														<option value='Kano'>Kano</option>
+														<option value='Katsina'>Katsina</option>
+														<option value='Kebbi'>Kebbi</option>
+														<option value='Kogi'>Kogi</option>
+														<option value='Kwara'>Kwara</option>
+														<option value='Lagos'>Lagos</option>
+														<option value='Nasarawa'>Nasarawa</option>
+														<option value='Niger'>Niger</option>
+														<option value='Ogun'>Ogun</option>
+														<option value='Ondo'>Ondo</option>
+														<option value='Osun'>Osun</option>
+														<option value='Oyo'>Oyo</option>
+														<option value='Plateau'>Plateau</option>
+														<option value='Rivers'>Rivers</option>
+														<option value='Sokoto'>Sokoto</option>
+														<option value='Taraba'>Taraba</option>
+														<option value='Yobe'>Yobe</option>
+														<option value='Zamfara'>Zamafara</option>
+													</select>
 												</div>
 											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">LGA</label>
+													<select name="residence_lga" id="lga3" class="form-control"
+														required>
+													</select>
+												</div>
+											</div>
+										</div>
 									</div>
 
 									<div class="form-category">
 										<h4>Where would you like your partner to come from?</h4>
-											<hr>
+										<hr>
 
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">State</label>
-														<select name="origin_state" id="state4" class="form-control">
-															<option value="" selected="selected" ></option>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">State</label>
+													<select name="origin_state" id="state4" class="form-control">
+														<option value="" selected="selected"></option>
 
-															<option value='Does Not Matter'>Does Not Matter</option>
-															<option value='Non-Nigerian'>Non-Nigerian</option>
-															<option value='Abia'>Abia</option>
-															<option value='Adamawa'>Adamawa</option>
-															<option value='AkwaIbom'>AkwaIbom</option>
-															<option value='Anambra'>Anambra</option>
-															<option value='Bauchi'>Bauchi</option>
-															<option value='Bayelsa'>Bayelsa</option>
-															<option value='Benue'>Benue</option>
-															<option value='Borno'>Borno</option>
-															<option value='Cross River'>Cross River</option>
-															<option value='Delta'>Delta</option>
-															<option value='Ebonyi'>Ebonyi</option>
-															<option value='Edo'>Edo</option>
-															<option value='Ekiti'>Ekiti</option>
-															<option value='Enugu'>Enugu</option>
-															<option value='FCT'>FCT</option>
-															<option value='Gombe'>Gombe</option>
-															<option value='Imo'>Imo</option>
-															<option value='Jigawa'>Jigawa</option>
-															<option value='Kaduna'>Kaduna</option>
-															<option value='Kano'>Kano</option>
-															<option value='Katsina'>Katsina</option>
-															<option value='Kebbi'>Kebbi</option>
-															<option value='Kogi'>Kogi</option>
-															<option value='Kwara'>Kwara</option>
-															<option value='Lagos'>Lagos</option>
-															<option value='Nasarawa'>Nasarawa</option>
-															<option value='Niger'>Niger</option>
-															<option value='Ogun'>Ogun</option>
-															<option value='Ondo'>Ondo</option>
-															<option value='Osun'>Osun</option>
-															<option value='Oyo'>Oyo</option>
-															<option value='Plateau'>Plateau</option>
-															<option value='Rivers'>Rivers</option>
-															<option value='Sokoto'>Sokoto</option>
-															<option value='Taraba'>Taraba</option>
-															<option value='Yobe'>Yobe</option>
-															<option value='Zamfara'>Zamafara</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">LGA</label>
-														<select name="origin_lga" id="lga4" class="form-control"
-															required>
-														</select>
-													</div>
+														<option value='Does Not Matter'>Does Not Matter</option>
+														<option value='Non-Nigerian'>Non-Nigerian</option>
+														<option value='Abia'>Abia</option>
+														<option value='Adamawa'>Adamawa</option>
+														<option value='AkwaIbom'>AkwaIbom</option>
+														<option value='Anambra'>Anambra</option>
+														<option value='Bauchi'>Bauchi</option>
+														<option value='Bayelsa'>Bayelsa</option>
+														<option value='Benue'>Benue</option>
+														<option value='Borno'>Borno</option>
+														<option value='Cross River'>Cross River</option>
+														<option value='Delta'>Delta</option>
+														<option value='Ebonyi'>Ebonyi</option>
+														<option value='Edo'>Edo</option>
+														<option value='Ekiti'>Ekiti</option>
+														<option value='Enugu'>Enugu</option>
+														<option value='FCT'>FCT</option>
+														<option value='Gombe'>Gombe</option>
+														<option value='Imo'>Imo</option>
+														<option value='Jigawa'>Jigawa</option>
+														<option value='Kaduna'>Kaduna</option>
+														<option value='Kano'>Kano</option>
+														<option value='Katsina'>Katsina</option>
+														<option value='Kebbi'>Kebbi</option>
+														<option value='Kogi'>Kogi</option>
+														<option value='Kwara'>Kwara</option>
+														<option value='Lagos'>Lagos</option>
+														<option value='Nasarawa'>Nasarawa</option>
+														<option value='Niger'>Niger</option>
+														<option value='Ogun'>Ogun</option>
+														<option value='Ondo'>Ondo</option>
+														<option value='Osun'>Osun</option>
+														<option value='Oyo'>Oyo</option>
+														<option value='Plateau'>Plateau</option>
+														<option value='Rivers'>Rivers</option>
+														<option value='Sokoto'>Sokoto</option>
+														<option value='Taraba'>Taraba</option>
+														<option value='Yobe'>Yobe</option>
+														<option value='Zamfara'>Zamafara</option>
+													</select>
 												</div>
 											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">LGA</label>
+													<select name="origin_lga" id="lga4" class="form-control" required>
+													</select>
+												</div>
+											</div>
+										</div>
 									</div>
 
 									<div class="form-category">
-										<h4>Your Partner's Sexuality & Status</h4>
-											<hr>
+										<h4>Sexuality & Status</h4>
+										<hr>
 
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Preferred Partner's Marital
-															Status?</label>
-														<select name="marital_status" id="marital-status2"
-															class="form-control" required>
-															<option value='Does Not Matter' selected="selected">Does Not
-																Matter</option>
-															<option value="Single">Single</option>
-															<option value="Seperated">Separated</option>
-															<option value="Divorced">Divorced</option>
-															<option value="Widowed">Widowed</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your ideal partner must not have
-															children?</label>
-														<select name="children" id="children2" class="form-control"
-															required>
-															<option value="Does Not Matter">Does Not Matter</option>
-															<option value="Yes">Yes, No children please.</option>
-														</select>
-													</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Preferred Partner's Marital
+														Status?</label>
+													<select name="marital_status" id="marital-status2"
+														class="form-control" required>
+														<option value='Does Not Matter' selected="selected">Does Not
+															Matter</option>
+														<option value="Single">Single</option>
+														<option value="Seperated">Separated</option>
+														<option value="Divorced">Divorced</option>
+														<option value="Widowed">Widowed</option>
+													</select>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="form-group">
-														<label class="control-label">Your Ideal Partner's Age
-															Range</label>
-														<input type="text" id="age-range-slider" value="" />
-													</div>
-												</div>
 
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your ideal partner must not have
+														children?</label>
+													<select name="children" id="children2" class="form-control"
+														required>
+														<option value="Does Not Matter">Does Not Matter</option>
+														<option value="Yes">Yes, No children please.</option>
+													</select>
+												</div>
 											</div>
-											<div class="row" style="display:none;">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Ideal Partner's Minimum
-															Age</label>
-														<input type="number" min="21" name="min-age" id="age2"
-															value="21" class="form-control">
-													</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="control-label">Your Ideal Partner's Age
+														Range</label>
+													<input type="text" id="age-range-slider" value="" />
 												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Ideal Partner's Maximum
-															Age</label>
-														<input type="number" min="22" name="max-age" id="age3"
-															value="99" class="form-control">
-													</div>
-												</div>
+											</div>
 
+										</div>
+										<div class="row" style="display:none;">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your Ideal Partner's Minimum
+														Age</label>
+													<input type="number" min="21" name="min-age" id="age2" value="21"
+														class="form-control">
+												</div>
 											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Your Ideal Partner's Maximum
+														Age</label>
+													<input type="number" min="22" name="max-age" id="age3" value="99"
+														class="form-control">
+												</div>
+											</div>
+
+										</div>
 									</div>
 									<div class="form-category">
 										<h4>Your Ideal Partner's Education & Work</h4>
-											<hr>
+										<hr>
 
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Minimum level of education</label>
-														<select name="education" id="education2" class="form-control"
-															required>
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value=1>SSCE</option>
-															<option value=2>OND</option>
-															<option value=3>HND</option>
-															<option value=4>Bachelors</option>
-															<option value=5>PGD/PCE</option>
-															<option value=6>Masters</option>
-															<option value=7>Doctorate</option>
-														</select>
-													</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Minimum level of education</label>
+													<select name="education" id="education2" class="form-control"
+														required>
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value=1>SSCE</option>
+														<option value=2>OND</option>
+														<option value=3>HND</option>
+														<option value=4>Bachelors</option>
+														<option value=5>PGD/PCE</option>
+														<option value=6>Masters</option>
+														<option value=7>Doctorate</option>
+													</select>
 												</div>
+											</div>
 
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Average net worth</label>
-														<select name="net_worth" id="net-worth2" class="form-control"
-															required>
-															<option value="Does Not Matter" selected>Does Not Matter
-															</option>
-															<option value=1>Less than N100,000</option>
-															<option value=2>N100,000 - N500,000</option>
-															<option value=3>N500,000 - N1,000,000</option>
-															<option value=4>N1,000,000 - N10,000,000</option>
-															<option value=5>N10,000,000 - N100,000,000</option>
-															<option value=6>N100,000,000 - 1 Billion</option>
-															<option value=7>Above 1 Billion</option>
-														</select>
-                                                    </div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Average net worth</label>
+													<select name="net_worth" id="net-worth2" class="form-control"
+														required>
+														<option value="Does Not Matter" selected>Does Not Matter
+														</option>
+														<option value=1>Less than N100,000</option>
+														<option value=2>N100,000 - N500,000</option>
+														<option value=3>N500,000 - N1,000,000</option>
+														<option value=4>N1,000,000 - N10,000,000</option>
+														<option value=5>N10,000,000 - N100,000,000</option>
+														<option value=6>N100,000,000 - 1 Billion</option>
+														<option value=7>Above 1 Billion</option>
+													</select>
 												</div>
+											</div>
 
 
+										</div>
 									</div>
-                                    </div>
 
 									<div class="form-category">
 										<h4>Your Ideal Partner's Body & Soul</h4>
-											<hr>
-											<div class="row">
-												<div class="col-md-3">
-													<div class="form-group">
-														<label class="control-label">Blood Group</label>
-														<select name="blood_group" id="blood-group2"
-															class="form-control">
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value=1>A</option>
-															<option value=2>B</option>
-															<option value=3>AB</option>
-															<option value=4>O</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-3">
-													<div class="form-group">
-														<label class="control-label">Rhesus Factor</label>
-														<select name="rhesus_factor" id="rhesus-factor2"
-															class="form-control">
-															<option value="Does Not Matter"
-																selected="selected">Does Not Matter
-															</option>
-															<option value=1>Positive (+)</option>
-															<option value=2>Negative (-)</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Ideal Partner's
-															Genotype</label>
-														<select name="genotype" id="genotype2" class="form-control"
-															required>
-															<option value="Does Not Matter" selected>Does Not Matter
-															</option>
-															<option value="AA">AA Only</option>
-															<option value="AA,AS">AA or AS</option>
-															<option value="AA,AS,SC,CC,SS">AA, AS, SC, CC, or SS
-															</option>
-															>>>>>>> master
-														</select>
-													</div>
+										<hr>
+										<div class="row">
+											<div class="col-md-3">
+												<div class="form-group">
+													<label class="control-label">Blood Group</label>
+													<select name="blood_group" id="blood-group2" class="form-control">
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value=1>A</option>
+														<option value=2>B</option>
+														<option value=3>AB</option>
+														<option value=4>O</option>
+													</select>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Ideal Partner's
-															Religion</label>
-														<select name="religion" id="religion2" class="form-control">
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value='Christian'>Christian</option>
-															<option value='Muslim'>Muslim</option>
-															<option value='Unaffiliated'>Unaffiliated</option>
-															<option value='Other'>Other</option>
-														</select>
-													</div>
-												</div>
 
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Your Denomination</label>
-														<select name="denomination" id="denomination2"
-															class="form-control" required>
-														</select>
-													</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<label class="control-label">Rhesus Factor</label>
+													<select name="rhesus_factor" id="rhesus-factor2"
+														class="form-control">
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter
+														</option>
+														<option value=1>Positive (+)</option>
+														<option value=2>Negative (-)</option>
+													</select>
 												</div>
 											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Genotype</label>
+													<select name="genotype" id="genotype2" class="form-control"
+														required>
+														<option value="Does Not Matter" selected>Does Not Matter
+														</option>
+														<option value="AA">AA Only</option>
+														<option value="AA,AS">AA or AS</option>
+														<option value="AA,AS,SC,CC,SS">AA, AS, SC, CC, or SS
+														</option>
+														>>>>>>> master
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Religion</label>
+													<select name="religion" id="religion2" class="form-control">
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value='Christian'>Christian</option>
+														<option value='Muslim'>Muslim</option>
+														<option value='Unaffiliated'>Unaffiliated</option>
+														<option value='Other'>Other</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Denomination</label>
+													<select name="denomination" id="denomination2" class="form-control"
+														required>
+													</select>
+												</div>
+											</div>
+										</div>
 									</div>
 
 									<div class="form-category">
-										<h4>Your Ideal Partner's Physique</h4>
-											<hr>
+										<h4>Physique</h4>
+										<hr>
 
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Complexion</label>
-														<select name="complexion" id="complexion2" class="form-control"
-															required>
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value=1>Albino</option>
-															<option value=2>Light Skinned</option>
-															<option value=3>Normal Brown</option>
-															<option value=4>Dark Brown</option>
-															<option value=5>Deep Brown</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Height</label>
-														<select name="height" id="height2" class="form-control"
-															required>
-															<option value="Does Not Matter" selected>Does Not Matter
-															</option>
-															<option value=1>Really Short</option>
-															<option value=2>Short</option>
-															<option value=3>Average</option>
-															<option value=4>Tall</option>
-															<option value=5>Really Tall</option>
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Body Shape</label>
-														<select name="body_shape" id="body-shape2" class="form-control"
-															required>
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value=1>Straight</option>
-															<option value=2>Pear</option>
-															<option value=3>Apple</option>
-															<option value=4>Hourglass</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Body Type</label>
-														<select name="body_type" id="body-type2" class="form-control"
-															required>
-															<option value="Does Not Matter" selected>Does Not Matter
-															</option>
-															<option value=1>Ectomorphic</option>
-															<option value=2>Mesomorphic</option>
-															<option value=3>Endomorphic</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Body Size</label>
-														<select name="body_size" id="body-size2" class="form-control"
-															required>
-															<option value="Does Not Matter" selected>Does Not Matter
-															</option>
-															<option value=1>Skinny</option>
-															<option value=2>Slim</option>
-															<option value=3>Average</option>
-															<option value=4>Large</option>
-															<option value=5>Extra Large</option>
-														</select>
-													</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Complexion</label>
+													<select name="complexion" id="complexion2" class="form-control"
+														required>
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value=1>Albino</option>
+														<option value=2>Light Skinned</option>
+														<option value=3>Normal Brown</option>
+														<option value=4>Dark Brown</option>
+														<option value=5>Deep Brown</option>
+													</select>
 												</div>
 											</div>
 
-									</div>
-
-									<div class="form-category">
-										<h4>Your Ideal Partner's Social Habits</h4>
-											<hr>
-
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Does your ideal partner
-															drink?</label>
-														<select name="drink" id="drink2" class="form-control" required>
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value=1>Yes</option>
-															<option value=2>Socially</option>
-															<option value=3>No</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Does your ideal partner
-															smoke?</label>
-														<select name="smoke" id="smoke2" class="form-control" required>
-															<option value="Does Not Matter" selected>Does Not Matter
-															</option>
-															<option value=1>Yes</option>
-															<option value=2>Socially</option>
-															<option value=3>No</option>
-														</select>
-													</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Height</label>
+													<select name="height" id="height2" class="form-control" required>
+														<option value="Does Not Matter" selected>Does Not Matter
+														</option>
+														<option value=1>Really Short</option>
+														<option value=2>Short</option>
+														<option value=3>Average</option>
+														<option value=4>Tall</option>
+														<option value=5>Really Tall</option>
+													</select>
 												</div>
 											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Body Shape</label>
+													<select name="body_shape" id="body-shape2" class="form-control"
+														required>
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value=1>Straight</option>
+														<option value=2>Pear</option>
+														<option value=3>Apple</option>
+														<option value=4>Hourglass</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Body Type</label>
+													<select name="body_type" id="body-type2" class="form-control"
+														required>
+														<option value="Does Not Matter" selected>Does Not Matter
+														</option>
+														<option value=1>Ectomorphic (Lean & long, with difficulty
+															building muscle)</option>
+														<option value=2>Mesomorphic (Muscular and well-built)</option>
+														<option value=3>Endomorphic (High tendency to store body fat)
+														</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Body Size</label>
+													<select name="body_size" id="body-size2" class="form-control"
+														required>
+														<option value="Does Not Matter" selected>Does Not Matter
+														</option>
+														<option value=1>Skinny</option>
+														<option value=2>Slim</option>
+														<option value=3>Average</option>
+														<option value=4>Large</option>
+														<option value=5>Extra Large</option>
+													</select>
+												</div>
+											</div>
+										</div>
 
 									</div>
 
 									<div class="form-category">
-										<h4>Your Ideal Partner's Personality</h4>
-											<hr>
+										<h4>Social Habits</h4>
+										<hr>
 
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-8">
-
-														<label class="control-label"><strong>Openness *</strong> - How
-															open minded do you want your partner to be?</label>
-													</div>
-													<div class="col-md-4">
-														<select name="openness" id="openness2" class="form-control"
-															required>
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value=1>Not really</option>
-															<option value=2>Moderately</option>
-															<option value=3>Very Open</option>
-														</select>
-													</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Does your ideal partner
+														drink?</label>
+													<select name="drink" id="drink2" class="form-control" required>
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value=1>Yes</option>
+														<option value=2>Socially</option>
+														<option value=3>No</option>
+													</select>
 												</div>
 											</div>
 
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-8">
-
-														<label class="control-label"><strong>Conscientiousness
-																*</strong> - How diligent and careful do you want your
-															partner to be?</label>
-													</div>
-													<div class="col-md-4">
-														<select name="conscientiousness" id="conscientiousness2"
-															class="form-control" required>
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value=1>Careless</option>
-															<option value=2>Moderately Diligent</option>
-															<option value=3>Very Careful/Diligent</option>
-														</select>
-													</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Does your ideal partner
+														smoke?</label>
+													<select name="smoke" id="smoke2" class="form-control" required>
+														<option value="Does Not Matter" selected>Does Not Matter
+														</option>
+														<option value=1>Yes</option>
+														<option value=2>Socially</option>
+														<option value=3>No</option>
+													</select>
 												</div>
 											</div>
+										</div>
 
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-8">
+									</div>
 
-														<label class="control-label"><strong>Extraversion *</strong> -
-															How socially outgoing do you want your partner to
-															be?</label>
-													</div>
-													<div class="col-md-4">
-														<select name="extraversion" id="extraversion2"
-															class="form-control" required>
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value=1>Reserved</option>
-															<option value=2>Moderately Outgoing</option>
-															<option value=3>Very Outgoing</option>
-														</select>
-													</div>
+									<div class="form-category">
+										<h4>Personality</h4>
+										<hr>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8">
+
+													<label class="control-label"><strong>Openness *</strong> - How
+														open minded do you want your partner to be?</label>
+												</div>
+												<div class="col-md-4">
+													<select name="openness" id="openness2" class="form-control"
+														required>
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value=1>Not really</option>
+														<option value=2>Moderately</option>
+														<option value=3>Very Open</option>
+													</select>
 												</div>
 											</div>
+										</div>
 
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-8">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8">
 
-														<label class="control-label"><strong>Agreeableness *</strong> -
-															How friendly or tactful do you want your partner to
-															be?</label>
-													</div>
-													<div class="col-md-4">
-														<select name="agreeableness" id="agreeableness2"
-															class="form-control" required>
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value=1>Detatched</option>
-															<option value=2>Challenging</option>
-															<option value=3>Friendly</option>
-															<option value=4>Compassionate</option>
-														</select>
-													</div>
+													<label class="control-label"><strong>Conscientiousness
+															*</strong> - How diligent and careful do you want your
+														partner to be?</label>
+												</div>
+												<div class="col-md-4">
+													<select name="conscientiousness" id="conscientiousness2"
+														class="form-control" required>
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value=1>Careless</option>
+														<option value=2>Moderately Diligent</option>
+														<option value=3>Very Careful/Diligent</option>
+													</select>
 												</div>
 											</div>
+										</div>
 
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-8">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8">
 
-														<label class="control-label"><strong>Neurotism *</strong>
-															<span>- How emotionally sensitive do you want your partner
-																to be?</span></label>
-													</div>
-													<div class="col-md-4">
-														<select name="neurotism" id="neurotism2" class="form-control"
-															required>
-															<option value="Does Not Matter" selected="selected">Does Not
-																Matter</option>
-															<option value=1>Cold and Distant</option>
-															<option value=2>Moderately Sensitive</option>
-															<option value=3>Very Sensitive</option>
-														</select>
-													</div>
+													<label class="control-label"><strong>Extraversion *</strong> -
+														How socially outgoing do you want your partner to
+														be?</label>
+												</div>
+												<div class="col-md-4">
+													<select name="extraversion" id="extraversion2" class="form-control"
+														required>
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value=1>Reserved</option>
+														<option value=2>Moderately Outgoing</option>
+														<option value=3>Very Outgoing</option>
+													</select>
 												</div>
 											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8">
+
+													<label class="control-label"><strong>Agreeableness *</strong> -
+														How friendly or tactful do you want your partner to
+														be?</label>
+												</div>
+												<div class="col-md-4">
+													<select name="agreeableness" id="agreeableness2"
+														class="form-control" required>
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value=1>Detatched</option>
+														<option value=2>Challenging</option>
+														<option value=3>Friendly</option>
+														<option value=4>Compassionate</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8">
+
+													<label class="control-label"><strong>Neurotism *</strong>
+														<span>- How emotionally sensitive do you want your partner
+															to be?</span></label>
+												</div>
+												<div class="col-md-4">
+													<select name="neurotism" id="neurotism2" class="form-control"
+														required>
+														<option value="Does Not Matter" selected="selected">Does Not
+															Matter</option>
+														<option value=1>Cold and Distant</option>
+														<option value=2>Moderately Sensitive</option>
+														<option value=3>Very Sensitive</option>
+													</select>
+												</div>
+											</div>
+										</div>
 
 
 									</div>
 
 									<div class="form-category">
 										<h4>Choose Your Dealbreakers.</h4>
-											<span>These are two features that you absolutely will not compromise on. If
-												these conditions are not exactly what you want, the potential partner
-												will not be considered.</span>
-											<hr>
+										<span>These are two features that you absolutely will not compromise on. If
+											these conditions are not exactly what you want, the potential partner
+											will not be considered.</span>
+										<hr>
 
-											<div class="row">
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">First Dealbreaker</label>
-														<select name="dealbreaker1" id="dealbreaker1"
-															class="form-control">
-															<option value="No Dealbreaker" selected="selected">No
-																Dealbreaker</option>
-															<option value="residence-state">State of Residence</option>
-															<option value="origin-state">State of Origin</option>
-															<option value="religion">Religion</option>
-															<option value="denomination">Denomination</option>
-															<option value="marital-status">Marital Status</option>
-															<option value="children">Children</option>
-															<option value="blood-group">Blood Group</option>
-															<option value="genotype">Genotype</option>
-															<option value="body-size">Body Size</option>
-															<option value="drink">Drinks</option>
-															<option value="smoke">Smokes</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="col-md-6">
-													<div class="form-group">
-														<label class="control-label">Second Dealbreaker</label>
-														<select name="dealbreaker2" id="dealbreaker2"
-															class="form-control">
-															<option value="No Dealbreaker" selected="selected">No
-																Dealbreaker</option>
-														</select>
-													</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">First Dealbreaker</label>
+													<select name="dealbreaker1" id="dealbreaker1" class="form-control">
+														<option value="No Dealbreaker" selected="selected">No
+															Dealbreaker</option>
+														<option value="residence-state">State of Residence</option>
+														<option value="origin-state">State of Origin</option>
+														<option value="religion">Religion</option>
+														<option value="denomination">Denomination</option>
+														<option value="marital-status">Marital Status</option>
+														<option value="children">Children</option>
+														<option value="blood-group">Blood Group</option>
+														<option value="genotype">Genotype</option>
+														<option value="body-size">Body Size</option>
+														<option value="drink">Drinks</option>
+														<option value="smoke">Smokes</option>
+													</select>
 												</div>
 											</div>
+
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Second Dealbreaker</label>
+													<select name="dealbreaker2" id="dealbreaker2" class="form-control">
+														<option value="No Dealbreaker" selected="selected">No
+															Dealbreaker</option>
+													</select>
+												</div>
+											</div>
+										</div>
 
 									</div>
 
