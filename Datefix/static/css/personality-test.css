@@ -209,3 +209,30 @@ button {
 		vertical-align: middle;
 	}
 }
+
+.p-result-header {
+	text-transform: uppercase;
+	font-weight: 500;
+	margin: 0 0 10px 0 !important;
+}
+
+.p-result-subheader {
+	text-transform: uppercase;
+	font-weight: 500;
+	color: #fff;
+	border-top: 2px solid #fff;
+}
+
+.p-results {
+	display: inline;
+}
+
+.p-result-item {
+	float: left;
+	margin: 0 5px 0 5px;
+}
+
+span {
+	font-size: 17px !important;
+	line-height: 1.6;
+}
