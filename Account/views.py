@@ -136,7 +136,7 @@ def results(request):
                 for x in matches)
             if show is None:
                 return render(request, 'Account/results.html',
-                          {'matches': matches, "select": select, "matches_length": size})
+                              {'matches': matches, "select": select, "matches_length": size})
             else:
                 return render(request, 'Account/results.html',
                               {'matches': matches, "select": select, "matches_length": size, "message": show[0],
@@ -377,8 +377,8 @@ def test_result(request):
                     json.loads(your_personality.openness)['description'],
                 )
             )
-            return render(request, 'Account/personality.html', {'data': data,
-                                                                "email": request.session['email'].split('@')[0]})
+            return render(request, 'Account/personality_result.html', {'data': data,
+                                                                       "email": request.session['email'].split('@')[0]})
         except (PersonalityTest.DoesNotExist, KeyError):
             return redirect('personality_test')
 
@@ -386,9 +386,6 @@ def test_result(request):
         del request.session['category'], request.session['email']
         return redirect('personality_test')
 
-
-def person_result(request):
-    return render(request, 'Account/personality_result.html')
 
 @csrf_exempt
 @login_required

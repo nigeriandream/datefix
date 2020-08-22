@@ -96,64 +96,27 @@ Personality Test
 			</div> -->
             <h1 class="text-white text-center p-result-header">Your Personality Test Result</h1>
             <p class="text-center p-result-subheader p-3">
-                Ozor Pascal Awachie
+                {% if request.user.is_authenticated %}
+                            Dear {{ request.user.username }}
+                        {% else %}
+                        Dear {{ email }},
+                        {% endif %}
             </p>
 
             <div class="container clearfix">
 
                 <div class="nobottommargin text-white">
-
+                {% for category, title, description in data %}
                     <div class="bottommargin-lg">
                         <div class="heading-block">
-                            <h3 class="text-white">EXTRAVERSION</h3>
+                            <h3 class="text-white">{{ category }}</h3>
                         </div>
 
 
-                        <p>{% lorem 1 %}</p>
-                        <span>{% lorem 3 %}</span>
+                        <p>{{ title }}</p>
+                        <span>{{ description }}</span>
                     </div>
-
-                    <div class="bottommargin-lg">
-                        <div class="heading-block">
-                            <h3 class="text-white">EXTRAVERSION</h3>
-                        </div>
-
-
-                        <p>{% lorem 1 %}</p>
-                        <span>{% lorem 3 %}</span>
-                    </div>
-
-                    <div class="bottommargin-lg">
-                        <div class="heading-block">
-                            <h3 class="text-white">EXTRAVERSION</h3>
-                        </div>
-
-
-                        <p>{% lorem 1 %}</p>
-                        <span>{% lorem 3 %}</span>
-                    </div>
-
-                    <div class="bottommargin-lg">
-                        <div class="heading-block">
-                            <h3 class="text-white">EXTRAVERSION</h3>
-                        </div>
-
-
-                        <p>{% lorem 1 %}</p>
-                        <span>{% lorem 3 %}</span>
-                    </div>
-
-                    <div class="bottommargin-lg">
-                        <div class="heading-block">
-                            <h3 class="text-white">EXTRAVERSION</h3>
-                        </div>
-
-
-                        <p>{% lorem 1 %}</p>
-                        <span>{% lorem 3 %}</span>
-                    </div>
-
-
+                {% endfor %}
                 </div>
             </div>
 
