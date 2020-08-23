@@ -337,8 +337,12 @@ var app = new Vue({
 });
 
 function scroll(){
-  const k = document.getElementsByClassName('screen')
-  k[k.length - 1].scrollIntoView()
+  try {
+    const k = document.getElementsByClassName('screen')
+    k[k.length - 1].scrollIntoView()
+  }catch (e){
+    console.log("scroll_error >>", e)
+  }
 }
 
 
@@ -348,7 +352,7 @@ function back_ (){
   let arrow_ = document.getElementById('arrow')
   let contacts_ = document.getElementById('contact_list')
   let chats_ = document.getElementById('chat_list')
-  if (device === 3){
+  if (device > 1.100000023841858){
     chats_.classList.remove('d-block')
     contacts_.classList.remove('d-none')
     arrow_.classList.add('d-none')
@@ -360,7 +364,7 @@ function show_chat() {
   let contacts_ = document.getElementById('contact_list')
   let chats_ = document.getElementById('chat_list')
   let device = window.devicePixelRatio
-  if (device === 3) {
+  if (device > 1.100000023841858) {
     contacts_.classList.add('d-none')
     chats_.classList.add('d-block')
     arrow_.classList.remove('d-none')

@@ -46,6 +46,7 @@ button {
 
 .btn {
 	margin: 0 20px 0 20px;
+	border-radius: 0.25rem !important;
 }
 
 .btn-strongly-agree {
@@ -96,11 +97,6 @@ button {
 	font-weight: bold;
 }
 
-.btn-neutral{
-	color: rgba(7, 7, 7, 0.73);
-	font-weight: normal;
-}
-
 .btn-strongly-disagree.active,
 .btn-strongly-disagree:active,
 .btn-strongly-disagree:focus,
@@ -111,16 +107,20 @@ button {
 	color: #fff;
 }
 
+.btn-neutral {
+	color: #7c7c7c;
+	font-weight: bold;
+}
+
 .btn-neutral.active,
 .btn-neutral:active,
 .btn-neutral:focus,
 .btn-neutral:active:focus,
 .btn-neutral.active:focus,
 .btn-neutral:hover {
-	background-color: #a5a3a3;
-	color: #070707;
+	background-color: #7c7c7c;
+	color: #fff;
 }
-
 
 .bottom {
 	margin-bottom: 100px;
@@ -208,4 +208,31 @@ button {
 		display: inline;
 		vertical-align: middle;
 	}
+}
+
+.p-result-header {
+	text-transform: uppercase;
+	font-weight: 500;
+	margin: 0 0 10px 0 !important;
+}
+
+.p-result-subheader {
+	text-transform: uppercase;
+	font-weight: 500;
+	color: #fff;
+	border-top: 2px solid #fff;
+}
+
+.p-results {
+	display: inline;
+}
+
+.p-result-item {
+	float: left;
+	margin: 0 5px 0 5px;
+}
+
+span {
+	font-size: 17px !important;
+	line-height: 1.6;
 }
