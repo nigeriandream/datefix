@@ -136,7 +136,7 @@ def results(request):
                 for x in matches)
             if show is None:
                 return render(request, 'Account/results.html',
-                              {'matches': matches, "select": select, "matches_length": size})
+                          {'matches': matches, "select": select, "matches_length": size})
             else:
                 return render(request, 'Account/results.html',
                               {'matches': matches, "select": select, "matches_length": size, "message": show[0],
@@ -212,7 +212,9 @@ def signup(request):
             user.save()
             flash(request, f"{request.POST['first-name']}, your account has been "
                            f"created successfully.", 'success', 'thumbs-up')
-            return redirect('login')
+            request.session['email'] = user.email
+            send_verification(request, user)
+            return redirect('verification')
 
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -289,7 +291,7 @@ def verified(request):
         user = User.objects.get(email=request.session['email'])
         user.verified = True
         user.save()
-        auth.login(request, user)
+        auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         flash(request, f'{user.username} is logged in successfully !', 'success', 'thumbs-up')
         user.status = 'Online'
     return render(request, 'Account/account-verified.html')
@@ -378,13 +380,14 @@ def test_result(request):
                 )
             )
             return render(request, 'Account/personality_result.html', {'data': data,
-                                                                       "email": request.session['email'].split('@')[0]})
+                                                                "email": request.session['email'].split('@')[0]})
         except (PersonalityTest.DoesNotExist, KeyError):
             return redirect('personality_test')
 
     if request.method == 'POST':
         del request.session['category'], request.session['email']
         return redirect('personality_test')
+
 
 
 @csrf_exempt
