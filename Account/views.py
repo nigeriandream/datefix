@@ -233,19 +233,28 @@ def dashboard(request):
 
         user = User.objects.get(id=request.user.id)
 
-        if user.user_data == '{}':
-            return render(request, 'Account/profile.html')
-
-        elif user.sex == 'male' and not user.complete_match():
-            return redirect('results')
-
-        elif user.sex == 'female' and not user.complete_match():
-            user_details = user.user_data_()
-            user_details['registered'] = True
-            return render(request, 'Account/profile.html', user_details)
-
-        elif user.complete_match():
+        if user.session is not -1:
             return redirect('chatroom')
+        else:
+            if user.complete_match():
+                return redirect('chatroom')
+
+            if user.user_data == '{}':
+                return render(request, 'Account/profile.html')
+
+            if user.choice_data == '{}':
+                user_details = user.user_data_()
+                user_details['registered'] = True
+                return render(request, 'Account/profile.html', user_details)
+
+            if user.sex == 'male' and not user.complete_match():
+                return redirect('results')
+
+            if user.sex == 'female' and not user.complete_match():
+                user_details = user.user_data_()
+                user_details['registered'] = True
+                return render(request, 'Account/profile.html', user_details)
+
 
 
 # verified

@@ -249,10 +249,6 @@ def create_chat(request, your_id, user_id):
         list_ = user.matches_()
         list_.append(int(your_id))
         user.matches = json.dumps(list_)
-        if user.session == -1:
-            user.session = 1
-        else:
-            user.session = 2
         user.save()
         chat = ChatThread()
         chat.first_user_id = your_id
@@ -264,6 +260,10 @@ def create_chat(request, your_id, user_id):
         for i in [your_id, user_id]:
             user = User.objects.get(id=int(i))
             notify_user(chat, user)
+            message = f'{chat.get_receiver(user).username} has been matched to you.'
+            from Account.algorithms import send_email
+            send_email(user.username, 'New Match', message,
+                       user.email, None, None)
         return {"status": 200, "message": f'A Chat Thread Object has been created for you and the '
                                           f'user with ID {user_id}',
                 "data": get_chat(chat.id, user=request.user)}
@@ -296,3 +296,18 @@ def activate_expiration(chat, user):
     if their_msg.count() > 0 and ur_msg == 0:
         chat.expiry_date = datetime.now() + timedelta(days=7)
         chat.save()
+        if user.session == -1:
+            user.session = 1
+        else:
+            user.session = 2
+        user.save()
+        if receiver.session == -1:
+            receiver.session = 1
+        else:
+            receiver.session = 2
+        receiver.save()
+        notify_user(chat, user)
+        notify_user(chat, receiver)
+
+
+
