@@ -91,7 +91,7 @@ function returnTotal(){
 
     if (selected.includes(null) ||
         (email === undefined && input_email === '')) {
-      console.log('You have not finished filling your form')
+      alert('You have not finished filling your form')
       return
     }
     if (email === undefined) {

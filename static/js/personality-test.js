@@ -78,7 +78,6 @@ function returnTotal(){
 
 
   $('#submit-btn').click(function () {
-      let url = window.location.origin
     let response
     let email = document.getElementById('email').classList[2]
     let  input_email
@@ -92,7 +91,7 @@ function returnTotal(){
 
     if (selected.includes(null) ||
         (email === undefined && input_email === '')) {
-      console.log('You have not finished filling your form')
+      alert('You have not finished filling your form')
       return
     }
     if (email === undefined) {
@@ -100,7 +99,7 @@ function returnTotal(){
       }
     console.log('Email: ', email)
     $.ajax({
-    url: url+'/personality_test/submit/',
+    url: 'http://127.0.0.1:8000/personality_test/submit/',
     type: 'GET',
     data: {"score": total, "category": category, "email": email},
     success: (data) => {
@@ -108,7 +107,7 @@ function returnTotal(){
         console.log('Response: ', response)
 
         if (response === 'Finished')
-            window.open(url+'/personality_test/result/', '_self')
+            window.open('http://127.0.0.1:8000/personality_test/result/', '_self')
 
         if (response === 'Remaining')
             window.open(window.location.href, '_self')
