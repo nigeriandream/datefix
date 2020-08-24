@@ -99,7 +99,7 @@ function returnTotal(){
       }
     console.log('Email: ', email)
     $.ajax({
-    url: +window.location.origin+'/personality_test/submit/',
+    url: window.location.origin+'/personality_test/submit/',
     type: 'GET',
     data: {"score": total, "category": category, "email": email},
     success: (data) => {
