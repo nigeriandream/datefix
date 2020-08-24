@@ -256,6 +256,7 @@ def create_chat(request, your_id, user_id):
         chat.secret = get_key(f'{request.user.id}{datetime.now().__str__()}{user_id}')
         chat.date_created = datetime.now()
         chat.expiry_date = datetime.now() + timedelta(days=30)
+        chat.last_message_date = datetime.now()
         chat.save()
         for i in [your_id, user_id]:
             user = User.objects.get(id=int(i))
