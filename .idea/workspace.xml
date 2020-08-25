@@ -40,7 +40,6 @@
       <change beforePath="$PROJECT_DIR$/Datefix/static/js/chat-vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/chat-vue.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Datefix/static/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/functions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Datefix/static/js/personality-test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/personality-test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/chat-vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/chat-vue.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -352,7 +351,7 @@
       <workItem from="1597747838329" duration="287000" />
       <workItem from="1597937705287" duration="3166000" />
       <workItem from="1598246852023" duration="863000" />
-      <workItem from="1598284043901" duration="8162000" />
+      <workItem from="1598284043901" duration="8985000" />
     </task>
     <task id="LOCAL-00001" summary="Revert &quot;merge with louieee&quot;&#10;&#10;This reverts commit d2184739">
       <created>1597921264350</created>
