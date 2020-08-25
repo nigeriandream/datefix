@@ -26,7 +26,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Account/templates/Account/personality_result.html" beforeDir="false" afterPath="$PROJECT_DIR$/Account/templates/Account/personality_result.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Datefix/static/images/favicon/android-chrome-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Datefix/static/images/favicon/android-chrome-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Datefix/static/images/favicon/apple-touch-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Datefix/static/images/favicon/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Datefix/static/images/favicon/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Datefix/static/images/favicon/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Datefix/static/images/favicon/site.webmanifest" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/algorithms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Account/algorithms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/algorithms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/algorithms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chat/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Chat/consumers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Datefix/static/js/chat-vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/chat-vue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Datefix/static/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Datefix/static/js/personality-test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/static/js/personality-test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/chat-vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/chat-vue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,20 +84,21 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Datefix/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Account" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static\images" />
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static" />
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Account\templates\Account" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Secret" />
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Payment" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static" />
-      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Account\templates\Account" />
     </key>
   </component>
   <component name="RestClientSettings">
@@ -336,7 +352,7 @@
       <workItem from="1597747838329" duration="287000" />
       <workItem from="1597937705287" duration="3166000" />
       <workItem from="1598246852023" duration="863000" />
-      <workItem from="1598284043901" duration="5248000" />
+      <workItem from="1598284043901" duration="8162000" />
     </task>
     <task id="LOCAL-00001" summary="Revert &quot;merge with louieee&quot;&#10;&#10;This reverts commit d2184739">
       <created>1597921264350</created>
@@ -410,10 +426,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1598117508237" />
-    <state x="462" y="119" key="FileChooserDialogImpl" timestamp="1593807971381">
+    <state x="462" y="119" key="FileChooserDialogImpl" timestamp="1598353630002">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="462" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1593807971381" />
+    <state x="462" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1598353630002" />
     <state width="1323" height="335" key="GridCell.Tab.0.bottom" timestamp="1593626037950">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -450,6 +466,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593559752535" />
+    <state x="0" y="0" width="585" height="728" key="find.popup" timestamp="1598354623180">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="0" y="0" width="585" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1598354623180" />
     <state x="463" y="77" key="git4idea.branch.GitSmartOperationDialog" timestamp="1598116299379">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

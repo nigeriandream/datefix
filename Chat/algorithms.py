@@ -278,9 +278,7 @@ def has_chat(user):
     """
     no_of_chats = user.matches_()
     if len(no_of_chats) > 0:
-        print('has chat')
         return True
-    print('has no chat')
     return False
 
 

@@ -91,7 +91,6 @@ def compare_users(me, you):
     _3_spectrum = ('complexion', 'height', 'body_type', 'drink', 'smoke', 'conscientiousness', 'openess',
                    'extraversion', 'agreeableness', 'neurotism')
     deal_breakers = json.loads(me.deal_breaker)
-    print(deal_breakers)
     total = len(absolute_match) + len(_3_spectrum) + len(_2_spectrum) + 1
 
     for i in deal_breakers:
