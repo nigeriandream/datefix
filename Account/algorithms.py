@@ -471,7 +471,7 @@ But you’re likely also more introspective than others, which helps you to exam
     ),
     (
         {"title": "LOW AGREEABLENESS", "description": "Agreeableness refers to a desire to keep things running smoothly. \
-You have likely to be stubborn, find it difficult to forgive mistakes, are self-centered, have less compassion for others. \
+You are likely to be stubborn, find it difficult to forgive mistakes, are self-centered, have less compassion for others. \
 A low agreeableness score may mean you tend hold grudges. You might also be less sympathetic with others. \
 But you are also likely avoid the pitfalls of comparing yourself to others or caring about what others think of you. "},
         {"title": "HIGH AGREEABLENESS", "description": "Agreeableness refers to a desire to keep things running smoothly. \
