@@ -212,7 +212,9 @@ def signup(request):
             user.save()
             flash(request, f"{request.POST['first-name']}, your account has been "
                            f"created successfully.", 'success', 'thumbs-up')
-            return redirect('login')
+            request.session['email'] = user.email
+            send_verification(request, user)
+            return redirect('verification')
 
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -231,19 +233,28 @@ def dashboard(request):
 
         user = User.objects.get(id=request.user.id)
 
-        if user.user_data == '{}':
-            return render(request, 'Account/profile.html')
-
-        elif user.sex == 'male' and not user.complete_match():
-            return redirect('results')
-
-        elif user.sex == 'female' and not user.complete_match():
-            user_details = user.user_data_()
-            user_details['registered'] = True
-            return render(request, 'Account/profile.html', user_details)
-
-        elif user.complete_match():
+        if user.session is not -1:
             return redirect('chatroom')
+        else:
+            if user.complete_match():
+                return redirect('chatroom')
+
+            if user.user_data == '{}':
+                return render(request, 'Account/profile.html')
+
+            if user.choice_data == '{}':
+                user_details = user.user_data_()
+                user_details['registered'] = True
+                return render(request, 'Account/profile.html', user_details)
+
+            if user.sex == 'male' and not user.complete_match():
+                return redirect('results')
+
+            if user.sex == 'female' and not user.complete_match():
+                user_details = user.user_data_()
+                user_details['registered'] = True
+                return render(request, 'Account/profile.html', user_details)
+
 
 
 # verified
@@ -289,7 +300,7 @@ def verified(request):
         user = User.objects.get(email=request.session['email'])
         user.verified = True
         user.save()
-        auth.login(request, user)
+        auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         flash(request, f'{user.username} is logged in successfully !', 'success', 'thumbs-up')
         user.status = 'Online'
     return render(request, 'Account/account-verified.html')
@@ -377,7 +388,7 @@ def test_result(request):
                     json.loads(your_personality.openness)['description'],
                 )
             )
-            return render(request, 'Account/personality.html', {'data': data,
+            return render(request, 'Account/personality_result.html', {'data': data,
                                                                 "email": request.session['email'].split('@')[0]})
         except (PersonalityTest.DoesNotExist, KeyError):
             return redirect('personality_test')
@@ -387,8 +398,6 @@ def test_result(request):
         return redirect('personality_test')
 
 
-def person_result(request):
-    return render(request, 'Account/personality_result.html')
 
 @csrf_exempt
 @login_required

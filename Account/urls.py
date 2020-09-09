@@ -27,7 +27,6 @@ urlpatterns = [
     path('logout/', logout, name='logout'),
     path('api/get_couple/<int:couple_id>/', get_couple, name="get_couple"),
     path('confirm/', password_confirm, name="confirm"),
-    path('password/set/', reset_confirm, name="reset_confirm"),
-    path('personality_test/result/test', person_result, name="person_result")
+    path('password/set/', reset_confirm, name="reset_confirm")
 
 ]
