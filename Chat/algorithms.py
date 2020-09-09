@@ -87,7 +87,7 @@ def email_chat(chat_thread, user):
               f'is a text file of the chat between you and {other_user.username}.'
     from Account.algorithms import send_email
     send_email(user.username, f'Chat Text File Between You and {user.username}.', message, user.email,
-               None, [f'{user_chat.name}.txt'])
+               None, [f'{user_chat.name}'])
     import os
     os.remove(f'{user_chat.name}')
 
@@ -249,10 +249,6 @@ def create_chat(request, your_id, user_id):
         list_ = user.matches_()
         list_.append(int(your_id))
         user.matches = json.dumps(list_)
-        if user.session == -1:
-            user.session = 1
-        else:
-            user.session = 2
         user.save()
         chat = ChatThread()
         chat.first_user_id = your_id
@@ -260,10 +256,15 @@ def create_chat(request, your_id, user_id):
         chat.secret = get_key(f'{request.user.id}{datetime.now().__str__()}{user_id}')
         chat.date_created = datetime.now()
         chat.expiry_date = datetime.now() + timedelta(days=30)
+        chat.last_message_date = datetime.now()
         chat.save()
         for i in [your_id, user_id]:
             user = User.objects.get(id=int(i))
             notify_user(chat, user)
+            message = f'{chat.get_receiver(user).username} has been matched to you.'
+            from Account.algorithms import send_email
+            send_email(user.username, 'New Match', message,
+                       user.email, None, None)
         return {"status": 200, "message": f'A Chat Thread Object has been created for you and the '
                                           f'user with ID {user_id}',
                 "data": get_chat(chat.id, user=request.user)}
@@ -277,9 +278,7 @@ def has_chat(user):
     """
     no_of_chats = user.matches_()
     if len(no_of_chats) > 0:
-        print('has chat')
         return True
-    print('has no chat')
     return False
 
 
@@ -296,3 +295,18 @@ def activate_expiration(chat, user):
     if their_msg.count() > 0 and ur_msg == 0:
         chat.expiry_date = datetime.now() + timedelta(days=7)
         chat.save()
+        if user.session == -1:
+            user.session = 1
+        else:
+            user.session = 2
+        user.save()
+        if receiver.session == -1:
+            receiver.session = 1
+        else:
+            receiver.session = 2
+        receiver.save()
+        notify_user(chat, user)
+        notify_user(chat, receiver)
+
+
+

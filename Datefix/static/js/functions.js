@@ -115,7 +115,6 @@ var SEMICOLON = SEMICOLON || {};
 		responsiveClasses: function () {
 
 			if (typeof jRespond === 'undefined') {
-				console.log('responsiveClasses: jRespond not Defined.');
 				return true;
 			}
 

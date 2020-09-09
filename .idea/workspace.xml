@@ -25,7 +25,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="" />
+    <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="nigerian_dream" />
+        <entry key="$PROJECT_DIR$" value="development" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,20 +69,21 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Datefix/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Account" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static\images" />
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static" />
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Account\templates\Account" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Secret" />
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Payment" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static" />
-      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Account\templates\Account" />
     </key>
   </component>
   <component name="RestClientSettings">
@@ -333,6 +336,16 @@
       <workItem from="1597672560887" duration="594000" />
       <workItem from="1597747838329" duration="287000" />
       <workItem from="1597937705287" duration="3166000" />
+      <workItem from="1598246852023" duration="863000" />
+      <workItem from="1598284043901" duration="9573000" />
+      <workItem from="1598367880902" duration="125000" />
+      <workItem from="1598373501929" duration="863000" />
+      <workItem from="1598375125476" duration="1844000" />
+      <workItem from="1598415005366" duration="49000" />
+      <workItem from="1598415997186" duration="991000" />
+      <workItem from="1598436861451" duration="36000" />
+      <workItem from="1598441541291" duration="4079000" />
+      <workItem from="1598798746152" duration="1192000" />
     </task>
     <task id="LOCAL-00001" summary="Revert &quot;merge with louieee&quot;&#10;&#10;This reverts commit d2184739">
       <created>1597921264350</created>
@@ -402,14 +415,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="278" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1597921262849" />
-    <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog" timestamp="1597922670082">
+    <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog" timestamp="1598117508237">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1597922670082" />
-    <state x="462" y="119" key="FileChooserDialogImpl" timestamp="1593807971381">
+    <state x="92" y="92" width="1182" height="544" maximized="true" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1598117508237" />
+    <state x="462" y="119" key="FileChooserDialogImpl" timestamp="1598353630002">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="462" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1593807971381" />
+    <state x="462" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1598353630002" />
     <state width="1323" height="335" key="GridCell.Tab.0.bottom" timestamp="1593626037950">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -426,10 +439,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="335" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593626037949" />
-    <state x="81" y="43" key="MergeDialog" timestamp="1597920863407">
+    <state x="81" y="43" key="MergeDialog" timestamp="1598115874089">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="81" y="43" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1597920863407" />
+    <state x="81" y="43" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1598115874089" />
     <state x="21" y="29" width="1229" height="647" key="MultipleFileMergeDialog" timestamp="1597921245689">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -446,14 +459,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593559752535" />
-    <state x="463" y="77" key="git4idea.branch.GitSmartOperationDialog" timestamp="1597920503699">
+    <state x="0" y="0" width="585" height="728" key="find.popup" timestamp="1598377031096">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="77" key="git4idea.branch.GitSmartOperationDialog/0.0.1366.728@0.0.1366.728" timestamp="1597920503699" />
-    <state x="480" y="152" key="git4idea.merge.GitMergeDialog" timestamp="1597921708549">
+    <state x="0" y="0" width="585" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1598377031096" />
+    <state x="463" y="77" key="git4idea.branch.GitSmartOperationDialog" timestamp="1598116299379">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="480" y="152" key="git4idea.merge.GitMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1597921708549" />
+    <state x="463" y="77" key="git4idea.branch.GitSmartOperationDialog/0.0.1366.728@0.0.1366.728" timestamp="1598116299379" />
+    <state x="480" y="152" key="git4idea.merge.GitMergeDialog" timestamp="1598116558504">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="480" y="152" key="git4idea.merge.GitMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1598116558504" />
     <state x="415" y="152" key="git4idea.merge.GitPullDialog" timestamp="1592334026729">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -462,6 +479,17 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1597201551252" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Chat/models.py</url>
+          <line>87</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/datefix_1$consumers.coverage" NAME="consumers Coverage Results" MODIFIED="1595884584103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Chat" />

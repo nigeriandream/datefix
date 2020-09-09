@@ -35,7 +35,6 @@ class ChatConsumer(AsyncConsumer):
         self.chat_room = ''
 
     async def websocket_connect(self, event):
-        print("connected", event)
         await self.send({"type": "websocket.accept"})
         await self.channel_layer.group_add(
             self.general,
@@ -55,7 +54,6 @@ class ChatConsumer(AsyncConsumer):
                 self.me = await self.get_user(self.chat_data['username'])
                 self.other_user = await self.get_receiver(self.thread_obj, self.me)
                 chat_room = f"chat_{self.thread_obj.id}"
-                print("Connected to " + chat_room)
                 self.chat_room = chat_room
                 await self.channel_layer.group_add(
                     chat_room,
@@ -84,7 +82,6 @@ class ChatConsumer(AsyncConsumer):
                  "data": self.chat_data})
         if self.chat_data['function'] == 'status':
             await self.update_status(int(self.chat_data['message_id']))
-            print('updated - delivered')
             await self.channel_layer.group_send(
                 self.chat_room,
                 {"type": "send_message",
@@ -96,7 +93,6 @@ class ChatConsumer(AsyncConsumer):
             self.chat_data['status'] = 'sent'
             await self.save_message(self.thread_obj, self.chat_data)
             del self.chat_data['datetime']
-            print(self.chat_data)
             await self.channel_layer.group_send(
                 self.chat_room,
                 {"type": "send_message",
@@ -149,8 +145,8 @@ class ChatConsumer(AsyncConsumer):
         await self.send({"type": "websocket.send", "text": json.dumps(event['data'])})
 
     async def websocket_disconnect(self, event):
-        print("disconnected", event)
         # tell chat mate you're offline
+        pass
 
     @database_sync_to_async
     def get_thread(self, id_):
