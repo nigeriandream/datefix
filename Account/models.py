@@ -19,10 +19,10 @@ class User(AbstractUser):
     no_matches = models.TextField(default='[]')
     jilted_matches = models.TextField(default='[]')
     couple_ids = models.CharField(max_length=16, default='[]')
-    payed = models.BooleanField(default=False)
     session = models.IntegerField(default=-1)
     verified = models.BooleanField(default=False)
     status = models.CharField(max_length=64, default='Offline')
+    package = models.CharField(max_length=10, default=None, null=True, blank=True)
 
     def successful_list(self):
         if self.successful_matches == '[]':

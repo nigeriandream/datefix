@@ -26,7 +26,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Datefix/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Payment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Payment/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Payment/templates/Payment/payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/Payment/templates/Payment/match.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Payment/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Payment/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Payment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Payment/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +49,8 @@
       <list>
         <option value="HTTP Request" />
         <option value="JavaScript File" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -76,14 +84,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Payment" />
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Secret" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static\images" />
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static" />
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Account\templates\Account" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Secret" />
-      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Payment" />
     </key>
   </component>
   <component name="RestClientSettings">
