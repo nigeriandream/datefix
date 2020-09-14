@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from Datefix.secret import SECRET_KEY
-
+from decouple import config, Csv
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,14 +19,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRET_KEY
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'datefixe.herokuapp.com', '127.0.0.1'
-]
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -113,11 +111,11 @@ EMAIL_USE_SSL = False
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = 'ohaegbulouis@gmail.com'
+EMAIL_HOST_USER = config('EMAIL_USER')
 
-EMAIL_HOST_PASSWORD = '1BILLION'
+EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 
-DEFAULT_FROM_EMAIL = 'admin@datefix.me'
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
