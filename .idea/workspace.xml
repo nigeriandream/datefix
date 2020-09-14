@@ -20,21 +20,13 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:development" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Payment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Payment/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Payment/templates/Payment/payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/Payment/templates/Payment/match.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Payment/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Payment/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Payment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Payment/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -463,10 +455,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="487" y="61" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1592326440981" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1593559752535">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1600053913705">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593559752535" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1600053913705" />
     <state x="0" y="0" width="585" height="728" key="find.popup" timestamp="1598377031096">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
