@@ -1,5 +1,186 @@
-<html>
+{% extends "index.html" %}
+{% load static %}
+{% block title %}
+Payment Successful
+{% endblock title %}
 
-{#this page displays after user makes payment. Please include a button to redirect useer to {% url 'redirect_match' %}#}
+{% block css %}
+<link rel="stylesheet" href={% static 'css/personality-test.css' %}>
+<link rel="stylesheet" href={% static 'css/stylex.css' %}>
+<link rel="stylesheet" href={% static 'css/components/bs-switches.css' %}>
+<link rel="stylesheet" href={% static 'css/components/pricing-table.css' %}>
 
-</html>
+
+<style>
+    .select2-search__field {
+        display: none !important;
+    }
+
+    .body-pill-attribute,
+    .card-category {
+        font-size: x-large;
+    }
+</style>
+
+{% endblock css %}
+
+
+{% block content %}
+
+<!-- Header
+		============================================= -->
+<header id="header" class="full-header">
+
+    <div id="header-wrap">
+
+        <div class="container clearfix">
+
+            <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+            <!-- Logo
+					============================================= -->
+            <div id="logo">
+                <a href={% url 'home' %} class="standard-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img
+                        src={% static 'images/logo.png' %} alt="Canvas Logo"></a>
+                <a href={% url 'home' %} class="retina-logo" data-dark-logo={% static 'images/logo-dark@2x.png' %}><img
+                        src={% static 'images/logo@2x.png' %} alt="Canvas Logo"></a>
+            </div><!-- #logo end -->
+
+            <!-- Primary Navigation
+					============================================= -->
+            <nav id="primary-menu">
+
+                <ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+                    <li><a href={% url 'home' %}>
+                            <div>Home</div>
+                        </a>
+                    </li>
+                    <li><a href="#">
+                            <div>About Datefix</div>
+                        </a>
+                    </li>
+                </ul>
+
+                <div id="side-panel-trigger" class="side-panel-trigger user-sidebar-trigger"
+                    style="font-size: 12px;	font-weight: 400;	letter-spacing: 3px;    text-transform: uppercase; line-height: 22px;">
+                    <a href="#" style="width: auto; font-size: inherit;"><i class="icon-line-heart"></i>
+                        Menu</a>
+                </div>
+
+
+            </nav><!-- #primary-menu end -->
+
+        </div>
+
+    </div>
+
+</header><!-- #header end -->
+<!-- #header end -->
+
+
+<!-- Page Title
+		============================================= -->
+<section id="page-title">
+
+    <div class="container clearfix">
+        <h1>Payment Successful</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Datefix</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Payment Successful</li>
+        </ol>
+    </div>
+
+</section><!-- #page-title end -->
+
+<!-- Content
+		============================================= -->
+<section id="content"
+    style="overflow: inherit!important;  background-image: url({% static "images/page/pfbgx.png"%}); background-size: cover; background-attachment: fixed;">
+
+    <div class="content-wrap">
+
+
+
+        <div class="container clearfix" style="padding: 15px!important;
+		margin-right: auto;
+		margin-left: auto;">
+
+            <!-- <div class="container text-center">
+				<h1>Personality Test</h1>
+            </div> -->
+
+
+
+
+            <div id="section-pricing" class="page-section nopadding nomargin">
+
+
+
+                <!-- Redirection Counter -->
+                <script type="text/javascript">
+                    var count = 12;
+                    var redirect = "{% url 'redirect_match' %}";
+
+                    function countDown() {
+                        var timer = document.getElementById("timer");
+                        if (count > 0) {
+                            count--;
+                            timer.innerHTML = "This page will redirect in " + count + " seconds.";
+                            setTimeout("countDown()", 1000);
+                        } else {
+                            window.location.href = redirect;
+                        }
+                    }
+                </script>
+
+
+                <form>
+                    <h2 style="margin-bottom: 3px; color:#fff">PAYMENT SUCCESSFUL</h2>
+                </form>
+
+                <div class="col_full card col_last card-category m-3">
+                    <div class="p-2">
+                        <p class="center">Please wait while we redirect you to your Datefix Session</p>
+                    </div>
+
+                    <div class="footer animated slow fadeInUp">
+                        <p id="timer" class="center">
+                            <script type="text/javascript">
+                                countDown();
+                            </script>
+                        </p>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section><!-- #content end -->
+<!-- Go To Top
+	============================================= -->
+<div id="gotoTop" class="icon-angle-up"></div>
+
+<!-- Footer
+		============================================= -->
+{% include "footer.html" %}
+<!-- #footer end -->
+{% endblock content %}
+
+{% block script %}
+
+<script src={% static 'js/personality-test.js' %}></script>
+
+<script>
+
+</script>
+
+
+{% endblock script %}

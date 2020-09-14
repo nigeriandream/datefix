@@ -1,3 +1,314 @@
-<html>
-the first payment form comes here, if user chooses
-</html>
+{% extends "index.html" %}
+{% load static %}
+{% block title %}
+Pricing
+{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href={% static 'css/personality-test.css' %}>
+<link rel="stylesheet" href={% static 'css/stylex.css' %}>
+<link rel="stylesheet" href={% static 'css/components/bs-switches.css' %}>
+<link rel="stylesheet" href={% static 'css/components/pricing-table.css' %}>
+
+
+<style>
+    .pricing-tenure-switcher {
+        position: relative;
+    }
+
+    .pricing-tenure-switcher .pts-left,
+    .pricing-tenure-switcher .pts-right,
+    .pricing-tenure-switcher .pts-switcher {
+        display: inline-block;
+        margin: 0 10px;
+        height: 30px;
+        overflow: hidden;
+    }
+
+    .pricing-tenure-switcher .pts-left,
+    .pricing-tenure-switcher .pts-right {
+        font-size: 16px;
+        font-weight: 600;
+        color: #AAA;
+        line-height: 30px;
+    }
+
+    .pricing-tenure-switcher .pts-switch-active {
+        color: #ffffff;
+    }
+
+    .pricing-tenure-switcher .pts-switcher label {
+        margin-bottom: 0;
+    }
+
+    input.switch-toggle-round+label {
+        background-color: transparent !important;
+    }
+
+    input.switch-toggle-round:checked+label:before {
+        background-color: #7e50f8 !important;
+    }
+</style>
+
+{% endblock css %}
+
+
+{% block content %}
+
+<!-- Header
+		============================================= -->
+<header id="header" class="full-header">
+
+    <div id="header-wrap">
+
+        <div class="container clearfix">
+
+            <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+            <!-- Logo
+					============================================= -->
+            <div id="logo">
+                <a href={% url 'home' %} class="standard-logo" data-dark-logo={% static 'images/logo-dark.png' %}><img
+                        src={% static 'images/logo.png' %} alt="Canvas Logo"></a>
+                <a href={% url 'home' %} class="retina-logo" data-dark-logo={% static 'images/logo-dark@2x.png' %}><img
+                        src={% static 'images/logo@2x.png' %} alt="Canvas Logo"></a>
+            </div><!-- #logo end -->
+
+            <!-- Primary Navigation
+					============================================= -->
+            <nav id="primary-menu">
+
+                <ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+                    <li><a href={% url 'home' %}>
+                            <div>Home</div>
+                        </a>
+                    </li>
+                    <li><a href="#">
+                            <div>About Datefix</div>
+                        </a>
+                    </li>
+                </ul>
+
+                <div id="side-panel-trigger" class="side-panel-trigger user-sidebar-trigger"
+                    style="font-size: 12px;	font-weight: 400;	letter-spacing: 3px;    text-transform: uppercase; line-height: 22px;">
+                    <a href="#" style="width: auto; font-size: inherit;"><i class="icon-line-heart"></i>
+                        Menu</a>
+                </div>
+
+
+            </nav><!-- #primary-menu end -->
+
+        </div>
+
+    </div>
+
+</header><!-- #header end -->
+<!-- #header end -->
+
+
+<!-- Page Title
+		============================================= -->
+<section id="page-title">
+
+    <div class="container clearfix">
+        <h1>Pricing</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Datefix</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pricing</li>
+        </ol>
+    </div>
+
+</section><!-- #page-title end -->
+
+<!-- Content
+		============================================= -->
+<section id="content"
+    style="overflow: inherit!important;  background-image: url({% static "images/page/pfbgx.png"%}); background-size: cover; background-attachment: fixed;">
+
+    <div class="content-wrap">
+
+
+
+        <div class="container clearfix" style="padding: 15px!important;
+		margin-right: auto;
+		margin-left: auto;">
+
+            <!-- <div class="container text-center">
+				<h1>Personality Test</h1>
+            </div> -->
+
+
+
+
+            <div id="section-pricing" class="page-section nopadding nomargin">
+
+                <div class="pricing-tenure-switcher center bottommargin-sm" data-container="#pricing-switch">
+                    <span class="pts-left">Quarterly</span>
+                    <div class="pts-switcher">
+                        <div class="switch">
+                            <input id="switch-toggle-pricing-tenure" class="switch-toggle switch-toggle-round"
+                                type="checkbox">
+                            <label for="switch-toggle-pricing-tenure"></label>
+                        </div>
+                    </div>
+                    <span class="pts-right">Yearly</span>
+                </div>
+
+                <div id="pricing-switch" class="pricing row bottommargin-lg clearfix">
+
+                    <div class="col-lg-4 col-md-6">
+
+                        <div class="pricing-box">
+                            <div class="pricing-title">
+                                <h3>Guest</h3>
+                            </div>
+                            <div class="pricing-price">
+                                FREE
+                            </div>
+                            <div class="pricing-features">
+                                <ul>
+                                    <li><strong>Datefix</strong> Trial</li>
+                                    <li><strong>Limited</strong> Access</li>
+                                    <li><i class="icon-code"></i> No Matching</li>
+                                    <li><strong>Free</strong> Personality Test</li>
+                                    <li><i class="icon-star3"></i></li>
+                                </ul>
+                            </div>
+                            <div class="pricing-action">
+                                <a href="#" class="button button-large button-rounded capitalize ls0"
+                                    style="border-radius: 23px;">Continue</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+
+                        <div class="pricing-box best-price">
+                            <div class="pricing-title">
+                                <h3>Regular</h3>
+                                <span>Most Popular</span>
+                            </div>
+                            <div class="pricing-price">
+                                <div class="pts-switch-content-left"><span class="price-unit">₦</span>1500
+                                </div>
+                                <div class="pts-switch-content-right"><span class="price-unit">₦</span>5500
+                                </div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul>
+                                    <li><strong>Datefix</strong> Online Membership</li>
+                                    <li><strong>Full</strong> Access</li>
+                                    <li><i class="icon-code"></i> AI-assisted Matching</li>
+                                    <li><strong>Free</strong> Personality Test</li>
+                                    <li><i class="icon-star3"></i>
+                                        <i class="icon-star3"></i>
+                                        <i class="icon-star3"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="pricing-action">
+                                <div class="pts-switch-content-left"><a href="#"
+                                        class="button button-large button-rounded capitalize ls0"
+                                        style="border-radius: 23px;">Select</a></div>
+                                <div class="pts-switch-content-right"><a href="#"
+                                        class="button button-large button-rounded capitalize ls0"
+                                        style="border-radius: 23px;">Select</a></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 offset-lg-0 col-md-6 offset-md-3">
+
+                        <div class="pricing-box">
+                            <div class="pricing-title">
+                                <h3>Premium</h3>
+                            </div>
+                            <div class="pricing-price">
+                                <div class="pts-switch-content-left"><span class="price-unit">₦</span>6000
+                                </div>
+                                <div class="pts-switch-content-right"><span class="price-unit">₦</span>20000
+                                </div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul>
+                                    <li><strong>Datefix</strong> Events & Programs</li>
+                                    <li><strong>Priority</strong> Access</li>
+                                    <li><i class="icon-code"></i> AI &amp; Human-assisted Matching</li>
+                                    <li>Phone &amp; Email Support</li>
+                                    <li><i class="icon-star3"></i>
+                                        <i class="icon-star3"></i>
+                                        <i class="icon-star3"></i>
+                                        <i class="icon-star3"></i>
+                                        <i class="icon-star3"></i></li>
+                                </ul>
+                            </div>
+                            <div class="pricing-action">
+                                <div class="pts-switch-content-left"><a href="#"
+                                        class="button button-large button-rounded capitalize ls0"
+                                        style="border-radius: 23px;">Select</a></div>
+                                <div class="pts-switch-content-right"><a href="#"
+                                        class="button button-large button-rounded capitalize ls0"
+                                        style="border-radius: 23px;">Select</a></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section><!-- #content end -->
+<!-- Go To Top
+	============================================= -->
+<div id="gotoTop" class="icon-angle-up"></div>
+
+<!-- Footer
+		============================================= -->
+{% include "footer.html" %}
+<!-- #footer end -->
+{% endblock content %}
+
+{% block script %}
+
+<script src={% static 'js/personality-test.js' %}></script>
+
+<script>
+    jQuery(document).ready(function ($) {
+        function pricingSwitcher(elementCheck, elementParent, elementPricing) {
+            elementParent.find('.pts-left,.pts-right').removeClass('pts-switch-active');
+            elementPricing.find('.pts-switch-content-left,.pts-switch-content-right').addClass('hidden');
+
+            if (elementCheck.filter(':checked').length > 0) {
+                elementParent.find('.pts-right').addClass('pts-switch-active');
+                elementPricing.find('.pts-switch-content-right').removeClass('hidden');
+            } else {
+                elementParent.find('.pts-left').addClass('pts-switch-active');
+                elementPricing.find('.pts-switch-content-left').removeClass('hidden');
+            }
+        }
+
+        $('.pts-switcher').each(function () {
+            var element = $(this),
+                elementCheck = element.find(':checkbox'),
+                elementParent = $(this).parents('.pricing-tenure-switcher'),
+                elementPricing = $(elementParent.attr('data-container'));
+
+            pricingSwitcher(elementCheck, elementParent, elementPricing);
+
+            elementCheck.on('change', function () {
+                pricingSwitcher(elementCheck, elementParent, elementPricing);
+            });
+        });
+    });
+</script>
+
+
+{% endblock script %}

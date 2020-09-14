@@ -6,8 +6,8 @@
 
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="SemiColonWeb" />
-    <link rel="icon" type="image/ico" href="{% static 'images/favicon/favicon.ico' %}"/>
-    <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}"/>
+	<link rel="icon" type="image/ico" href="{% static 'images/favicon/favicon.ico' %}" />
+	<link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}" />
 	<!-- Stylesheets
 	============================================= -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Roboto:300,400,500,700"
@@ -80,18 +80,14 @@
 				</div>
 				{% else %}<div class="feature-box fbox-center fbox-border fbox-dark fbox-effect noborder">
 					<div class="fbox-icon">
-						<a href="#"><img
-                            {% if user.profile_pic %}
-                                src={{ user.profile_pic.url }}
-                            {% else %}
-                                src={% static "images/icons/avatar.jpg" %}
-                            {% endif %}
+						<a href="#"><img {% if user.profile_pic %} src={{ user.profile_pic.url }} {% else %}
+								src={% static "images/icons/avatar.jpg" %} {% endif %}
 								class="img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar"></a>
 					</div>
 					<h3> {{request.user.first_name}} {{request.user.last_name}}
-                        {% for item in user.personality %}
-                            <span class="subtitle">{{ item }}</span>
-                        {% endfor %}
+						{% for item in user.personality %}
+						<span class="subtitle">{{ item }}</span>
+						{% endfor %}
 				</div>
 
 
@@ -124,10 +120,10 @@
 						<i class="icon-heart float-right"></i></a>
 					<a href="{% url 'chatroom' %}" class="list-group-item list-group-item-action clearfix">Chat <i
 							class="icon-envelope2 float-right"></i></a>
-					<a href="{% url 'payment' %}" class="list-group-item list-group-item-action clearfix">Billing <i
+					<a href="" class="list-group-item list-group-item-action clearfix">Billing <i
 							class="icon-credit-cards float-right"></i></a>
-					<a href="{% url 'dashboard' %}" class="list-group-item list-group-item-action clearfix">Edit Profile <i
-							class="icon-cog float-right"></i></a>
+					<a href="{% url 'dashboard' %}" class="list-group-item list-group-item-action clearfix">Edit Profile
+						<i class="icon-cog float-right"></i></a>
 					<a href={% url 'logout' %} class="list-group-item list-group-item-action clearfix">Logout <i
 							class="icon-line2-logout float-right"></i></a>
 				</div>
@@ -160,8 +156,8 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-    {% block match_script %}
-    {% endblock %}
+	{% block match_script %}
+	{% endblock %}
 	<script src={% static 'js/jquery.js' %}></script>
 	<script src={% static 'js/plugins.js' %}></script>
 	<script src={% static 'js/select2.2.js' %}></script>
