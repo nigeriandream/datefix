@@ -588,7 +588,8 @@ Setup Session
 														{% if not body_shape %}
 														<option value="" selected="selected"></option>
 														{% endif %}
-
+														<option value=0 {% if body_shape == 0 %} selected{% endif %}>
+															Not Sure</option>
 														<option value=1 {% if body_shape == 1 %} selected{% endif %}>
 															Straight</option>
 														<option value=2 {% if body_shape == 2 %} selected{% endif %}>
@@ -596,6 +597,8 @@ Setup Session
 														<option value=3 {% if body_shape == 3 %} selected{% endif %}>
 															Apple</option>
 														<option value=4 {% if body_shape == 4 %} selected{% endif %}>
+															Vee</option>
+														<option value=5 {% if body_shape == 4 %} selected{% endif %}>
 															Hourglass</option>
 													</select>
 												</div>
@@ -610,6 +613,9 @@ Setup Session
 														<option value="" selected></option>
 														{% endif %}
 
+														<option value=0 {% if body_type == 0 %} selected{% endif %}>
+															Not Sure
+														</option>
 														<option value=1 {% if body_type == 1 %} selected{% endif %}>
 															Ectomorphic (Lean & long, with difficulty building muscle)
 														</option>
@@ -1199,7 +1205,8 @@ Setup Session
 														<option value=1>Straight</option>
 														<option value=2>Pear</option>
 														<option value=3>Apple</option>
-														<option value=4>Hourglass</option>
+														<option value=4>Vee</option>
+														<option value=5>Hourglass</option>
 													</select>
 												</div>
 											</div>
