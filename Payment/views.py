@@ -1,5 +1,6 @@
 import json
 from decouple import config
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 
@@ -14,6 +15,7 @@ from .ravepay_services import RavePayServices
 from Payment.algorithm import can_be_matched
 
 
+@login_required()
 def redirect_match(request):
     if can_be_matched(request.user.id):
         return render(request, 'Payment/match.html')
@@ -58,6 +60,7 @@ def rave_webhook(request):
         return HttpResponse('**ok**')
 
 
+@login_required()
 def rave_redirect(request, user_id, package, duration, tx_ref):
     from datetime import timedelta
     user = User.objects.get(id=user_id)
@@ -74,6 +77,7 @@ def rave_redirect(request, user_id, package, duration, tx_ref):
     return render(request, 'Payment/rave_redirect.html')
 
 
+@login_required()
 def rave_pay(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
