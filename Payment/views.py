@@ -1,5 +1,6 @@
 import json
 from decouple import config
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 
@@ -11,10 +12,15 @@ from django.views.decorators.http import require_POST
 from Account.models import User
 from .models import Payment
 from .ravepay_services import RavePayServices
+from Payment.algorithm import can_be_matched
 
 
+@login_required()
 def redirect_match(request):
-    return render(request, 'Payment/match.html')
+    if can_be_matched(request.user.id):
+        return render(request, 'Payment/match.html')
+    else:
+        return redirect('personality_test')
 
 
 def tester(request):
@@ -44,30 +50,53 @@ def rave_webhook(request):
             return HttpResponse('****')
         payment_.status = 'PAID'
         payment_.save()
-        user = payment_.payer
-        user.package = payment_.package
+        user = Payment.payer
+        user.can_be_matched = True
+        if payment_.package == 'REGULAR':
+            user.extra_support = False
+        if payment_.package == 'PREMIUM':
+            user.extra_support = True
         user.save()
         return HttpResponse('**ok**')
 
 
-def rave_redirect(request, user_id, package, tx_ref):
-    Payment.objects.create(payer_id=user_id, package=package, tx_ref=tx_ref, date_of_payment=datetime.now())
+@login_required()
+def rave_redirect(request, user_id, package, duration, tx_ref):
+    from datetime import timedelta
+    user = User.objects.get(id=user_id)
+    try:
+        Payment.objects.get(tx_ref__exact=tx_ref)
+    except Payment.DoesNotExist:
+        payment = Payment.objects.create(payer_id=user_id, package=str(package).upper(),
+                                         duration=str(duration).upper(), tx_ref=tx_ref)
+        if payment.duration == 'QUARTERLY':
+            payment.expiry_date = payment.date_of_payment.astimezone() + timedelta(days=90)
+        if payment.duration == 'YEARLY':
+            payment.expiry_date = payment.date_of_payment.astimezone() + timedelta(days=365)
+        payment.save()
     return render(request, 'Payment/rave_redirect.html')
 
 
+@login_required()
 def rave_pay(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'GET':
-        if user.package is not None:
+        if can_be_matched(user.id):
             return redirect('redirect_match')
         else:
             return render(request, 'Payment/pay.html')
     if request.method == 'POST':
-        data = request.POST
-        if data['package'] == 'BASIC':
-            user.package = 'BASIC'
-            user.save()
+        if user.can_be_matched:
             return redirect('redirect_match')
+        data = {}
+        if 'REGULAR' in request.POST:
+            data["package"] = "REGULAR"
+        if 'PREMIUM' in request.POST:
+            data["package"] = "PREMIUM"
+        if 'duration' in request.POST:
+            data["duration"] = "YEARLY"
+        else:
+            data["duration"] = "QUARTERLY"
         data['user_id'] = request.user.id
         rave = RavePayServices(data)
         executed = rave.make_payment()

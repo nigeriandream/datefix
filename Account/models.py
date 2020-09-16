@@ -22,7 +22,8 @@ class User(AbstractUser):
     session = models.IntegerField(default=-1)
     verified = models.BooleanField(default=False)
     status = models.CharField(max_length=64, default='Offline')
-    package = models.CharField(max_length=10, default=None, null=True, blank=True)
+    can_be_matched = models.BooleanField(default=False)
+    extra_support = models.BooleanField(default=False)
 
     def successful_list(self):
         if self.successful_matches == '[]':

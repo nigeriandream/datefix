@@ -137,17 +137,16 @@ Pricing
 				<h1>Personality Test</h1>
             </div> -->
 
-
-
-
-            <div id="section-pricing" class="page-section nopadding nomargin">
+            <form method="post" action="{% url 'pay' %}">
+                {% csrf_token %}
+                <div id="section-pricing" class="page-section nopadding nomargin">
 
                 <div class="pricing-tenure-switcher center bottommargin-sm" data-container="#pricing-switch">
                     <span class="pts-left">Quarterly</span>
                     <div class="pts-switcher">
                         <div class="switch">
                             <input id="switch-toggle-pricing-tenure" class="switch-toggle switch-toggle-round"
-                                type="checkbox">
+                                type="checkbox" name="duration">
                             <label for="switch-toggle-pricing-tenure"></label>
                         </div>
                     </div>
@@ -175,7 +174,7 @@ Pricing
                                 </ul>
                             </div>
                             <div class="pricing-action">
-                                <a href="#" class="button button-large button-rounded capitalize ls0"
+                                <a href="{% url 'redirect_match' %}" class="button button-large button-rounded capitalize ls0"
                                     style="border-radius: 23px;">Continue</a>
                             </div>
                         </div>
@@ -208,12 +207,12 @@ Pricing
                                 </ul>
                             </div>
                             <div class="pricing-action">
-                                <div class="pts-switch-content-left"><a href="#"
+                                <div class="pts-switch-content-left"><input type="submit"
                                         class="button button-large button-rounded capitalize ls0"
-                                        style="border-radius: 23px;">Select</a></div>
-                                <div class="pts-switch-content-right"><a href="#"
+                                        name="REGULAR" value="Select" style="border-radius: 23px;"/></div>
+                            <div class="pts-switch-content-right"><input type="submit"
                                         class="button button-large button-rounded capitalize ls0"
-                                        style="border-radius: 23px;">Select</a></div>
+                                        name="REGULAR" value="Select" style="border-radius: 23px;"/></div>
                             </div>
                         </div>
 
@@ -245,12 +244,14 @@ Pricing
                                 </ul>
                             </div>
                             <div class="pricing-action">
-                                <div class="pts-switch-content-left"><a href="#"
+                                <div class="pts-switch-content-left"><input type="submit"
                                         class="button button-large button-rounded capitalize ls0"
-                                        style="border-radius: 23px;">Select</a></div>
-                                <div class="pts-switch-content-right"><a href="#"
+                                        name="PREMIUM" value="Select" style="border-radius: 23px;"/></div>
+                            </div>
+                            <div class="pricing-action">
+                                <div class="pts-switch-content-right"><input type="submit"
                                         class="button button-large button-rounded capitalize ls0"
-                                        style="border-radius: 23px;">Select</a></div>
+                                        name="PREMIUM" value="Select" style="border-radius: 23px;"/></div>
                             </div>
                         </div>
 
@@ -259,6 +260,9 @@ Pricing
                 </div>
 
             </div>
+            </form>
+
+
 
 
         </div>
