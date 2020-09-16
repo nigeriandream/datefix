@@ -10,14 +10,15 @@ class RavePayServices:
         self.link = None
 
     @staticmethod
-    def package_price(package):
-        if package == 'BASIC':
-            return 0
-        if package == 'CLASSIC':
-            return 1000
-
-        if package == 'PREMIUM':
-            return 2000
+    def package_price(package, duration):
+        if package == 'REGULAR' and duration == 'QUARTERLY':
+            return 1500
+        if package == 'PREMIUM' and duration == 'QUARTERLY':
+            return 6000
+        if package == 'REGULAR' and duration == 'YEARLY':
+            return 5500
+        if package == 'PREMIUM' and duration == 'YEARLY':
+            return 20000
 
     @staticmethod
     def get_user(user_id):
@@ -34,12 +35,13 @@ class RavePayServices:
         url = f"{config('RAVE_PAY_BASE_URL')}/payments"
         headers = {"Authorization": f"Bearer {config('RAVE_PAY_KEY')}"}
         tx_ref = self.create_tx_ref()
-        data = {"tx_ref": tx_ref, "amount": self.package_price(self.data['package']), "currency": "NGN",
-                "redirect_url": f"{config('RAVE_PAY_REDIRECT_URL')}/{user.id}/{self.data['package']}/{tx_ref}",
+        data = {"tx_ref": tx_ref, "amount": self.package_price(self.data['package'], self.data['duration']), "currency": "NGN",
+                "redirect_url": f"{config('RAVE_PAY_REDIRECT_URL')}/{user.id}/{self.data['package']}/{self.data['duration']}/{tx_ref}",
                 "payment_options": self.data['payment_option'],
                 "customer": {
                     "id": user.id, "email": user.email, "name": f"{user.first_name} {user.last_name}",
-                    "package": self.data['package']
+                    "package": self.data['package'],
+                    "duration": self.data['duration']
                 }, "customizations": {
                 "title": "DateFix Payments",
                 "description": f"Payment for the {self.data['package']} package",

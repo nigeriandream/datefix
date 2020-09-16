@@ -147,7 +147,7 @@ def match_user(user):
                  if (x.complete_match() is False)
                  and (str(x.id) not in user.jilted_list()) and (x.is_couple() is False)
                  and (str(x.id) not in user.no_list()) and x.sex == 'male' and
-                 (x.user_data is not None or x.user_data == ''))
+                 (x.user_data is not None or x.user_data == '') and x.can_be_matched)
     # compare filtered users with user and return matches
 
     for peep in all_users:

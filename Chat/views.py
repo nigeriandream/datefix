@@ -10,7 +10,7 @@ def chat(request):
         from Account.models import User
         user = User.objects.get(id=request.user.id)
         from Chat.algorithms import has_chat
-        if has_chat(user):
+        if has_chat(user) and user.can_be_matched:
             return render(request, 'Chat/chat.html')
         elif user.session == 0:
             return redirect('end_session')

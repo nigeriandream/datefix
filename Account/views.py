@@ -233,10 +233,10 @@ def dashboard(request):
 
         user = User.objects.get(id=request.user.id)
 
-        if user.session is not -1:
+        if user.session is not -1 and user.can_be_matched:
             return redirect('chatroom')
         else:
-            if user.complete_match():
+            if user.complete_match() and user.can_be_matched:
                 return redirect('chatroom')
 
             if user.user_data == '{}':
@@ -247,7 +247,7 @@ def dashboard(request):
                 user_details['registered'] = True
                 return render(request, 'Account/profile.html', user_details)
 
-            if user.sex == 'male' and not user.complete_match():
+            if user.sex == 'male' and not user.complete_match() and user.can_be_matched:
                 return redirect('results')
 
             if user.sex == 'female' and not user.complete_match():
