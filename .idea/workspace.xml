@@ -25,7 +25,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="" />
+    <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Payment/templates/Payment/pay.html" beforeDir="false" afterPath="$PROJECT_DIR$/Payment/templates/Payment/pay.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,6 +62,34 @@
   <component name="GithubPullRequestsUISettings">
     <option name="zipChanges" value="false" />
   </component>
+  <component name="IlluminatedCloudWorkspaceSettings">
+    <option name="projectWorkspaceSettings">
+      <ProjectWorkspaceSettings>
+        <option name="anonymousApexSettings">
+          <AnonymousApexSettings>
+            <option name="savedDocuments">
+              <list>
+                <AnonymousApexSavedDocument>
+                  <option name="name" value="Anonymous Apex 1" />
+                </AnonymousApexSavedDocument>
+              </list>
+            </option>
+          </AnonymousApexSettings>
+        </option>
+        <option name="soqlQuerySettings">
+          <SoqlQuerySettings>
+            <option name="savedDocuments">
+              <list>
+                <SoqlQuerySavedDocument>
+                  <option name="name" value="SOQL Query 1" />
+                </SoqlQuerySavedDocument>
+              </list>
+            </option>
+          </SoqlQuerySettings>
+        </option>
+      </ProjectWorkspaceSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="1dKCXwJybzsU2lgqNDPzhzlrzVD" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -67,21 +101,22 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Account" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Payment" />
-      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Secret" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\templates" />
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static\images" />
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Datefix\static" />
       <recent name="C:\Users\hp\PycharmProjects\datefix-1\Account\templates\Account" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Payment" />
+      <recent name="C:\Users\hp\PycharmProjects\datefix-1\Secret" />
     </key>
   </component>
   <component name="RestClientSettings">
@@ -345,6 +380,10 @@
       <workItem from="1598441541291" duration="4079000" />
       <workItem from="1598798746152" duration="1192000" />
       <workItem from="1600205836265" duration="12065000" />
+      <workItem from="1600250447893" duration="2768000" />
+      <workItem from="1600253497032" duration="347000" />
+      <workItem from="1600253887640" duration="85000" />
+      <workItem from="1600254000876" duration="10000000" />
     </task>
     <task id="LOCAL-00001" summary="Revert &quot;merge with louieee&quot;&#10;&#10;This reverts commit d2184739">
       <created>1597921264350</created>
@@ -406,6 +445,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="360" y="58" key="#Options/0.0.1366.728@0.0.1366.728" timestamp="1597493231445" />
+    <state x="431" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1600255738768">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="431" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1600255738768" />
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595270620043">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -450,18 +493,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="21" y="29" width="1229" height="647" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1597921245689" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1595665742997">
+    <state x="184" y="9" key="SettingsEditor" timestamp="1600253969693">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1595665742997" />
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1600253969693" />
     <state x="487" y="61" key="VCS.ChangeListViewerDialog" timestamp="1592326440981">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="487" y="61" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1592326440981" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1600219453965">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1600250810318">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1600219453965" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1600250810318" />
     <state x="0" y="0" width="585" height="728" key="find.popup" timestamp="1600209418176">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
