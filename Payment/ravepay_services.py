@@ -47,7 +47,7 @@ class RavePayServices:
                 "description": f"Payment for the {self.data['package']} package",
                 "logo": config('LOGO_URL')
             }}
-        result = requests.post(url=url, headers=headers, data=data).json()
+        result = requests.post(url=url, headers=headers, json=data).json()
         if result['status'] == 'success':
             self.link = result['data']['link']
             return True
