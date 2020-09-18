@@ -29,6 +29,7 @@
       <change beforePath="$PROJECT_DIR$/.ebextensions/01_env.config" beforeDir="false" afterPath="$PROJECT_DIR$/.ebextensions/01_env.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.ebextensions/02_setup.config" beforeDir="false" afterPath="$PROJECT_DIR$/.ebextensions/02_setup.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
