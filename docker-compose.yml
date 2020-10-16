@@ -5,33 +5,24 @@ services:
   web:
     restart: always
     build:
-      context: ./Datefix
+      context: ../datefix-1
       dockerfile: Dockerfile
-    image: 172255399645.dkr.ecr.us-east-2.amazonaws.com/django-ec2:web
+    image: 172255399645.dkr.ecr.us-east-2.amazonaws.com/datefix:web
     expose:
       - "8000"
     links:
-      - postgres:postgres
       - redis:redis
-    env_file: env
-    volumes:
-      - static_volume:/datefix-1/static
+    env_file: .env
     command: /usr/bin/gunicorn Datefix.wsgi:application -w 2 -b :8000
 
   nginx-proxy:
     container_name: nginx-proxy
     build: nginx
-    image: 172255399645.dkr.ecr.us-east-2.amazonaws.com/django-ec2:nginx-proxy
+    image: 172255399645.dkr.ecr.us-east-2.amazonaws.com/datefix:nginx-proxy
     restart: always
     ports:
       - 443:443
       - 80:80
-    volumes:
-      - static_volume:/home/datefix/static
-      - certs:/etc/nginx/certs
-      - html:/usr/share/nginx/html
-      - vhost:/etc/nginx/vhost.d
-      - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - web
 
@@ -39,20 +30,12 @@ services:
     image: jrcs/letsencrypt-nginx-proxy-companion
     env_file:
       - .env.prod.proxy-companion
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - certs:/etc/nginx/certs
-      - html:/usr/share/nginx/html
-      - vhost:/etc/nginx/vhost.d
     depends_on:
       - nginx-proxy
 
   nginx:
     restart: always
     build: ./nginx/
-    networks:
-      - front
-      - back
     ports:
       - "80:80"
     environment:
@@ -69,8 +52,6 @@ services:
   redis:
     restart: always
     image: redis:latest
-    networks:
-      - back
     ports:
     - "6379:6379"
     expose:
@@ -86,25 +67,19 @@ services:
     command: bash -c "python manage.py runworker channels -v2"
     environment:
       - REDIS_HOST=redis
-    networks:
-      - front
-      - back
     depends_on:
       - redis
     links:
       - redis
   daphne:
-    image: "datefix-1: latest"
+    image: "datefix-1:latest"
     build: .
-    working_dir: /home/myproject
+    working_dir: /home/datefix-1
     command: bash -c "daphne -b 0.0.0.0 -p 8000 Datefix.asgi:channel_layer"
     ports:
       - "8000:8000"
     environment:
       - REDIS_HOST=redis
-    networks:
-      - front
-      - back
     depends_on:
       - redis
     links:

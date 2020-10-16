@@ -26,11 +26,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a953797-7a89-49b1-8b38-8033e02ea492" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.ebextensions/00_packages.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ebextensions/01_env.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ebextensions/02_setup.config" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Datefix/secret.py" beforeDir="false" afterPath="$PROJECT_DIR$/Datefix/secret.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirement.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirement.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +105,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="Docker" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -428,7 +428,7 @@
       <workItem from="1602111735980" duration="131000" />
       <workItem from="1602111937190" duration="4596000" />
       <workItem from="1602116652636" duration="2481000" />
-      <workItem from="1602119178819" duration="619000" />
+      <workItem from="1602119178819" duration="11026000" />
     </task>
     <task id="LOCAL-00001" summary="Revert &quot;merge with louieee&quot;&#10;&#10;This reverts commit d2184739">
       <created>1597921264350</created>
@@ -574,10 +574,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="21" y="29" width="1229" height="647" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1597921245689" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1602113476289">
+    <state x="184" y="9" key="SettingsEditor" timestamp="1602127124333">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1602113476289" />
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1602127124333" />
     <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1600250810318">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
