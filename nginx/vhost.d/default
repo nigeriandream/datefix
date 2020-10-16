@@ -1,0 +1,5 @@
+location /staticfiles/ {
+  alias /home/datefix-1/static;
+  add_header Access-Control-Allow-Origin *;
+}
+

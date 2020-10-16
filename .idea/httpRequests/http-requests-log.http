@@ -3,6 +3,13 @@ Content-Type: application/json
 
 {"message": "i love my fucking country", "sender" : "3"}
 
+###
+
+POST http://127.0.0.1:8000/chat/api/encrypt/
+Content-Type: application/json
+
+{"message": "i love my fucking country", "sender" : "3"}
+
 <> 2020-07-01T065057.500.html
 
 ###
